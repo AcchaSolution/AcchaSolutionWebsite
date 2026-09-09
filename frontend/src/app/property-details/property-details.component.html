@@ -1,0 +1,613 @@
+
+<!-- DETAILS -->
+
+<div
+  class="details-page-wrapper"
+  *ngIf="!isLoading && propertyData"
+>
+
+
+
+  <!-- =====================================================
+       HERO SECTION
+  ====================================================== -->
+
+<div class="luxury-hero">
+
+  <img
+    [src]="propertyData.gallery?.[0]?.url"
+    alt="Main Photo"
+  >
+
+  <div class="hero-overlay-title">
+
+    <h1>
+      {{ propertyData.name }}
+    </h1>
+
+    <!-- PROPERTY ID -->
+    <p class="id-badge-details">
+      ID: {{ propertyData.uniqueId }}
+    </p>
+
+    <!-- DIRECT PROPERTY LINK - ID KE NICHE -->
+<a
+  *ngIf="propertyData?.permalink"
+  [routerLink]="['/properties', getPermalinkSlug(propertyData.permalink)]"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="hero-direct-link"
+>
+  🔗 Open Property Link
+</a>
+
+
+
+  </div>
+
+</div>
+
+
+  <!-- =====================================================
+       MAIN DETAILS CONTAINER
+  ====================================================== -->
+
+  <div class="details-content-container">
+
+
+    <!-- =====================================================
+         OVERVIEW
+    ====================================================== -->
+
+    <div class="detail-section">
+
+      <h2>
+        Overview & Architecture Description
+      </h2>
+
+      <div
+        class="rich-text-content"
+        [innerHTML]="propertyData.description"
+      ></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CORE SPECIFICATIONS
+    ====================================================== -->
+
+    <div class="detail-section">
+
+      <h2>
+        Core Specifications
+      </h2>
+
+      <table class="premium-details-table">
+
+        <tr>
+
+          <td>
+            <strong>Price Structure:</strong>
+          </td>
+
+          <td>
+
+            <span
+              style="font-weight: 700; color: #1e1e1e;"
+            >
+              {{ formatDisplayPrice(propertyData.price) }}
+            </span>
+
+            <span
+              style="
+                color: #666;
+                font-size: 13px;
+                margin-left: 4px;
+              "
+            >
+              ({{ propertyData.type }})
+            </span>
+
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            <strong>Total Covered Area:</strong>
+          </td>
+
+          <td>
+            {{ propertyData.area }} Sq.Ft
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            <strong>Configuration:</strong>
+          </td>
+
+          <td>
+            {{ propertyData.bhk }}
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            <strong>Furnishing Status:</strong>
+          </td>
+
+          <td>
+            {{ propertyData.furnishing }}
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            <strong>Vastu / Facing:</strong>
+          </td>
+
+          <td>
+            {{ propertyData.facing }}
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            <strong>Possession Timeline:</strong>
+          </td>
+
+          <td>
+            {{ propertyData.possession }}
+          </td>
+
+        </tr>
+
+      </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         MARKET PRICE ANALYSIS
+    ====================================================== -->
+
+    <div
+      class="detail-section"
+      *ngIf="propertyData?.priceAnalysis"
+    >
+
+      <h2>
+        Market Price Analysis
+      </h2>
+
+      <p class="text-muted small mb-4">
+        This property is evaluated against current market
+        benchmarks in this region.
+      </p>
+
+
+      <div class="analysis-meter-wrapper">
+
+        <div class="meter-bar-line">
+
+          <div
+            class="meter-pointer"
+            [style.left.%]="propertyData.priceAnalysis"
+          ></div>
+
+        </div>
+
+
+        <div class="meter-labels-row">
+
+          <span
+            class="label-box budget"
+            [class.active-status]="
+              propertyData.priceAnalysis <= 35
+            "
+          >
+            Budget Friendly
+          </span>
+
+
+          <span
+            class="label-box fair"
+            [class.active-status]="
+              propertyData.priceAnalysis > 35 &&
+              propertyData.priceAnalysis <= 70
+            "
+          >
+            Fair Price
+          </span>
+
+
+          <span
+            class="label-box premium"
+            [class.active-status]="
+              propertyData.priceAnalysis > 70
+            "
+          >
+            Premium Luxury
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         AMENITIES
+    ====================================================== -->
+
+    <div
+      class="detail-section"
+      *ngIf="propertyData.selectedAmenities?.length"
+    >
+
+      <h2>
+        Premium Accoutrements & Amenities
+      </h2>
+
+
+      <div class="chips-display-row">
+
+        <span
+          *ngFor="
+            let amenity of propertyData.selectedAmenities
+          "
+          class="luxury-pill"
+        >
+          ✦ {{ amenity }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PROPERTY GALLERY
+    ====================================================== -->
+
+    <div
+      class="detail-section"
+      *ngIf="propertyData?.gallery?.length > 1"
+    >
+
+      <h2>
+        Property Visual Gallery
+      </h2>
+
+      <p class="text-muted small mb-3">
+        Explore internal views, architecture structure,
+        and layout design spaces.
+      </p>
+
+
+      <div class="luxury-gallery-wrapper">
+
+
+        <!-- MAIN GALLERY IMAGE -->
+
+        <div class="active-slide-box">
+
+          <img
+            [src]="
+              propertyData.gallery[activeImageIndex]?.url
+            "
+            class="fade-in-img"
+            alt="Property Space"
+          >
+
+
+          <!-- PREVIOUS -->
+
+          <button
+            class="nav-arrow prev"
+            type="button"
+            (click)="prevImage()"
+            aria-label="Previous image"
+          >
+            ❮
+          </button>
+
+
+          <!-- NEXT -->
+
+          <button
+            class="nav-arrow next"
+            type="button"
+            (click)="nextImage()"
+            aria-label="Next image"
+          >
+            ❯
+          </button>
+
+        </div>
+
+
+        <!-- THUMBNAILS -->
+
+        <div class="thumbnail-strip-container">
+
+          <div
+            *ngFor="
+              let img of propertyData.gallery;
+              let idx = index
+            "
+            class="mini-thumb-card"
+            [class.active-thumb]="
+              idx === activeImageIndex
+            "
+            (click)="setActiveImage(idx)"
+          >
+
+            <img
+              [src]="img.url"
+              alt="Property Thumbnail"
+            >
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         LOCATION
+    ====================================================== -->
+
+    <div class="detail-section">
+
+      <h2>
+        Geographical Coordinates
+      </h2>
+
+
+      <p class="status-text">
+
+        <strong>
+          Assigned Location:
+        </strong>
+
+        {{ propertyData?.location ||
+           'Whitefield Region, Bengaluru' }}
+
+      </p>
+
+
+      <div class="geo-specs">
+
+        <span>
+
+          <strong>
+            Latitude:
+          </strong>
+
+          {{ propertyData.latitude }}
+
+        </span>
+
+        &nbsp; | &nbsp;
+
+        <span>
+
+          <strong>
+            Longitude:
+          </strong>
+
+          {{ propertyData.longitude }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         LISTED BY AGENT
+    ====================================================== -->
+
+    <div
+      class="detail-section"
+      *ngIf="propertyData?.postedByName"
+    >
+
+      <h2>
+        Listed By
+      </h2>
+
+
+      <div class="listed-agent-card">
+
+
+        <!-- AGENT INITIAL -->
+
+        <div class="agent-avatar">
+
+          {{
+            propertyData.postedByName
+              .charAt(0)
+              .toUpperCase()
+          }}
+
+        </div>
+
+
+        <!-- AGENT INFORMATION -->
+
+        <div class="agent-info">
+
+          <h3>
+            {{ propertyData.postedByName }}
+          </h3>
+
+
+          <p
+            *ngIf="propertyData.postedByEmail"
+          >
+            {{ propertyData.postedByEmail }}
+          </p>
+
+
+          <span class="verified-agent">
+            ✓ Verified Agent
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         RATINGS
+    ====================================================== -->
+
+    <div class="detail-section">
+
+      <h2>
+        Ratings & User Trust Score
+      </h2>
+
+
+      <div class="rating-overall-container">
+
+
+        <!-- OVERALL SCORE -->
+
+        <div class="score-badge-box">
+
+          <div class="big-score-number">
+            4.8
+          </div>
+
+
+          <div class="stars-row-gold">
+            ⭐⭐⭐⭐★
+          </div>
+
+
+          <div class="total-reviews-count">
+            Based on 24 Reviews
+          </div>
+
+        </div>
+
+
+        <!-- RATING PARAMETERS -->
+
+        <div class="rating-parameters-list">
+
+
+          <!-- LOCATION -->
+
+          <div class="param-progress-row">
+
+            <span class="param-name">
+              Location Connectivity
+            </span>
+
+
+            <div class="progress-track-bar">
+
+              <div
+                class="progress-fill-gold"
+                style="width: 95%"
+              ></div>
+
+            </div>
+
+
+            <span class="param-numeric">
+              4.9
+            </span>
+
+          </div>
+
+
+          <!-- CONSTRUCTION -->
+
+          <div class="param-progress-row">
+
+            <span class="param-name">
+              Construction Quality
+            </span>
+
+
+            <div class="progress-track-bar">
+
+              <div
+                class="progress-fill-gold"
+                style="width: 88%"
+              ></div>
+
+            </div>
+
+
+            <span class="param-numeric">
+              4.6
+            </span>
+
+          </div>
+
+
+          <!-- VALUE -->
+
+          <div class="param-progress-row">
+
+            <span class="param-name">
+              Value for Money
+            </span>
+
+
+            <div class="progress-track-bar">
+
+              <div
+                class="progress-fill-gold"
+                style="width: 92%"
+              ></div>
+
+            </div>
+
+
+            <span class="param-numeric">
+              4.8
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>

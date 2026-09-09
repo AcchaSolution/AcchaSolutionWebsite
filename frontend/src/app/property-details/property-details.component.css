@@ -1,0 +1,1233 @@
+/* =========================================================
+   PROPERTY DETAILS PAGE
+   ACCHA SOLUTION - LUXURY REAL ESTATE
+========================================================= */
+
+.details-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #fcfbfa;
+  padding-bottom: 80px;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HERO SECTION
+========================================================= */
+
+/* =====================================================
+   LUXURY HERO
+===================================================== */
+
+.luxury-hero {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+.luxury-hero img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.luxury-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.15) 45%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+
+  z-index: 1;
+}
+
+
+/* =====================================================
+   HERO TEXT
+===================================================== */
+
+.hero-overlay-title {
+  position: absolute;
+
+  left: 6%;
+  bottom: 55px;
+
+  z-index: 3;
+
+  color: #fff;
+}
+
+
+/* PROPERTY NAME */
+
+.hero-overlay-title h1 {
+  margin: 0 0 12px 0;
+
+  font-family: "Playfair Display", Georgia, serif;
+
+  font-size: 44px;
+  font-weight: 600;
+
+  line-height: 1.15;
+
+  color: #ffffff;
+
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =====================================================
+   PROPERTY ID
+===================================================== */
+
+.id-badge-details {
+  display: block;
+
+  width: fit-content;
+
+  margin: 0;
+
+  padding: 7px 15px;
+
+  background: #c9a074;
+
+  color: #211611;
+
+  border-radius: 5px;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: 0.3px;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =====================================================
+   DIRECT LINK
+   ID KE BILKUL NICHE
+===================================================== */
+
+.hero-direct-link {
+  display: block;
+
+  width: fit-content;
+
+  margin-top: 8px;
+
+  padding: 6px 12px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+
+  border-radius: 5px;
+
+  color: #ffffff;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  line-height: 1.2;
+
+  text-decoration: none;
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  transition: all 0.2s ease;
+}
+
+.hero-direct-link:hover {
+  background: #c9a074;
+
+  border-color: #c9a074;
+
+  color: #211611;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .luxury-hero {
+    height: 430px;
+  }
+
+  .hero-overlay-title {
+    left: 25px;
+    bottom: 35px;
+  }
+
+  .hero-overlay-title h1 {
+    font-size: 34px;
+  }
+
+  .id-badge-details {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+
+  .hero-direct-link {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+}
+
+/* =========================================================
+   DETAILS CONTENT
+========================================================= */
+
+.details-content-container {
+  width: calc(100% - 50px);
+
+  max-width: 950px;
+
+  margin: 50px auto 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DETAIL SECTION
+========================================================= */
+
+.detail-section {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #f0ebe5;
+
+  border-radius: 16px;
+
+  padding: 35px;
+
+  margin-bottom: 30px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 5px 25px rgba(33, 22, 17, 0.04);
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.detail-section h2 {
+  position: relative;
+
+  margin: 0 0 22px;
+
+  padding-bottom: 12px;
+
+  font-family: "Playfair Display", Georgia, serif;
+
+  font-size: 21px;
+
+  font-weight: 600;
+
+  color: #211611;
+}
+
+.detail-section h2::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 42px;
+  height: 2px;
+
+  background: #c9a074;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.rich-text-content {
+  color: #4a3e3d;
+
+  font-size: 15px;
+
+  line-height: 1.85;
+}
+
+
+/* =========================================================
+   CORE SPECIFICATION TABLE
+========================================================= */
+
+.premium-details-table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.premium-details-table tr {
+  border-bottom: 1px solid #f3eee9;
+}
+
+.premium-details-table tr:last-child {
+  border-bottom: none;
+}
+
+.premium-details-table td {
+  padding: 15px 10px;
+
+  font-size: 14px;
+
+  color: #4a3e3d;
+
+  vertical-align: middle;
+}
+
+.premium-details-table td:first-child {
+  width: 42%;
+}
+
+.premium-details-table td strong {
+  color: #8c7669;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   AMENITIES
+========================================================= */
+
+.chips-display-row {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+}
+
+.luxury-pill {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 10px 18px;
+
+  border-radius: 30px;
+
+  background: #f5efe6;
+
+  border: 1px solid #e6dcce;
+
+  color: #614e43;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  transition: 0.25s ease;
+}
+
+.luxury-pill:hover {
+  background: #c9a074;
+
+  color: #211611;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.status-text {
+  margin: 0 0 15px;
+
+  color: #211611;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+.geo-specs {
+  padding: 15px 20px;
+
+  border-left: 3px solid #c9a074;
+
+  border-radius: 10px;
+
+  background: #fcfbfa;
+
+  color: #614e43;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   PROPERTY GALLERY
+========================================================= */
+
+.luxury-gallery-wrapper {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.active-slide-box {
+  position: relative;
+
+  width: 100%;
+
+  height: 400px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background: #1a120e;
+}
+
+.active-slide-box img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+}
+
+
+/* =========================================================
+   GALLERY FADE
+========================================================= */
+
+.fade-in-img {
+  animation: galleryFade 0.4s ease;
+}
+
+@keyframes galleryFade {
+  from {
+    opacity: 0.55;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   GALLERY ARROWS
+========================================================= */
+
+.nav-arrow {
+  position: absolute;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  z-index: 5;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(33, 22, 17, 0.65);
+
+  color: #ffffff;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.nav-arrow:hover {
+  background: #c9a074;
+
+  color: #211611;
+}
+
+.prev {
+  left: 15px;
+}
+
+.next {
+  right: 15px;
+}
+
+
+/* =========================================================
+   THUMBNAILS
+========================================================= */
+
+.thumbnail-strip-container {
+  display: flex;
+
+  gap: 10px;
+
+  overflow-x: auto;
+
+  padding: 5px 0 8px;
+
+  scrollbar-width: thin;
+}
+
+.mini-thumb-card {
+  flex: 0 0 auto;
+
+  width: 90px;
+  height: 60px;
+
+  overflow: hidden;
+
+  border-radius: 7px;
+
+  border: 2px solid transparent;
+
+  opacity: 0.6;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.mini-thumb-card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.mini-thumb-card:hover,
+.mini-thumb-card.active-thumb {
+  opacity: 1;
+
+  border-color: #c9a074;
+}
+
+
+/* =========================================================
+   PRICE ANALYSIS
+========================================================= */
+
+.analysis-meter-wrapper {
+  width: 100%;
+
+  padding: 20px 10px;
+
+  box-sizing: border-box;
+}
+
+.meter-bar-line {
+  position: relative;
+
+  width: 100%;
+
+  height: 8px;
+
+  margin-bottom: 25px;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      to right,
+      #10b981 0%,
+      #f59e0b 50%,
+      #ef4444 100%
+    );
+}
+
+.meter-pointer {
+  position: absolute;
+
+  top: 50%;
+
+  width: 20px;
+  height: 20px;
+
+  transform: translate(-50%, -50%);
+
+  border: 4px solid #211611;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.3);
+
+  transition:
+    left 0.6s cubic-bezier(
+      0.175,
+      0.885,
+      0.32,
+      1.275
+    );
+}
+
+.meter-labels-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.label-box {
+  padding: 6px 12px;
+
+  border-radius: 6px;
+
+  background: #fcfbfa;
+
+  border: 1px solid #f2eee9;
+
+  color: #8c7669;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.label-box.active-status {
+  color: #ffffff;
+
+  border-color: transparent;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.budget.active-status {
+  background: #10b981;
+}
+
+.fair.active-status {
+  background: #f59e0b;
+}
+
+.premium.active-status {
+  background: #ef4444;
+}
+
+
+/* =========================================================
+   LISTED BY AGENT
+========================================================= */
+
+.listed-agent-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 20px;
+
+  border-radius: 15px;
+
+  background: #f7f4ef;
+}
+
+.agent-avatar {
+  flex: 0 0 64px;
+
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #5a3825;
+
+  color: #ffffff;
+
+  font-size: 24px;
+
+  font-weight: 700;
+}
+
+.agent-info h3 {
+  margin: 0 0 5px;
+
+  color: #211611;
+
+  font-size: 20px;
+}
+
+.agent-info p {
+  margin: 0 0 8px;
+
+  color: #666;
+
+  font-size: 14px;
+}
+
+.verified-agent {
+  display: inline-block;
+
+  color: #80652f;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   RATINGS
+========================================================= */
+
+.rating-overall-container {
+  display: flex;
+
+  align-items: center;
+
+  gap: 40px;
+
+  padding: 15px 0;
+}
+
+.score-badge-box {
+  flex: 0 0 180px;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  border-radius: 16px;
+
+  background: #211611;
+
+  box-shadow:
+    0 10px 25px rgba(33, 22, 17, 0.15);
+}
+
+.big-score-number {
+  margin-bottom: 8px;
+
+  color: #c9a074;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: 48px;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+.stars-row-gold {
+  margin-bottom: 8px;
+
+  color: #c9a074;
+
+  font-size: 16px;
+
+  letter-spacing: 2px;
+}
+
+.total-reviews-count {
+  color: #bfaea2;
+
+  font-size: 11px;
+}
+
+.rating-parameters-list {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.param-progress-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.param-name {
+  flex: 0 0 160px;
+
+  color: #4a3e3d;
+
+  font-size: 13px;
+
+  font-weight: 500;
+}
+
+.progress-track-bar {
+  flex: 1;
+
+  height: 6px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #f2eee9;
+}
+
+.progress-fill-gold {
+  height: 100%;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      to right,
+      #c9a074,
+      #a3825f
+    );
+}
+
+.param-numeric {
+  flex: 0 0 30px;
+
+  color: #211611;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  text-align: right;
+}
+
+
+/* =========================================================
+   OLD PERMALINK SECTION
+   Agar page ke neeche accidentally ho to bhi clean rahe
+========================================================= */
+
+.permalink-section {
+  margin-top: 25px;
+}
+
+.permalink-description {
+  margin-bottom: 15px;
+
+  color: #777;
+
+  font-size: 14px;
+}
+
+.permalink-box {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+.permalink-input {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 44px;
+
+  padding: 0 15px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #d4af37;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #faf9f6;
+
+  color: #333;
+
+  font-size: 13px;
+}
+
+.permalink-copy-btn {
+  flex: 0 0 auto;
+
+  height: 44px;
+
+  padding: 0 20px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #1e1e1e;
+
+  color: #d4af37;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition: 0.25s ease;
+}
+
+.permalink-copy-btn:hover {
+  background: #333333;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   PROPERTY DIRECT LINK - IF USED AS SEPARATE SECTION
+========================================================= */
+
+.property-direct-link-section {
+  width: 100%;
+
+  padding: 18px 5%;
+
+  box-sizing: border-box;
+
+  background: #faf8f4;
+
+  border-bottom: 1px solid #eadfca;
+}
+
+.direct-link-content {
+  width: 100%;
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 25px;
+}
+
+.direct-link-text {
+  flex: 0 0 auto;
+}
+
+.direct-link-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #9b7426;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+.direct-link-text p {
+  margin: 0;
+
+  color: #555;
+
+  font-size: 14px;
+}
+
+.direct-link-content .permalink-box {
+  flex: 1;
+
+  max-width: 700px;
+
+  margin: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #dfcfac;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+.direct-link-content .permalink-input {
+  border: none;
+
+  border-radius: 0;
+
+  background: #ffffff;
+}
+
+.direct-link-content .permalink-copy-btn {
+  border-radius: 0;
+
+  height: 44px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .luxury-hero {
+    height: 480px;
+  }
+
+  .hero-overlay-title {
+    left: 5%;
+    bottom: 45px;
+  }
+
+  .hero-overlay-title h1 {
+    font-size: 38px;
+  }
+
+  .details-content-container {
+    width: calc(100% - 35px);
+
+    margin-top: 35px;
+  }
+
+  .detail-section {
+    padding: 28px;
+  }
+
+  .direct-link-content {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .direct-link-content .permalink-box {
+    max-width: 100%;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .details-page-wrapper {
+    padding-bottom: 40px;
+  }
+
+  .luxury-hero {
+    height: 420px;
+  }
+
+  .hero-overlay-title {
+    left: 20px;
+
+    bottom: 30px;
+  }
+
+  .hero-overlay-title h1 {
+    font-size: 32px;
+
+    margin-bottom: 12px;
+  }
+
+  .hero-info-row {
+    gap: 8px;
+  }
+
+  .id-badge-details,
+  .hero-property-link {
+    height: 30px;
+
+    font-size: 11px;
+  }
+
+  .details-content-container {
+    width: calc(100% - 24px);
+
+    margin-top: 25px;
+  }
+
+  .detail-section {
+    padding: 22px;
+
+    margin-bottom: 20px;
+
+    border-radius: 13px;
+  }
+
+  .detail-section h2 {
+    font-size: 19px;
+  }
+
+  .premium-details-table td {
+    padding: 12px 5px;
+
+    font-size: 13px;
+  }
+
+  .premium-details-table td:first-child {
+    width: 45%;
+  }
+
+  .premium-details-table td strong {
+    width: auto;
+  }
+
+  .active-slide-box {
+    height: 280px;
+  }
+
+  .nav-arrow {
+    width: 38px;
+    height: 38px;
+
+    font-size: 16px;
+  }
+
+  .rating-overall-container {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 25px;
+  }
+
+  .score-badge-box {
+    width: 100%;
+  }
+
+  .param-progress-row {
+    display: grid;
+
+    grid-template-columns: 1fr 35px;
+
+    gap: 8px;
+  }
+
+  .param-name {
+    width: auto;
+
+    grid-column: 1 / -1;
+  }
+
+  .progress-track-bar {
+    width: 100%;
+  }
+
+  .param-numeric {
+    width: auto;
+  }
+
+  .listed-agent-card {
+    padding: 16px;
+  }
+
+  .property-direct-link-section {
+    padding: 16px;
+  }
+
+  .direct-link-content {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 12px;
+  }
+
+  .direct-link-content .permalink-box {
+    width: 100%;
+
+    max-width: 100%;
+  }
+
+  .direct-link-content .permalink-input {
+    font-size: 11px;
+  }
+
+  .direct-link-content .permalink-copy-btn {
+    padding: 0 14px;
+
+    font-size: 12px;
+  }
+
+  .permalink-box {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .permalink-copy-btn {
+    width: 100%;
+  }
+}

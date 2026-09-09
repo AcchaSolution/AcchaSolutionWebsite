@@ -1,0 +1,1169 @@
+<div class="dashboard-body-container">
+
+  <!-- =====================================================
+       LEFT SIDEBAR
+       ===================================================== -->
+
+  <aside class="left-sidebar-strip">
+
+    <!-- DASHBOARD -->
+    <div
+      class="side-icon-btn"
+      [class.active-icon]="viewMode === 'dashboard'"
+      (click)="viewMode = 'dashboard'"
+      data-tooltip="Dashboard Home"
+    >
+      🏠
+    </div>
+
+
+    <!-- ===================================================
+         REAL ESTATE MENU
+         =================================================== -->
+
+    <div class="side-icon-btn-parent">
+
+      <div
+        class="side-icon-btn"
+        [class.highlighted-icon]="viewMode === 'properties'"
+        data-tooltip="Real Estate"
+      >
+        🛏️
+      </div>
+
+      <div class="expanded-menu-box">
+
+        <a
+          (click)="viewMode = 'properties'"
+          class="menu-item"
+          [class.active-item]="viewMode === 'properties'"
+        >
+          🏢 Properties
+        </a>
+
+        <a class="menu-item">
+          🏗️ Projects
+        </a>
+
+        <a class="menu-item">
+          ⭐ Features
+        </a>
+
+        <a class="menu-item">
+          ⚙️ Facilities
+        </a>
+
+        <a class="menu-item">
+          💰 Investors
+        </a>
+
+        <a class="menu-item">
+          📋 Categories
+        </a>
+
+        <a class="menu-item">
+          💬 Reviews
+        </a>
+
+        <a class="menu-item">
+          🔲 Custom Fields
+        </a>
+
+        <a class="menu-item">
+          📊 Reports
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- MEDIA -->
+    <div
+      class="side-icon-btn"
+      data-tooltip="Media Manager"
+    >
+      📁
+    </div>
+
+
+    <!-- TESTIMONIAL -->
+    <div
+      class="side-icon-btn"
+      data-tooltip="Testimonials"
+    >
+      📣
+    </div>
+
+
+    <!-- AGENTS -->
+    <div
+      class="side-icon-btn"
+      [class.active-icon]="
+        viewMode === 'agents' ||
+        viewMode === 'agent-detail'
+      "
+      (click)="viewMode = 'agents'"
+      data-tooltip="Agents / Users"
+    >
+      👥
+    </div>
+
+
+    <!-- CONTACT -->
+    <div
+      class="side-icon-btn"
+      data-tooltip="Contact Messages"
+    >
+      ✉️
+    </div>
+
+  </aside>
+
+
+
+  <!-- =====================================================
+       RIGHT MAIN AREA
+       ===================================================== -->
+
+  <main class="right-main-space">
+
+
+    <!-- ===================================================
+         BREADCRUMB / TOP ACTION
+         =================================================== -->
+
+    <div class="sub-action-row">
+
+      <nav class="breadcrumb-text">
+
+        <span
+          class="breadcrumb-link"
+          (click)="viewMode = 'dashboard'"
+        >
+          Dashboard
+        </span>
+
+        <span class="breadcrumb-separator">
+          /
+        </span>
+
+        <span>
+          {{ viewMode | titlecase }}
+        </span>
+
+      </nav>
+
+
+      <button
+        class="btn-manage-widgets"
+        *ngIf="viewMode !== 'agent-detail'"
+        (click)="viewMode = 'dashboard'"
+      >
+        ⚙️ Reset View
+      </button>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         DASHBOARD HOME
+         ===================================================== -->
+
+    <div
+      *ngIf="viewMode === 'dashboard'"
+      class="fade-in"
+    >
+
+      <div class="dashboard-stats-grid">
+
+
+        <!-- ACTIVE PROPERTIES -->
+
+        <div
+          class="stat-card bg-chocolate-light clickable-stat"
+          (click)="viewMode = 'properties'"
+          title="View Active Properties"
+        >
+
+          <p>
+            Active Properties
+          </p>
+
+          <h1>
+            {{ totalProperties }}
+          </h1>
+
+        </div>
+
+
+
+        <!-- PENDING PROPERTIES -->
+
+        <div
+          class="stat-card bg-chocolate-dark clickable-stat"
+          (click)="viewMode = 'properties'"
+          title="View Pending Properties"
+        >
+
+          <p>
+            Pending Properties
+          </p>
+
+          <h1>
+            {{ pendingReview }}
+          </h1>
+
+        </div>
+
+
+
+        <!-- EXPIRED PROPERTIES -->
+
+        <div
+          class="stat-card bg-chocolate-deep clickable-stat"
+          (click)="viewMode = 'properties'"
+          title="View Expired Properties"
+        >
+
+          <p>
+            Expired Properties
+          </p>
+
+          <h1>
+            0
+          </h1>
+
+        </div>
+
+
+
+        <!-- AGENTS -->
+
+        <div
+          class="stat-card bg-cream-gold clickable-stat"
+          (click)="viewMode = 'agents'"
+          title="View Agents"
+        >
+
+          <p>
+            Agents
+          </p>
+
+          <h1>
+            {{ agents.length }}
+          </h1>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         PROPERTY DIRECTORY
+         ===================================================== -->
+
+    <div
+      *ngIf="viewMode === 'properties'"
+      class="fade-in property-dashboard-section"
+    >
+
+
+      <!-- PROPERTY HEADER -->
+
+      <div class="agent-toolbar">
+
+        <div>
+
+          <h2 class="section-gold-title">
+            Property Directory
+          </h2>
+
+          <p
+            style="
+              margin:5px 0 0;
+              color:#777;
+              font-size:14px;
+            "
+          >
+            Manage all properties submitted on AcchaSolution
+          </p>
+
+        </div>
+
+
+        <button
+          class="btn-create-property"
+          type="button"
+          (click)="goToCreateProperty()"
+        >
+          <i class="fa fa-plus"></i>
+          Create Property
+        </button>
+
+      </div>
+
+
+
+      <!-- =================================================
+           PROPERTY TABLE
+           ================================================= -->
+
+      <div class="luxury-table-card property-table-wrapper">
+
+        <table class="dashboard-luxury-table property-dashboard-table">
+
+
+          <!-- TABLE HEADER -->
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Property
+              </th>
+
+              <th>
+                Location
+              </th>
+
+              <th>
+                Type
+              </th>
+
+              <th>
+                BHK
+              </th>
+
+              <th>
+                Price
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+
+          <!-- TABLE BODY -->
+
+          <tbody>
+
+
+            <!-- =========================================
+                 PROPERTY ROWS
+                 ========================================= -->
+
+            <tr
+              *ngFor="let property of propertyList"
+              class="clickable-row"
+            >
+
+
+              <!-- PROPERTY NAME -->
+
+              <td>
+
+                <div
+                  style="
+                    display:flex;
+                    align-items:center;
+                    gap:12px;
+                  "
+                >
+
+                  <div class="custom-avatar">
+                    🏠
+                  </div>
+
+
+                  <div class="agent-identity-meta">
+
+                    <strong>
+
+                      {{
+                        property?.name ||
+                        property?.title ||
+                        'Untitled Property'
+                      }}
+
+                    </strong>
+
+
+                    <span>
+
+                      ID:
+                      {{ property?.id }}
+
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+
+
+              <!-- LOCATION -->
+
+              <td>
+
+                {{
+                  property?.location ||
+                  property?.locality ||
+                  property?.city ||
+                  'N/A'
+                }}
+
+              </td>
+
+
+
+              <!-- PROPERTY TYPE -->
+
+              <td>
+
+                {{
+                  property?.type ||
+                  property?.propertyType ||
+                  'N/A'
+                }}
+
+              </td>
+
+
+
+              <!-- BHK -->
+
+              <td>
+
+                {{
+                  property?.bhk ||
+                  property?.BHK ||
+                  'N/A'
+                }}
+
+              </td>
+
+
+
+              <!-- PRICE -->
+
+              <td>
+
+                <strong>
+
+                  {{
+                    property?.price
+                      ? ('₹ ' + property.price)
+                      : 'N/A'
+                  }}
+
+                </strong>
+
+              </td>
+
+
+
+              <!-- STATUS -->
+
+              <td>
+
+                <span
+                  class="badge-type"
+                  [ngClass]="
+                    (
+                      property?.status ||
+                      ''
+                    ).toLowerCase() === 'approved'
+                    ||
+                    (
+                      property?.status ||
+                      ''
+                    ).toLowerCase() === 'active'
+                    ||
+                    (
+                      property?.status ||
+                      ''
+                    ).toLowerCase() === 'published'
+                      ? 'status-approved'
+                      : 'status-pending'
+                  "
+                >
+
+                  {{
+                    property?.status ||
+                    'Pending'
+                  }}
+
+                </span>
+
+              </td>
+
+
+
+              <!-- =================================================
+                   PROPERTY ACTIONS
+                   ================================================= -->
+
+              <td>
+
+                <!-- EDIT -->
+
+                <button
+                  class="btn-view-profile"
+                  type="button"
+                  (click)="
+                    viewProperty(property);
+                    $event.stopPropagation()
+                  "
+                >
+                  Edit →
+                </button>
+
+
+                <!-- DELETE -->
+
+                <button
+                  class="btn-delete"
+                  type="button"
+                  (click)="
+                    deleteProperty(property);
+                    $event.stopPropagation()
+                  "
+                  style="
+                    margin-left:8px;
+                    background:#ff4d4d;
+                    color:#fff;
+                    border:none;
+                    padding:8px 14px;
+                    border-radius:5px;
+                    cursor:pointer;
+                  "
+                >
+                  Delete
+                </button>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- =========================================
+                 NO PROPERTY DATA
+                 ========================================= -->
+
+            <tr
+              *ngIf="propertyList.length === 0"
+            >
+
+              <td
+                colspan="7"
+                class="no-agent-data"
+              >
+
+                <div
+                  style="
+                    padding:30px 10px;
+                    text-align:center;
+                  "
+                >
+
+                  <div
+                    style="
+                      font-size:42px;
+                      margin-bottom:10px;
+                    "
+                  >
+                    🏠
+                  </div>
+
+                  <strong>
+                    No properties found
+                  </strong>
+
+                  <p
+                    style="
+                      margin-top:8px;
+                      color:#777;
+                    "
+                  >
+                    Properties created in the
+                    system will appear here.
+                  </p>
+
+                  <button
+                    class="btn-create-property"
+                    type="button"
+                    (click)="goToCreateProperty()"
+                  >
+                    + Create First Property
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         AGENT DIRECTORY
+         ===================================================== -->
+
+    <div
+      *ngIf="viewMode === 'agents'"
+      class="fade-in"
+    >
+
+
+      <div class="agent-toolbar">
+
+        <h2 class="section-gold-title">
+          Elite Agent Directory
+        </h2>
+
+
+        <button
+          class="btn-create-property"
+          type="button"
+          (click)="goToCreateProperty()"
+        >
+
+          <i class="fa fa-plus"></i>
+
+          Create Property
+
+        </button>
+
+      </div>
+
+
+
+      <div class="luxury-table-card">
+
+        <table class="dashboard-luxury-table">
+
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Agent Identity
+              </th>
+
+              <th>
+                Experience
+              </th>
+
+              <th>
+                Role
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Joined Date
+              </th>
+
+              <th>
+                Contact
+              </th>
+
+              <th>
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+
+          <tbody>
+
+
+            <!-- ================= APPROVED USERS ================= -->
+
+            <tr
+              *ngFor="let agent of approvedAgents"
+              class="clickable-row"
+              (click)="openAgentProfile(agent)"
+            >
+
+              <td class="avatar-cell">
+
+                <div class="custom-avatar">
+
+                  {{
+                    getAgentInitials(
+                      agent?.name
+                    )
+                  }}
+
+                </div>
+
+
+                <div class="agent-identity-meta">
+
+                  <strong>
+                    {{
+                      agent?.name ||
+                      'N/A'
+                    }}
+                  </strong>
+
+                  <span>
+                    {{
+                      agent?.email ||
+                      'N/A'
+                    }}
+                  </span>
+
+                </div>
+
+              </td>
+
+
+              <td>
+                {{
+                  agent?.experience ?? 0
+                }}
+                Years
+              </td>
+
+
+              <td>
+                {{
+                  agent?.role ||
+                  'N/A'
+                | titlecase
+                }}
+              </td>
+
+
+              <td>
+
+                <span
+                  class="badge-type status-approved"
+                >
+                  Approved
+                </span>
+
+              </td>
+
+
+              <td>
+
+                {{
+                  agent?.createdAt
+                  | date:'mediumDate'
+                }}
+
+              </td>
+
+
+              <td>
+                {{
+                  agent?.phone ||
+                  'N/A'
+                }}
+              </td>
+
+
+              <!-- APPROVED AGENT ACTION -->
+
+              <td>
+
+                <button
+                  class="btn-view-profile"
+                  type="button"
+                  (click)="
+                    openAgentProfile(agent);
+                    $event.stopPropagation()
+                  "
+                >
+                  View Profile →
+                </button>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- ================= PENDING USERS ================= -->
+
+            <tr
+              *ngFor="let agent of pendingAgents"
+              class="clickable-row-pending"
+              (click)="openAgentProfile(agent)"
+            >
+
+              <td class="avatar-cell">
+
+                <div
+                  class="custom-avatar pending-avatar"
+                >
+
+                  {{
+                    getAgentInitials(
+                      agent?.name
+                    )
+                  }}
+
+                </div>
+
+
+                <div class="agent-identity-meta">
+
+                  <strong>
+                    {{
+                      agent?.name ||
+                      'N/A'
+                    }}
+                  </strong>
+
+                  <span>
+                    {{
+                      agent?.email ||
+                      'N/A'
+                    }}
+                  </span>
+
+                </div>
+
+              </td>
+
+
+              <td>
+                {{
+                  agent?.experience ?? 0
+                }}
+                Years
+              </td>
+
+
+              <td>
+                {{
+                  agent?.role ||
+                  'N/A'
+                | titlecase
+                }}
+              </td>
+
+
+              <td>
+
+                <span
+                  class="badge-type status-pending"
+                >
+                  Pending Review
+                </span>
+
+              </td>
+
+
+              <td>
+
+                {{
+                  agent?.createdAt
+                  | date:'mediumDate'
+                }}
+
+              </td>
+
+
+              <td>
+                {{
+                  agent?.phone ||
+                  'N/A'
+                }}
+              </td>
+
+
+              <!-- PENDING AGENT ACTION -->
+
+              <td>
+
+                <button
+                  class="btn-view-profile pending-button"
+                  type="button"
+                  (click)="
+                    openAgentProfile(agent);
+                    $event.stopPropagation()
+                  "
+                >
+                  Review →
+                </button>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- NO USERS -->
+
+            <tr
+              *ngIf="
+                approvedAgents.length === 0 &&
+                pendingAgents.length === 0
+              "
+            >
+
+              <td
+                colspan="7"
+                class="no-agent-data"
+              >
+                No agents/users found.
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         AGENT DETAIL
+         ===================================================== -->
+
+    <div
+      *ngIf="
+        viewMode === 'agent-detail' &&
+        selectedAgent
+      "
+      class="agent-profile-layout fade-in"
+    >
+
+
+      <!-- BACK -->
+
+      <button
+        class="btn-back-list"
+        type="button"
+        (click)="viewMode = 'agents'"
+      >
+        ← Back to Directory
+      </button>
+
+
+      <div class="profile-luxury-card">
+
+
+        <div class="profile-header-accent">
+
+          <div class="large-profile-avatar">
+
+            {{
+              getAgentInitials(
+                selectedAgent?.name
+              )
+            }}
+
+          </div>
+
+          <h1>
+            {{ selectedAgent.name }}
+          </h1>
+
+        </div>
+
+
+
+        <div class="profile-details-grid">
+
+
+          <!-- EMAIL -->
+
+          <div class="info-strip">
+
+            <span class="info-label">
+              Email
+            </span>
+
+            <span class="info-value">
+              {{ selectedAgent.email }}
+            </span>
+
+          </div>
+
+
+
+          <!-- CONTACT -->
+
+          <div class="info-strip">
+
+            <span class="info-label">
+              Contact
+            </span>
+
+            <span class="info-value">
+
+              {{
+                selectedAgent.phone ||
+                'N/A'
+              }}
+
+            </span>
+
+          </div>
+
+
+
+          <!-- JOINED DATE -->
+
+          <div class="info-strip">
+
+            <span class="info-label">
+              Joined Date
+            </span>
+
+            <span class="info-value">
+
+              {{
+                selectedAgent.createdAt
+                | date:'mediumDate'
+              }}
+
+            </span>
+
+          </div>
+
+
+
+          <!-- STATUS -->
+
+          <div class="info-strip">
+
+            <span class="info-label">
+              Status
+            </span>
+
+            <span
+              class="badge-type"
+              [ngClass]="
+                selectedAgent.status === 'approved'
+                ? 'status-approved'
+                : 'status-pending'
+              "
+            >
+
+              {{
+                selectedAgent.status
+                | uppercase
+              }}
+
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- PROFILE ACTIONS -->
+
+        <div class="profile-action-footer">
+
+
+          <!-- APPROVE -->
+
+          <button
+            class="btn-grant-approval"
+            type="button"
+            (click)="
+              grantAgentApproval(
+                selectedAgent.id
+              )
+            "
+          >
+            Approval
+          </button>
+
+
+
+          <!-- REVOKE -->
+
+          <button
+            class="btn-revoke-access"
+            type="button"
+            (click)="
+              revokeAgentApproval(
+                selectedAgent.id
+              )
+            "
+          >
+            Not Approved
+          </button>
+
+
+
+          <!-- DELETE AGENT -->
+
+          <button
+            class="btn-delete"
+            type="button"
+            (click)="
+              deleteAgent(
+                selectedAgent.id
+              )
+            "
+            style="
+              background-color:#ff4d4d;
+              color:white;
+              margin-left:10px;
+              padding:10px 20px;
+              border:none;
+              border-radius:4px;
+              cursor:pointer;
+            "
+          >
+            Delete Agent
+          </button>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+</div>

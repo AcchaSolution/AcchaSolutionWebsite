@@ -1,0 +1,104 @@
+<div class="bg-gray-50 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+    
+    <!-- Tab Controls -->
+    <div class="flex border-b mb-6">
+      <button 
+        class="w-1/2 pb-2 text-center font-semibold transition-all focus:outline-none"
+        [ngClass]="activeTab === 'login' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 border-b-2 border-transparent'"
+        (click)="switchTab('login')">
+        Login
+      </button>
+      <button 
+        class="w-1/2 pb-2 text-center font-semibold transition-all focus:outline-none"
+        [ngClass]="activeTab === 'signup' ? 'text-green-600 border-b-2 border-green-600' : 'text-gray-500 border-b-2 border-transparent'"
+        (click)="switchTab('signup')">
+        Sign Up
+      </button>
+    </div>
+
+    <!-- ================= LOGIN VIEW ================= -->
+    <div *ngIf="activeTab === 'login'" class="space-y-4">
+      <form (ngSubmit)="onLoginSubmit()" #loginForm="ngForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email Address</label>
+          <input 
+            type="email" 
+            name="email"
+            [(ngModel)]="loginData.email" 
+            required 
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+          <div class="flex justify-between">
+            <label class="block text-sm font-medium text-gray-700">Password</label>
+            <a href="#" class="text-sm text-blue-600 hover:underline">Forgot Password?</a>
+          </div>
+          <input 
+            type="password" 
+            name="password"
+            [(ngModel)]="loginData.password" 
+            required 
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <button 
+          type="submit" 
+          [disabled]="!loginForm.valid"
+          class="w-full bg-blue-600 text-white py-2 rounded-md font-medium hover:bg-blue-700 transition disabled:opacity-50">
+          Login
+        </button>
+      </form>
+
+      <div class="relative flex py-2 items-center">
+        <div class="flex-grow border-t border-gray-300"></div>
+        <span class="flex-shrink mx-4 text-gray-400 text-sm">OR</span>
+        <div class="flex-grow border-t border-gray-300"></div>
+      </div>
+
+      <!-- Google Sign In Target Node Elements -->
+      <div class="flex justify-center">
+        <div id="google-btn-container"></div>
+      </div>
+    </div>
+
+    <!-- ================= SIGN UP VIEW (New User) ================= -->
+    <div *ngIf="activeTab === 'signup'" class="space-y-4">
+      <form (ngSubmit)="onSignUpSubmit()" #signUpForm="ngForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Full Name</label>
+          <input 
+            type="text" 
+            name="name"
+            [(ngModel)]="signUpData.name" 
+            required 
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email Address</label>
+          <input 
+            type="email" 
+            name="email"
+            [(ngModel)]="signUpData.email" 
+            required 
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Password</label>
+          <input 
+            type="password" 
+            name="password"
+            [(ngModel)]="signUpData.password" 
+            required 
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <button 
+          type="submit" 
+          [disabled]="!signUpForm.valid"
+          class="w-full bg-green-600 text-white py-2 rounded-md font-medium hover:bg-green-700 transition disabled:opacity-50">
+          Create Account
+        </button>
+      </form>
+    </div>
+
+  </div>
+</div>

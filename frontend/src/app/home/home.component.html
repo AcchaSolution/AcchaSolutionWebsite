@@ -1,0 +1,868 @@
+<!-- ============================================================
+     🏠 ACCHASOLUTION HOME PAGE
+     AI SMART SEARCH + PROMO + PROJECTS + PROPERTY CARDS
+     ============================================================ -->
+
+<!-- ============================================================
+     1️⃣ HERO / SEARCH SECTION
+     ============================================================ -->
+
+<div class="hero">
+
+  <div class="search-section">
+<h1 class="main-title">
+  Find Verified Properties Across India
+</h1>
+
+<h6 class="main-title-h">
+  Direct Owners. Trusted Builders. Zero-Brokerage Options.
+</h6>
+
+
+<!-- ========================================================
+     SEARCH CONTAINER
+     ======================================================== -->
+
+<div class="search-container">
+
+
+  <!-- BUY / RENT / COMMERCIAL TABS -->
+
+  <div class="tabs">
+
+    <div
+      class="tab"
+      [class.active]="activeTab === 'Buy'"
+      (click)="selectTab('Buy')"
+    >
+      Buy
+    </div>
+
+    <div
+      class="tab"
+      [class.active]="activeTab === 'Rent'"
+      (click)="selectTab('Rent')"
+    >
+      Rent
+    </div>
+
+    <div
+      class="tab"
+      [class.active]="activeTab === 'Commercial'"
+      (click)="selectTab('Commercial')"
+    >
+      Commercial
+    </div>
+
+  </div>
+
+
+  <!-- ======================================================
+       SEARCH TOP
+       ====================================================== -->
+
+  <div class="search-top">
+
+    <!-- CITY -->
+
+    <select
+      class="city-dropdown"
+      [(ngModel)]="selectedCity"
+      name="city"
+    >
+
+      <option value="">
+        All Cities
+      </option>
+
+      <option value="bangalore">
+        Bangalore
+      </option>
+
+      <option value="mumbai">
+        Mumbai
+      </option>
+
+      <option value="delhi">
+        Delhi
+      </option>
+
+      <option value="pune">
+        Pune
+      </option>
+
+    </select>
+
+
+    <!-- SMART SEARCH -->
+
+    <input
+      type="text"
+      class="search-input"
+      [(ngModel)]="searchKeyword"
+      name="searchKeyword"
+      (keyup.enter)="searchProperties()"
+      placeholder="Try: '3 BHK flat in Whitefield near metro under 2 Cr' or enter landmarks"
+    />
+
+
+    <!-- SEARCH BUTTON -->
+
+    <button
+      class="btn-search custom-saffron-search"
+      type="button"
+      (click)="searchProperties()"
+      [disabled]="isAiSearching"
+    >
+
+      <span
+        class="icon"
+        *ngIf="!isAiSearching"
+      >
+        🔍
+      </span>
+
+      <span
+        class="icon spin-bot"
+        *ngIf="isAiSearching"
+      >
+        🤖
+      </span>
+
+      <span>
+        {{ isAiSearching ? 'Parsing AI...' : 'Search' }}
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <!-- AI SEARCH HINT -->
+
+  <div class="ai-search-hint">
+
+    💡
+
+    <span class="sparkle-text">
+      AI Smart Search Enabled:
+    </span>
+
+    Feel free to type queries in normal natural language sentences.
+
+  </div>
+
+
+  <!-- ======================================================
+       SEARCH FILTERS
+       ====================================================== -->
+
+  <div class="search-filters">
+
+
+    <!-- PROPERTY TYPE -->
+
+    <div class="radio-group">
+
+      <label>
+
+        <input
+          type="radio"
+          name="ptype"
+          value="Full House"
+          [(ngModel)]="propertyType"
+        />
+
+        Full House
+
+      </label>
+
+
+      <label>
+
+        <input
+          type="radio"
+          name="ptype"
+          value="Land/Plot"
+          [(ngModel)]="propertyType"
+        />
+
+        Land/Plot
+
+      </label>
+
+    </div>
+
+
+    <!-- BHK -->
+
+    <select
+      class="filter-select"
+      [(ngModel)]="selectedBhk"
+      name="bhk"
+    >
+
+      <option value="">
+        BHK Type
+      </option>
+
+      <option value="1 BHK">
+        1 BHK
+      </option>
+
+      <option value="2 BHK">
+        2 BHK
+      </option>
+
+      <option value="3 BHK">
+        3 BHK
+      </option>
+
+      <option value="4 BHK">
+        4 BHK
+      </option>
+
+    </select>
+
+
+    <!-- STATUS -->
+
+    <select
+      class="filter-select"
+      [(ngModel)]="selectedStatus"
+      name="status"
+    >
+
+      <option value="">
+        Property Status
+      </option>
+
+      <option value="Under Construction">
+        Under Construction
+      </option>
+
+      <option value="Ready">
+        Ready
+      </option>
+
+    </select>
+
+
+    <!-- NEW BUILDER PROJECT -->
+
+    <label class="checkbox-label">
+
+      <input
+        type="checkbox"
+        [(ngModel)]="newBuilderProjects"
+        name="builderProject"
+      />
+
+      New Builder Projects
+
+    </label>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================
+     2️⃣ PROPERTY PROMOTION SECTION
+     ======================================================== -->
+
+<div class="promo-action-box-home">
+
+
+  <div class="action-text-side">
+
+    <div class="promo-badge-mini">
+      360° Aggressive Marketing Campaign
+    </div>
+
+    <p>
+
+      🎯
+
+      <strong>
+        Promote Your Project & Close 10x Faster:
+      </strong>
+
+      Our internal tech team launches heavy ad campaigns
+      across Meta, Google Maps, and Instagram Reels aggressively.
+      You only handle verified inbound buyer leads!
+
+    </p>
+
+  </div>
+
+
+  <div class="action-btn-side">
+
+    <a
+      href="/project-ad"
+      class="promo-cta-btn-home"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Post Project Ad Now
+    </a>
+
+  </div>
+
+</div>
+
+  </div>
+
+</div>
+
+<!-- ============================================================
+     3️⃣ UPCOMING & NEW PROJECTS
+     ============================================================ -->
+
+<section class="upcoming-projects-section">
+
+  <!-- SECTION HEADER -->
+
+  <div class="projects-section-header">
+
+<div class="projects-section-subtitle">
+  ACCHASOLUTION REALTY
+</div>
+
+<h2 class="projects-section-title">
+  Upcoming & New Projects
+</h2>
+
+<p class="projects-section-description">
+
+  Explore projects from India's leading real estate builders
+  across Bangalore's prime locations.
+
+</p>
+
+  </div>
+
+  <!-- ==========================================================
+       LOCATION FILTER
+       ========================================================== -->
+
+  <div class="project-location-tabs">
+
+    <button
+  type="button"
+  class="project-location-tab"
+  [class.active]="selectedProjectLocation === 'All'"
+  (click)="filterBuilderProjects('All')"
+>
+  All
+</button>
+
+
+<button
+  type="button"
+  class="project-location-tab"
+  [class.active]="selectedProjectLocation === 'Whitefield'"
+  (click)="filterBuilderProjects('Whitefield')"
+>
+  Whitefield
+</button>
+
+
+<button
+  type="button"
+  class="project-location-tab"
+  [class.active]="selectedProjectLocation === 'Hoodi'"
+  (click)="filterBuilderProjects('Hoodi')"
+>
+  Hoodi
+</button>
+
+
+<button
+  type="button"
+  class="project-location-tab"
+  [class.active]="selectedProjectLocation === 'Bangalore'"
+  (click)="filterBuilderProjects('Bangalore')"
+>
+  Bangalore
+</button>
+
+
+  </div>
+
+  <!-- ==========================================================
+       BUILDER LOGOS GRID
+       ========================================================== -->
+
+  <div class="builders-grid">
+
+<div
+  class="builder-logo-card"
+  *ngFor="let builder of getFilteredBuilderProjects()"
+  (click)="openBuilderProjects(builder)"
+  tabindex="0"
+  role="button"
+>
+
+
+  <ng-container
+    *ngIf="$any(builder) as safeBuilder"
+  >
+
+    <div class="builder-logo-wrapper">
+
+
+      <!-- BUILDER LOGO -->
+
+      <img
+        *ngIf="safeBuilder.logoUrl"
+        [src]="safeBuilder.logoUrl"
+        [alt]="safeBuilder.name || 'Builder logo'"
+        class="builder-logo-image"
+        loading="lazy"
+      />
+
+
+      <!-- FALLBACK -->
+
+      <div
+        *ngIf="!safeBuilder.logoUrl"
+        class="builder-logo-fallback text-first-letter-only"
+      >
+
+        {{ safeBuilder.name || 'B' }}
+
+      </div>
+
+    </div>
+
+
+    <!-- BUILDER NAME -->
+
+    <div class="builder-name">
+
+      {{ safeBuilder.name || 'Builder' }}
+
+    </div>
+
+  </ng-container>
+
+</div>
+
+  </div>
+
+  <!-- ==========================================================
+       VIEW ALL PROJECTS
+       ========================================================== -->
+
+  <div class="view-all-projects-wrapper">
+<button
+  type="button"
+  class="view-all-projects-btn"
+  (click)="viewAllProjects()"
+>
+
+  <span>
+    View All Projects
+  </span>
+
+  <span class="view-all-arrow">
+    →
+  </span>
+
+</button>
+
+  </div>
+
+</section>
+
+<!-- ============================================================
+     4️⃣ SELECTED BUILDER PROJECT DETAILS
+     ============================================================ -->
+
+<section
+  class="builder-project-details"
+  *ngIf="selectedBuilder"
+>
+
+  <!-- SELECTED BUILDER HEADER -->
+
+  <div class="selected-builder-header">
+
+<div class="selected-builder-logo">
+
+  <img
+    *ngIf="selectedBuilder.logoUrl"
+    [src]="selectedBuilder.logoUrl"
+    [alt]="selectedBuilder.name + ' logo'"
+  />
+
+
+  <div
+    *ngIf="!selectedBuilder.logoUrl"
+    class="builder-logo-fallback text-truncate-first"
+  >
+
+    {{ selectedBuilder.name || '' }}
+
+  </div>
+
+</div>
+
+
+<div class="selected-builder-info">
+
+  <span class="projects-section-subtitle">
+    BUILDER PROJECTS
+  </span>
+
+  <h2>
+    {{ selectedBuilder.name }}
+  </h2>
+
+</div>
+
+  </div>
+
+  <!-- BUILDER PROJECTS -->
+
+  <div class="builder-projects-grid">
+
+<div
+  class="builder-project-item"
+  *ngFor="let project of selectedBuilder?.projects || []"
+  (click)="openProjectDetails(project)"
+>
+
+
+  <div class="builder-project-image">
+
+
+    <img
+      [src]="
+        $any(project).image ||
+        'assets/default-project.jpg'
+      "
+      [alt]="$any(project).name || 'Project Image'"
+    />
+
+
+  </div>
+
+
+  <div class="builder-project-info">
+
+    <h3>
+      {{ $any(project).name || 'Project' }}
+    </h3>
+
+    <p
+      *ngIf="$any(project).location"
+    >
+      📍 {{ $any(project).location }}
+    </p>
+
+  </div>
+
+</div>
+
+  </div>
+
+</section>
+
+<!-- ============================================================
+     5️⃣ CURATED / VERIFIED PROPERTY SECTION
+     ============================================================ -->
+
+<section class="curated-properties-section">
+
+  <!-- SECTION HEADER -->
+
+  <div class="properties-section-header">
+
+<div class="properties-section-subtitle">
+  ACCHASOLUTION REALTY
+</div>
+
+<h2 class="properties-section-title">
+  Curated Properties
+</h2>
+
+<p class="properties-section-description">
+
+  Discover verified properties from trusted owners and builders
+  across prime locations in India.
+
+</p>
+
+  </div>
+
+  <!-- ==========================================================
+       PROPERTY CARDS GRID
+       ========================================================== -->
+
+  <div
+    class="property-cards-grid"
+    *ngIf="displayedProperties.length > 0"
+  >
+
+<div
+  class="property-card"
+  *ngFor="let property of displayedProperties"
+>
+
+
+  <!-- ====================================================
+       PROPERTY IMAGE
+       ==================================================== -->
+
+  <div class="property-card-image-wrapper">
+
+
+    <img
+      [src]="
+        $any(property).gallery?.[0]?.url ||
+        $any(property).image ||
+        'assets/placeholder.jpg'
+      "
+      [alt]="$any(property).name || 'Property Image'"
+      class="property-card-image"
+      loading="lazy"
+    />
+
+
+    <!-- STATUS -->
+
+    <span
+      class="property-status-badge"
+      *ngIf="$any(property).status"
+    >
+
+      {{ $any(property).status }}
+
+    </span>
+
+  </div>
+
+
+
+  <!-- ====================================================
+       PROPERTY CONTENT
+       ==================================================== -->
+
+  <div class="property-card-content">
+
+
+    <!-- PROPERTY NAME -->
+
+    <h3 class="property-card-title">
+
+      {{ $any(property).name || 'Verified Property' }}
+
+    </h3>
+
+
+    <!-- TYPE + BHK -->
+
+    <div class="property-card-meta">
+
+
+      <span
+        *ngIf="$any(property).type"
+      >
+        {{ $any(property).type }}
+      </span>
+
+
+      <span
+        *ngIf="$any(property).bhk"
+      >
+        {{ $any(property).bhk }}
+      </span>
+
+
+    </div>
+
+
+
+    <!-- LOCATION -->
+
+    <div
+      class="property-card-location"
+      *ngIf="$any(property).location"
+    >
+
+      📍 {{ $any(property).location }}
+
+    </div>
+
+
+
+    <!-- PRICE + AREA -->
+
+    <div class="property-card-details">
+
+
+      <div
+        class="property-price"
+        *ngIf="$any(property).price"
+      >
+
+        ₹ {{ $any(property).price }}
+
+      </div>
+
+
+      <div
+        class="property-area"
+        *ngIf="$any(property).area"
+      >
+
+        {{ $any(property).area }}
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- DESCRIPTION -->
+
+    <div
+      class="property-card-description"
+      *ngIf="$any(property).description"
+      [innerHTML]="$any(property).description"
+    >
+    </div>
+
+
+
+    <!-- VIEW DETAILS -->
+
+<button
+  type="button"
+  class="property-view-details-btn"
+  (click)="viewDetails($any(property))"
+>
+  <span>
+    View Details
+  </span>
+
+  <span>
+    →
+  </span>
+</button>
+
+
+  </div>
+
+</div>
+
+  </div>
+
+  <!-- ==========================================================
+       NO PROPERTY MESSAGE
+       ========================================================== -->
+
+  <div
+    class="no-properties-message"
+    *ngIf="displayedProperties.length === 0"
+  >
+
+<div class="no-properties-icon">
+  🏠
+</div>
+
+<h3>
+  No Properties Available
+</h3>
+
+<p>
+
+  Verified properties will appear here once they are available.
+
+</p>
+
+  </div>
+
+  <!-- ==========================================================
+       VIEW ALL PROPERTIES
+       ========================================================== -->
+
+  <div
+    class="properties-view-all-wrapper"
+    *ngIf="properties.length > 4"
+  >
+
+<button
+  type="button"
+  class="properties-view-all-btn"
+  (click)="toggleAllProperties()"
+>
+
+  <span>
+
+    {{
+      showAllProperties
+        ? 'Show Less'
+        : 'View All Properties'
+    }}
+
+  </span>
+
+
+  <span>
+
+    {{
+      showAllProperties
+        ? '↑'
+        : '→'
+    }}
+
+  </span>
+
+</button>
+
+  </div>
+
+</section>
+
+<!-- ============================================================
+     6️⃣ FINAL BUILDER / PROPERTY CTA
+     ============================================================ -->
+
+<section class="home-property-cta-section">
+
+  <div class="home-property-cta-content">
+
+    <span class="home-property-cta-badge">
+  ACCHASOLUTION
+</span>
+
+<h2>
+  Looking to Sell, Rent or Promote Your Property?
+</h2>
+
+<p>
+  List your property and connect with genuine buyers and tenants.
+</p>
+
+<div class="home-property-cta-actions">
+
+  <!-- <button
+    type="button"
+    class="home-property-cta-btn"
+    (click)="router.navigate(['/post-property'])"
+  >
+    Post Your Property
+  </button> -->
+
+
+  <a routerLink="/post-property" class="home-property-cta-btn" > Post Your Property </a>
+</div>
+
+  </div>
+
+</section>

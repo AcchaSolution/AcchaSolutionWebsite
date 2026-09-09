@@ -1,0 +1,41 @@
+<div class="profile-container">
+  <button class="back-btn" (click)="goBack()">← Back to Agents</button>
+
+  <div class="profile-card" *ngIf="agent; else loading">
+    <div class="profile-header">
+      <div class="avatar-box">
+        <img [src]="agent.photoUrl || 'images/AcchaSolutionLogo.jpg'" alt="Agent">
+      </div>
+      <h1>{{ agent.name }}</h1>
+      <span class="status-badge" [class.verified]="agent.verified">
+        {{ agent.verified ? '✓ Verified Agent' : 'Pending Verification' }}
+      </span>
+    </div>
+
+    <div class="details-grid">
+      <div class="info-box">
+        <label>Email Address</label>
+        <p>{{ agent.email || 'N/A' }}</p>
+      </div>
+      <div class="info-box">
+        <label>Phone Number</label>
+        <p>{{ agent.phone || 'Not Provided' }}</p>
+      </div>
+      <div class="info-box">
+        <label>Experience</label>
+        <p>{{ agent.experience || 0 }} Years</p>
+      </div>
+      <div class="info-box">
+        <label>Active Properties</label>
+        <p>{{ agent.activeProperties || 0 }}</p>
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #loading>
+    <div class="loading-state">
+      <h2>Loading profile...</h2>
+    </div>
+  </ng-template>
+</div>

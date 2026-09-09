@@ -1,0 +1,328 @@
+<div class="login-wrapper">
+
+  <div class="login-card">
+
+    <!-- =====================================================
+         LEFT SIDE - ONLY LOGIN
+    ====================================================== -->
+
+    <div
+      class="card-left"
+      *ngIf="activeTab === 'login'"
+    >
+
+      <div class="overlay-text">
+
+        <h2>
+          EXPLORE.<br>
+          LEARN. GROW.
+        </h2>
+
+        <p>
+          Join the elite network of real estate professionals.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         RIGHT SIDE
+    ====================================================== -->
+
+    <div class="card-right">
+
+
+      <!-- ===================================================
+           LOGIN
+      ==================================================== -->
+
+      <div *ngIf="activeTab === 'login'">
+
+        <div class="header">
+
+          <h1>
+            Welcome Back
+          </h1>
+
+          <p>
+            Enter your details to login
+          </p>
+
+        </div>
+
+
+        <form
+          (ngSubmit)="onLoginSubmit()"
+        >
+
+
+          <!-- EMAIL -->
+
+          <div class="form-group">
+
+            <label>
+              Email
+            </label>
+
+            <input
+              type="email"
+              [(ngModel)]="loginData.email"
+              name="loginEmail"
+              required
+              autocomplete="email"
+            >
+
+          </div>
+
+
+          <!-- PASSWORD -->
+
+          <div class="form-group">
+
+            <label>
+              Password
+            </label>
+
+            <input
+              type="password"
+              [(ngModel)]="loginData.password"
+              name="loginPass"
+              required
+              autocomplete="current-password"
+            >
+
+          </div>
+
+
+          <!-- LOGIN BUTTON -->
+
+          <button
+            type="submit"
+            class="btn-login"
+          >
+            Login
+          </button>
+
+
+          <!-- =================================================
+               GOOGLE LOGIN
+          ================================================== -->
+
+          <div class="google-login-section">
+
+            <div class="google-divider">
+
+              <span></span>
+
+              <small>
+                OR
+              </small>
+
+              <span></span>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="google-btn"
+              (click)="triggerGoogleLogin()"
+            >
+
+              <img
+                src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"
+                alt="Google"
+                class="google-logo"
+              >
+
+              <span>
+                Continue with Google
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <!-- =================================================
+               REGISTER
+          ================================================== -->
+
+          <div
+            class="auth-footer"
+            style="text-align: center; margin-top: 20px;"
+          >
+
+            <p>
+
+              Don't have an account?
+
+              <span
+                (click)="toggleAuthMode()"
+                class="auth-toggle-link"
+              >
+                Register Now
+              </span>
+
+            </p>
+
+          </div>
+
+
+        </form>
+
+      </div>
+
+
+      <!-- ===================================================
+           SIGNUP
+      ==================================================== -->
+
+      <form
+        *ngIf="activeTab === 'signup'"
+        #signupForm="ngForm"
+        (ngSubmit)="onSignUpSubmit()"
+      >
+
+        <div class="content-wrapper">
+
+
+          <!-- =================================================
+               LEFT SECTION
+          ================================================== -->
+
+          <div class="left-section">
+
+            <img
+              src="images/login image.png"
+              alt="House"
+              class="house-img"
+            >
+
+            <h2>
+              Post your property Ad to sell or rent online for
+              <span>Free!</span>
+            </h2>
+
+            <ul class="features">
+
+              <li>
+                ✅ Get Access to 4 Lakh+ Buyers
+              </li>
+
+              <li>
+                ✅ Sell Faster with Premium Service
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <!-- =================================================
+               SIGNUP FORM
+          ================================================== -->
+
+          <div class="form-card">
+
+            <h2>
+              Let's get you started
+            </h2>
+
+            <p>
+              You are:
+            </p>
+
+
+            <!-- USER TYPE -->
+
+            <div class="selection-group">
+
+              <button
+                type="button"
+                [class.active]="selectedUser === 'Owner'"
+                (click)="selectedUser = 'Owner'"
+              >
+                Owner
+              </button>
+
+              <button
+                type="button"
+                [class.active]="selectedUser === 'Agent'"
+                (click)="selectedUser = 'Agent'"
+              >
+                Agent
+              </button>
+
+            </div>
+
+
+            <!-- INPUTS -->
+
+            <div class="input-stack">
+
+              <input
+                type="text"
+                placeholder="Full Name"
+                [(ngModel)]="signUpData.name"
+                name="name"
+                required
+              >
+
+              <input
+                type="email"
+                placeholder="Email Address"
+                [(ngModel)]="signUpData.email"
+                name="email"
+                required
+              >
+
+              <input
+                type="password"
+                placeholder="Password"
+                [(ngModel)]="signUpData.password"
+                name="password"
+                required
+              >
+
+              <input
+                type="number"
+                placeholder="Experience (Years)"
+                [(ngModel)]="signUpData.experience"
+                name="exp"
+              >
+
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                [(ngModel)]="signUpData.phone"
+                name="phone"
+                required
+              >
+
+            </div>
+
+
+            <!-- SIGNUP BUTTON -->
+
+            <button
+              type="submit"
+              class="submit-btn"
+              [disabled]="signupForm.invalid"
+            >
+              START NOW
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,383 @@
+/* ============================================================
+   PROJECT DETAILS PAGE
+============================================================ */
+
+.project-details-page {
+  min-height: 100vh;
+  background: #f7f5f0;
+  color: #222;
+}
+
+
+/* ============================================================
+   1. HERO
+============================================================ */
+
+.project-details-hero {
+  position: relative;
+  min-height: 430px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 70px 8%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #24170f,
+      #5b402b
+    );
+
+  overflow: hidden;
+}
+
+
+.project-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 75% 30%,
+      rgba(255, 255, 255, 0.12),
+      transparent 35%
+    );
+}
+
+
+.project-hero-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 850px;
+
+  color: #fff;
+}
+
+
+.builder-label {
+  display: inline-block;
+
+  margin-bottom: 18px;
+  padding: 8px 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 30px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+
+.project-hero-content h1 {
+  margin: 0 0 18px;
+
+  font-size: clamp(38px, 6vw, 72px);
+
+  line-height: 1.05;
+  font-weight: 700;
+
+  letter-spacing: -1px;
+}
+
+
+.project-hero-content p {
+  margin: 0;
+
+  font-size: 18px;
+
+  color: rgba(255, 255, 255, 0.85);
+}
+
+
+/* ============================================================
+   2. PROJECT INFORMATION
+============================================================ */
+
+.project-info-section {
+  padding: 70px 6%;
+}
+
+
+.project-info-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+
+/* ============================================================
+   PROJECT HEADER
+============================================================ */
+
+.project-info-header {
+  margin-bottom: 45px;
+}
+
+
+.project-type {
+  display: inline-block;
+
+  margin-bottom: 12px;
+
+  color: #8b6239;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+
+.project-info-header h2 {
+  margin: 0 0 12px;
+
+  font-size: 38px;
+
+  color: #24170f;
+}
+
+
+.project-location {
+  margin: 0;
+
+  font-size: 17px;
+
+  color: #666;
+}
+
+
+/* ============================================================
+   3. DETAILS GRID
+============================================================ */
+
+.project-details-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 60px;
+}
+
+
+.detail-box {
+  padding: 25px 22px;
+
+  background: #fff;
+
+  border: 1px solid #e7dfd6;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 8px 25px rgba(40, 25, 15, 0.06);
+
+  transition: 0.3s ease;
+}
+
+
+.detail-box:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 15px 35px rgba(40, 25, 15, 0.10);
+}
+
+
+.detail-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #888;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+.detail-box strong {
+  display: block;
+
+  color: #24170f;
+
+  font-size: 17px;
+}
+
+
+/* ============================================================
+   4. ABOUT PROJECT
+============================================================ */
+
+.project-about {
+  max-width: 850px;
+
+  margin-bottom: 50px;
+}
+
+
+.project-about h2 {
+  margin: 0 0 18px;
+
+  color: #24170f;
+
+  font-size: 30px;
+}
+
+
+.project-about p {
+  margin: 0;
+
+  color: #666;
+
+  font-size: 17px;
+
+  line-height: 1.8;
+}
+
+
+/* ============================================================
+   5. ACTION BUTTONS
+============================================================ */
+
+.project-actions {
+  display: flex;
+
+  gap: 15px;
+
+  align-items: center;
+}
+
+
+.enquiry-button,
+.back-button {
+  padding: 14px 28px;
+
+  border-radius: 30px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+
+/* ENQUIRE */
+
+.enquiry-button {
+  border: none;
+
+  background: #24170f;
+
+  color: #fff;
+}
+
+
+.enquiry-button:hover {
+  background: #8b6239;
+
+  transform: translateY(-2px);
+}
+
+
+/* BACK */
+
+.back-button {
+  border: 1px solid #cfc3b7;
+
+  background: transparent;
+
+  color: #24170f;
+}
+
+
+.back-button:hover {
+  background: #fff;
+
+  border-color: #8b6239;
+}
+
+
+/* ============================================================
+   6. RESPONSIVE — TABLET
+============================================================ */
+
+@media (max-width: 900px) {
+
+  .project-details-hero {
+    min-height: 380px;
+
+    padding: 60px 6%;
+  }
+
+
+  .project-details-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+/* ============================================================
+   7. RESPONSIVE — MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+  .project-details-hero {
+    min-height: 330px;
+
+    padding: 50px 22px;
+  }
+
+
+  .project-hero-content h1 {
+    font-size: 40px;
+  }
+
+
+  .project-hero-content p {
+    font-size: 15px;
+  }
+
+
+  .project-info-section {
+    padding: 50px 20px;
+  }
+
+
+  .project-info-header h2 {
+    font-size: 30px;
+  }
+
+
+  .project-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .project-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .enquiry-button,
+  .back-button {
+    width: 100%;
+  }
+
+}

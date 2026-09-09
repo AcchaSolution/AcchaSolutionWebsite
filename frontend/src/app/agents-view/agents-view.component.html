@@ -1,0 +1,311 @@
+<!-- =====================================================
+     AGENTS GRID
+===================================================== -->
+
+<div class="agents-grid">
+
+  <div
+    class="agent-card"
+    *ngFor="let agent of agents; trackBy: trackByAgentId"
+  >
+
+    <!-- ROLE -->
+    <div
+      class="role-badge"
+      [ngClass]="agent.role === 'agent' ? 'role-agent' : 'role-owner'"
+    >
+      {{ agent.role | titlecase }}
+    </div>
+
+
+    <!-- =================================================
+         AGENT AVATAR
+    ================================================== -->
+
+    <div class="avatar-circle">
+
+      <!-- Actual Photo -->
+      <img
+        *ngIf="agent.photoUrl && !agent.imageError"
+        [src]="agent.photoUrl"
+        alt="{{ agent.name }}"
+        (error)="agent.imageError = true"
+      >
+
+      <!-- Initials fallback -->
+      <div
+        class="initial-avatar"
+        *ngIf="!agent.photoUrl || agent.imageError"
+      >
+        {{ getInitials(agent.name) }}
+      </div>
+
+    </div>
+
+
+    <!-- NAME -->
+    <h3>
+      {{ agent.name }}
+
+      <span
+        class="verified-badge"
+        *ngIf="agent.verified"
+      >
+        ✓
+      </span>
+    </h3>
+
+
+    <!-- STATS -->
+    <div class="stats">
+
+      <div class="stat-item">
+        <strong>
+          {{ agent.activeProperties }}
+        </strong>
+
+        <small>
+          Properties
+        </small>
+      </div>
+
+
+      <div class="stat-item">
+        <strong>
+          {{ agent.experience }}
+        </strong>
+
+        <small>
+          Years
+        </small>
+      </div>
+
+    </div>
+
+
+    <!-- REVIEW -->
+    <button
+      type="button"
+      class="btn-view"
+      (click)="viewProfile(agent.id)"
+    >
+      Review Details
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     AGENT DETAILS POPUP
+===================================================== -->
+
+<div
+  class="agent-modal-overlay"
+  *ngIf="showAgentDetails"
+  (click)="closeAgentDetails()"
+>
+
+  <div
+    class="agent-detail-modal"
+    (click)="$event.stopPropagation()"
+  >
+
+    <!-- CLOSE -->
+    <button
+      type="button"
+      class="modal-close"
+      (click)="closeAgentDetails()"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+
+    <!-- =================================================
+         MODAL AVATAR
+    ================================================== -->
+
+    <div class="modal-avatar">
+
+      <!-- Actual Photo -->
+      <img
+        *ngIf="
+          selectedAgent?.photoUrl &&
+          !selectedAgent?.imageError
+        "
+        [src]="selectedAgent.photoUrl"
+        alt="{{ selectedAgent?.name }}"
+        (error)="selectedAgent.imageError = true"
+      >
+
+      <!-- Initials -->
+      <div
+        class="modal-initial-avatar"
+        *ngIf="
+          !selectedAgent?.photoUrl ||
+          selectedAgent?.imageError
+        "
+      >
+        {{ getInitials(selectedAgent?.name) }}
+      </div>
+
+    </div>
+
+
+    <!-- NAME -->
+    <h2>
+      {{ selectedAgent?.name }}
+    </h2>
+
+
+    <!-- VERIFIED -->
+    <span class="modal-verified">
+      ✓ Verified Agent
+    </span>
+
+
+    <!-- =================================================
+         DETAILS
+    ================================================== -->
+
+    <div class="modal-details">
+
+
+      <!-- EMAIL -->
+      <div class="modal-info">
+
+        <strong>
+          Email
+        </strong>
+
+        <p>
+          {{ selectedAgent?.email || 'N/A' }}
+        </p>
+
+      </div>
+
+
+      <!-- PHONE -->
+      <div class="modal-info">
+
+        <strong>
+          Phone
+        </strong>
+
+        <p>
+          {{ selectedAgent?.phone || 'N/A' }}
+        </p>
+
+      </div>
+
+
+      <!-- EXPERIENCE -->
+      <div class="modal-info">
+
+        <strong>
+          Experience
+        </strong>
+
+        <p>
+          {{ selectedAgent?.experience || 0 }} Years
+        </p>
+
+      </div>
+
+
+      <!-- PROPERTY COUNT -->
+      <div class="modal-info properties-count-card">
+
+        <strong>
+          Properties
+        </strong>
+
+        <p>
+          {{ agentProperties.length }}
+        </p>
+
+      </div>
+
+
+      <!-- =================================================
+           PROPERTY LINKS
+      ================================================== -->
+
+      <div
+        class="agent-property-links"
+        *ngIf="agentProperties.length > 0"
+      >
+
+        <h4>
+          Properties Posted by {{ selectedAgent?.name }}
+        </h4>
+
+
+        <div
+          class="property-link"
+          *ngFor="let property of agentProperties"
+        >
+
+          <a
+            [routerLink]="[
+              '/property-details',
+              property.id || property.uniqueId
+            ]"
+            (click)="closeAgentDetails()"
+          >
+
+            <span class="property-name">
+              {{ property.name || 'View Property' }}
+            </span>
+
+            <span class="property-arrow">
+              →
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- NO PROPERTY -->
+      <div
+        class="no-agent-properties"
+        *ngIf="agentProperties.length === 0"
+      >
+        No properties posted yet.
+      </div>
+
+
+      <!-- ROLE -->
+      <div class="modal-info">
+
+        <strong>
+          Role
+        </strong>
+
+        <p>
+          {{ selectedAgent?.role | titlecase }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- OK -->
+    <button
+      type="button"
+      class="modal-ok-btn"
+      (click)="closeAgentDetails()"
+    >
+      OK
+    </button>
+
+  </div>
+
+</div>

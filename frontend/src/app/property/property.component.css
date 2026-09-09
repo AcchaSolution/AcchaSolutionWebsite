@@ -1,0 +1,470 @@
+/* ==========================================
+   ☀️ ACCHASOLUTION ULTRA-BRIGHT LUXURY THEME
+   ========================================== */
+
+/* Page Background - Pure Clean Linen (Light & Fresh) */
+.admin-layout {
+  background-color: #fcfbfa; /* Clean Ivory Cream - Poora page light ho gaya */
+  min-height: 100vh;
+  padding: 40px 3%;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Elegant Floating Breadcrumb */
+.breadcrumb {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: #8c7669;
+  margin-bottom: 35px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.breadcrumb .active {
+  color: #c9a074; /* Signature Soft Gold */
+}
+
+/* Master Grid Engine */
+.property-grid {
+  display: grid;
+  grid-template-columns: 72% 25%;
+  gap: 35px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .property-grid { grid-template-columns: 1fr; gap: 25px; }
+}
+
+/* ==========================================
+   💎 LIGHT FROSTED GLASS CARDS (Bright & Premium)
+   ========================================== */
+
+/* Dark blocks ko hata kar ekdum saaf, halka glass plate card banaya */
+.card, .glass-card {
+  background: rgba(255, 255, 255, 0.85) !important; /* Premium Crisp White Glass */
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(201, 160, 116, 0.25) !important; /* Soft Gold hairline border */
+  border-radius: 16px !important;
+  padding: 30px !important;
+  box-shadow: 0 10px 35px rgba(163, 130, 95, 0.06) !important; /* Very soft luxury shadow */
+  color: #211611 !important; /* Deep coffee text for perfect clean contrast */
+  margin-bottom: 30px;
+  transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Hover Effect: Card subtly lifts up and glows with soft gold outline */
+.card:hover, .glass-card:hover {
+  transform: translateY(-4px);
+  border-color: #c9a074 !important;
+  box-shadow: 0 20px 45px rgba(201, 160, 116, 0.12) !important;
+}
+
+/* Card Section Titles - Deep Espresso serif font */
+.specs-header h4, .media-header h4, h5, h6 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: #211611 !important; /* Rich Dark Espresso Title */
+  letter-spacing: 1.2px;
+  font-weight: 600 !important;
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.badge-modern {
+  background: rgba(201, 160, 116, 0.12);
+  color: #a3825f;
+  border: 1px solid rgba(201, 160, 116, 0.3);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-left: 12px;
+  font-weight: 600;
+}
+
+/* ==========================================
+   ✍️ LIGHT INPUT CONTOURS (No Cramped Look)
+   ========================================== */
+
+.form-group, .spec-input-group {
+  margin-bottom: 28px; /* Clean breathing gap to avoid overlapping */
+}
+
+/* Input Fields Labels */
+.form-group label, .spec-input-group label, .card label {
+  color: #4a3e3d !important; /* Dark Muted Chocolate labels */
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+  font-weight: 600;
+}
+
+/* Inputs - Soft Warm Alabaster Pockets (Clean White/Cream fields) */
+.main-input, .permalink-input, .input-with-icon input, .spec-input-group input, select, .form-select {
+  background-color: #fdfdfc !important; /* Soft bright input pocket */
+  border: 1px solid #e2e8f0 !important;   /* Sleek hairline subtle border */
+  color: #211611 !important;             /* Dark text inside inputs for easy data-entry */
+  border-radius: 8px !important;
+  padding: 13px 16px !important;
+  font-size: 13px;
+  font-family: sans-serif;
+  width: 100%;
+  transition: all 0.25s ease;
+}
+
+/* Smooth input placeholder styling */
+.main-input::placeholder, .permalink-input::placeholder, .spec-input-group input::placeholder {
+  color: #bfaea2 !important; /* Elegant muted placeholder text */
+}
+
+.main-input:focus, .permalink-input:focus, select:focus, .form-select:focus {
+  outline: none !important;
+  border-color: #c9a074 !important; /* Active gold highlight border */
+  background-color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(201, 160, 116, 0.15) !important;
+}
+
+/* Prefix Addons (₹ and URL strings alignment) */
+.url-prefix, .currency-tag {
+  background: #f2eee9 !important; /* Light Warm Sand tone prefix background */
+  border: 1px solid #e2e8f0;
+  color: #a3825f !important;
+  padding: 13px 16px;
+  font-size: 13px;
+  border-radius: 8px 0 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+.permalink-container, .input-with-icon {
+  display: flex;
+  align-items: stretch;
+}
+
+.permalink-container input {
+  border-radius: 0 !important;
+}
+
+.link-icon-btn {
+  background: #f2eee9 !important;
+  border: 1px solid #e2e8f0;
+  border-left: none;
+  color: #c9a074;
+  padding: 0 18px;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.link-icon-btn:hover {
+  background: #c9a074 !important;
+  color: #ffffff;
+}
+
+.preview-url {
+  font-size: 11px;
+  color: #8c7669;
+  margin-top: 8px;
+}
+.preview-url a { color: #c9a074; text-decoration: underline; }
+
+/* ==========================================
+   🎛️ SYSTEM SPECIFICATIONS GRID & SLIDERS
+   ========================================== */
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* Range Slider Light Track styling */
+.range-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  outline: none;
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #c9a074;
+  cursor: pointer;
+}
+
+.value-display {
+  background: rgba(201, 160, 116, 0.12);
+  color: #a3825f;
+  border: 1px solid rgba(201, 160, 116, 0.25);
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* Premium Amenities Mini Chips */
+.amenities-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.amenity-chip {
+  background: #fcfbfa;
+  border: 1px solid #e2e8f0;
+  color: #4a3e3d;
+  padding: 10px 18px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.amenity-chip.active {
+  background: #211611 !important; /* Deep Espresso fill when selected */
+  border-color: #211611 !important;
+  color: #c9a074 !important;
+  font-weight: 600;
+}
+
+/* ==========================================
+   🔮 AUTOMATION WIDGETS (Map & Heatmap)
+   ========================================== */
+
+#map-container {
+  height: 260px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.btn-ai-magic {
+  background: transparent !important;
+  border: 1px solid #c9a074 !important;
+  color: #a3825f !important;
+  font-weight: 600 !important;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-ai-magic:hover {
+  background: #211611 !important;
+  color: #c9a074 !important;
+  border-color: #211611 !important;
+}
+
+.heatmap-bar {
+  position: relative;
+  height: 4px;
+  background: linear-gradient(to right, #10b981, #f59e0b, #ef4444);
+  border-radius: 4px;
+  margin: 15px 0;
+}
+
+.heatmap-pointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border: 2px solid #211611;
+  border-radius: 50%;
+}
+
+/* ==========================================
+   🖼️ PHOTO INSTANT GALLERIES PREVIEWS
+   ========================================== */
+.image-grid-proactive {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.upload-placeholder-proactive {
+  width: 100px;
+  height: 100px;
+  background-color: #f2eee9 !important;
+  border: 2px dashed #c9a074 !important;
+  border-radius: 8px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.upload-content { display: flex; flex-direction: column; align-items: center; }
+.upload-icon-big { font-size: 20px; margin-bottom: 4px; color: #c9a074; }
+.upload-text-main { font-size: 11px; font-weight: 600; color: #a3825f !important; text-transform: uppercase; }
+.upload-subtext { font-size: 9px; color: #8c7669 !important; }
+
+.image-preview-card {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+.image-preview-card img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ==========================================
+   🚀 RIGHT SIDEBAR COMPACT CONTROL PANEL
+   ========================================== */
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.side-card {
+  margin-bottom: 0px !important;
+}
+
+/* Dynamic select choices text visibility overrides */
+select, .form-select {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c9a074'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 15px center !important;
+  background-size: 18px !important;
+}
+
+/* Options stays clean light gray background with dark text */
+select option {
+  background-color: #ffffff !important; 
+  color: #211611 !important;            
+  padding: 12px !important;
+}
+
+/* Clean button stacking structure */
+.btn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* The Grand Solid Luxury Submit Trigger */
+.btn-save {
+  background: #211611 !important; /* Solid Dark Charcoal Luxury Button */
+  color: #c9a074 !important;      /* Royal Gold text */
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(33, 22, 17, 0.15);
+  transition: all 0.2s ease;
+}
+
+.btn-save:hover {
+  background: #c9a074 !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(201, 160, 116, 0.3);
+}
+
+.btn-exit {
+  background: transparent !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #211611 !important;
+  font-weight: 600;
+  font-size: 11px;
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.btn-exit:hover {
+  border-color: #c9a074 !important;
+  color: #c9a074 !important;
+}
+
+/* Target Category Pill Chips */
+.category-chip {
+  background: #fcfbfa;
+  border: 1px solid #e2e8f0;
+  color: #4a3e3d;
+  padding: 8px 14px;
+  border-radius: 4px;
+  margin: 4px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.category-chip.selected {
+  background: #211611 !important;
+  border-color: #211611 !important;
+  color: #c9a074 !important;
+  font-weight: 600;
+}
+
+/* System Generated Code Identity Tracking Registration Token Badge */
+.id-badge {
+  background: #fdfdfc;
+  padding: 12px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+}
+.id-badge code { color: #211611; font-weight: 600; font-size: 13px; }
+
+/* Clear Form Execution Button Trigger */
+.btn-clear {
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.btn-clear:hover { background: #ef4444; color: #ffffff; }
+
+/* ==========================================
+   🖋️ QUILL TEXTAREA COMPONENT HARMONY OVERRIDE
+   ========================================== */
+.ql-toolbar.ql-snow {
+  background: #f2eee9 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px 8px 0 0;
+}
+
+.ql-container.ql-snow {
+  background: #ffffff !important; 
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0 0 8px 8px;
+  color: #211611 !important;
+}

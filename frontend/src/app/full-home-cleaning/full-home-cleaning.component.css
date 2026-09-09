@@ -1,0 +1,1551 @@
+/* =====================================
+   CLEANING HERO
+===================================== */
+
+.cleaning-hero {
+    min-height: 650px;
+
+    padding: 70px 7%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    gap: 60px;
+
+    background: #f7f5ef;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+
+/* =====================================
+   LEFT CONTENT
+===================================== */
+
+.cleaning-content {
+    max-width: 560px;
+}
+
+
+.cleaning-label {
+    display: inline-block;
+
+    margin-bottom: 22px;
+
+    color: #a47732;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.cleaning-content h1 {
+    margin: 0;
+
+    color: #2d2119;
+
+    font-size: clamp(48px, 5.5vw, 78px);
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+
+.cleaning-content h1 span {
+    color: #a47732;
+}
+
+
+.cleaning-content p {
+    max-width: 480px;
+
+    margin: 28px 0;
+
+    color: #6f665e;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================
+   BUTTONS
+===================================== */
+
+.cleaning-buttons {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 30px;
+}
+
+
+.cleaning-btn {
+    padding: 14px 24px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #2d2119;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.cleaning-btn span {
+    margin-left: 12px;
+
+    color: #d2aa64;
+
+    font-size: 17px;
+}
+
+
+.cleaning-link-btn {
+    padding: 13px 22px;
+
+    border: 1px solid #cfc5b9;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #4b4037;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =====================================
+   IMAGE AREA
+===================================== */
+
+.cleaning-images {
+    position: relative;
+
+    width: 100%;
+
+    height: 540px;
+}
+
+
+/* =====================================
+   BIG SQUARE IMAGE
+===================================== */
+
+.cleaning-big-image {
+    position: absolute;
+
+    top: 0;
+    right: 20px;
+
+    width: 430px;
+    height: 430px;
+
+    padding: 10px;
+
+    background: #f7f5ef;
+
+    z-index: 1;
+
+    box-sizing: border-box;
+
+    border: 1px solid #b88a35;
+
+    box-shadow:
+        10px 10px 0 #2d2119,
+        0 20px 40px rgba(45, 33, 25, 0.14);
+}
+
+
+.cleaning-big-image::before {
+    content: "";
+
+    position: absolute;
+
+    top: -8px;
+    right: -8px;
+
+    width: 55px;
+    height: 55px;
+
+    border-top: 2px solid #b88a35;
+    border-right: 2px solid #b88a35;
+
+    pointer-events: none;
+}
+
+
+.cleaning-big-image::after {
+    content: "";
+
+    position: absolute;
+
+    left: -8px;
+    bottom: -8px;
+
+    width: 55px;
+    height: 55px;
+
+    border-left: 2px solid #b88a35;
+    border-bottom: 2px solid #b88a35;
+
+    pointer-events: none;
+}
+
+
+.cleaning-big-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* =====================================
+   SMALL SQUARE IMAGE
+===================================== */
+
+.cleaning-small-image {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 320px;
+    height: 320px;
+
+    padding: 10px;
+
+    background: #f7f5ef;
+
+    z-index: 2;
+
+    box-sizing: border-box;
+
+    /* Stylish double frame */
+    border: 1px solid #b88a35;
+
+    box-shadow:
+        10px 10px 0 #2d2119,
+        0 18px 35px rgba(45, 33, 25, 0.16);
+}
+
+
+.cleaning-small-image::before {
+    content: "";
+
+    position: absolute;
+
+    top: -8px;
+    left: -8px;
+
+    width: 45px;
+    height: 45px;
+
+    border-top: 2px solid #b88a35;
+    border-left: 2px solid #b88a35;
+
+    pointer-events: none;
+}
+
+
+.cleaning-small-image::after {
+    content: "";
+
+    position: absolute;
+
+    right: -8px;
+    bottom: -8px;
+
+    width: 45px;
+    height: 45px;
+
+    border-right: 2px solid #b88a35;
+    border-bottom: 2px solid #b88a35;
+
+    pointer-events: none;
+}
+
+
+.cleaning-small-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media (max-width: 1000px) {
+
+    .cleaning-hero {
+        grid-template-columns: 1fr;
+
+        padding: 55px 6%;
+
+        gap: 45px;
+    }
+
+    .cleaning-content {
+        max-width: 700px;
+    }
+
+    .cleaning-images {
+        height: 500px;
+    }
+
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 600px) {
+
+    .cleaning-hero {
+        padding: 45px 20px;
+
+        gap: 35px;
+    }
+
+
+    .cleaning-content h1 {
+        font-size: 48px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .cleaning-content p {
+        font-size: 15px;
+    }
+
+
+    .cleaning-buttons {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .cleaning-btn,
+    .cleaning-link-btn {
+        width: 100%;
+    }
+
+
+    .cleaning-images {
+        height: 390px;
+    }
+
+
+    .cleaning-big-image {
+        top: 0;
+
+        right: 5px;
+
+        width: 290px;
+
+        height: 290px;
+    }
+
+
+    .cleaning-small-image {
+        left: 0;
+
+        bottom: 5px;
+
+        width: 175px;
+
+        height: 175px;
+
+        padding: 6px;
+    }
+
+}
+
+
+
+/* =========================================
+   CLEANING SERVICES
+========================================= */
+
+.cleaning-services {
+    padding: 100px 7%;
+
+    background: #ffffff;
+
+    color: #2d2119;
+}
+
+
+/* =========================================
+   SECTION HEADING
+========================================= */
+
+.cleaning-services-heading {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 50px;
+
+    margin-bottom: 55px;
+}
+
+
+.services-label {
+    display: block;
+
+    margin-bottom: 14px;
+
+    color: #a47732;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.cleaning-services-heading h2 {
+    margin: 0;
+
+    font-size: clamp(42px, 5vw, 65px);
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+
+    color: #2d2119;
+}
+
+
+.cleaning-services-heading h2 span {
+    color: #a47732;
+}
+
+
+.cleaning-services-heading > p {
+    max-width: 390px;
+
+    margin: 0;
+
+    color: #777069;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================
+   SERVICES GRID
+========================================= */
+
+.services-layout {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+
+/* =========================================
+   FEATURED SERVICE
+========================================= */
+
+.featured-service {
+    grid-column: span 2;
+    grid-row: span 2;
+
+    display: grid;
+
+    grid-template-columns: 1.1fr .9fr;
+
+    min-height: 470px;
+
+    background: #f5f1e9;
+
+    overflow: hidden;
+}
+
+
+.featured-image {
+    min-height: 470px;
+}
+
+
+.featured-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.featured-content {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 42px;
+}
+
+
+.featured-content > span {
+    margin-bottom: 25px;
+
+    color: #b88a35;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.featured-content h3 {
+    margin: 0;
+
+    color: #2d2119;
+
+    font-size: 34px;
+
+    line-height: 1.05;
+}
+
+
+.featured-content p {
+    margin: 22px 0;
+
+    color: #756d65;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+.featured-content a {
+    color: #2d2119;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.featured-content a b {
+    margin-left: 8px;
+
+    color: #b88a35;
+
+    font-size: 17px;
+}
+
+
+/* =========================================
+   SMALL SERVICES
+========================================= */
+
+.mini-service {
+    position: relative;
+
+    min-height: 225px;
+
+    overflow: hidden;
+
+    background: #f5f1e9;
+}
+
+
+.mini-image {
+    position: absolute;
+
+    inset: 0;
+}
+
+
+.mini-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: linear-gradient(
+        180deg,
+        rgba(30, 23, 18, 0.02),
+        rgba(30, 23, 18, 0.72)
+    );
+}
+
+
+.mini-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.mini-content {
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 225px;
+
+    padding: 24px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    box-sizing: border-box;
+}
+
+
+.mini-content > span {
+    color: #e1bd7a;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+.mini-content h3 {
+    margin: auto 0 15px;
+
+    color: #ffffff;
+
+    font-size: 21px;
+
+    line-height: 1.1;
+}
+
+
+.mini-content a {
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.mini-content a::after {
+    content: "";
+
+    display: inline-block;
+
+    width: 25px;
+
+    height: 1px;
+
+    margin-left: 8px;
+
+    vertical-align: middle;
+
+    background: #d0a85e;
+}
+
+
+/* =========================================
+   SIMPLE HOVER
+========================================= */
+
+.mini-service img,
+.featured-image img {
+    transition: transform .35s ease;
+}
+
+
+.mini-service:hover img {
+    transform: scale(1.04);
+}
+
+
+.featured-service:hover img {
+    transform: scale(1.02);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .cleaning-services {
+        padding: 75px 6%;
+    }
+
+
+    .cleaning-services-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+
+    .services-layout {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .featured-service {
+        grid-column: span 2;
+
+        grid-row: auto;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .cleaning-services {
+        padding: 60px 20px;
+    }
+
+
+    .cleaning-services-heading {
+        margin-bottom: 35px;
+    }
+
+
+    .cleaning-services-heading h2 {
+        font-size: 43px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .cleaning-services-heading > p {
+        font-size: 14px;
+    }
+
+
+    .services-layout {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+
+    .featured-service {
+        grid-column: auto;
+
+        display: block;
+    }
+
+
+    .featured-image {
+        height: 280px;
+
+        min-height: 0;
+    }
+
+
+    .featured-content {
+        padding: 28px;
+    }
+
+
+    .featured-content h3 {
+        font-size: 30px;
+    }
+
+
+    .mini-service {
+        min-height: 230px;
+    }
+
+
+    .mini-content {
+        min-height: 230px;
+    }
+
+}
+
+
+/* =========================================
+   WHY CHOOSE US
+========================================= */
+
+.cleaning-why {
+    padding: 90px 7%;
+
+    background: #f7f5ef;
+
+    display: grid;
+
+    grid-template-columns: .85fr 1.15fr;
+
+    gap: 80px;
+
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.why-intro > span {
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: #a47732;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.why-intro h2 {
+    margin: 0;
+
+    color: #2d2119;
+
+    font-size: clamp(42px, 5vw, 62px);
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+}
+
+
+.why-intro h2 strong {
+    display: block;
+
+    color: #a47732;
+
+    font-weight: 800;
+}
+
+
+.why-intro p {
+    max-width: 430px;
+
+    margin: 25px 0 0;
+
+    color: #716960;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================
+   WHY POINTS
+========================================= */
+
+.why-points {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    border-top: 1px solid #d9d1c5;
+
+    border-left: 1px solid #d9d1c5;
+}
+
+
+.why-point {
+    display: grid;
+
+    grid-template-columns: 45px 1fr;
+
+    gap: 15px;
+
+    min-height: 170px;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    border-right: 1px solid #d9d1c5;
+
+    border-bottom: 1px solid #d9d1c5;
+
+    transition: background .25s ease;
+}
+
+
+.why-point:hover {
+    background: #ffffff;
+}
+
+
+/* =========================================
+   NUMBER
+========================================= */
+
+.why-number {
+    color: #b88a35;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    padding-top: 3px;
+}
+
+
+/* =========================================
+   TEXT
+========================================= */
+
+.why-point h3 {
+    margin: 0 0 10px;
+
+    color: #33271f;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+.why-point p {
+    margin: 0;
+
+    color: #777068;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .cleaning-why {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+
+        padding: 75px 6%;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .cleaning-why {
+        padding: 60px 20px;
+
+        gap: 35px;
+    }
+
+
+    .why-intro h2 {
+        font-size: 43px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .why-points {
+        grid-template-columns: 1fr;
+    }
+
+
+    .why-point {
+        min-height: 140px;
+
+        padding: 22px;
+    }
+
+}
+
+/* =========================================
+   HOW IT WORKS
+========================================= */
+
+.cleaning-process {
+    padding: 95px 7%;
+
+    background: #ffffff;
+
+    color: #2d2119;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.process-heading {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 65px;
+}
+
+
+.process-heading > span {
+    color: #a47732;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.process-heading h2 {
+    margin: 0;
+
+    font-size: clamp(40px, 5vw, 60px);
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+
+    color: #2d2119;
+}
+
+
+.process-heading h2 strong {
+    color: #a47732;
+}
+
+
+/* =========================================
+   PROCESS LINE
+========================================= */
+
+.process-line {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+
+/* Horizontal line */
+
+.process-line::before {
+    content: "";
+
+    position: absolute;
+
+    top: 28px;
+
+    left: 7%;
+
+    right: 7%;
+
+    height: 1px;
+
+    background: #d9d1c5;
+
+    z-index: 0;
+}
+
+
+/* =========================================
+   STEP
+========================================= */
+
+.process-step {
+    position: relative;
+
+    z-index: 1;
+
+    text-align: center;
+}
+
+
+.process-circle {
+    width: 56px;
+    height: 56px;
+
+    margin: 0 auto 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #b88a35;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: #a47732;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.process-step h3 {
+    margin: 0 0 12px;
+
+    color: #33271f;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+.process-step p {
+    max-width: 230px;
+
+    margin: auto;
+
+    color: #777068;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.process-step:hover .process-circle {
+    background: #2d2119;
+
+    border-color: #2d2119;
+
+    color: #ffffff;
+
+    transition: .25s ease;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .cleaning-process {
+        padding: 75px 6%;
+    }
+
+
+    .process-heading {
+        display: block;
+
+        margin-bottom: 50px;
+    }
+
+
+    .process-heading > span {
+        display: block;
+
+        margin-bottom: 15px;
+    }
+
+
+    .process-line {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 45px 25px;
+    }
+
+
+    .process-line::before {
+        display: none;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .cleaning-process {
+        padding: 60px 20px;
+    }
+
+
+    .process-heading h2 {
+        font-size: 43px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .process-line {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+
+    .process-step {
+        text-align: left;
+
+        display: grid;
+
+        grid-template-columns: 56px 1fr;
+
+        column-gap: 18px;
+    }
+
+
+    .process-circle {
+        grid-row: span 2;
+
+        margin: 0;
+    }
+
+
+    .process-step h3 {
+        margin-top: 5px;
+    }
+
+
+    .process-step p {
+        max-width: none;
+
+        margin: 0;
+    }
+
+}
+
+/* ================================
+   BOOKING CTA
+================================ */
+
+.booking-cta {
+  position: relative;
+  overflow: hidden;
+  padding: 105px 7%;
+  background: #f4eadc;
+  text-align: center;
+}
+
+
+/* Decorative shapes */
+
+.booking-cta-shape {
+  position: absolute;
+  border: 1px solid rgba(91, 55, 32, 0.14);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.shape-one {
+  width: 430px;
+  height: 430px;
+  top: -230px;
+  left: -150px;
+}
+
+.shape-two {
+  width: 350px;
+  height: 350px;
+  right: -140px;
+  bottom: -190px;
+}
+
+
+/* Content */
+
+.booking-cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  margin: auto;
+}
+
+
+/* Label */
+
+.booking-cta-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  margin-bottom: 22px;
+
+  color: #8b6848;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.booking-cta-label span {
+  width: 35px;
+  height: 1px;
+  background: #c49a61;
+}
+
+
+/* Heading */
+
+.booking-cta h2 {
+  margin: 0;
+
+  color: #351f14;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.08;
+  font-weight: 600;
+}
+
+.booking-cta h2 strong {
+  display: block;
+  color: #9b6f3f;
+  font-weight: 700;
+}
+
+
+/* Description */
+
+.booking-cta-content > p {
+  max-width: 650px;
+  margin: 25px auto 0;
+
+  color: #705b4a;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+
+/* Buttons */
+
+.booking-cta-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  margin-top: 35px;
+}
+
+.booking-btn-primary,
+.booking-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  min-width: 185px;
+  padding: 16px 24px;
+
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: all 0.3s ease;
+}
+
+
+/* Primary */
+
+.booking-btn-primary {
+  background: #382116;
+  color: #fff8ed;
+  border: 1px solid #382116;
+}
+
+.booking-btn-primary span {
+  font-size: 19px;
+  transition: transform 0.3s ease;
+}
+
+.booking-btn-primary:hover {
+  background: #9b6f3f;
+  border-color: #9b6f3f;
+  transform: translateY(-3px);
+}
+
+.booking-btn-primary:hover span {
+  transform: translate(3px, -3px);
+}
+
+
+/* Outline */
+
+.booking-btn-outline {
+  color: #382116;
+  border: 1px solid #9b7652;
+  background: transparent;
+}
+
+.booking-btn-outline span {
+  font-size: 16px;
+}
+
+.booking-btn-outline:hover {
+  background: #382116;
+  color: #fff8ed;
+  transform: translateY(-3px);
+}
+
+
+/* Trust items */
+
+.booking-trust {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  margin-top: 45px;
+  padding-top: 25px;
+
+  border-top: 1px solid rgba(91, 55, 32, 0.15);
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #705b4a;
+  font-size: 13px;
+}
+
+.trust-item strong {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 21px;
+  height: 21px;
+
+  border-radius: 50%;
+
+  background: #9b6f3f;
+  color: white;
+
+  font-size: 11px;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+
+  .booking-cta {
+    padding: 75px 20px;
+  }
+
+  .booking-cta h2 {
+    font-size: 38px;
+  }
+
+  .booking-cta-buttons {
+    flex-direction: column;
+  }
+
+  .booking-btn-primary,
+  .booking-btn-outline {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .booking-trust {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .booking-cta-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+}
+

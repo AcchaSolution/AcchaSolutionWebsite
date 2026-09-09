@@ -1,0 +1,672 @@
+<div class="rental-agreement-page">
+
+  <!-- ================= HERO ================= -->
+  <section class="ra-hero-new">
+
+    <div class="ra-hero-topline">
+      <span>ACCHASOLUTION DOCUMENTATION</span>
+      <span>RENTAL SERVICES</span>
+    </div>
+
+    <div class="ra-hero-main">
+
+      <div class="ra-hero-title">
+
+        <div class="ra-hero-number">
+          02
+        </div>
+
+        <div>
+          <span class="ra-kicker">RENTAL AGREEMENT</span>
+
+          <h1>
+            Easy.
+            <em>Clear.</em>
+            Documented.
+          </h1>
+        </div>
+
+      </div>
+
+
+      <div class="ra-hero-description">
+
+        <p>
+          Rental agreement preparation made simple with guided
+          documentation support for your property.
+        </p>
+
+        <a href="#ra-application" class="ra-start-btn">
+          Start Agreement
+          <span>↘</span>
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="ra-hero-bottom">
+
+      <span>RESIDENTIAL</span>
+      <i></i>
+      <span>COMMERCIAL</span>
+      <i></i>
+      <span>RENEWAL</span>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= AGREEMENT TYPES ================= -->
+
+  <section class="ra-type-strip">
+
+    <div class="ra-type-intro">
+      <span>01</span>
+
+      <h2>
+        Select your
+        <strong>agreement type</strong>
+      </h2>
+    </div>
+
+
+    <div class="ra-type-options">
+
+      <button type="button" class="ra-type-option active">
+
+        <span class="ra-option-no">01</span>
+
+        <div>
+          <strong>Residential</strong>
+          <small>House / Flat / Apartment</small>
+        </div>
+
+        <b>→</b>
+
+      </button>
+
+
+      <button type="button" class="ra-type-option">
+
+        <span class="ra-option-no">02</span>
+
+        <div>
+          <strong>Commercial</strong>
+          <small>Shop / Office / Business</small>
+        </div>
+
+        <b>→</b>
+
+      </button>
+
+
+      <button type="button" class="ra-type-option">
+
+        <span class="ra-option-no">03</span>
+
+        <div>
+          <strong>Renewal</strong>
+          <small>Existing agreement</small>
+        </div>
+
+        <b>→</b>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= APPLICATION ================= -->
+
+  <section class="ra-application" id="ra-application">
+
+    <div class="ra-application-heading">
+
+      <div class="ra-section-number">
+        02
+      </div>
+
+      <div>
+
+        <span>APPLICATION FORM</span>
+
+        <h2>
+          Rental Agreement
+          <strong>Request</strong>
+        </h2>
+
+      </div>
+
+      <p>
+        Fill in the basic information below. We will review the
+        details and guide you through the next steps.
+      </p>
+
+    </div>
+
+
+    <div class="ra-application-sheet">
+
+      <form>
+
+        <!-- LANDLORD -->
+
+        <div class="ra-sheet-section">
+
+          <div class="ra-sheet-label">
+            <span>01</span>
+            <strong>Landlord Details</strong>
+          </div>
+
+
+          <div class="ra-sheet-fields">
+
+            <div class="ra-input-group">
+
+              <label for="ra-landlord">
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                id="ra-landlord"
+                name="landlordName"
+                placeholder="Landlord full name"
+                required
+              >
+
+            </div>
+
+
+            <div class="ra-input-group">
+
+              <label for="ra-landlord-phone">
+                Mobile Number
+              </label>
+
+              <input
+                type="tel"
+                id="ra-landlord-phone"
+                name="landlordMobile"
+                placeholder="Mobile number"
+                required
+              >
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- TENANT -->
+
+        <div class="ra-sheet-section">
+
+          <div class="ra-sheet-label">
+            <span>02</span>
+            <strong>Tenant Details</strong>
+          </div>
+
+
+          <div class="ra-sheet-fields">
+
+            <div class="ra-input-group">
+
+              <label for="ra-tenant">
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                id="ra-tenant"
+                name="tenantName"
+                placeholder="Tenant full name"
+                required
+              >
+
+            </div>
+
+
+            <div class="ra-input-group">
+
+              <label for="ra-tenant-phone">
+                Mobile Number
+              </label>
+
+              <input
+                type="tel"
+                id="ra-tenant-phone"
+                name="tenantMobile"
+                placeholder="Mobile number"
+                required
+              >
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PROPERTY -->
+
+        <div class="ra-sheet-section">
+
+          <div class="ra-sheet-label">
+            <span>03</span>
+            <strong>Property Details</strong>
+          </div>
+
+
+          <div class="ra-sheet-fields full">
+
+            <div class="ra-input-group">
+
+              <label for="ra-address">
+                Complete Property Address
+              </label>
+
+              <textarea
+                id="ra-address"
+                name="propertyAddress"
+                placeholder="Enter complete property address"
+                rows="3"
+                required
+              ></textarea>
+
+            </div>
+
+          </div>
+
+
+          <div class="ra-sheet-fields">
+
+            <div class="ra-input-group">
+
+              <label for="ra-property">
+                Property Type
+              </label>
+
+              <select
+                id="ra-property"
+                name="propertyType"
+                required
+              >
+
+                <option value="">
+                  Select property type
+                </option>
+
+                <option value="flat">
+                  Flat / Apartment
+                </option>
+
+                <option value="house">
+                  Independent House
+                </option>
+
+                <option value="shop">
+                  Shop
+                </option>
+
+                <option value="office">
+                  Office
+                </option>
+
+                <option value="other">
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="ra-input-group">
+
+              <label for="ra-purpose">
+                Request Type
+              </label>
+
+              <select
+                id="ra-purpose"
+                name="requestType"
+                required
+              >
+
+                <option value="">
+                  Select request
+                </option>
+
+                <option value="new">
+                  New Agreement
+                </option>
+
+                <option value="renewal">
+                  Renewal
+                </option>
+
+                <option value="extension">
+                  Extension
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FINANCIAL -->
+
+        <div class="ra-sheet-section">
+
+          <div class="ra-sheet-label">
+            <span>04</span>
+            <strong>Rent & Duration</strong>
+          </div>
+
+
+          <div class="ra-sheet-fields">
+
+            <div class="ra-input-group">
+
+              <label for="ra-rent">
+                Monthly Rent
+              </label>
+
+              <input
+                type="number"
+                id="ra-rent"
+                name="monthlyRent"
+                placeholder="₹ Enter amount"
+                required
+              >
+
+            </div>
+
+
+            <div class="ra-input-group">
+
+              <label for="ra-deposit">
+                Security Deposit
+              </label>
+
+              <input
+                type="number"
+                id="ra-deposit"
+                name="securityDeposit"
+                placeholder="₹ Enter amount"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="ra-sheet-fields">
+
+            <div class="ra-input-group">
+
+              <label for="ra-duration">
+                Agreement Duration
+              </label>
+
+              <select
+                id="ra-duration"
+                name="duration"
+                required
+              >
+
+                <option value="">
+                  Select duration
+                </option>
+
+                <option value="6-months">
+                  6 Months
+                </option>
+
+                <option value="11-months">
+                  11 Months
+                </option>
+
+                <option value="1-year">
+                  1 Year
+                </option>
+
+                <option value="other">
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="ra-input-group">
+
+              <label for="ra-start">
+                Agreement Start Date
+              </label>
+
+              <input
+                type="date"
+                id="ra-start"
+                name="startDate"
+                required
+              >
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ADDITIONAL -->
+
+        <div class="ra-sheet-section">
+
+          <div class="ra-sheet-label">
+            <span>05</span>
+            <strong>Additional Requirements</strong>
+          </div>
+
+
+          <div class="ra-sheet-fields full">
+
+            <div class="ra-input-group">
+
+              <label for="ra-notes">
+                Additional Notes
+              </label>
+
+              <textarea
+                id="ra-notes"
+                name="additionalNotes"
+                rows="4"
+                placeholder="Mention any additional terms or requirements..."
+              ></textarea>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <div class="ra-submit-area">
+
+          <div>
+            <span>READY TO CONTINUE?</span>
+
+            <p>
+              Submit your details and our team will contact you
+              regarding the next steps.
+            </p>
+          </div>
+
+
+          <button type="submit" class="ra-submit">
+
+            Submit Request
+
+            <span>→</span>
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= TIMELINE ================= -->
+
+  <section class="ra-timeline-section">
+
+    <div class="ra-timeline-heading">
+
+      <span>03 / PROCESS</span>
+
+      <h2>
+        From details to
+        <strong>agreement.</strong>
+      </h2>
+
+    </div>
+
+
+    <div class="ra-timeline">
+
+      <div class="ra-timeline-step">
+
+        <span>01</span>
+
+        <div>
+          <strong>Details</strong>
+          <small>Share information</small>
+        </div>
+
+      </div>
+
+
+      <div class="ra-timeline-line"></div>
+
+
+      <div class="ra-timeline-step">
+
+        <span>02</span>
+
+        <div>
+          <strong>Review</strong>
+          <small>Information check</small>
+        </div>
+
+      </div>
+
+
+      <div class="ra-timeline-line"></div>
+
+
+      <div class="ra-timeline-step">
+
+        <span>03</span>
+
+        <div>
+          <strong>Preparation</strong>
+          <small>Agreement drafting</small>
+        </div>
+
+      </div>
+
+
+      <div class="ra-timeline-line"></div>
+
+
+      <div class="ra-timeline-step">
+
+        <span>04</span>
+
+        <div>
+          <strong>Delivery</strong>
+          <small>Final document</small>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= INFORMATION ================= -->
+
+  <section class="ra-note">
+
+    <div class="ra-note-mark">
+      i
+    </div>
+
+    <div>
+
+      <span>IMPORTANT INFORMATION</span>
+
+      <p>
+        Agreement preparation is based on the information provided.
+        Applicable stamp duty, registration, notarization and other
+        requirements may vary depending on the location and agreement type.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FINAL CTA ================= -->
+
+  <section class="ra-final">
+
+    <div class="ra-final-number">
+      02
+    </div>
+
+    <div class="ra-final-content">
+
+      <span>RENTAL DOCUMENTATION</span>
+
+      <h2>
+        Need help with
+        <strong>your agreement?</strong>
+      </h2>
+
+    </div>
+
+
+    <a
+      href="https://wa.me/919304751016?text=Hello%20AcchaSolution%2C%20I%20need%20help%20with%20a%20Rental%20Agreement."
+      target="_blank"
+      rel="noopener"
+      class="ra-final-btn"
+    >
+      Talk to Us
+      <span>↗</span>
+    </a>
+
+  </section>
+
+</div>

@@ -1,0 +1,2581 @@
+/* ==========================================================================
+   👑 ACCHASOLUTION REAL ESTATE — HOME MASTER CSS
+   Current HTML + TypeScript Compatible
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. GLOBAL RESET
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #fcfbfa;
+  color: #211611;
+  overflow-x: hidden;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+
+/* ==========================================================================
+   2. HERO / SEARCH
+   ========================================================================== */
+
+.hero {
+  width: 100%;
+  min-height: 85vh;
+
+  background:
+    linear-gradient(
+      rgba(22, 15, 12, 0.66),
+      rgba(22, 15, 12, 0.76)
+    ),
+    url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1600&auto=format&fit=crop');
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 60px 20px;
+
+  color: #fff;
+  text-align: center;
+}
+
+.search-section {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.main-title {
+  margin-bottom: 18px;
+
+  font-family: 'Playfair Display', Georgia, serif;
+
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+
+  font-weight: 500;
+  line-height: 1.15;
+
+  letter-spacing: 1px;
+
+  text-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.main-title-h {
+  margin-bottom: 35px;
+
+  font-family: 'Playfair Display', Georgia, serif;
+
+  font-size: 30px;
+
+  font-weight: 400;
+
+  line-height: 1.3;
+
+  letter-spacing: 1px;
+
+  color: #fff;
+
+  text-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ==========================================================================
+   3. SEARCH CONTAINER
+   ========================================================================== */
+
+.search-container {
+  width: 100%;
+  max-width: 950px;
+
+  margin: 0 auto;
+
+  padding: 30px;
+
+  background: #fff;
+
+  border-radius: 16px;
+
+  color: #211611;
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.25);
+
+  transition: transform 0.3s ease;
+}
+
+.search-container:hover {
+  transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   4. SEARCH TABS
+   ========================================================================== */
+
+.tabs {
+  display: flex;
+
+  gap: 25px;
+
+  margin-bottom: 25px;
+
+  border-bottom: 1px solid #f2eee9;
+}
+
+.tab {
+  position: relative;
+
+  padding: 12px 24px;
+
+  cursor: pointer;
+
+  color: #8c7669;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  transition: all 0.3s ease;
+}
+
+.tab:hover {
+  color: #211611;
+}
+
+.tab.active {
+  color: #c9a074;
+}
+
+.tab.active::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  bottom: -1px;
+
+  width: 100%;
+  height: 2px;
+
+  background: #c9a074;
+}
+
+
+/* ==========================================================================
+   5. SEARCH TOP
+   ========================================================================== */
+
+.search-top {
+  display: flex;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.city-dropdown,
+.search-input {
+  padding: 14px 20px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+
+  background: #fdfdfc;
+
+  color: #211611;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.city-dropdown {
+  min-width: 150px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.search-input {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.city-dropdown:focus,
+.search-input:focus {
+  border-color: #c9a074;
+
+  box-shadow:
+    0 0 0 3px rgba(201, 160, 116, 0.12);
+}
+
+
+/* ==========================================================================
+   6. SEARCH BUTTON
+   ========================================================================== */
+
+.btn-search {
+  border: none;
+
+  padding: 0 35px;
+
+  border-radius: 8px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  transition: all 0.3s ease;
+}
+
+.custom-saffron-search {
+  background-color: #ff9933 !important;
+
+  color: #fff !important;
+
+  font-weight: 700 !important;
+
+  border: none !important;
+
+  box-shadow:
+    0 4px 14px rgba(255, 153, 51, 0.35) !important;
+}
+
+.custom-saffron-search:hover:not(:disabled) {
+  background-color: #e68a2e !important;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 20px rgba(255, 153, 51, 0.5) !important;
+}
+
+.custom-saffron-search:disabled {
+  background-color: #94a3b8 !important;
+
+  cursor: not-allowed !important;
+
+  box-shadow: none !important;
+}
+
+.spin-bot {
+  display: inline-block;
+
+  animation: botPulse 1s infinite alternate;
+}
+
+@keyframes botPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+
+/* ==========================================================================
+   7. AI SEARCH HINT
+   ========================================================================== */
+
+.ai-search-hint {
+  margin-top: 8px;
+
+  padding-left: 5px;
+
+  color: #cbd5e1;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  text-align: left;
+}
+
+.sparkle-text {
+  color: #ff9933;
+
+  font-weight: 700;
+}
+
+
+/* ==========================================================================
+   8. SEARCH FILTERS
+   ========================================================================== */
+
+.search-filters {
+  display: flex;
+
+  align-items: center;
+
+  gap: 25px;
+
+  margin-top: 15px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #f2eee9;
+
+  flex-wrap: wrap;
+}
+
+.radio-group {
+  display: flex;
+
+  gap: 20px;
+}
+
+.radio-group label,
+.checkbox-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #4a3e3d;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+.radio-group input,
+.checkbox-label input {
+  accent-color: #ff9933;
+
+  cursor: pointer;
+}
+
+.filter-select {
+  min-width: 140px;
+
+  padding: 10px 16px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 6px;
+
+  background: #fff;
+
+  color: #211611;
+
+  font-size: 13px;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  border-color: #c9a074;
+}
+
+
+/* ==========================================================================
+   9. PROMO BANNER
+   ========================================================================== */
+
+.promo-action-box-home {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  margin-top: 35px;
+
+  padding: 22px 28px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border-left: 5px solid #ff9933;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.15);
+
+  backdrop-filter: blur(10px);
+
+  text-align: left;
+}
+
+.action-text-side {
+  flex: 2;
+}
+
+.promo-badge-mini {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  padding: 4px 12px;
+
+  background: rgba(255, 153, 51, 0.12);
+
+  color: #ff9933;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  text-transform: uppercase;
+}
+
+.action-text-side p {
+  margin: 0;
+
+  color: #1e293b;
+
+  font-size: 14.5px;
+
+  line-height: 1.5;
+}
+
+.action-btn-side {
+  flex: 1;
+
+  text-align: right;
+
+  white-space: nowrap;
+}
+
+.promo-cta-btn-home {
+  display: inline-block;
+
+  padding: 14px 28px;
+
+  background: #ff9933;
+
+  color: #fff !important;
+
+  border-radius: 6px;
+
+  text-decoration: none !important;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 4px 14px rgba(255, 153, 51, 0.35);
+
+  transition: all 0.3s ease;
+}
+
+.promo-cta-btn-home:hover {
+  background: #e68a2e;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 22px rgba(255, 153, 51, 0.45);
+}
+
+
+/* ==========================================================================
+   10. UPCOMING PROJECTS
+   ========================================================================== */
+
+.upcoming-projects-section {
+  width: 100%;
+
+  padding: 65px 4% 70px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fcfbfa 0%,
+      #f8f5f1 100%
+    );
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.projects-section-header {
+  width: 100%;
+
+  max-width: 900px;
+
+  margin: 0 auto 28px;
+
+  text-align: center;
+}
+
+.projects-section-subtitle,
+.properties-section-subtitle {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: #a3825f;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+}
+
+.projects-section-title,
+.properties-section-title {
+  margin-bottom: 10px;
+
+  color: #211611;
+
+  font-family:
+    'Playfair Display',
+    Georgia,
+    serif;
+
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+
+  font-weight: 500;
+
+  line-height: 1.2;
+}
+
+.projects-section-description,
+.properties-section-description {
+  max-width: 680px;
+
+  margin: 0 auto;
+
+  color: #806f64;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* ==========================================================================
+   11. PROJECT LOCATION TABS
+   ========================================================================== */
+
+.project-location-tabs {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-bottom: 28px;
+
+  flex-wrap: wrap;
+}
+
+.project-location-tab {
+  padding: 10px 22px;
+
+  border: 1px solid #dfd3c8;
+
+  border-radius: 30px;
+
+  background: #fff;
+
+  color: #4a3e3d;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.project-location-tab:hover {
+  border-color: #211611;
+
+  transform: translateY(-2px);
+}
+
+.project-location-tab.active {
+  border-color: #211611;
+
+  background: #211611;
+
+  color: #fff;
+
+  box-shadow:
+    0 8px 20px rgba(33, 22, 17, 0.15);
+}
+
+
+/* ==========================================================================
+   12. BUILDERS GRID
+   ========================================================================== */
+
+.builders-grid {
+  width: 100%;
+
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  gap: 20px;
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+
+  padding: 8px 5px 18px;
+
+  scroll-behavior: smooth;
+
+  scrollbar-width: thin;
+}
+
+
+/* ==========================================================================
+   13. BUILDER LOGO CARD
+   ========================================================================== */
+
+.builder-logo-card {
+  position: relative;
+
+  flex: 0 0 180px;
+
+  width: 180px;
+
+  height: 145px;
+
+  border: 1px solid #eadfd6;
+
+  border-radius: 18px;
+
+  background: #fff;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.builder-logo-card::before {
+  content: '';
+
+  position: absolute;
+
+  width: 140px;
+  height: 140px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(201, 160, 116, 0.15),
+      transparent 70%
+    );
+
+  opacity: 0;
+
+  transition: opacity 0.35s ease;
+}
+
+.builder-logo-card:hover::before {
+  opacity: 1;
+}
+
+.builder-logo-card:hover {
+  transform: translateY(-6px);
+
+  border-color: #c9a074;
+
+  box-shadow:
+    0 18px 40px rgba(33, 22, 17, 0.13);
+}
+
+
+/* ==========================================================================
+   14. BUILDER LOGO WRAPPER
+   ========================================================================== */
+
+.builder-logo-wrapper {
+  position: relative;
+
+  z-index: 2;
+
+  width: 105px;
+  height: 105px;
+
+  border-radius: 50%;
+
+  background: #f8f3ed;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(201, 160, 116, 0.5);
+
+  box-shadow:
+    0 8px 22px rgba(33, 22, 17, 0.12);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.builder-logo-card:hover .builder-logo-wrapper {
+  transform: scale(1.07);
+
+  box-shadow:
+    0 12px 28px rgba(33, 22, 17, 0.2);
+}
+
+.builder-logo-image {
+  width: 76%;
+  height: 76%;
+
+  object-fit: contain;
+
+  display: block;
+
+  transition: transform 0.35s ease;
+}
+
+.builder-logo-card:hover .builder-logo-image {
+  transform: scale(1.06);
+}
+
+.builder-logo-fallback {
+  font-family:
+    'Playfair Display',
+    Georgia,
+    serif;
+
+  font-size: 27px;
+
+  font-weight: 600;
+
+  color: #c9a074;
+
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   15. BUILDER NAME
+   ========================================================================== */
+
+.builder-name {
+  display: none;
+}
+
+
+/* ==========================================================================
+   16. VIEW ALL PROJECTS
+   ========================================================================== */
+
+.view-all-projects-wrapper {
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 30px;
+}
+
+.view-all-projects-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  padding: 11px 27px;
+
+  border: 1px solid #211611;
+
+  border-radius: 30px;
+
+  background: transparent;
+
+  color: #211611;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.view-all-projects-btn:hover {
+  background: #211611;
+
+  color: #fff;
+
+  transform: translateY(-2px);
+}
+
+.view-all-arrow {
+  font-size: 18px;
+
+  transition: transform 0.3s ease;
+}
+
+.view-all-projects-btn:hover .view-all-arrow {
+  transform: translateX(5px);
+}
+
+
+/* ==========================================================================
+   17. SELECTED BUILDER DETAILS
+   ========================================================================== */
+
+.builder-project-details {
+  width: 100%;
+
+  padding: 55px 4% 65px;
+
+  background: #fff;
+
+  border-top: 1px solid #eee5dc;
+}
+
+.selected-builder-header {
+  max-width: 1100px;
+
+  margin: 0 auto 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+.selected-builder-logo {
+  width: 75px;
+  height: 75px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #211611;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.selected-builder-logo img {
+  width: 75%;
+  height: 75%;
+
+  object-fit: contain;
+}
+
+.selected-builder-info h2 {
+  color: #211611;
+
+  font-family:
+    'Playfair Display',
+    Georgia,
+    serif;
+
+  font-size: 32px;
+}
+
+.builder-projects-grid {
+  width: 100%;
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+.builder-project-item {
+  background: #fff;
+
+  border: 1px solid #e7ddd4;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.builder-project-item:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 15px 35px rgba(33, 22, 17, 0.12);
+}
+
+.builder-project-image {
+  height: 200px;
+
+  overflow: hidden;
+
+  background: #eee;
+}
+
+.builder-project-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition: transform 0.4s ease;
+}
+
+.builder-project-item:hover .builder-project-image img {
+  transform: scale(1.05);
+}
+
+.builder-project-info {
+  padding: 18px;
+}
+
+.builder-project-info h3 {
+  margin-bottom: 8px;
+
+  color: #211611;
+
+  font-size: 17px;
+}
+
+.builder-project-info p {
+  color: #777;
+
+  font-size: 12px;
+}
+
+
+/* ==========================================================================
+   18. CURATED PROPERTY SECTION
+   ========================================================================== */
+
+.curated-properties-section {
+  width: 100%;
+
+  padding: 70px 4% 80px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f7f5f2 0%,
+      #f3f0ec 100%
+    );
+}
+
+.properties-section-header {
+  width: 100%;
+
+  max-width: 900px;
+
+  margin: 0 auto 38px;
+
+  text-align: center;
+}
+
+
+/* ========================================================================== */
+/* 19. PROPERTY CARD GRID — PREMIUM */
+/* ========================================================================== */
+
+.property-cards-grid {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 28px;
+}
+
+
+/* ========================================================================== */
+/* 20. PREMIUM PROPERTY CARD */
+/* ========================================================================== */
+
+.property-card {
+  position: relative;
+
+  min-width: 0;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(201, 160, 116, 0.22);
+
+  border-radius: 22px;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 25px rgba(33, 22, 17, 0.07),
+    0 2px 5px rgba(33, 22, 17, 0.03);
+
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.property-card:hover {
+  transform: translateY(-9px);
+
+  border-color: rgba(201, 160, 116, 0.65);
+
+  box-shadow:
+    0 25px 55px rgba(33, 22, 17, 0.16),
+    0 8px 18px rgba(201, 160, 116, 0.08);
+}
+
+
+/* ========================================================================== */
+/* 21. PROPERTY IMAGE */
+/* ========================================================================== */
+
+.property-card-image-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 245px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eee8e1,
+      #ddd5cc
+    );
+}
+
+
+/* IMAGE */
+
+.property-card-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition:
+    transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.4s ease;
+}
+
+.property-card:hover .property-card-image {
+  transform: scale(1.09);
+
+  filter: brightness(0.94);
+}
+
+
+/* ========================================================================== */
+/* IMAGE DARK GRADIENT */
+/* ========================================================================== */
+
+.property-card-image-wrapper::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 100%;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(20, 13, 10, 0.58) 0%,
+      rgba(20, 13, 10, 0.12) 42%,
+      transparent 72%
+    );
+}
+
+
+/* ========================================================================== */
+/* 22. PROPERTY STATUS BADGE */
+/* ========================================================================== */
+
+.property-status-badge {
+  position: absolute;
+
+  top: 15px;
+  left: 15px;
+
+  z-index: 3;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 30px;
+
+  padding: 7px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  border-radius: 30px;
+
+  background:
+    rgba(33, 22, 17, 0.88);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  color: #ffffff;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.1px;
+
+  text-transform: uppercase;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ========================================================================== */
+/* PREMIUM STATUS DOT */
+/* ========================================================================== */
+
+.property-status-badge::before {
+  content: '';
+
+  width: 6px;
+  height: 6px;
+
+  margin-right: 7px;
+
+  border-radius: 50%;
+
+  background: #ff9933;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 153, 51, 0.14);
+}
+
+
+/* ========================================================================== */
+/* 23. PROPERTY CONTENT */
+/* ========================================================================== */
+
+.property-card-content {
+  position: relative;
+
+  padding: 21px 21px 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fffdfb 100%
+    );
+}
+
+
+/* ========================================================================== */
+/* 24. PROPERTY TITLE */
+/* ========================================================================== */
+
+.property-card-title {
+  min-height: 48px;
+
+  margin: 0 0 12px;
+
+  color: #211611;
+
+  font-family:
+    'Montserrat',
+    sans-serif;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  line-height: 1.35;
+
+  letter-spacing: -0.15px;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 2;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.property-card:hover .property-card-title {
+  color: #a3825f;
+
+  transform: translateX(2px);
+}
+
+
+/* ========================================================================== */
+/* 25. PROPERTY META */
+/* ========================================================================== */
+
+.property-card-meta {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin-bottom: 13px;
+}
+
+
+/* META PILLS */
+
+.property-card-meta span {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 28px;
+
+  padding: 6px 11px;
+
+  border: 1px solid #eee3d8;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #faf7f3,
+      #f5eee7
+    );
+
+  color: #5a4940;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.5px;
+
+  text-transform: uppercase;
+}
+
+
+/* FIRST META */
+
+.property-card-meta span:first-child {
+  color: #8d6c4d;
+
+  border-color: rgba(201, 160, 116, 0.3);
+}
+
+
+/* ========================================================================== */
+/* 26. LOCATION */
+/* ========================================================================== */
+
+.property-card-location {
+  position: relative;
+
+  margin-bottom: 14px;
+
+  padding-left: 2px;
+
+  color: #766b65;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  line-height: 1.5;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* ========================================================================== */
+/* 27. PRICE + AREA */
+/* ========================================================================== */
+
+.property-card-details {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 17px;
+
+  padding: 14px 0;
+
+  border-top: 1px solid #eee7e1;
+
+  border-bottom: 1px solid #eee7e1;
+}
+
+
+/* PRICE */
+
+.property-price {
+  color: #211611;
+
+  font-family:
+    'Montserrat',
+    sans-serif;
+
+  font-size: 20px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* PRICE ACCENT */
+
+.property-price::first-letter {
+  color: #a3825f;
+}
+
+
+/* AREA */
+
+.property-area {
+  color: #8a7b72;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  text-align: right;
+
+  white-space: nowrap;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+}
+
+
+/* ========================================================================== */
+/* 28. DESCRIPTION */
+/* ========================================================================== */
+
+.property-card-description {
+  margin: 0 0 19px;
+
+  color: #81756e;
+
+  font-size: 11px;
+
+  line-height: 1.65;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 3;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+
+/* ========================================================================== */
+/* 29. VIEW DETAILS BUTTON */
+/* ========================================================================== */
+
+.property-view-details-btn {
+  position: relative;
+
+  width: 100%;
+
+  margin-top: auto;
+
+  min-height: 46px;
+
+  padding: 12px 17px;
+
+  border: 1px solid #211611;
+
+  border-radius: 30px;
+
+  background: #211611;
+
+  color: #ffffff;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* BUTTON SHINE */
+
+.property-view-details-btn::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 70%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.16),
+      transparent
+    );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.6s ease;
+}
+
+.property-view-details-btn:hover::before {
+  left: 140%;
+}
+
+
+/* BUTTON HOVER */
+
+.property-view-details-btn:hover {
+  background: #c9a074;
+
+  border-color: #c9a074;
+
+  color: #211611;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 22px rgba(201, 160, 116, 0.28);
+}
+
+
+/* BUTTON ARROW */
+
+.property-view-details-btn span:last-child {
+  font-size: 17px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.3s ease;
+}
+
+.property-view-details-btn:hover span:last-child {
+  transform: translateX(5px);
+}
+
+
+/* ========================================================================== */
+/* EXTRA — IMAGE CORNER INFO EFFECT */
+/* ========================================================================== */
+
+.property-card-image-wrapper::before {
+  content: '';
+
+  position: absolute;
+
+  right: 15px;
+  bottom: 14px;
+
+  z-index: 2;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #ff9933;
+
+  box-shadow:
+    0 0 0 5px rgba(255, 153, 51, 0.12);
+
+  opacity: 0.9;
+}
+
+
+/* ========================================================================== */
+/* 30. PROPERTY CARD RESPONSIVE */
+/* ========================================================================== */
+
+@media (max-width: 1100px) {
+
+  .property-cards-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+  }
+
+  .property-card-image-wrapper {
+    height: 235px;
+  }
+
+}
+
+
+/* ========================================================================== */
+/* TABLET */
+/* ========================================================================== */
+
+@media (max-width: 768px) {
+
+  .property-cards-grid {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+
+    max-width: 600px;
+  }
+
+  .property-card {
+    border-radius: 19px;
+  }
+
+  .property-card-image-wrapper {
+    height: 235px;
+  }
+
+  .property-card-content {
+    padding: 19px;
+  }
+
+  .property-card-title {
+    font-size: 17px;
+
+    min-height: auto;
+  }
+
+  .property-price {
+    font-size: 19px;
+  }
+
+}
+
+
+/* ========================================================================== */
+/* SMALL MOBILE */
+/* ========================================================================== */
+
+@media (max-width: 480px) {
+
+  .property-cards-grid {
+    gap: 18px;
+  }
+
+  .property-card {
+    border-radius: 17px;
+  }
+
+  .property-card-image-wrapper {
+    height: 205px;
+  }
+
+  .property-status-badge {
+    top: 12px;
+    left: 12px;
+
+    padding: 6px 11px;
+
+    font-size: 8px;
+  }
+
+  .property-card-content {
+    padding: 17px;
+  }
+
+  .property-card-title {
+    font-size: 16px;
+
+    line-height: 1.4;
+  }
+
+  .property-card-meta {
+    gap: 6px;
+  }
+
+  .property-card-meta span {
+    font-size: 8px;
+
+    padding: 6px 9px;
+  }
+
+  .property-card-location {
+    font-size: 10px;
+  }
+
+  .property-card-details {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 6px;
+  }
+
+  .property-price {
+    font-size: 18px;
+  }
+
+  .property-area {
+    text-align: left;
+  }
+
+  .property-view-details-btn {
+    min-height: 44px;
+
+    padding:
+      11px 15px;
+  }
+
+}
+
+
+/* ========================================================================== */
+/* EXTRA SMALL MOBILE */
+/* ========================================================================== */
+
+@media (max-width: 360px) {
+
+  .property-card-image-wrapper {
+    height: 185px;
+  }
+
+  .property-card-content {
+    padding: 15px;
+  }
+
+  .property-card-title {
+    font-size: 15px;
+  }
+
+  .property-price {
+    font-size: 17px;
+  }
+
+}
+
+
+/* ==========================================================================
+   30. NO PROPERTIES
+   ========================================================================== */
+
+.no-properties-message {
+  max-width: 700px;
+
+  margin: 30px auto 0;
+
+  padding: 50px 25px;
+
+  background: #fff;
+
+  border: 1px solid #eadfd6;
+
+  border-radius: 16px;
+
+  text-align: center;
+}
+
+.no-properties-icon {
+  margin-bottom: 15px;
+
+  font-size: 42px;
+}
+
+.no-properties-message h3 {
+  margin-bottom: 10px;
+
+  color: #211611;
+
+  font-family:
+    'Playfair Display',
+    Georgia,
+    serif;
+
+  font-size: 25px;
+}
+
+.no-properties-message p {
+  color: #777;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* ==========================================================================
+   31. VIEW ALL PROPERTIES
+   ========================================================================== */
+
+.properties-view-all-wrapper {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 35px;
+}
+
+.properties-view-all-btn {
+  min-width: 220px;
+
+  padding: 13px 25px;
+
+  border: 1px solid #211611;
+
+  border-radius: 28px;
+
+  background: #fff;
+
+  color: #211611;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.properties-view-all-btn:hover {
+  background: #211611;
+
+  color: #fff;
+
+  transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   32. FINAL CTA
+   ========================================================================== */
+
+.home-property-cta-section {
+  width: 100%;
+
+  padding: 75px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #211611 0%,
+      #38251d 100%
+    );
+
+  color: #fff;
+
+  text-align: center;
+}
+
+.home-property-cta-content {
+  width: 100%;
+
+  max-width: 850px;
+
+  margin: 0 auto;
+}
+
+.home-property-cta-badge {
+  display: inline-block;
+
+  margin-bottom: 15px;
+
+  color: #c9a074;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+}
+
+.home-property-cta-content h2 {
+  margin-bottom: 15px;
+
+  font-family:
+    'Playfair Display',
+    Georgia,
+    serif;
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  font-weight: 500;
+
+  line-height: 1.2;
+}
+
+.home-property-cta-content p {
+  margin-bottom: 28px;
+
+  color: #ddd2cb;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.home-property-cta-actions {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+}
+
+.home-property-cta-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 13px 28px;
+
+  border: 1px solid #c9a074;
+
+  border-radius: 28px;
+
+  background: #c9a074;
+
+  color: #211611 !important;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  transition: all 0.3s ease;
+}
+
+.home-property-cta-btn:hover {
+  background: #fff;
+
+  border-color: #fff;
+
+  transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   33. TABLET — 1100px
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+
+  .builders-grid {
+    gap: 16px;
+  }
+
+  .builder-logo-card {
+    flex-basis: 165px;
+
+    width: 165px;
+
+    height: 140px;
+  }
+
+  .builder-logo-wrapper {
+    width: 95px;
+    height: 95px;
+  }
+
+  .property-cards-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+  }
+
+  .builder-projects-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* ==========================================================================
+   34. TABLET — 850px
+   ========================================================================== */
+
+@media (max-width: 850px) {
+
+  .builders-grid {
+    gap: 14px;
+  }
+
+  .builder-logo-card {
+    flex-basis: 150px;
+
+    width: 150px;
+
+    height: 130px;
+  }
+
+  .builder-logo-wrapper {
+    width: 85px;
+    height: 85px;
+  }
+
+  .promo-action-box-home {
+    gap: 18px;
+  }
+
+  .action-text-side p {
+    font-size: 13px;
+  }
+
+  .promo-cta-btn-home {
+    padding: 12px 20px;
+
+    font-size: 13px;
+  }
+}
+
+
+/* ==========================================================================
+   35. MOBILE — 768px
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+  .hero {
+    min-height: auto;
+
+    padding:
+      50px 16px 60px;
+  }
+
+  .main-title {
+    font-size: 2.2rem;
+
+    margin-bottom: 20px;
+  }
+
+  .main-title-h {
+    font-size: 22px;
+
+    margin-bottom: 25px;
+  }
+
+  .search-container {
+    padding: 20px;
+
+    border-radius: 12px;
+  }
+
+  .tabs {
+    gap: 5px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    flex-shrink: 0;
+
+    padding: 10px 15px;
+
+    white-space: nowrap;
+  }
+
+  .search-top {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .city-dropdown,
+  .search-input,
+  .btn-search {
+    width: 100%;
+
+    min-width: 100%;
+  }
+
+  .btn-search {
+    min-height: 48px;
+
+    padding: 14px;
+  }
+
+  .search-filters {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 18px;
+  }
+
+  .radio-group {
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .checkbox-label {
+    width: 100%;
+  }
+
+  .promo-action-box-home {
+    flex-direction: column;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    text-align: center;
+  }
+
+  .action-text-side {
+    width: 100%;
+  }
+
+  .action-btn-side {
+    width: 100%;
+
+    text-align: center;
+  }
+
+  .promo-cta-btn-home {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+
+  /* UPCOMING */
+
+  .upcoming-projects-section {
+    padding:
+      50px 16px 60px;
+  }
+
+  .projects-section-title {
+    font-size: 2.2rem;
+  }
+
+  .projects-section-description {
+    font-size: 12px;
+  }
+
+  .project-location-tabs {
+    justify-content: flex-start;
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    flex-wrap: nowrap;
+
+    overflow-x: auto;
+
+    padding-bottom: 4px;
+
+    scrollbar-width: none;
+  }
+
+  .project-location-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-location-tab {
+    flex-shrink: 0;
+
+    padding: 9px 17px;
+
+    font-size: 9px;
+
+    white-space: nowrap;
+  }
+
+
+  /* BUILDERS */
+
+  .builders-grid {
+    display: flex;
+
+    flex-direction: row;
+
+    gap: 12px;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    padding:
+      5px 2px 14px;
+
+    scrollbar-width: none;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .builders-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .builder-logo-card {
+    flex:
+      0 0 145px;
+
+    width: 145px;
+
+    min-width: 145px;
+    max-width: 145px;
+
+    height: 120px;
+
+    min-height: 120px;
+
+    border-radius: 14px;
+  }
+
+  .builder-logo-wrapper {
+    width: 72px;
+    height: 72px;
+  }
+
+  .builder-logo-image {
+    width: 74%;
+    height: 74%;
+  }
+
+  .builder-logo-fallback {
+    font-size: 20px;
+  }
+
+
+  /* BUILDER DETAILS */
+
+  .builder-project-details {
+    padding:
+      45px 16px 55px;
+  }
+
+  .selected-builder-header {
+    gap: 15px;
+  }
+
+  .selected-builder-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .selected-builder-info h2 {
+    font-size: 26px;
+  }
+
+  .builder-projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  /* CURATED PROPERTIES */
+
+  .curated-properties-section {
+    padding:
+      50px 16px 60px;
+  }
+
+  .properties-section-header {
+    margin-bottom: 30px;
+  }
+
+  .properties-section-title {
+    font-size: 2.2rem;
+  }
+
+  .property-cards-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .property-card-image-wrapper {
+    height: 220px;
+  }
+
+  .property-card-content {
+    padding: 18px;
+  }
+
+  .property-card-title {
+    font-size: 17px;
+  }
+
+  .property-card-details {
+    flex-wrap: wrap;
+  }
+
+  .property-price {
+    font-size: 18px;
+  }
+
+
+  /* CTA */
+
+  .home-property-cta-section {
+    padding:
+      55px 16px;
+  }
+
+  .home-property-cta-content h2 {
+    font-size: 2.2rem;
+  }
+}
+
+
+/* ==========================================================================
+   36. VERY SMALL MOBILE — 480px
+   ========================================================================== */
+
+@media (max-width: 480px) {
+
+  .main-title {
+    font-size: 1.9rem;
+  }
+
+  .main-title-h {
+    font-size: 19px;
+  }
+
+  .search-container {
+    padding: 15px;
+  }
+
+  .projects-section-title,
+  .properties-section-title {
+    font-size: 1.9rem;
+  }
+
+  .projects-section-header,
+  .properties-section-header {
+    margin-bottom: 23px;
+  }
+
+  .builders-grid {
+    gap: 10px;
+  }
+
+  .builder-logo-card {
+    flex:
+      0 0 125px;
+
+    width: 125px;
+
+    min-width: 125px;
+    max-width: 125px;
+
+    height: 105px;
+
+    min-height: 105px;
+
+    border-radius: 13px;
+  }
+
+  .builder-logo-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .builder-logo-fallback {
+    font-size: 17px;
+  }
+
+  .property-card-image-wrapper {
+    height: 190px;
+  }
+
+  .property-card-content {
+    padding: 15px;
+  }
+
+  .property-card-title {
+    font-size: 16px;
+
+    min-height: auto;
+  }
+
+  .property-card-details {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 7px;
+  }
+
+  .property-area {
+    text-align: left;
+  }
+
+  .property-view-details-btn {
+    padding:
+      11px 15px;
+  }
+
+  .properties-view-all-btn {
+    width: 100%;
+
+    min-width: 0;
+  }
+}
+
+
+/* ==========================================================================
+   37. EXTRA SMALL — 360px
+   ========================================================================== */
+
+@media (max-width: 360px) {
+
+  .main-title {
+    font-size: 1.75rem;
+  }
+
+  .main-title-h {
+    font-size: 17px;
+  }
+
+  .search-container {
+    padding: 12px;
+  }
+
+  .property-card-content {
+    padding: 14px;
+  }
+
+  .property-card-image-wrapper {
+    height: 180px;
+  }
+
+  .property-card-meta span {
+    font-size: 9px;
+
+    padding:
+      5px 8px;
+  }
+
+  .property-price {
+    font-size: 17px;
+  }
+}
+
+
+/* ==========================================================================
+   🏁 END
+   ========================================================================== */

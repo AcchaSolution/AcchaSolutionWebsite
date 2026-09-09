@@ -1,0 +1,341 @@
+<!-- ============================================================
+     SOBHA PROJECTS PAGE
+============================================================ -->
+
+<div class="sobha-page">
+
+
+  <!-- ==========================================================
+       1. PAGE HERO
+  =========================================================== -->
+
+  <section class="sobha-hero">
+
+    <div class="sobha-hero-overlay"></div>
+
+    <div class="sobha-hero-content">
+
+      <div class="builder-label">
+        SOBHA
+      </div>
+
+      <h1>
+        SOBHA Projects in Bangalore
+      </h1>
+
+      <p>
+        Explore residential projects by SOBHA
+        across Bangalore's prime locations.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ==========================================================
+       2. PROJECT FILTER
+  =========================================================== -->
+
+  <section class="project-filter-section">
+
+    <div class="filter-header">
+
+      <h2>
+        SOBHA Projects
+      </h2>
+
+      <p>
+        Find projects by location
+      </p>
+
+    </div>
+
+
+    <div class="project-location-tabs">
+
+      <!-- ALL -->
+
+      <button
+        type="button"
+        class="project-location-tab"
+        [class.active]="selectedLocation === 'All'"
+        (click)="selectLocation('All')"
+      >
+        All
+      </button>
+
+
+      <!-- WHITEFIELD -->
+
+      <button
+        type="button"
+        class="project-location-tab"
+        [class.active]="selectedLocation === 'Whitefield'"
+        (click)="selectLocation('Whitefield')"
+      >
+        Whitefield
+      </button>
+
+
+      <!-- PANATHUR -->
+
+      <button
+        type="button"
+        class="project-location-tab"
+        [class.active]="selectedLocation === 'Panathur'"
+        (click)="selectLocation('Panathur')"
+      >
+        Panathur
+      </button>
+
+
+      <!-- KORAMANGALA -->
+
+      <button
+        type="button"
+        class="project-location-tab"
+        [class.active]="selectedLocation === 'Koramangala'"
+        (click)="selectLocation('Koramangala')"
+      >
+        Koramangala
+      </button>
+
+
+      <!-- SARJAPUR -->
+
+      <button
+        type="button"
+        class="project-location-tab"
+        [class.active]="selectedLocation === 'Sarjapur Road'"
+        (click)="selectLocation('Sarjapur Road')"
+      >
+        Sarjapur
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ==========================================================
+       3. PROJECT COUNT
+  =========================================================== -->
+
+  <section class="project-summary">
+
+    <div>
+
+      <span class="summary-number">
+        {{ getFilteredProjects().length }}
+      </span>
+
+      <span class="summary-text">
+        Projects Found
+      </span>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ==========================================================
+       4. PROJECT CARDS
+  =========================================================== -->
+
+  <section class="sobha-projects-container">
+
+    <div class="sobha-project-grid">
+
+
+      <!-- ======================================================
+           PROJECT CARD
+      ======================================================= -->
+
+      <div
+        class="sobha-project-card"
+        *ngFor="let project of getFilteredProjects()"
+        (click)="openProject(project)"
+      >
+
+
+        <!-- PROJECT IMAGE PLACEHOLDER -->
+
+        <div class="project-image">
+
+          <div class="project-image-placeholder">
+
+            <span>
+              SOBHA
+            </span>
+
+          </div>
+
+
+          <!-- STATUS -->
+
+          <div class="project-status">
+
+            {{ project.status }}
+
+          </div>
+
+        </div>
+
+
+
+        <!-- PROJECT CONTENT -->
+
+        <div class="project-content">
+
+
+          <!-- PROJECT NAME -->
+
+          <h3>
+
+            {{ project.name }}
+
+          </h3>
+
+
+
+          <!-- LOCATION -->
+
+          <div class="project-location">
+
+            📍 {{ project.location }}
+
+          </div>
+
+
+
+          <!-- CONFIGURATION -->
+
+          <div class="project-info-row">
+
+            <span>
+              Configuration
+            </span>
+
+            <strong>
+              {{ project.configuration }}
+            </strong>
+
+          </div>
+
+
+
+          <!-- CITY -->
+
+          <div class="project-info-row">
+
+            <span>
+              City
+            </span>
+
+            <strong>
+              {{ project.city }}
+            </strong>
+
+          </div>
+
+
+
+          <!-- TYPE -->
+
+          <div class="project-info-row">
+
+            <span>
+              Type
+            </span>
+
+            <strong>
+              {{ project.type }}
+            </strong>
+
+          </div>
+
+
+
+          <!-- VIEW PROJECT -->
+
+          <div class="view-project">
+
+                <button
+                        type="button"
+                        [routerLink]="['/project-details', project.id]"
+                        >
+                       View Details →
+                                 </button>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- ========================================================
+         NO PROJECT RESULT
+    ========================================================= -->
+
+    <div
+      class="no-projects"
+      *ngIf="getFilteredProjects().length === 0"
+    >
+
+      <h3>
+        No SOBHA projects found
+      </h3>
+
+      <p>
+        Try selecting another location.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ==========================================================
+       5. FOOTER CTA
+  =========================================================== -->
+
+  <section class="sobha-cta">
+
+    <div class="cta-content">
+
+      <h2>
+        Looking for a SOBHA property?
+      </h2>
+
+      <p>
+        Explore available properties and
+        connect with our team.
+      </p>
+
+      <button
+        type="button"
+        class="cta-button"
+      >
+        Enquire Now →
+      </button>
+
+    </div>
+
+  </section>
+
+
+</div>
+
+<!-- ============================================================
+     END SOBHA PROJECTS PAGE
+============================================================ -->

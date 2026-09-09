@@ -1,0 +1,164 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  /* Cream & Sand Gradient Background */
+background: linear-gradient(135deg, #e6d5b8 50%, #f9e7d2 50%) !important;
+font-family: 'Poppins', sans-serif;
+}
+
+.landing-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 120px;
+  padding: 40px 10%;
+  min-height: 100vh;
+}
+
+.info-side { flex: 1; max-width: 600px; }
+
+/* Luxurious Playfair Font for Headings */
+.info-side h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  color: #3E2723; /* Deep Rich Chocolate */
+  margin-bottom: 25px;
+  letter-spacing: -0.5px;
+}
+
+.info-side ul { 
+  list-style: none; 
+  padding: 0; 
+  color: #5D4037; /* Chocolate Muted Text */
+  font-size: 1rem; 
+}
+
+.info-side ul li { margin-bottom: 15px; }
+
+.hero-img { 
+  width: 120%; 
+  max-width: 1400px; 
+  margin-top: -40px; 
+  border-radius: 20px; 
+}
+
+.form-card {
+  flex: 0 0 500px;
+  background: linear-gradient(135deg, #bcaa85 0%, #f9e7d2 100%) !important;
+  padding: 60px;
+  border-radius: 40px;
+  box-shadow: 0 30px 60px rgba(62, 39, 35, 0.1);
+  border: 1px solid #D7CCC8;
+}
+
+/* Chocolate Labels */
+.input-group label { 
+  display: block; 
+  margin-bottom: 12px; 
+  color: #5D4037; 
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+input, select {
+  width: 100%;
+  padding: 20px;
+  border: 2px solid #EFEBE9;
+  border-radius: 20px;
+  font-size: 16px;
+  background: #FDFBF9;
+  color: #3E2723;
+  margin-bottom: 10px;
+}
+
+/* Rich Chocolate Button */
+.btn-start {
+  width: 100%;
+  padding: 22px;
+    background: linear-gradient(135deg, #5D4037 20%, #c9a491 50%) !important;
+
+  color: #f7ecec;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  margin-top: 30px;
+}
+
+.btn-start:hover {
+  background: #f5c8c0; /* Darker Chocolate on Hover */
+  transform: translateY(-7px);
+}
+
+@media (max-width: 768px) {
+  .landing-page-container { flex-direction: column; gap: 40px; padding: 20px; }
+  .form-card { flex: 0 0 100%; width: 100%; }
+}
+
+/* Modal Overlay: Background ko blur aur dark karein */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Dark tint */
+  backdrop-filter: blur(5px); /* Professional blur effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal Card: White neat card */
+.modal-content {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  width: 380px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-content h2 {
+  color: #5D4037; /* Brown text */
+  margin-bottom: 10px;
+}
+
+/* OTP Input Style */
+.otp-input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  text-align: center;
+  border: 2px solid #D7CCC8;
+  border-radius: 12px;
+  letter-spacing: 8px; /* Letters ke beech space */
+  outline: none;
+}
+
+/* Verify Button Style */
+.btn-start {
+  background: #5D4037;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Cancel Button */
+.btn-cancel {
+  background: transparent;
+  color: #8D6E63;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}

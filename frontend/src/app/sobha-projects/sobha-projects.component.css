@@ -1,0 +1,884 @@
+/* ============================================================
+   SOBHA PROJECTS PAGE
+   ACCHASOLUTION REALTY
+============================================================ */
+
+
+/* ============================================================
+   1. GLOBAL PAGE
+============================================================ */
+
+.sobha-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8f5f1;
+  color: #211611;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+
+/* ============================================================
+   2. HERO SECTION
+============================================================ */
+
+.sobha-hero {
+  position: relative;
+  min-height: 420px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 80px 25px;
+
+  background:
+    linear-gradient(
+      rgba(33, 22, 17, 0.72),
+      rgba(33, 22, 17, 0.82)
+    ),
+    url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1800&auto=format&fit=crop');
+
+  background-size: cover;
+  background-position: center;
+}
+
+
+.sobha-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(201, 160, 116, 0.08),
+      transparent 60%
+    );
+}
+
+
+.sobha-hero-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 850px;
+
+  text-align: center;
+  color: #ffffff;
+}
+
+
+.builder-label {
+  display: inline-block;
+
+  margin-bottom: 18px;
+
+  padding: 8px 20px;
+
+  border: 1px solid rgba(201, 160, 116, 0.7);
+  border-radius: 30px;
+
+  color: #c9a074;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 4px;
+}
+
+
+.sobha-hero h1 {
+  margin: 0 0 20px;
+
+  font-family: 'Playfair Display', Georgia, serif;
+
+  font-size: clamp(2.2rem, 5vw, 4rem);
+
+  font-weight: 500;
+
+  line-height: 1.2;
+}
+
+
+.sobha-hero p {
+  max-width: 650px;
+
+  margin: 0 auto;
+
+  color: #e8ded5;
+
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+
+/* ============================================================
+   3. PROJECT FILTER SECTION
+============================================================ */
+
+.project-filter-section {
+  width: 100%;
+
+  padding: 55px 5% 30px;
+
+  background: #ffffff;
+
+  text-align: center;
+}
+
+
+.filter-header h2 {
+  margin: 0 0 8px;
+
+  font-family: 'Playfair Display', Georgia, serif;
+
+  font-size: 32px;
+  font-weight: 500;
+
+  color: #211611;
+}
+
+
+.filter-header p {
+  margin: 0 0 28px;
+
+  color: #8c7669;
+
+  font-size: 14px;
+}
+
+
+/* ============================================================
+   LOCATION TABS
+============================================================ */
+
+.project-location-tabs {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+
+.project-location-tab {
+  padding: 11px 22px;
+
+  border: 1px solid #e2d7cd;
+
+  border-radius: 30px;
+
+  background: #ffffff;
+
+  color: #6f5d52;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 0.8px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+
+.project-location-tab:hover {
+  border-color: #c9a074;
+
+  color: #211611;
+
+  transform: translateY(-2px);
+}
+
+
+.project-location-tab.active {
+  background: #211611;
+
+  border-color: #211611;
+
+  color: #c9a074;
+
+  box-shadow: 0 6px 18px rgba(33, 22, 17, 0.18);
+}
+
+
+/* ============================================================
+   4. PROJECT SUMMARY
+============================================================ */
+
+.project-summary {
+  padding: 20px 5% 35px;
+
+  background: #ffffff;
+
+  text-align: center;
+}
+
+
+.project-summary > div {
+  display: inline-flex;
+
+  align-items: baseline;
+
+  gap: 10px;
+
+  padding: 10px 22px;
+
+  border-radius: 30px;
+
+  background: #f8f5f1;
+}
+
+
+.summary-number {
+  font-family: 'Playfair Display', Georgia, serif;
+
+  font-size: 24px;
+  font-weight: 600;
+
+  color: #211611;
+}
+
+
+.summary-text {
+  color: #8c7669;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   5. PROJECTS CONTAINER
+============================================================ */
+
+.sobha-projects-container {
+  width: 100%;
+
+  padding: 65px 5% 80px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8f5f1 0%,
+      #f1ebe5 100%
+    );
+}
+
+
+/* ============================================================
+   6. PROJECT GRID
+============================================================ */
+
+.sobha-project-grid {
+  width: 100%;
+
+  max-width: 1450px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 28px;
+}
+
+
+/* ============================================================
+   7. PROJECT CARD
+============================================================ */
+
+.sobha-project-card {
+  position: relative;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(201, 160, 116, 0.18);
+
+  box-shadow:
+    0 12px 35px rgba(33, 22, 17, 0.08);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+
+.sobha-project-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 22px 50px rgba(33, 22, 17, 0.16);
+}
+
+
+/* ============================================================
+   8. PROJECT IMAGE
+============================================================ */
+
+.project-image {
+  position: relative;
+
+  width: 100%;
+
+  height: 220px;
+
+  overflow: hidden;
+
+  background: #211611;
+}
+
+
+.project-image-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #211611,
+      #4b3428
+    );
+
+  transition: transform 0.5s ease;
+}
+
+
+.sobha-project-card:hover
+.project-image-placeholder {
+  transform: scale(1.04);
+}
+
+
+.project-image-placeholder span {
+  font-family: 'Playfair Display', Georgia, serif;
+
+  color: #c9a074;
+
+  font-size: 30px;
+  font-weight: 600;
+
+  letter-spacing: 5px;
+}
+
+
+/* ============================================================
+   9. PROJECT STATUS
+============================================================ */
+
+.project-status {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
+  padding: 7px 13px;
+
+  border-radius: 5px;
+
+  background: #c9a074;
+
+  color: #211611;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ============================================================
+   10. PROJECT CONTENT
+============================================================ */
+
+.project-content {
+  padding: 25px;
+}
+
+
+.project-content h3 {
+  margin: 0 0 12px;
+
+  font-family: 'Playfair Display', Georgia, serif;
+
+  color: #211611;
+
+  font-size: 23px;
+  font-weight: 600;
+
+  line-height: 1.3;
+}
+
+
+.project-location {
+  margin-bottom: 22px;
+
+  color: #806c60;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   11. PROJECT INFO ROWS
+============================================================ */
+
+.project-info-row {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 11px 0;
+
+  border-top: 1px solid #eee7e1;
+
+  font-size: 12px;
+}
+
+
+.project-info-row span {
+  color: #9a887d;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.6px;
+}
+
+
+.project-info-row strong {
+  color: #211611;
+
+  font-weight: 600;
+
+  text-align: right;
+}
+
+
+/* ============================================================
+   12. VIEW PROJECT
+============================================================ */
+
+/* .view-project {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 22px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid #e9dfd7;
+
+  color: #a77c50;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  transition: color 0.3s ease;
+}
+
+
+.view-project span {
+  font-size: 20px;
+
+  transition:
+    transform 0.3s ease;
+} */
+
+
+.sobha-project-card:hover
+.view-project {
+  color: #211611;
+}
+
+
+.sobha-project-card:hover
+.view-project span {
+  transform: translateX(6px);
+}
+
+
+/* ============================================================
+   13. NO PROJECTS
+============================================================ */
+
+.no-projects {
+  grid-column: 1 / -1;
+
+  padding: 70px 20px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  border: 1px solid #eadfd6;
+}
+
+
+.no-projects h3 {
+  margin: 0 0 10px;
+
+  font-family: 'Playfair Display', Georgia, serif;
+
+  color: #211611;
+
+  font-size: 25px;
+}
+
+
+.no-projects p {
+  margin: 0;
+
+  color: #8c7669;
+
+  font-size: 13px;
+}
+
+
+/* ============================================================
+   14. CTA SECTION
+============================================================ */
+
+.sobha-cta {
+  padding: 75px 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #211611,
+      #39261d
+    );
+
+  text-align: center;
+
+  color: #ffffff;
+}
+
+
+.cta-content {
+  max-width: 700px;
+
+  margin: 0 auto;
+}
+
+
+.cta-content h2 {
+  margin: 0 0 15px;
+
+  font-family: 'Playfair Display', Georgia, serif;
+
+  font-size: 32px;
+  font-weight: 500;
+}
+
+
+.cta-content p {
+  margin: 0 0 28px;
+
+  color: #d9cbc1;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+.cta-button {
+  padding: 13px 28px;
+
+  border: none;
+
+  border-radius: 30px;
+
+  background: #c9a074;
+
+  color: #211611;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.cta-button:hover {
+  background: #ffffff;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ============================================================
+   15. TABLET
+============================================================ */
+
+@media (max-width: 1100px) {
+
+  .sobha-project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* ============================================================
+   16. MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+  .sobha-hero {
+    min-height: 360px;
+
+    padding: 60px 20px;
+  }
+
+
+  .sobha-hero h1 {
+    font-size: 2.2rem;
+  }
+
+
+  .sobha-hero p {
+    font-size: 13px;
+  }
+
+
+  .project-filter-section {
+    padding: 40px 20px 25px;
+  }
+
+
+  .filter-header h2 {
+    font-size: 27px;
+  }
+
+
+  .project-location-tabs {
+    gap: 8px;
+  }
+
+
+  .project-location-tab {
+    padding: 9px 15px;
+
+    font-size: 11px;
+  }
+
+
+  .sobha-projects-container {
+    padding: 45px 16px 60px;
+  }
+
+
+  .sobha-project-grid {
+    grid-template-columns: 1fr;
+
+    gap: 22px;
+  }
+
+
+  .project-image {
+    height: 210px;
+  }
+
+
+  .project-content {
+    padding: 22px;
+  }
+
+
+  .sobha-cta {
+    padding: 60px 20px;
+  }
+
+
+  .cta-content h2 {
+    font-size: 27px;
+  }
+
+}
+
+
+/* ============================================================
+   17. SMALL MOBILE
+============================================================ */
+
+@media (max-width: 420px) {
+
+  .sobha-hero h1 {
+    font-size: 1.9rem;
+  }
+
+
+  .builder-label {
+    font-size: 10px;
+
+    letter-spacing: 3px;
+  }
+
+
+  .project-location-tabs {
+    justify-content: flex-start;
+  }
+
+
+  .project-location-tab {
+    padding: 8px 12px;
+  }
+
+
+  .project-info-row {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 4px;
+  }
+
+
+  .project-info-row strong {
+    text-align: left;
+  }
+
+
+  /* ===============================
+   VIEW PROJECT BUTTON
+================================ */
+
+.view-project {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+
+
+.view-project button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 24px;
+
+  border: 1px solid #8b6239;
+  border-radius: 30px;
+
+  background: #24170f;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.view-project button:hover {
+  background: #8b6239;
+  color: #ffffff;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(36, 23, 15, 0.18);
+}
+
+.view-project button:active {
+  transform: translateY(0);
+}
+
+.view-project span {
+  font-size: 22px;
+  color: #8b6239;
+
+  transition: transform 0.3s ease;
+}
+
+.view-project:hover span {
+  transform: translateX(5px);
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+  .view-project {
+    margin-top: 16px;
+  }
+
+  .view-project button {
+    padding: 11px 20px;
+    font-size: 13px;
+  }
+
+  .view-project span {
+    font-size: 20px;
+  }
+
+}
+}

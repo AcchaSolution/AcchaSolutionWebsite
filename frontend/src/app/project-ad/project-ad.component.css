@@ -1,0 +1,416 @@
+/* Base Container Layout */
+.promote-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  padding: 0 20px;
+}
+
+/* Typography and Top Header Callouts */
+.promote-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.promote-header h1 {
+  color: #0f172a;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.promote-header p {
+  color: #475569;
+  font-size: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Card Section Content Boxes */
+.form-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+  border: 1px solid #e2e8f0;
+}
+.form-section h2 {
+  margin-top: 0;
+  color: #1e3a8a; /* Deep Ocean Blue Anchor */
+  border-left: 5px solid #ff9933; /* Indian Saffron Bar */
+  padding-left: 12px;
+  margin-bottom: 25px;
+}
+
+/* Grid Matrix for Data Inputs */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group.full-width {
+  grid-column: span 2;
+}
+@media (max-width: 768px) {
+  .form-group.full-width { grid-column: span 1; }
+}
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #334155;
+  font-size: 14px;
+}
+.form-group input, .form-group select {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color: #ff9933;
+}
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  background: #f8fafc;
+  padding: 15px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+}
+@media (max-width: 550px) {
+  .amenities-grid { grid-template-columns: 1fr; }
+}
+.amenities-grid label {
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #334155;
+}
+
+/* ===================================================== */
+/* GLOBE MATRIX RADIAL GRID COMPONENT CONFIGURATIONS    */
+/* ===================================================== */
+.pricing-section {
+  background-color: #ffffff;
+  background-image: radial-gradient(#cbd5e1 0.7px, transparent 0.7px); /* Subtle Globe Mapping Nodes Grid Effect */
+  background-size: 24px 24px;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  margin-bottom: 40px;
+  border: 1px solid #cbd5e1;
+}
+.pricing-section h2 {
+  margin-top: 0;
+  color: #0f172a; /* Dark Navy Slate */
+  border-left: 5px solid #138808; /* Indian Earth Green Bar */
+  padding-left: 12px;
+  margin-bottom: 25px;
+}
+.form-warning {
+  color: #dc2626;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+.table-responsive {
+  overflow-x: auto;
+}
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  border-radius: 8px;
+  overflow: visible; /* Important to keep tooltips uncropped */
+}
+
+/* Global Slate-Blue Headings Frame Layout */
+.pricing-table th {
+  background-color: #1e293b; /* Global Navy Slate */
+  color: #ff9933; /* Indian Saffron Text Accent */
+  padding: 18px 12px;
+  font-size: 15px;
+  position: relative;
+  text-align: center;
+  border: 1px solid #334155;
+}
+.pricing-table th.best-choice-header {
+  background-color: #0f172a;
+  border-top: 4px solid #f59e0b; /* Amber Ribbon Accent */
+}
+.pricing-table td {
+  padding: 16px 12px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+.feature-name {
+  text-align: left !important;
+  font-weight: 600;
+  color: #1e293b;
+  background: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+}
+.pricing-table tbody tr:nth-child(even) td:not(.feature-name) {
+  background-color: #f1f5f9;
+}
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0f172a;
+}
+
+/* Tricolor Dynamic Interactive Call to Actions */
+.buy-btn {
+  background-color: #138808; /* Action Green Base */
+  color: white;
+  border: 2px solid #ff9933; /* Saffron Framing Layer */
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.buy-btn:hover:not([disabled]) {
+  background-color: #ff9933; /* Shifts to Saffron Accent on Active Interaction states */
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3);
+}
+.buy-btn:disabled {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ===================================================== */
+/* HOVER ACTION FLOATING TOOLTIPS LAYER                 */
+/* ===================================================== */
+.tooltip-icon {
+  display: inline-block;
+  margin-left: 6px;
+  cursor: help;
+  background: rgba(255,255,255,0.2);
+  color: #ffffff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  position: relative;
+}
+.tooltip-text {
+  visibility: hidden;
+  width: 230px;
+  background-color: #0f172a; /* High Contrast Global Navy */
+  color: #ffffff;
+  text-align: left;
+  border-radius: 8px;
+  padding: 12px;
+  position: absolute;
+  z-index: 99999;
+  bottom: 130%; 
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  border-top: 3px solid #ff9933; /* Saffron Accent line */
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: normal;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: normal;
+}
+.tooltip-icon:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Bottom Assistance Box Callout Panel Frame */
+.support-banner {
+  background: #f0fdf4;
+  border: 1px solid #16a34a;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+.support-banner p {
+  margin: 0 0 8px 0;
+  color: #1e293b;
+  font-weight: 500;
+}
+.support-link {
+  color: #16a34a;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.support-link:hover {
+  text-decoration: underline;
+}
+
+/* ===================================================== */
+/* MODAL POPUP BACKDROP SCREEN AND ANIMATED OVERLAYS   */
+/* ===================================================== */
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.8); /* Dimmed Slate Mask */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999; /* Higher priority execution layer */
+}
+.qr-modal-card {
+  background: #ffffff;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 650px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.qr-modal-header {
+  background: #1e293b; /* Deep Slate Base */
+  color: #ffffff;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.qr-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+.close-btn:hover {
+  color: #ffffff;
+}
+
+/* Popup Matrix Double-Column Configuration Splitter */
+.qr-modal-body {
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+@media (max-width: 550px) {
+  .qr-modal-body { grid-template-columns: 1fr; }
+}
+
+/* Left Column Invoice Summary Frame Styles */
+.ad-summary {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid #ff9933; /* Saffron Invoice Indicator Edge */
+}
+.ad-summary h4 {
+  margin-top: 0;
+  color: #1e3a8a;
+  margin-bottom: 12px;
+}
+.ad-summary p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #334155;
+}
+.plan-badge {
+  background: #1e293b;
+  color: #ff9933;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 12px;
+}
+.final-price {
+  font-size: 16px;
+  color: #138808; /* Success Action Green */
+  margin-top: 14px !important;
+  border-top: 1px dashed #cbd5e1;
+  padding-top: 8px;
+}
+
+/* Right Column Scanner Elements Rendering Engine */
+.qr-holder {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.qr-img {
+  width: 160px;
+  height: 160px;
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  border-radius: 10px;
+  background: #ffffff;
+}
+.qr-tip {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* Bottom Footer Interface Elements Layout */
+.qr-modal-footer {
+  padding: 20px 25px;
+  background: #f8fafc;
+}
+.warning-text {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+.confirm-btn {
+  background-color: #138808; /* Success Action Green Call to Action */
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(19, 136, 8, 0.2);
+  transition: background-color 0.2s ease;
+}
+.confirm-btn:hover {
+  background-color: #0f6c06;
+}
+
+/* Animations Layout Models */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

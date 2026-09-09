@@ -1,0 +1,199 @@
+<!-- ============================================================
+     COMMON PROJECT DETAILS PAGE
+============================================================ -->
+
+<div class="project-details-page">
+
+  <!-- ==========================================================
+       1. HERO
+  =========================================================== -->
+
+  <section class="project-details-hero">
+
+    <div class="project-hero-overlay"></div>
+
+    <div class="project-hero-content">
+
+      <div class="builder-label">
+        {{ project?.builder }}
+      </div>
+
+      <h1>
+        {{ project?.name }}
+      </h1>
+
+      <p>
+        {{ project?.location }},
+        {{ project?.city }}
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       2. PROJECT INFORMATION
+  =========================================================== -->
+
+  <section class="project-info-section">
+
+    <div class="project-info-container">
+
+
+      <!-- PROJECT TITLE -->
+
+      <div class="project-info-header">
+
+        <span class="project-type">
+          {{ project?.type }}
+        </span>
+
+        <h2>
+          {{ project?.name }}
+        </h2>
+
+        <p class="project-location">
+
+          📍 {{ project?.location }},
+          {{ project?.city }}
+
+        </p>
+
+      </div>
+
+
+      <!-- ======================================================
+           PROJECT DETAILS GRID
+      ======================================================= -->
+
+      <div class="project-details-grid">
+
+
+        <!-- CONFIGURATION -->
+
+        <div class="detail-box">
+
+          <span class="detail-label">
+            Configuration
+          </span>
+
+          <strong>
+            {{ project?.configuration }}
+          </strong>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="detail-box">
+
+          <span class="detail-label">
+            Status
+          </span>
+
+          <strong>
+            {{ project?.status }}
+          </strong>
+
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="detail-box">
+
+          <span class="detail-label">
+            Location
+          </span>
+
+          <strong>
+            {{ project?.location }}
+          </strong>
+
+        </div>
+
+
+        <!-- BUILDER -->
+
+        <div class="detail-box">
+
+          <span class="detail-label">
+            Builder
+          </span>
+
+          <strong>
+            {{ project?.builder }}
+          </strong>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- ======================================================
+           ABOUT PROJECT
+      ======================================================= -->
+
+      <div class="project-about">
+
+        <h2>
+          About {{ project?.name }}
+        </h2>
+
+        <p>
+
+          Explore {{ project?.name }} by
+          {{ project?.builder }}, located in
+          {{ project?.location }}, {{ project?.city }}.
+
+          This project offers
+          {{ project?.configuration }}
+          residential options.
+
+        </p>
+
+      </div>
+
+
+      <!-- ======================================================
+           ACTION BUTTONS
+      ======================================================= -->
+
+      <div class="project-actions">
+
+        <button
+          type="button"
+          class="enquiry-button"
+        >
+
+          Enquire Now
+
+        </button>
+
+
+        <button
+          type="button"
+          class="back-button"
+          onclick="history.back()"
+        >
+
+          ← Back
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+</div>
+
+<!-- ============================================================
+     END PROJECT DETAILS PAGE
+============================================================ -->

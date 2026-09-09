@@ -1,0 +1,125 @@
+<div class="luxury-catalog-container">
+  
+  <div class="catalog-rich-header">
+    <h1>{{ pageTitle }}</h1>
+    <p>Discover {{ filteredProperties.length }} verified luxury projects listed across top premium locations</p>
+  </div>
+
+  <div class="horizontal-cards-pipeline">
+    
+    <div class="luxury-horizontal-card" *ngFor="let item of filteredProperties"
+         [routerLink]="['/property-details', item.id || item.uniqueId]">
+      
+      <div class="card-image-left-frame">
+        <img [src]="item.gallery?.[0]?.url || 'assets/placeholder.jpg'" alt="AcchaSolution Premium Asset Preview">
+        <span class="luxury-badge-tag">✨ Verified On Site</span>
+      </div>
+
+      <div class="card-content-middle-frame">
+        <div class="card-title-row">
+          <h3>{{ item.bhk }} Flat for {{ item.type }} in {{ item.name || 'Premium Residency' }}</h3>
+          <p class="location-marker">📍 {{ item.location || 'Whitefield, Bengaluru' }}</p>
+        </div>
+
+        <div class="luxury-specs-badge-grid">
+          <div class="spec-icon-box">
+            <span class="spec-emoji">🏢</span>
+            <div class="spec-meta">
+              <label>BHK TYPE</label>
+              <strong>{{ item.bhk }} Layout</strong>
+            </div>
+          </div>
+
+          <div class="spec-icon-box">
+            <span class="spec-emoji">📐</span>
+            <div class="spec-meta">
+              <label>SUPER AREA</label>
+              <strong>{{ item.area || '1800' }} Sq.Ft</strong>
+            </div>
+          </div>
+
+          <div class="spec-icon-box">
+            <span class="spec-emoji">🔑</span>
+            <div class="spec-meta">
+              <label>STATUS</label>
+              <strong>Ready To Move</strong>
+            </div>
+          </div>
+        </div>
+
+        <p class="property-brief-text">
+          Exclusively designed premium residential layout by elite structural planners. Features world-class clubhouse, grand balcony layouts, and upscale amenities.
+        </p>
+      </div>
+
+      <div class="card-pricing-right-frame">
+        <div class="price-calculator-block">
+          <h2 class="premium-price-text">{{ formatPrice(item.price) }}</h2>
+          <span class="price-per-sqft">Market Verified Premium Rate</span>
+        </div>
+
+        <div class="action-buttons-stack">
+          <button class="btn-premium-action-contact" (click)="openContactModal(item.name || 'Premium Project', $event)">Contact Agent</button>
+          <button class="btn-subtle-action-details">View Details</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="filteredProperties.length === 0" class="luxury-empty-state-card">
+    <span class="empty-monument-icon">🏰</span>
+    <h3>No verified assets listed currently</h3>
+    <p>Please update your search filters from the master dashboard or console dashboard controls.</p>
+  </div>
+</div>
+
+<div class="luxury-modal-overlay" *ngIf="isModalOpen" (click)="closeContactModal()">
+  <div class="luxury-modal-card" (click)="$event.stopPropagation()" [formGroup]="contactForm">
+    
+    <div class="modal-header-row">
+      <h2>Connect with Agent</h2>
+      <p>Inquiry for: <span class="highlight-title">{{ selectedPropertyName }}</span></p>
+      <button class="close-x-btn" (click)="closeContactModal()">×</button>
+    </div>
+
+    <div class="modal-body-form">
+      <div class="form-input-group">
+        <label>Your Name *</label>
+        <input type="text" formControlName="name" placeholder="Enter your full name" 
+               [class.input-error]="contactForm.get('name')?.touched && contactForm.get('name')?.invalid">
+        <span class="error-msg-tag" *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.hasError('required')">Name is required</span>
+        <span class="error-msg-tag" *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.hasError('minlength')">Minimum 3 characters required</span>
+      </div>
+
+      <div class="form-input-group">
+        <label>Email Address *</label>
+        <input type="email" formControlName="email" placeholder="name@domain.com"
+               [class.input-error]="contactForm.get('email')?.touched && contactForm.get('email')?.invalid">
+        <span class="error-msg-tag" *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.hasError('required')">Email is required</span>
+        <span class="error-msg-tag" *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.hasError('email')">Enter a valid email structure</span>
+      </div>
+
+      <div class="form-input-group">
+        <label>Phone Number *</label>
+        <div class="phone-input-wrapper">
+          <span class="country-code-addon">+91</span>
+          <input type="text" formControlName="phone" placeholder="10-digit mobile number"
+                 [class.input-error]="contactForm.get('phone')?.touched && contactForm.get('phone')?.invalid">
+        </div>
+        <span class="error-msg-tag" *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.hasError('required')">Phone number is required</span>
+        <span class="error-msg-tag" *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.hasError('pattern')">Enter a valid 10-digit mobile number</span>
+      </div>
+
+      <div class="form-input-group">
+        <label>Your Message</label>
+        <textarea formControlName="message" rows="3"></textarea>
+      </div>
+
+      <button class="btn-submit-luxury-lead" [disabled]="isSending" (click)="onFormSubmit()">
+        {{ isSending ? 'Transmitting Lead Data...' : 'Submit Inquiry & Email Details' }}
+      </button>
+    </div>
+
+  </div>
+</div>

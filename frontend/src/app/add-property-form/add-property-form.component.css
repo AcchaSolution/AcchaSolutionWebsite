@@ -1,0 +1,1424 @@
+/* ==========================================
+   ☀️ ACCHASOLUTION ULTRA-BRIGHT LUXURY THEME
+   ========================================== */
+
+/* ==========================================
+   PAGE BACKGROUND
+   ========================================== */
+
+.admin-layout {
+  background-color: #fcfbfa;
+  min-height: 100vh;
+  padding: 40px 3%;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+
+/* ==========================================
+   MASTER PROPERTY GRID
+   ========================================== */
+
+.property-grid {
+  display: grid;
+  grid-template-columns: 72% 25%;
+  gap: 35px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+
+  .property-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+}
+
+
+/* ==========================================
+   💎 LIGHT FROSTED GLASS CARDS
+   ========================================== */
+
+.card,
+.glass-card {
+
+  background: rgba(255, 255, 255, 0.85) !important;
+
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+
+  border: 1px solid rgba(201, 160, 116, 0.25) !important;
+
+  border-radius: 16px !important;
+
+  padding: 30px !important;
+
+  box-shadow:
+    0 10px 35px rgba(163, 130, 95, 0.06) !important;
+
+  color: #211611 !important;
+
+  margin-bottom: 30px;
+
+  transition:
+    all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+
+/* Card hover */
+
+.card:hover,
+.glass-card:hover {
+
+  transform: translateY(-4px);
+
+  border-color: #c9a074 !important;
+
+  box-shadow:
+    0 20px 45px rgba(201, 160, 116, 0.12) !important;
+}
+
+
+/* ==========================================
+   SECTION TITLES
+   ========================================== */
+
+.specs-header h4,
+.media-header h4,
+h5,
+h6 {
+
+  font-family:
+    'Playfair Display',
+    Georgia,
+    serif;
+
+  color: #211611 !important;
+
+  letter-spacing: 1.2px;
+
+  font-weight: 600 !important;
+
+  font-size: 18px;
+
+  margin-top: 0;
+
+  margin-bottom: 25px;
+
+  display: flex;
+
+  align-items: center;
+}
+
+
+/* ==========================================
+   BADGE
+   ========================================== */
+
+.badge-modern {
+
+  background:
+    rgba(201, 160, 116, 0.12);
+
+  color: #a3825f;
+
+  border:
+    1px solid rgba(201, 160, 116, 0.3);
+
+  font-size: 10px;
+
+  letter-spacing: 1.5px;
+
+  padding: 3px 10px;
+
+  border-radius: 4px;
+
+  text-transform: uppercase;
+
+  margin-left: 12px;
+
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   ✍️ FORM GROUP
+   ========================================== */
+
+.form-group,
+.spec-input-group {
+
+  margin-bottom: 28px;
+}
+
+
+/* ==========================================
+   LABELS
+   ========================================== */
+
+.form-group label,
+.spec-input-group label,
+.card label {
+
+  color: #4a3e3d !important;
+
+  font-size: 11px;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  margin-bottom: 10px;
+
+  display: block;
+
+  font-weight: 600;
+}
+
+
+/* Required */
+
+.required {
+
+  color: #d64545 !important;
+
+  font-weight: 700;
+}
+
+
+/* ==========================================
+   INPUTS / SELECT / TEXTAREA
+   ========================================== */
+
+.main-input,
+.permalink-input,
+.input-with-icon input,
+.spec-input-group input,
+.spec-input-group textarea,
+.location-container input,
+.location-container textarea,
+select,
+.form-select {
+
+  background-color: #fdfdfc !important;
+
+  border:
+    1px solid #e2e8f0 !important;
+
+  color: #211611 !important;
+
+  border-radius: 8px !important;
+
+  padding: 13px 16px !important;
+
+  font-size: 13px;
+
+  font-family: sans-serif;
+
+  width: 100%;
+
+  transition: all 0.25s ease;
+
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   TEXTAREA
+   ========================================== */
+
+textarea {
+
+  resize: vertical;
+
+  min-height: 100px;
+
+  line-height: 1.6;
+}
+
+
+/* Address textarea */
+
+.location-container textarea {
+
+  min-height: 110px;
+
+  line-height: 1.7;
+
+  resize: vertical;
+}
+
+
+/* ==========================================
+   PLACEHOLDER
+   ========================================== */
+
+.main-input::placeholder,
+.permalink-input::placeholder,
+.spec-input-group input::placeholder,
+.spec-input-group textarea::placeholder,
+.location-container input::placeholder,
+.location-container textarea::placeholder {
+
+  color: #bfaea2 !important;
+
+  opacity: 1;
+}
+
+
+/* ==========================================
+   INPUT FOCUS
+   ========================================== */
+
+.main-input:focus,
+.permalink-input:focus,
+.spec-input-group input:focus,
+.spec-input-group textarea:focus,
+.location-container input:focus,
+.location-container textarea:focus,
+select:focus,
+.form-select:focus {
+
+  outline: none !important;
+
+  border-color: #c9a074 !important;
+
+  background-color: #ffffff !important;
+
+  box-shadow:
+    0 0 12px rgba(201, 160, 116, 0.15) !important;
+}
+
+
+/* ==========================================
+   📍 LOCATION SECTION
+   ========================================== */
+
+.location-container {
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+/* Location heading */
+
+.location-container .specs-header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+
+
+/* Location grid */
+
+.location-container .specs-grid {
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 25px;
+}
+
+
+/* Location icon style */
+
+.location-container .specs-header h4::before {
+
+  content: "📍";
+
+  margin-right: 10px;
+
+  font-size: 20px;
+}
+
+
+/* ==========================================
+   URL / CURRENCY PREFIX
+   ========================================== */
+
+.url-prefix,
+.currency-tag {
+
+  background: #f2eee9 !important;
+
+  border:
+    1px solid #e2e8f0;
+
+  color: #a3825f !important;
+
+  padding: 13px 16px;
+
+  font-size: 13px;
+
+  border-radius: 8px 0 0 8px;
+
+  display: flex;
+
+  align-items: center;
+}
+
+
+.permalink-container,
+.input-with-icon {
+
+  display: flex;
+
+  align-items: stretch;
+}
+
+
+.permalink-container input {
+
+  border-radius: 0 !important;
+}
+
+
+.link-icon-btn {
+
+  background: #f2eee9 !important;
+
+  border:
+    1px solid #e2e8f0;
+
+  border-left: none;
+
+  color: #c9a074;
+
+  padding: 0 18px;
+
+  border-radius: 0 8px 8px 0;
+
+  cursor: pointer;
+
+  transition: all 0.2s;
+}
+
+
+.link-icon-btn:hover {
+
+  background: #c9a074 !important;
+
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   PREVIEW URL
+   ========================================== */
+
+.preview-url {
+
+  font-size: 11px;
+
+  color: #8c7669;
+
+  margin-top: 8px;
+}
+
+
+.preview-url a {
+
+  color: #c9a074;
+
+  text-decoration: underline;
+}
+
+
+/* ==========================================
+   🎛️ SPECIFICATIONS GRID
+   ========================================== */
+
+.specs-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 25px;
+}
+
+
+/* ==========================================
+   RANGE SLIDER
+   ========================================== */
+
+.range-slider {
+
+  -webkit-appearance: none;
+
+  width: 100%;
+
+  height: 4px;
+
+  background: #e2e8f0;
+
+  border-radius: 4px;
+
+  outline: none;
+}
+
+
+.range-slider::-webkit-slider-thumb {
+
+  -webkit-appearance: none;
+
+  width: 14px;
+
+  height: 14px;
+
+  border-radius: 50%;
+
+  background: #c9a074;
+
+  cursor: pointer;
+}
+
+
+.value-display {
+
+  background:
+    rgba(201, 160, 116, 0.12);
+
+  color: #a3825f;
+
+  border:
+    1px solid rgba(201, 160, 116, 0.25);
+
+  font-weight: 600;
+
+  padding: 4px 10px;
+
+  border-radius: 4px;
+
+  font-size: 12px;
+}
+
+
+/* ==========================================
+   ⭐ PREMIUM AMENITIES
+   ========================================== */
+
+.amenities-grid {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+
+.amenity-chip {
+
+  background: #fcfbfa;
+
+  border:
+    1px solid #e2e8f0;
+
+  color: #4a3e3d;
+
+  padding: 10px 18px;
+
+  border-radius: 6px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  font-size: 12px;
+
+  transition: all 0.2s ease;
+}
+
+
+.amenity-chip:hover {
+
+  border-color: #c9a074;
+
+  transform: translateY(-2px);
+}
+
+
+.amenity-chip.active {
+
+  background: #211611 !important;
+
+  border-color: #211611 !important;
+
+  color: #c9a074 !important;
+
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   🗺️ MAP
+   ========================================== */
+
+#map-container {
+
+  height: 260px;
+
+  width: 100%;
+
+  border-radius: 10px;
+
+  border:
+    1px solid #e2e8f0;
+
+  overflow: hidden;
+
+  background: #f2eee9;
+}
+
+
+/* ==========================================
+   🤖 AI MAGIC
+   ========================================== */
+
+.btn-ai-magic {
+
+  background: transparent !important;
+
+  border:
+    1px solid #c9a074 !important;
+
+  color: #a3825f !important;
+
+  font-weight: 600 !important;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  padding: 12px 28px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition: all 0.2s;
+}
+
+
+.btn-ai-magic:hover {
+
+  background: #211611 !important;
+
+  color: #c9a074 !important;
+
+  border-color: #211611 !important;
+}
+
+
+/* ==========================================
+   📊 MARKET HEATMAP
+   ========================================== */
+
+.heatmap-bar {
+
+  position: relative;
+
+  height: 4px;
+
+  background:
+    linear-gradient(
+      to right,
+      #10b981,
+      #f59e0b,
+      #ef4444
+    );
+
+  border-radius: 4px;
+
+  margin: 15px 0;
+}
+
+
+.heatmap-pointer {
+
+  position: absolute;
+
+  top: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  width: 10px;
+
+  height: 10px;
+
+  background: #ffffff;
+
+  border:
+    2px solid #211611;
+
+  border-radius: 50%;
+}
+
+
+/* ==========================================
+   🖼️ PHOTO GALLERY
+   ========================================== */
+
+.image-grid-proactive {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 15px;
+}
+
+
+.upload-placeholder-proactive {
+
+  width: 100px;
+
+  height: 100px;
+
+  background-color: #f2eee9 !important;
+
+  border:
+    2px dashed #c9a074 !important;
+
+  border-radius: 8px !important;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: all 0.2s;
+}
+
+
+.upload-placeholder-proactive:hover {
+
+  background: #fff8f0 !important;
+
+  transform: translateY(-2px);
+}
+
+
+.upload-content {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+
+.upload-icon-big {
+
+  font-size: 20px;
+
+  margin-bottom: 4px;
+
+  color: #c9a074;
+}
+
+
+.upload-text-main {
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  color: #a3825f !important;
+
+  text-transform: uppercase;
+}
+
+
+.upload-subtext {
+
+  font-size: 9px;
+
+  color: #8c7669 !important;
+}
+
+
+.image-preview-card {
+
+  width: 100px;
+
+  height: 100px;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  border:
+    1px solid #e2e8f0;
+
+  position: relative;
+}
+
+
+.image-preview-card img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* ==========================================
+   🚀 RIGHT SIDEBAR
+   ========================================== */
+
+.right-column {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 30px;
+}
+
+
+.side-card {
+
+  margin-bottom: 0 !important;
+}
+
+
+/* ==========================================
+   SELECT DROPDOWN
+   ========================================== */
+
+select,
+.form-select {
+
+  cursor: pointer;
+
+  -webkit-appearance: none;
+
+  appearance: none;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c9a074'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position:
+    right 15px center !important;
+
+  background-size: 18px !important;
+}
+
+
+select option {
+
+  background-color: #ffffff !important;
+
+  color: #211611 !important;
+
+  padding: 12px !important;
+}
+
+
+/* ==========================================
+   SAVE BUTTON
+   ========================================== */
+
+.btn-stack {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+
+.btn-save {
+
+  background: #211611 !important;
+
+  color: #c9a074 !important;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  font-size: 12px;
+
+  letter-spacing: 1px;
+
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 8px;
+
+  width: 100%;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 15px rgba(33, 22, 17, 0.15);
+
+  transition: all 0.2s ease;
+}
+
+
+.btn-save:hover {
+
+  background: #c9a074 !important;
+
+  color: #ffffff !important;
+
+  box-shadow:
+    0 6px 20px rgba(201, 160, 116, 0.3);
+}
+
+
+/* ==========================================
+   SAVE & EXIT
+   ========================================== */
+
+.btn-exit {
+
+  background: transparent !important;
+
+  border:
+    1px solid #e2e8f0 !important;
+
+  color: #211611 !important;
+
+  font-weight: 600;
+
+  font-size: 11px;
+
+  padding: 12px;
+
+  border-radius: 8px;
+
+  width: 100%;
+
+  cursor: pointer;
+}
+
+
+.btn-exit:hover {
+
+  border-color: #c9a074 !important;
+
+  color: #c9a074 !important;
+}
+
+
+/* ==========================================
+   CATEGORY CHIPS
+   ========================================== */
+
+.category-chip {
+
+  background: #fcfbfa;
+
+  border:
+    1px solid #e2e8f0;
+
+  color: #4a3e3d;
+
+  padding: 8px 14px;
+
+  border-radius: 4px;
+
+  margin: 4px;
+
+  display: inline-block;
+
+  cursor: pointer;
+
+  font-size: 11px;
+
+  transition: all 0.2s;
+}
+
+
+.category-chip:hover {
+
+  border-color: #c9a074;
+}
+
+
+.category-chip.selected {
+
+  background: #211611 !important;
+
+  border-color: #211611 !important;
+
+  color: #c9a074 !important;
+
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   SYSTEM ID
+   ========================================== */
+
+.id-badge {
+
+  background: #fdfdfc;
+
+  padding: 12px;
+
+  border-radius: 6px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  border:
+    1px solid #e2e8f0;
+}
+
+
+.id-badge code {
+
+  color: #211611;
+
+  font-weight: 600;
+
+  font-size: 13px;
+}
+
+
+.refresh-btn {
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  font-size: 15px;
+}
+
+
+/* ==========================================
+   CLEAR BUTTON
+   ========================================== */
+
+.btn-clear {
+
+  background: transparent;
+
+  border:
+    1px solid rgba(239, 68, 68, 0.3);
+
+  color: #ef4444;
+
+  padding: 12px;
+
+  border-radius: 8px;
+
+  width: 100%;
+
+  cursor: pointer;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  transition: all 0.2s;
+}
+
+
+.btn-clear:hover {
+
+  background: #ef4444;
+
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   🖋️ QUILL EDITOR
+   ========================================== */
+
+
+/* Toolbar */
+
+.ql-toolbar.ql-snow {
+
+  background: #f2eee9 !important;
+
+  border:
+    1px solid #e2e8f0 !important;
+
+  border-radius: 8px 8px 0 0;
+
+  padding: 10px 12px !important;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 4px;
+}
+
+
+/* Toolbar groups */
+
+.ql-toolbar .ql-formats {
+
+  margin-right: 8px;
+
+  margin-bottom: 3px;
+}
+
+
+/* Editor container */
+
+.ql-container.ql-snow {
+
+  background: #ffffff !important;
+
+  border:
+    1px solid #e2e8f0 !important;
+
+  border-top: none !important;
+
+  border-radius: 0 0 8px 8px;
+
+  color: #211611 !important;
+
+  font-family: sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* Editor writing area */
+
+.ql-editor {
+
+  min-height: 300px;
+
+  padding: 20px !important;
+
+  color: #211611 !important;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  line-height: 1.7;
+}
+
+
+/* Editor placeholder */
+
+.ql-editor.ql-blank::before {
+
+  color: #bfaea2 !important;
+
+  font-style: normal !important;
+
+  opacity: 0.8;
+}
+
+
+/* ==========================================
+   🎨 QUILL TEXT COLOR DROPDOWN
+   ========================================== */
+
+.ql-toolbar .ql-color .ql-picker-label,
+.ql-toolbar .ql-background .ql-picker-label {
+
+  color: #211611 !important;
+}
+
+
+/* Color picker */
+
+.ql-snow .ql-picker.ql-color-picker {
+
+  width: 28px;
+}
+
+
+/* Color picker options */
+
+.ql-snow .ql-color-picker .ql-picker-options {
+
+  padding: 4px !important;
+
+  background: #ffffff !important;
+
+  border:
+    1px solid #e2e8f0 !important;
+
+  box-shadow:
+    0 10px 25px rgba(33, 22, 17, 0.12);
+
+  border-radius: 8px;
+}
+
+
+/* ==========================================
+   🎨 CUSTOM TEXT COLORS
+   ========================================== */
+
+.ql-snow .ql-picker.ql-color-picker .ql-picker-item {
+
+  border-radius: 3px;
+
+  margin: 2px;
+
+  transition: transform 0.15s ease;
+}
+
+
+.ql-snow .ql-picker.ql-color-picker .ql-picker-item:hover {
+
+  transform: scale(1.15);
+}
+
+
+/* ==========================================
+   🖍️ HIGHLIGHT / BACKGROUND COLOR
+   ========================================== */
+
+.ql-snow .ql-picker.ql-background {
+
+  width: 28px;
+}
+
+
+/* ==========================================
+   🔗 QUILL LINKS
+   ========================================== */
+
+.ql-editor a {
+
+  color: #a3825f;
+
+  text-decoration: underline;
+}
+
+
+/* ==========================================
+   📋 QUILL HEADINGS
+   ========================================== */
+
+.ql-editor h1 {
+
+  color: #211611;
+
+  font-size: 28px;
+
+  margin-bottom: 15px;
+}
+
+
+.ql-editor h2 {
+
+  color: #211611;
+
+  font-size: 22px;
+
+  margin-bottom: 12px;
+}
+
+
+.ql-editor h3 {
+
+  color: #211611;
+
+  font-size: 18px;
+
+  margin-bottom: 10px;
+}
+
+
+/* ==========================================
+   📱 MOBILE RESPONSIVE
+   ========================================== */
+
+@media (max-width: 768px) {
+
+  .admin-layout {
+
+    padding: 20px 15px;
+  }
+
+
+  .card,
+  .glass-card {
+
+    padding: 20px !important;
+
+    border-radius: 12px !important;
+  }
+
+
+  .property-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+
+  .specs-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+
+  .location-container .specs-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .ql-toolbar.ql-snow {
+
+    padding: 8px !important;
+  }
+
+
+  .ql-toolbar .ql-formats {
+
+    margin-right: 4px;
+
+    margin-bottom: 5px;
+  }
+
+
+  .ql-editor {
+
+    min-height: 250px;
+
+    padding: 15px !important;
+  }
+
+
+  .right-column {
+
+    gap: 20px;
+  }
+
+}
+
+
+/* ==========================================
+   📱 SMALL MOBILE
+   ========================================== */
+
+@media (max-width: 480px) {
+
+  .admin-layout {
+
+    padding: 15px 10px;
+  }
+
+
+  .card,
+  .glass-card {
+
+    padding: 16px !important;
+  }
+
+
+  .spec-input-group input,
+  .spec-input-group textarea,
+  .location-container input,
+  .location-container textarea,
+  select,
+  .form-select {
+
+    padding: 11px 12px !important;
+
+    font-size: 12px;
+  }
+
+
+  .image-preview-card,
+  .upload-placeholder-proactive {
+
+    width: 85px;
+
+    height: 85px;
+  }
+
+}
+
+
+/* ==========================================
+   ✨ SCROLLBAR
+   ========================================== */
+
+::-webkit-scrollbar {
+
+  width: 7px;
+
+  height: 7px;
+}
+
+
+::-webkit-scrollbar-track {
+
+  background: #f2eee9;
+}
+
+
+::-webkit-scrollbar-thumb {
+
+  background: #c9a074;
+
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+
+  background: #a3825f;
+}
+
+.ng-invalid.ng-touched {
+  border: 2px solid red !important;
+}
+
+.ng-invalid.ng-touched:focus {
+  outline: 2px solid red;
+}

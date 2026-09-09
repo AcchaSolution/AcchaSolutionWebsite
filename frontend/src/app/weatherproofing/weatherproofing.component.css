@@ -1,0 +1,752 @@
+/* =========================================================
+   EXTERIOR WEATHERPROOFING PAGE
+   ========================================================= */
+
+.weatherproof-page {
+  --wp-chocolate: #321d16;
+  --wp-dark: #21130f;
+  --wp-gold: #c9a45c;
+  --wp-light-gold: #e5c987;
+  --wp-cream: #f7f2e9;
+  --wp-soft: #eee6da;
+  --wp-white: #ffffff;
+  --wp-text: #45352e;
+  --wp-muted: #75665d;
+
+  color: var(--wp-text);
+  background: var(--wp-cream);
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.weather-hero {
+  min-height: 650px;
+  padding: 80px 7%;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(201,164,92,.18), transparent 30%),
+    linear-gradient(135deg, #21130f 0%, #392219 58%, #4b2e20 100%);
+  display: grid;
+  grid-template-columns: 1fr .95fr;
+  align-items: center;
+  gap: 70px;
+  position: relative;
+}
+
+.weather-hero::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border: 1px solid rgba(229,201,135,.18);
+  border-radius: 50%;
+  right: -100px;
+  bottom: -120px;
+}
+
+.weather-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.weather-tag {
+  display: inline-block;
+  color: var(--wp-gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 18px;
+}
+
+.weather-hero h1 {
+  margin: 0;
+  color: var(--wp-white);
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: 1.04;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.weather-hero h1 span {
+  color: var(--wp-light-gold);
+}
+
+.weather-hero p {
+  max-width: 590px;
+  margin: 25px 0 32px;
+  color: #dfd2c8;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.weather-hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.weather-btn,
+.weather-outline-btn {
+  min-height: 50px;
+  padding: 0 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: .3s ease;
+}
+
+.weather-btn {
+  background: var(--wp-gold);
+  color: var(--wp-dark);
+}
+
+.weather-btn:hover {
+  background: var(--wp-light-gold);
+  transform: translateY(-2px);
+}
+
+.weather-outline-btn {
+  color: var(--wp-white);
+  border: 1px solid rgba(255,255,255,.4);
+}
+
+.weather-outline-btn:hover {
+  background: rgba(255,255,255,.1);
+  border-color: var(--wp-light-gold);
+  color: var(--wp-light-gold);
+}
+
+
+/* HERO IMAGE */
+
+.weather-hero-image {
+  position: relative;
+  width: min(100%, 560px);
+  justify-self: end;
+}
+
+.weather-hero-image::before {
+  content: "";
+  position: absolute;
+  inset: -18px 18px 18px -18px;
+  border: 1px solid rgba(229,201,135,.45);
+  z-index: 0;
+}
+
+.weather-hero-image img {
+  display: block;
+  width: 100%;
+  height: 540px;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+  border-radius: 3px;
+}
+
+.weather-image-badge {
+  position: absolute;
+  z-index: 3;
+  left: -25px;
+  bottom: 28px;
+  padding: 18px 24px;
+  background: var(--wp-gold);
+  color: var(--wp-dark);
+  min-width: 160px;
+  box-shadow: 0 15px 35px rgba(0,0,0,.25);
+}
+
+.weather-image-badge strong {
+  display: block;
+  font-size: 27px;
+  line-height: 1;
+}
+
+.weather-image-badge span {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   COMMON SECTION HEADING
+   ========================================================= */
+
+.weather-section-heading {
+  max-width: 720px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.weather-section-heading > span {
+  color: var(--wp-gold);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.weather-section-heading h2 {
+  margin: 13px 0 15px;
+  color: var(--wp-chocolate);
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.15;
+}
+
+.weather-section-heading p {
+  margin: 0 auto;
+  color: var(--wp-muted);
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 650px;
+}
+
+.light-heading h2 {
+  color: var(--wp-white);
+}
+
+.light-heading p {
+  color: #d6c7bd;
+}
+
+
+/* =========================================================
+   WHY WEATHERPROOFING
+   ========================================================= */
+
+.weather-problem {
+  padding: 95px 7%;
+  background: var(--wp-cream);
+}
+
+.weather-problem-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.weather-problem-card {
+  padding: 32px 25px;
+  min-height: 220px;
+  background: var(--wp-white);
+  border-bottom: 3px solid transparent;
+  position: relative;
+  transition: .3s ease;
+}
+
+.weather-problem-card:hover {
+  transform: translateY(-7px);
+  border-bottom-color: var(--wp-gold);
+  box-shadow: 0 15px 35px rgba(50,29,22,.09);
+}
+
+.problem-number {
+  color: var(--wp-gold);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.weather-problem-card h3 {
+  margin: 28px 0 12px;
+  color: var(--wp-chocolate);
+  font-size: 20px;
+}
+
+.weather-problem-card p {
+  margin: 0;
+  color: var(--wp-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   SOLUTIONS
+   ========================================================= */
+
+.weather-solutions {
+  padding: 100px 7%;
+  background:
+    linear-gradient(135deg, #261611, #3a2219);
+}
+
+.weather-solution-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.weather-solution-card {
+  background: #fff;
+  overflow: hidden;
+  transition: .3s ease;
+}
+
+.weather-solution-card:hover {
+  transform: translateY(-8px);
+}
+
+.solution-image {
+  height: 250px;
+  overflow: hidden;
+}
+
+.solution-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+
+.weather-solution-card:hover .solution-image img {
+  transform: scale(1.05);
+}
+
+.solution-content {
+  padding: 25px;
+}
+
+.solution-content > span {
+  color: var(--wp-gold);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.solution-content h3 {
+  margin: 10px 0;
+  color: var(--wp-chocolate);
+  font-size: 21px;
+}
+
+.solution-content p {
+  margin: 0;
+  color: var(--wp-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   PROTECTION STORY
+   ========================================================= */
+
+.weather-story {
+  padding: 110px 7%;
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  align-items: center;
+  gap: 90px;
+  background: var(--wp-soft);
+}
+
+.weather-story-image {
+  position: relative;
+  max-width: 550px;
+}
+
+.weather-story-image::after {
+  content: "";
+  position: absolute;
+  inset: 25px -25px -25px 25px;
+  border: 2px solid var(--wp-gold);
+  z-index: 0;
+}
+
+.weather-story-image img {
+  width: 100%;
+  height: 520px;
+  display: block;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+.weather-story-content {
+  max-width: 650px;
+}
+
+.weather-story-content h2 {
+  margin: 10px 0 20px;
+  color: var(--wp-chocolate);
+  font-size: clamp(32px, 4vw, 50px);
+  line-height: 1.12;
+}
+
+.weather-story-content h2 span {
+  color: #9a7440;
+}
+
+.weather-story-content > p {
+  color: var(--wp-muted);
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 590px;
+}
+
+.protection-points {
+  margin-top: 35px;
+  display: grid;
+  gap: 18px;
+}
+
+.protection-point {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.protection-point strong {
+  min-width: 45px;
+  height: 45px;
+  border: 1px solid var(--wp-gold);
+  color: #9a7440;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.protection-point h3 {
+  margin: 0 0 5px;
+  color: var(--wp-chocolate);
+  font-size: 17px;
+}
+
+.protection-point p {
+  margin: 0;
+  color: var(--wp-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   PROCESS
+   ========================================================= */
+
+.weather-process {
+  padding: 100px 7%;
+  background: var(--wp-cream);
+}
+
+.weather-process-line {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+
+.weather-process-line::before {
+  content: "";
+  position: absolute;
+  top: 27px;
+  left: 11%;
+  right: 11%;
+  height: 1px;
+  background: #d6c5ad;
+}
+
+.process-item {
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.process-icon {
+  width: 55px;
+  height: 55px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  background: var(--wp-chocolate);
+  color: var(--wp-light-gold);
+  border: 5px solid var(--wp-cream);
+  outline: 1px solid var(--wp-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.process-item h3 {
+  margin: 0 0 9px;
+  color: var(--wp-chocolate);
+  font-size: 18px;
+}
+
+.process-item p {
+  margin: 0;
+  color: var(--wp-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+/* =========================================================
+   CTA - DIFFERENT FROM FOOTER
+   ========================================================= */
+
+.weather-contact {
+  padding: 75px 7%;
+  background: linear-gradient(
+    135deg,
+    #4a3025 0%,
+    #634535 55%,
+    #795b42 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.weather-contact::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border: 1px solid rgba(229, 201, 135, 0.22);
+  border-radius: 50%;
+  right: -120px;
+  top: -150px;
+}
+
+.weather-contact::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(229, 201, 135, 0.15);
+  border-radius: 50%;
+  left: -90px;
+  bottom: -100px;
+}
+
+.weather-contact-inner {
+  position: relative;
+  z-index: 2;
+}
+
+
+.weather-contact-inner > div:first-child {
+  max-width: 700px;
+}
+
+.weather-contact-inner span {
+  color: var(--wp-gold);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.weather-contact h2 {
+  margin: 12px 0;
+  color: var(--wp-white);
+  font-size: clamp(32px, 4vw, 50px);
+  line-height: 1.15;
+}
+
+.weather-contact h2 strong {
+  color: var(--wp-light-gold);
+  display: block;
+}
+
+.weather-contact p {
+  margin: 0;
+  color: #cdbdb2;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.weather-contact-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .weather-hero {
+    grid-template-columns: 1fr;
+    gap: 55px;
+    padding-top: 70px;
+    padding-bottom: 80px;
+  }
+
+  .weather-hero-image {
+    justify-self: center;
+    width: min(100%, 620px);
+  }
+
+  .weather-problem-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .weather-solution-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .weather-story {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .weather-story-image {
+    max-width: 600px;
+    margin: auto;
+  }
+
+  .weather-story-content {
+    max-width: 750px;
+    margin: auto;
+  }
+
+  .weather-process-line {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 45px 20px;
+  }
+
+  .weather-process-line::before {
+    display: none;
+  }
+
+  .weather-contact-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .weather-hero {
+    padding: 60px 6% 70px;
+    gap: 45px;
+  }
+
+  .weather-hero h1 {
+    font-size: 42px;
+    letter-spacing: -1px;
+  }
+
+  .weather-hero p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .weather-hero-image img {
+    height: 400px;
+  }
+
+  .weather-hero-image::before {
+    inset: -10px 10px 10px -10px;
+  }
+
+  .weather-image-badge {
+    left: 12px;
+    bottom: 18px;
+  }
+
+  .weather-problem,
+  .weather-solutions,
+  .weather-story,
+  .weather-process {
+    padding: 70px 6%;
+  }
+
+  .weather-section-heading {
+    margin-bottom: 40px;
+  }
+
+  .weather-section-heading h2 {
+    font-size: 32px;
+  }
+
+  .weather-problem-grid,
+  .weather-solution-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-problem-card {
+    min-height: auto;
+  }
+
+  .solution-image {
+    height: 230px;
+  }
+
+  .weather-story {
+    gap: 45px;
+  }
+
+  .weather-story-image img {
+    height: 400px;
+  }
+
+  .weather-story-image::after {
+    inset: 15px -15px -15px 15px;
+  }
+
+  .weather-story-content h2 {
+    font-size: 34px;
+  }
+
+  .weather-process-line {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .process-item {
+    padding: 0 10px;
+  }
+
+  .weather-contact {
+    padding: 65px 6%;
+  }
+
+  .weather-contact-inner {
+    gap: 30px;
+  }
+
+  .weather-contact h2 {
+    font-size: 34px;
+  }
+
+  .weather-contact-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .weather-contact-actions a {
+    width: 100%;
+  }
+
+}

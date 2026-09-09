@@ -1,0 +1,208 @@
+<div class="promote-container">
+  <!-- Top Banner Section -->
+  <div class="promote-header">
+    <h1>🇮🇳 Promote Your Project with India's Trusted Property Platform</h1>
+    <p>Bring your real estate project directly to thousands of active buyers looking for properties in your city. We don't just deliver views, we provide verified leads to accelerate your sales 10x faster.</p>
+  </div>
+
+  <!-- Section 1: Project Details Input Form -->
+  <div class="form-section">
+    <h2>📄 Enter Project Details</h2>
+    <form [formGroup]="projectForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Project Name *</label>
+          <input type="text" formControlName="projectName" placeholder="e.g., Skyline Residency">
+        </div>
+
+        <div class="form-group">
+          <label>Builder / Company Name *</label>
+          <input type="text" formControlName="builderName" placeholder="e.g., DLF Builders">
+        </div>
+
+        <div class="form-group">
+          <label>Property Type *</label>
+          <select formControlName="propertyType">
+            <option value="">Select Type</option>
+            <option value="Apartment">Apartment / Flat</option>
+            <option value="Plot">Plot / Land</option>
+            <option value="Villa">Villa</option>
+            <option value="Commercial">Commercial Space</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>City & Locality *</label>
+          <input type="text" formControlName="location" placeholder="e.g., Sector 62, Noida">
+        </div>
+
+        <div class="form-group">
+          <label>Starting Price *</label>
+          <input type="text" formControlName="price" placeholder="e.g., ₹45 Lakhs onwards">
+        </div>
+
+        <div class="form-group">
+          <label>Possession Status / Date *</label>
+          <select formControlName="possessionStatus">
+            <option value="">Select Status</option>
+            <option value="Ready to Move">Ready to Move</option>
+            <option value="Under Construction">Under Construction</option>
+            <option value="Launching Soon">Launching Soon</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label>RERA Number (Optional)</label>
+          <input type="text" formControlName="reraNumber" placeholder="e.g., UPRERAPRJ12345">
+        </div>
+
+        <!-- Amenities Selection Grid Frame -->
+        <div class="form-group full-width">
+          <label>Key Amenities</label>
+          <div class="amenities-grid">
+            <label><input type="checkbox" (change)="onAmenityChange($event, 'Swimming Pool')"> 🏊‍♂️ Swimming Pool</label>
+            <label><input type="checkbox" (change)="onAmenityChange($event, 'Gym')"> 🏋️‍♂️ Gym</label>
+            <label><input type="checkbox" (change)="onAmenityChange($event, '24/7 Security')"> 👮‍♂️ 24/7 Security</label>
+            <label><input type="checkbox" (change)="onAmenityChange($event, 'Parking')"> 🚗 Parking</label>
+            <label><input type="checkbox" (change)="onAmenityChange($event, 'Park/Garden')"> 🌳 Park/Garden</label>
+            <label><input type="checkbox" (change)="onAmenityChange($event, 'Power Backup')"> ⚡ Power Backup</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Upload Project Images / Brochure *</label>
+          <input type="file" (change)="onFileSelect($event)" multiple>
+        </div>
+
+        <div class="form-group">
+          <label>Your Contact Number (For Buyers) *</label>
+          <input type="text" formControlName="contactNumber" placeholder="e.g., 6299978048">
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Section 2: Tricolor Pricing & Feature Comparison Table -->
+  <div class="pricing-section">
+    <h2>💰 Select a Promotion Plan & Publish</h2>
+    <p class="form-warning" *ngIf="projectForm.invalid">⚠️ Please complete all required form fields (*) above to unlock the promotion plans.</p>
+    
+    <div class="table-responsive">
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Plan Features / Options</th>
+            <th>
+              ⚡ Flexi Daily 
+              <span class="tooltip-icon">ⓘ<span class="tooltip-text">Best for trials or flexible budgets! Keep your ad active at just ₹50/day. Turn it on or off whenever you need.</span></span>
+            </th>
+            <th>
+              📡 Silver Plan
+              <span class="tooltip-icon">ⓘ<span class="tooltip-text">Our most cost-effective solution for individual sellers. Keep your project live for 90 full days with direct buyer leads.</span></span>
+            </th>
+            <th class="best-choice-header">
+              🔥 Gold Plan ⭐
+              <span class="tooltip-icon">ⓘ<span class="tooltip-text">Our most popular pack! Grants a highlighted "Featured" Gold Tag and places your property at the top of local search results for 180 days.</span></span>
+            </th>
+            <th>
+              👑 Platinum Plan
+              <span class="tooltip-icon">ⓘ<span class="tooltip-text">The ultimate plan for large scale builders. 365 days validity, homepage banner placement, and dedicated social media blasts.</span></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">Top Banners on Search</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>15 Days</td>
+            <td><strong>Full 365 Days</strong></td>
+          </tr>
+          <tr>
+            <td class="feature-name">Expected Leads / Response</td>
+            <td>Standard</td>
+            <td>Upto 2x More</td>
+            <td>Upto 5x More</td>
+            <td><strong>Upto 10x More</strong></td>
+          </tr>
+          <tr>
+            <td class="feature-name">Validity of Project Ad</td>
+            <td>Flexible (You Decide)</td>
+            <td><strong>90 Days</strong></td>
+            <td><strong>180 Days</strong></td>
+            <td><strong>365 Days (1 Year)</strong></td>
+          </tr>
+          <tr>
+            <td class="feature-name">Featured Tag on Project</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✔️ (Gold Tag)</td>
+            <td>✔️ (Premium Tag)</td>
+          </tr>
+          <tr>
+            <td class="feature-name">24/7 Call Support</td>
+            <td>✔️</td>
+            <td>✔️</td>
+            <td>✔️</td>
+            <td>✔️</td>
+          </tr>
+          <tr class="price-row">
+            <td class="feature-name">Price</td>
+            <td class="price">₹50 / Day</td>
+            <td class="price">₹999</td>
+            <td class="price">₹2,499</td>
+            <td class="price">₹4,999</td>
+          </tr>
+          <tr class="action-row">
+            <td></td>
+            <td><button class="buy-btn" [disabled]="projectForm.invalid" (click)="processPayment('flexi')">Buy Now</button></td>
+            <td><button class="buy-btn" [disabled]="projectForm.invalid" (click)="processPayment('silver')">Buy Now</button></td>
+            <td><button class="buy-btn gold-btn" [disabled]="projectForm.invalid" (click)="processPayment('gold')">Buy Now</button></td>
+            <td><button class="buy-btn" [disabled]="projectForm.invalid" (click)="processPayment('platinum')">Buy Now</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Help & Support Banner Component -->
+  <div class="support-banner">
+    <p>🎯 Having trouble setting up your ad or choosing a plan? Connect directly with our Real Estate Assistance Team.</p>
+    <a href="tel:+916299978048" class="support-link">📞 Call Our 24/7 Free Assistance Helpline: +91 6299978048</a>
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- 📱 SCANNER POPUP OVERLAY MODAL WINDOW                 -->
+  <!-- ===================================================== -->
+  <div class="qr-modal-overlay" *ngIf="showQRModal">
+    <div class="qr-modal-card">
+      <div class="qr-modal-header">
+        <h3>🇮🇳 Scan UPI QR to Publish Advertisement</h3>
+        <button class="close-btn" (click)="closeQRModal()">&times;</button>
+      </div>
+      
+      <div class="qr-modal-body">
+        <!-- Invoice Summary Frame Box (Left Column) -->
+        <div class="ad-summary">
+          <h4>Ad Specification Invoice</h4>
+          <p><strong>Project Title:</strong> {{ projectForm.value.projectName }}</p>
+          <p><strong>Builder Entity:</strong> {{ projectForm.value.builderName }}</p>
+          <p><strong>Location Focus:</strong> {{ projectForm.value.location }}</p>
+          <p><strong>Selected Tier:</strong> <span class="plan-badge">{{ currentSelectedPlan | uppercase }}</span></p>
+          <p class="final-price"><strong>Total Payable Amount:</strong> ₹{{ currentPlanPrice }}</p>
+        </div>
+
+        <!-- Scanner Image Box Frame (Right Column) -->
+        <div class="qr-holder">
+          <img src="assets/images/my-payment-qr.png" alt="Company Payment Gateway QR Code" class="qr-img">
+          <p class="qr-tip">Scan using any authentic UPI App (GPay, PhonePe, Paytm, BHIM)</p>
+        </div>
+      </div>
+
+      <div class="qr-modal-footer">
+        <p class="warning-text">⚠️ <strong>Crucial Action Required:</strong> After finalizing payment transaction inside your mobile application, take a screenshot of your receipt confirmation and share it right over to our verification endpoint desk at <strong>6299978048</strong> for instant validation clearance approval.</p>
+        <button class="confirm-btn" (click)="submitWithQRCode()">I Have Paid Successfully</button>
+      </div>
+    </div>
+  </div>
+</div>

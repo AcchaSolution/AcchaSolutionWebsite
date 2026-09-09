@@ -1,0 +1,876 @@
+<div class="navbar-master-container">
+
+  <!-- =====================================================
+        LOGO
+  ====================================================== -->
+
+  <div class="brand-logo-frame">
+    <a routerLink="/">
+      <img
+        src="images/AcchaSolutionLogo.png"
+        alt="AcchaSolution Brand Logo"
+        class="brand-logo-img"
+      >
+    </a>
+  </div>
+
+  <!-- =====================================================
+        DESKTOP NAVIGATION
+  ====================================================== -->
+
+  <div class="navbar-links-pipeline">
+
+
+    <a
+  routerLink="/"
+  routerLinkActive="active-link"
+  [routerLinkActiveOptions]="{ exact: true }"
+  class="nav-base-link"
+>
+  Home
+</a>
+
+
+<!-- ================= SALE ================= -->
+
+<div class="nav-dropdown-wrapper">
+
+  <button
+    type="button"
+    class="nav-base-link dropdown-toggle-btn"
+  >
+    Sale
+    <span class="arrow-indicator">▼</span>
+  </button>
+
+  <div class="magic-mega-dropdown-panel">
+
+    <div class="dropdown-caret-arrow"></div>
+
+    <div class="mega-panel-grid">
+
+      <!-- POPULAR CHOICES -->
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-blue-text">
+          📍 Popular Choices
+        </div>
+
+<a [routerLink]="['/properties/sale']"
+   [queryParams]="{ location: 'Whitefield' }"
+   class="mega-link-item">
+  Properties in Whitefield
+</a>
+
+<a [routerLink]="['/properties/sale']"
+   [queryParams]="{ location: 'Hoodi' }"
+   class="mega-link-item">
+  Properties in Hoodi
+</a>
+
+<a [routerLink]="['/properties/sale']"
+   [queryParams]="{ location: 'Marathahalli' }"
+   class="mega-link-item">
+  Properties in Marathahalli
+</a>
+
+
+
+      </div>
+
+
+      <!-- PROPERTY TYPES -->
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-red-text">
+          🏢 Property Types
+        </div>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ type: 'Flat' }"
+          class="mega-link-item"
+        >
+          Flats & Apartments
+        </a>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ type: 'Villa' }"
+          class="mega-link-item"
+        >
+          Independent Villas
+        </a>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ type: 'Plot' }"
+          class="mega-link-item"
+        >
+          Residential Plots
+        </a>
+
+      </div>
+
+
+      <!-- BUDGET PREMIUM -->
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-gold-text">
+          💰 Budget Premium
+        </div>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ budget: 'under-1-crore' }"
+          class="mega-link-item"
+        >
+          Under ₹1 Crore
+        </a>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ budget: '1-3-crore' }"
+          class="mega-link-item"
+        >
+          ₹1 Cr - ₹3 Crore
+        </a>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ budget: 'ultra-luxury' }"
+          class="mega-link-item highlight-royal-gold"
+        >
+          ✨ Ultra Luxury Segment
+        </a>
+
+      </div>
+
+
+      <!-- INSTANT ACTIONS -->
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-green-text">
+          🚀 Instant Actions
+        </div>
+
+        <a
+          routerLink="/about"
+          class="mega-link-item"
+        >
+          Localities Guide
+        </a>
+
+        <a
+          routerLink="/properties/sale"
+          class="mega-link-item view-all-cta"
+        >
+          Explore All Sale →
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= RENT ================= -->
+
+<div class="nav-dropdown-wrapper">
+
+  <button
+    type="button"
+    class="nav-base-link dropdown-toggle-btn"
+  >
+    Rent
+    <span class="arrow-indicator">▼</span>
+  </button>
+
+  <div class="magic-mega-dropdown-panel">
+
+    <div class="dropdown-caret-arrow"></div>
+
+    <div class="mega-panel-grid">
+
+      <!-- RENTAL HOTSPOTS -->
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-blue-text">
+          📍 Rental Hotspots
+        </div>
+
+<a [routerLink]="['/properties/rent']"
+   [queryParams]="{ location: 'Whitefield' }"
+   class="mega-link-item">
+  Properties in Whitefield
+</a>
+
+<a [routerLink]="['/properties/rent']"
+   [queryParams]="{ location: 'Hoodi' }"
+   class="mega-link-item">
+  Properties in Hoodi
+</a>
+
+<a [routerLink]="['/properties/rent']"
+   [queryParams]="{ location: 'Marathahalli' }"
+   class="mega-link-item">
+  Properties in Marathahalli
+</a>      </div>
+
+
+
+
+      <!-- PROPERTY TYPES -->
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-red-text">
+          🏠 Property Types
+        </div>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ type: 'Flat' }"
+          class="mega-link-item"
+        >
+          Flat for Rent
+        </a>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ type: 'House' }"
+          class="mega-link-item"
+        >
+          House for Rent
+        </a>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ type: 'Villa' }"
+          class="mega-link-item"
+        >
+          Villa for Rent
+        </a>
+
+      </div>
+
+
+      <!-- RENTAL BUDGET -->
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-gold-text">
+          💳 Rental Budget
+        </div>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ budget: 'under-20000' }"
+          class="mega-link-item"
+        >
+          Under ₹20,000
+        </a>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ budget: '20000-50000' }"
+          class="mega-link-item"
+        >
+          ₹20,000 - ₹50,000
+        </a>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ budget: 'above-50000' }"
+          class="mega-link-item"
+        >
+          Above ₹50,000
+        </a>
+
+      </div>
+
+
+      <!-- INSTANT ACTIONS -->
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-green-text">
+          🚀 Instant Actions
+        </div>
+
+        <a
+          routerLink="/properties/rent"
+          class="mega-link-item view-all-cta"
+        >
+          View All Rentals →
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= SERVICES ================= -->
+
+<div class="nav-dropdown-wrapper">
+
+  <button
+    type="button"
+    class="nav-base-link dropdown-toggle-btn"
+  >
+    Services
+    <span class="arrow-indicator">▼</span>
+  </button>
+
+  <div class="magic-mega-dropdown-panel">
+
+    <div class="dropdown-caret-arrow"></div>
+
+    <div class="mega-panel-grid">
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-blue-text">
+          🧹 Elite Cleaning
+        </div>
+
+        <a
+          routerLink="/full-home-cleaning"
+          [queryParams]="{ type: 'deep' }"
+          class="mega-link-item"
+        >
+          Full Home Deep Cleaning
+        </a>
+
+        <a
+          routerLink="/kitchen-bathroom-cleaning"
+          [queryParams]="{ type: 'kitchen' }"
+          class="mega-link-item"
+        >
+          Kitchen & Bathroom Intense
+        </a>
+
+        <a
+          routerLink="/sofa-carpet-claening"
+          [queryParams]="{ type: 'sofa' }"
+          class="mega-link-item"
+        >
+          Sofa & Carpet Shampooing
+        </a>
+
+      </div>
+
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-red-text">
+          🎨 Master Painting
+        </div>
+
+        <a
+          routerLink="/luxury-painting"
+          [queryParams]="{ type: 'interior' }"
+          class="mega-link-item"
+        >
+          Interior Luxury Wallcare
+        </a>
+
+        <a
+          routerLink="/weatherproofing"
+          [queryParams]="{ type: 'exterior' }"
+          class="mega-link-item"
+        >
+          Exterior Weatherproofing
+        </a>
+
+        <a
+          routerLink="/designer-walpaper"
+          [queryParams]="{ type: 'texture' }"
+          class="mega-link-item"
+        >
+          Designer Texture & Wallpapers
+        </a>
+
+      </div>
+
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-green-text">
+          🤝 Legal & Deals
+        </div>
+
+        <a
+          routerLink="/property-verification"
+          [queryParams]="{ type: 'verification' }"
+          class="mega-link-item"
+        >
+          Property Verification & Due Diligence
+        </a>
+
+        <a
+          routerLink="/rental-agreement"
+          [queryParams]="{ type: 'agreement' }"
+          class="mega-link-item"
+        >
+          Instant Rental Agreement
+        </a>
+
+      </div>
+
+
+      <div class="mega-grid-column">
+
+        <div class="column-group-title logo-gold-text">
+          ✨ Premium Benefits
+        </div>
+
+        <a
+          routerLink="/contact"
+          class="mega-link-item"
+        >
+          Book Consult Session
+        </a>
+
+        <a
+          routerLink="/about"
+          class="mega-link-item highlight-royal-gold"
+        >
+          🔥 Combo Offers Pack
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= ABOUT ================= -->
+
+<a
+  routerLink="/about"
+  routerLinkActive="active-link"
+  class="nav-base-link"
+>
+  About Us
+</a>
+
+
+<!-- ================= PORTFOLIO ================= -->
+
+<a
+  routerLink="/portfolio"
+  routerLinkActive="active-link"
+  class="nav-base-link portfolio-nav-link"
+>
+  Portfolio
+</a>
+
+
+<!-- ================= CONTACT ================= -->
+
+<a
+  routerLink="/contact"
+  routerLinkActive="active-link"
+  class="nav-base-link"
+>
+  Contact
+</a>
+
+
+<!-- ================= AGENT ================= -->
+
+<a
+  routerLink="/agents-view"
+  routerLinkActive="active-link"
+  class="nav-base-link"
+>
+  Agent
+</a>
+
+  </div>
+
+  <!-- =====================================================
+        RIGHT SIDE
+  ====================================================== -->
+
+  <div class="navbar-right-actions">
+
+<button
+  type="button"
+  class="btn-navbar-post-property"
+  routerLink="/post-property"
+>
+  Post Property
+  <span class="badge-free-tag">FREE</span>
+</button>
+
+
+<!-- ================= ADMIN ================= -->
+
+<ng-container
+  *ngIf="isAdminArea() && isAdminLoggedIn()"
+>
+
+  <div
+    class="profile-user-wrapper"
+    (click)="toggleDropdown($event)"
+  >
+
+    <button
+      type="button"
+      class="profile-user-btn"
+    >
+
+      <div class="profile-circle">
+        {{ getAdminInitial() }}
+      </div>
+
+      <div class="profile-user-info">
+
+        <strong>
+          {{ getAdminName() }}
+        </strong>
+
+        <span>
+          Admin
+        </span>
+
+      </div>
+
+      <span class="profile-arrow">
+        {{ isDropdownOpen ? '▲' : '▼' }}
+      </span>
+
+    </button>
+
+
+    <div
+      class="user-dropdown-menu"
+      [class.show]="isDropdownOpen"
+      (click)="$event.stopPropagation()"
+    >
+
+      <div class="profile-dropdown-header">
+
+        <div class="profile-circle dropdown-avatar">
+          {{ getAdminInitial() }}
+        </div>
+
+        <div>
+
+          <strong>
+            {{ getAdminName() }}
+          </strong>
+
+          <span>
+            {{ getAdminEmail() }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="dropdown-divider"></div>
+
+
+      <a
+        routerLink="/admin-dashboard"
+        (click)="isDropdownOpen = false"
+      >
+        📊 Admin Dashboard
+      </a>
+
+
+      <div class="dropdown-divider"></div>
+
+
+      <button
+        type="button"
+        (click)="onLogout()"
+      >
+        🚪 Admin Logout
+      </button>
+
+    </div>
+
+  </div>
+
+</ng-container>
+
+
+<!-- ================= PUBLIC ================= -->
+
+<ng-container *ngIf="!isAdminArea()">
+
+  <ng-container
+    *ngIf="!authService.isPublicUserLoggedIn()"
+  >
+
+    <a
+      routerLink="/login"
+      class="nav-login-btn"
+    >
+      <span class="login-icon">♙</span>
+      <span>Login</span>
+    </a>
+
+  </ng-container>
+
+
+  <ng-container
+    *ngIf="authService.isPublicUserLoggedIn()"
+  >
+
+    <div
+      class="profile-user-wrapper"
+      (click)="toggleDropdown($event)"
+    >
+
+      <button
+        type="button"
+        class="profile-user-btn"
+      >
+
+        <div class="profile-circle">
+          {{ userInitial$ | async }}
+        </div>
+
+        <span class="profile-arrow">
+          {{ isDropdownOpen ? '▲' : '▼' }}
+        </span>
+
+      </button>
+
+
+      <div
+        class="user-dropdown-menu"
+        [class.show]="isDropdownOpen"
+        (click)="$event.stopPropagation()"
+      >
+
+        <div class="profile-dropdown-header">
+
+          <div class="profile-circle dropdown-avatar">
+            {{ userInitial$ | async }}
+          </div>
+
+          <div>
+
+            <strong>
+              {{ userName$ | async }}
+            </strong>
+
+            <span>
+              {{ userEmail$ | async }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="dropdown-divider"></div>
+
+
+        <a
+          routerLink="/"
+          (click)="isDropdownOpen = false"
+        >
+          🏠 My Properties
+        </a>
+
+
+        <a
+          routerLink="/profile"
+          (click)="isDropdownOpen = false"
+        >
+          ⚙️ Profile Settings
+        </a>
+
+
+        <div class="dropdown-divider"></div>
+
+
+        <button
+          type="button"
+          (click)="onLogout()"
+        >
+          🚪 Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  </ng-container>
+
+</ng-container>
+
+
+<!-- =================================================
+     MOBILE MENU BUTTON
+================================================== -->
+
+<button
+  type="button"
+  class="mobile-menu-button"
+  [class.menu-open]="isMobileMenuOpen"
+  (click)="toggleMobileMenu()"
+  aria-label="Open navigation menu"
+>
+
+  <span></span>
+  <span></span>
+  <span></span>
+
+</button>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     MOBILE NAVIGATION
+====================================================== -->
+
+<div
+  class="mobile-navigation"
+  [class.mobile-navigation-open]="isMobileMenuOpen"
+>
+
+  <div class="mobile-navigation-inner">
+
+<a
+  routerLink="/"
+  routerLinkActive="mobile-active-link"
+  [routerLinkActiveOptions]="{ exact: true }"
+  class="mobile-nav-link"
+  (click)="closeMobileMenu()"
+>
+  <span>01</span>
+  Home
+</a>
+
+
+<a
+  routerLink="/properties/sale"
+  routerLinkActive="mobile-active-link"
+  class="mobile-nav-link"
+  (click)="closeMobileMenu()"
+>
+  <span>02</span>
+  Sale
+</a>
+
+
+<a
+  routerLink="/properties/rent"
+  routerLinkActive="mobile-active-link"
+  class="mobile-nav-link"
+  (click)="closeMobileMenu()"
+>
+  <span>03</span>
+  Rent
+</a>
+
+
+<a
+  routerLink="/services/cleaning"
+  routerLinkActive="mobile-active-link"
+  class="mobile-nav-link"
+  (click)="closeMobileMenu()"
+>
+  <span>04</span>
+  Services
+</a>
+
+
+<a
+  routerLink="/about"
+  routerLinkActive="mobile-active-link"
+  class="mobile-nav-link"
+  (click)="closeMobileMenu()"
+>
+  <span>05</span>
+  About Us
+</a>
+
+
+<!-- PORTFOLIO -->
+
+<a
+  routerLink="/portfolio"
+  routerLinkActive="mobile-active-link"
+  class="mobile-nav-link mobile-portfolio-link"
+  (click)="closeMobileMenu()"
+>
+  <span>06</span>
+  Portfolio
+  <b>↗</b>
+</a>
+
+
+<a
+  routerLink="/contact"
+  routerLinkActive="mobile-active-link"
+  class="mobile-nav-link"
+  (click)="closeMobileMenu()"
+>
+  <span>07</span>
+  Contact
+</a>
+
+
+<a
+  routerLink="/agents-view"
+  routerLinkActive="mobile-active-link"
+  class="mobile-nav-link"
+  (click)="closeMobileMenu()"
+>
+  <span>08</span>
+  Agent
+</a>
+
+
+<div class="mobile-menu-divider"></div>
+
+
+<button
+  type="button"
+  class="mobile-post-property"
+  routerLink="/post-property"
+  (click)="closeMobileMenu()"
+>
+  Post Property
+  <span>FREE</span>
+</button>
+
+
+<a
+  routerLink="/login"
+  class="mobile-login-link"
+  (click)="closeMobileMenu()"
+>
+  Login →
+</a>
+
+  </div>
+
+</div>

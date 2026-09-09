@@ -1,0 +1,38 @@
+<div class="property-page">
+  <div class="content-wrapper">
+    
+    <div class="left-section">
+      <img src="images/login image.png" alt="House" class="house-img">
+      <h2>Post your property Ad to sell or rent online for <span>Free!</span></h2>
+      <ul class="features">
+        <li>✅ Get Access to 4 Lakh+ Buyers</li>
+        <li>✅ Sell Faster with Premium Service</li>
+        <li>✅ Get Expert Advice on Market Trends and Insights</li>
+      </ul>
+    </div>
+
+    <div class="form-card">
+  <h2>Let's get you started</h2>
+  
+  <p>You are:</p>
+  <div class="selection-group">
+    <!-- Owner/Agent selection: Sirf ek hi select hoga -->
+    <button 
+      [class.active]="selectedUser === 'Owner'" 
+      (click)="selectedUser = 'Owner'">Owner</button>
+    <button 
+      [class.active]="selectedUser === 'Agent'" 
+      (click)="selectedUser = 'Agent'">Agent</button>
+  </div>
+
+  <div class="input-stack">
+    <input type="text" placeholder="Full Name" [(ngModel)]="userData.name">
+    <input type="email" placeholder="Email Address" [(ngModel)]="userData.email">
+    <input type="password" placeholder="Password" [(ngModel)]="userData.password">
+    <input type="number" placeholder="Experience (Years)" [(ngModel)]="userData.experience">
+    <input type="tel" placeholder="Phone Number" [(ngModel)]="userData.phone">
+  </div>
+
+  <button class="submit-btn" (click)="onRegister()">START NOW</button>
+</div>
+</div>
