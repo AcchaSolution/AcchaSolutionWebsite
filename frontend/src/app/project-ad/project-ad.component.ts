@@ -122,7 +122,7 @@ export class ProjectAdComponent implements OnInit {
     console.log('Posting validated form package over to API channel:', payload);
 
     // Forwarding structural tracking details straight onto node entry routing module
-    this.http.post('http://localhost:5000/api/payments/qr-submission', payload)
+this.http.post('https://api.acchasolution.com/api/payments/qr-submission', payload)
       .subscribe({
         next: (res: any) => {
           alert('Your structural details have been registered into system logs successfully. Please ensure you wire payment confirmation receipt screenshot directly to 6299978048 for rapid ad display deployment validation.');

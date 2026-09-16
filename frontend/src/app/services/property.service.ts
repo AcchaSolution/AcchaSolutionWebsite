@@ -19,8 +19,7 @@ export class PropertyService {
 
 
   private readonly API_URL =
-    'http://localhost:5000/api/properties';
-
+'https://api.acchasolution.com/api/properties'
 
   constructor(
     private http: HttpClient
@@ -253,7 +252,7 @@ generateAIDescription(
 ): Observable<any> {
 
   return this.http.post(
-    'http://localhost:5000/api/ai/generate-description',
+'https://api.acchasolution.com/api/ai/generate-description',
     propertyData
   );
 

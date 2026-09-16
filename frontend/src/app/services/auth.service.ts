@@ -15,8 +15,7 @@ export class AuthService {
   // =========================================================
 
   private apiUrl =
-    enviroment?.apiUrl || 'http://localhost:5000/api/auth';
-
+enviroment?.apiUrl || 'https://api.acchasolution.com/api/auth';
   // =========================================================
   // LOGIN STATE
   // =========================================================
@@ -155,8 +154,8 @@ export class AuthService {
 getAllUsers() {
 
   return this.http.get<any>(
-    'http://localhost:5000/api/auth/users'
-  );
+  'https://api.acchasolution.com/api/auth/users'
+ );
 
 }
 

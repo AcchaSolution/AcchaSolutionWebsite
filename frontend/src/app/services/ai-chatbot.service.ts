@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AiChatbotService {
   // Aapka backend local server URL
-  private apiUrl = 'http://localhost:5000/api/ai/chat-assistant';
-
+private apiUrl = 'https://api.acchasolution.com/api/ai/chat-assistant';
   constructor(private http: HttpClient) {}
 
   /**

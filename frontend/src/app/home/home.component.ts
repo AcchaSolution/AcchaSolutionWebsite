@@ -461,8 +461,7 @@ searchProperties(): void {
 
 
     const aiApiUrl =
-      'http://localhost:5000/api/ai/smart-search';
-
+'https://api.acchasolution.com/api/ai/smart-search';
 
     const payload = {
 
