@@ -292,6 +292,33 @@ select:focus,
 
 
 /* ==========================================
+   🔴 FIELD VALIDATION MESSAGE
+   ========================================== */
+
+.field-error {
+
+  display: block;
+
+  margin-top: 6px;
+
+  padding-left: 2px;
+
+  color: #dc3545;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  line-height: 1.4;
+}
+
+
+/* ==========================================
    📍 LOCATION SECTION
    ========================================== */
 
@@ -1415,10 +1442,69 @@ select option {
   background: #a3825f;
 }
 
-.ng-invalid.ng-touched {
-  border: 2px solid red !important;
+
+
+.amenity-card{
+
+    background:#ffffff;
+    border:1px solid #f0e4d6;
+
+    border-radius:18px;
+
+    padding:15px;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,.04);
+
 }
 
-.ng-invalid.ng-touched:focus {
-  outline: 2px solid red;
+.amenity-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+    0 18px 35px rgba(255,153,51,.20);
+
+    border-color:#ff9933;
+
+}
+
+.view-all-btn {
+
+  border: none;
+
+  padding: 8px 18px;
+
+  border-radius: 30px;
+
+  background: linear-gradient(
+    135deg,
+    #ff9933,
+    #ffb347
+  );
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  transition: all .3s ease;
+
+  box-shadow:
+    0 8px 20px rgba(255,153,51,.25);
+
+}
+
+.view-all-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 25px rgba(255,153,51,.35);
+
 }

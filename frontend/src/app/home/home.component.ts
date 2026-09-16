@@ -17,6 +17,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
+  // ============================================================
+  // SEARCH / PROPERTY DATA
+  // ============================================================
+
   activeTab: string = 'Buy';
 
   properties: any[] = [];
@@ -31,17 +35,35 @@ export class HomeComponent implements OnInit {
   selectedStatus: string = '';
   newBuilderProjects: boolean = false;
 
-  selectedProjectLocation: string = 'All';
-  selectedBuilder: any = null;
+  showAllProperties: boolean = false;
+  hasSearched: boolean = false;
 
   isAiSearching: boolean = false;
 
-  showAllProperties: boolean = false;
+
+  // ============================================================
+  // BUILDER SECTION
+  // ============================================================
+
+  selectedProjectLocation: string = 'All';
+  selectedBuilder: any = null;
+
+  /*
+    false = Builder section hidden
+    true  = Builder section visible
+
+    IMPORTANT:
+    Aapne builder/project section ko abhi incomplete hone ke
+    reason se hide karna bola tha.
+    Isliye live launch ke liye ise false rakhna better hai.
+  */
+
+  showBuilderProjectsSection: boolean = false;
 
 
-  // =====================================================
+  // ============================================================
   // BUILDER PROJECT DATA
-  // =====================================================
+  // ============================================================
 
   builderProjects: any[] = [
 
@@ -53,20 +75,24 @@ export class HomeComponent implements OnInit {
       count: 'Upcoming Projects',
 
       projects: [
+
         {
-          name: 'Sobha Project 1',
+          id: 'sobha-oneworld',
+          name: 'SOBHA OneWorld',
           location: 'Whitefield',
-          image: 'assets/default-project.jpg',
-          link: 'https://www.sobha.com/'
+          image: 'assets/default-project.jpg'
         },
+
         {
-          name: 'Sobha Project 2',
+          id: 'sobha-windsor',
+          name: 'SOBHA Windsor',
           location: 'Hoodi',
-          image: 'assets/default-project.jpg',
-          link: 'https://www.sobha.com/'
+          image: 'assets/default-project.jpg'
         }
+
       ]
     },
+
 
     {
       name: 'PRESTIGE',
@@ -76,14 +102,17 @@ export class HomeComponent implements OnInit {
       count: 'Upcoming Projects',
 
       projects: [
+
         {
+          id: 'prestige-project-1',
           name: 'Prestige Project 1',
           location: 'Whitefield',
-          image: 'assets/default-project.jpg',
-          link: 'https://www.prestigeconstructions.com/'
+          image: 'assets/default-project.jpg'
         }
+
       ]
     },
+
 
     {
       name: 'BRIGADE',
@@ -93,14 +122,17 @@ export class HomeComponent implements OnInit {
       count: 'Upcoming Projects',
 
       projects: [
+
         {
+          id: 'brigade-project-1',
           name: 'Brigade Project 1',
           location: 'Hoodi',
-          image: 'assets/default-project.jpg',
-          link: 'https://www.brigadegroup.com/'
+          image: 'assets/default-project.jpg'
         }
+
       ]
     },
+
 
     {
       name: 'GODREJ',
@@ -110,14 +142,17 @@ export class HomeComponent implements OnInit {
       count: 'Upcoming Projects',
 
       projects: [
+
         {
+          id: 'godrej-project-1',
           name: 'Godrej Project 1',
           location: 'Whitefield',
-          image: 'assets/default-project.jpg',
-          link: 'https://www.godrejproperties.com/'
+          image: 'assets/default-project.jpg'
         }
+
       ]
     },
+
 
     {
       name: 'PURAVANKARA',
@@ -127,21 +162,23 @@ export class HomeComponent implements OnInit {
       count: 'Upcoming Projects',
 
       projects: [
+
         {
+          id: 'puravankara-project-1',
           name: 'Puravankara Project 1',
           location: 'Hoodi',
-          image: 'assets/default-project.jpg',
-          link: 'https://www.puravankara.com/'
+          image: 'assets/default-project.jpg'
         }
+
       ]
     }
 
   ];
 
 
-  // =====================================================
+  // ============================================================
   // CONSTRUCTOR
-  // =====================================================
+  // ============================================================
 
   constructor(
     private propService: PropertyService,
@@ -150,9 +187,9 @@ export class HomeComponent implements OnInit {
   ) {}
 
 
-  // =====================================================
+  // ============================================================
   // INIT
-  // =====================================================
+  // ============================================================
 
   ngOnInit(): void {
 
@@ -193,174 +230,386 @@ export class HomeComponent implements OnInit {
   }
 
 
-  // =====================================================
+  // ============================================================
   // TAB
-  // =====================================================
+  // ============================================================
 
   selectTab(tab: string): void {
 
     this.activeTab = tab;
 
+    console.log(
+      '🔄 ACTIVE TAB:',
+      this.activeTab
+    );
+
   }
 
 
-  // =====================================================
-  // SEARCH
-  // =====================================================
+  // ============================================================
+  // TRACK PROJECT
+  // ============================================================
 
-  searchProperties(): void {
+  trackProjectById(
+    index: number,
+    project: any
+  ): string | number {
 
-    const query =
-      this.searchKeyword.trim();
+    return project?.id || index;
 
-    if (!query) {
+  }
 
-      alert(
-        'Please enter a location or query to search.'
+
+  // ============================================================
+  // MAIN HOME SEARCH
+  // ============================================================
+
+
+searchProperties(): void {
+
+  console.log('========== HOME SEARCH ==========');
+  console.log('Selected BHK:', this.selectedBhk);
+  console.log('Keyword:', this.searchKeyword);
+  console.log('City:', this.selectedCity);
+  console.log('Total properties:', this.allProperties.length);
+
+  const normalize = (value: any): string => {
+    return String(value ?? '')
+      .toLowerCase()
+      .replace(/\s+/g, ' ')
+      .trim();
+  };
+
+  const selectedBhk = normalize(this.selectedBhk);
+  const selectedCity = normalize(this.selectedCity);
+  const keyword = normalize(this.searchKeyword);
+
+  let result = [...this.allProperties];
+
+  /* =====================================================
+     BHK
+     ===================================================== */
+
+  if (selectedBhk) {
+
+    result = result.filter((property: any) => {
+
+      const propertyBhk = normalize(
+        property.bhk ??
+        property.bhkType ??
+        property.bedrooms ??
+        property.bedroom ??
+        ''
       );
 
-      return;
+      console.log(
+        'BHK CHECK:',
+        property.name,
+        propertyBhk,
+        'vs',
+        selectedBhk
+      );
 
-    }
-
-    const wordCount =
-      query
-        .split(/\s+/)
-        .filter(word => word.length > 0)
-        .length;
-
-    if (wordCount > 2) {
-
-      this.runAiSearch(query);
-
-      return;
-
-    }
-
-    this.executeTraditionalSearch();
-
+      return propertyBhk === selectedBhk;
+    });
   }
 
 
-  // =====================================================
-  // AI SEARCH
-  // =====================================================
+  /* =====================================================
+     LOCATION
+     ===================================================== */
 
-  private runAiSearch(query: string): void {
+  if (selectedCity) {
+
+    result = result.filter((property: any) => {
+
+      const locationText = normalize([
+        property.location,
+        property.city,
+        property.locality,
+        property.subLocality,
+        property.address,
+        property.landmark
+      ].join(' '));
+
+      return locationText.includes(selectedCity);
+    });
+  }
+
+
+  /* =====================================================
+     KEYWORD / NATURAL SEARCH
+     ===================================================== */
+
+  if (keyword) {
+
+    // BHK already handled separately
+    const bhkMatch = keyword.match(/\b([1-5])\s*bhk\b/i);
+
+    let searchText = keyword;
+
+    if (bhkMatch) {
+      searchText = searchText.replace(
+        /\b([1-5])\s*bhk\b/gi,
+        ''
+      );
+    }
+
+    // Remove common words
+    searchText = searchText
+      .replace(/\bproperty\b/gi, '')
+      .replace(/\bproperties\b/gi, '')
+      .replace(/\bin\b/gi, '')
+      .replace(/\bat\b/gi, '')
+      .replace(/\bnear\b/gi, '')
+      .replace(/\bflat\b/gi, '')
+      .replace(/\bapartment\b/gi, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+
+    // If BHK was typed in search box
+    if (bhkMatch) {
+
+      const requestedBhk =
+        `${bhkMatch[1]} bhk`;
+
+      result = result.filter((property: any) => {
+
+        const propertyBhk = normalize(
+          property.bhk ??
+          property.bhkType ??
+          property.bedrooms ??
+          property.bedroom ??
+          ''
+        );
+
+        return propertyBhk === requestedBhk;
+      });
+    }
+
+
+    // Remaining location/name text
+    if (searchText) {
+
+      result = result.filter((property: any) => {
+
+        const searchable = normalize([
+          property.name,
+          property.title,
+          property.location,
+          property.city,
+          property.locality,
+          property.subLocality,
+          property.address,
+          property.landmark,
+          property.description,
+          property.uniqueId
+        ].join(' '));
+
+        return searchable.includes(searchText);
+      });
+    }
+  }
+
+
+  /* =====================================================
+     FINAL RESULT
+     ===================================================== */
+
+  this.filteredProperties = [...result];
+  this.properties = [...result];
+
+  this.hasSearched = true;
+  this.showAllProperties = false;
+
+  console.log('========== SEARCH RESULT ==========');
+  console.log('FOUND:', result.length);
+  console.log(result);
+
+
+  /* =====================================================
+     SCROLL
+     ===================================================== */
+
+  setTimeout(() => {
+
+    const section = document.querySelector(
+      '.curated-properties-section'
+    );
+
+    if (section) {
+
+      section.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+
+  }, 200);
+}
+
+  // ============================================================
+  // AI SEARCH
+  // ============================================================
+
+  private runAiSearch(
+    query: string
+  ): void {
 
     this.isAiSearching = true;
 
+
     const aiApiUrl =
       'http://localhost:5000/api/ai/smart-search';
+
 
     const payload = {
 
       query: query,
 
-      tabContext: this.activeTab,
+      tabContext:
+        this.activeTab,
 
-      cityContext: this.selectedCity,
+      cityContext:
+        this.selectedCity,
 
-      propertyType: this.propertyType,
+      propertyType:
+        this.propertyType,
 
-      bhk: this.selectedBhk,
+      bhk:
+        this.selectedBhk,
 
-      status: this.selectedStatus,
+      status:
+        this.selectedStatus,
 
       newBuilderProject:
         this.newBuilderProjects
 
     };
 
+
     console.log(
       '🤖 AI SEARCH REQUEST:',
       payload
     );
 
-    this.http.post<any>(
-      aiApiUrl,
-      payload
-    ).subscribe({
 
-      next: (response: any) => {
+    this.http
+      .post<any>(
+        aiApiUrl,
+        payload
+      )
+      .subscribe({
 
-        this.isAiSearching = false;
+        next: (response: any) => {
 
-        console.log(
-          '🤖 AI SEARCH RESPONSE:',
-          response
-        );
+          this.isAiSearching =
+            false;
 
-        if (
-          response &&
-          response.success &&
-          Array.isArray(response.data)
-        ) {
 
-          this.router.navigate(
-            ['/properties/catalog'],
-            {
-              state: {
-                aiFilters:
-                  response.filtersApplied || {},
+          console.log(
+            '🤖 AI SEARCH RESPONSE:',
+            response
+          );
 
-                directResults:
-                  response.data || []
+
+          if (
+
+            response &&
+            response.success &&
+            Array.isArray(
+              response.data
+            )
+
+          ) {
+
+            this.router.navigate(
+
+              ['/properties/catalog'],
+
+              {
+
+                state: {
+
+                  aiFilters:
+                    response.filtersApplied ||
+                    {},
+
+                  directResults:
+                    response.data ||
+                    []
+
+                }
+
               }
-            }
+
+            );
+
+            return;
+
+          }
+
+
+          if (
+            response &&
+            response.success
+          ) {
+
+            const filters =
+              response.filtersApplied ||
+              {};
+
+
+            this.router.navigate(
+
+              ['/properties/sale'],
+
+              {
+
+                queryParams:
+                  this.convertAiFiltersToQueryParams(
+                    filters
+                  )
+
+              }
+
+            );
+
+            return;
+
+          }
+
+
+          this.executeTraditionalSearch();
+
+        },
+
+
+        error: (err: any) => {
+
+          console.error(
+            '❌ AI API Error:',
+            err
           );
 
-          return;
+
+          this.isAiSearching =
+            false;
+
+
+          this.executeTraditionalSearch();
 
         }
 
-        if (
-          response &&
-          response.success
-        ) {
-
-          const filters =
-            response.filtersApplied || {};
-
-          this.router.navigate(
-            ['/properties/sale'],
-            {
-              queryParams:
-                this.convertAiFiltersToQueryParams(
-                  filters
-                )
-            }
-          );
-
-          return;
-
-        }
-
-        this.executeTraditionalSearch();
-
-      },
-
-      error: (err: any) => {
-
-        console.error(
-          '❌ AI API Error:',
-          err
-        );
-
-        this.isAiSearching = false;
-
-        this.executeTraditionalSearch();
-
-      }
-
-    });
+      });
 
   }
 
 
-  // =====================================================
-  // AI FILTERS
-  // =====================================================
+  // ============================================================
+  // AI FILTER → QUERY PARAMS
+  // ============================================================
 
   private convertAiFiltersToQueryParams(
     filters: any
@@ -369,11 +618,14 @@ export class HomeComponent implements OnInit {
     if (!filters) {
 
       return {
+
         keyword:
           this.searchKeyword.trim()
+
       };
 
     }
+
 
     return {
 
@@ -383,11 +635,13 @@ export class HomeComponent implements OnInit {
         this.selectedCity ||
         undefined,
 
+
       keyword:
         filters.keyword ||
         filters.searchKeyword ||
         this.searchKeyword.trim() ||
         undefined,
+
 
       type:
         filters.type ||
@@ -395,11 +649,13 @@ export class HomeComponent implements OnInit {
         this.propertyType ||
         undefined,
 
+
       bhk:
         filters.bhk ||
         filters.bhkType ||
         this.selectedBhk ||
         undefined,
+
 
       status:
         filters.status ||
@@ -407,10 +663,15 @@ export class HomeComponent implements OnInit {
         this.selectedStatus ||
         undefined,
 
+
       newProject:
-        filters.newProject ||
-        filters.newBuilderProject ||
-        this.newBuilderProjects
+
+        (
+          filters.newProject ||
+          filters.newBuilderProject ||
+          this.newBuilderProjects
+        )
+
           ? 'true'
           : undefined
 
@@ -419,16 +680,19 @@ export class HomeComponent implements OnInit {
   }
 
 
-  // =====================================================
-  // NORMAL SEARCH
-  // =====================================================
+  // ============================================================
+  // OLD NORMAL SEARCH
+  // ============================================================
 
   executeTraditionalSearch(): void {
 
     let targetRoute =
       '/properties/sale';
 
-    if (this.activeTab === 'Rent') {
+
+    if (
+      this.activeTab === 'Rent'
+    ) {
 
       targetRoute =
         '/properties/rent';
@@ -444,34 +708,42 @@ export class HomeComponent implements OnInit {
 
     }
 
+
     const queryParams: any = {
 
       city:
         this.selectedCity.trim() ||
         undefined,
 
+
       keyword:
         this.searchKeyword.trim() ||
         undefined,
+
 
       type:
         this.propertyType.trim() ||
         undefined,
 
+
       bhk:
         this.selectedBhk.trim() ||
         undefined,
+
 
       status:
         this.selectedStatus.trim() ||
         undefined,
 
+
       newProject:
+
         this.newBuilderProjects
           ? 'true'
           : undefined
 
     };
+
 
     console.log(
       '🚀 NORMAL SEARCH:',
@@ -479,42 +751,74 @@ export class HomeComponent implements OnInit {
       queryParams
     );
 
+
     this.router.navigate(
+
       [targetRoute],
+
       {
         queryParams
       }
+
     );
 
   }
 
 
-  // =====================================================
-  // RESET
-  // =====================================================
+  // ============================================================
+  // RESET SEARCH
+  // ============================================================
 
   resetSearch(): void {
 
-    this.selectedCity = '';
-    this.searchKeyword = '';
-    this.propertyType = 'Full House';
-    this.selectedBhk = '';
-    this.selectedStatus = '';
-    this.newBuilderProjects = false;
-    this.activeTab = 'Buy';
+    this.hasSearched =
+      false;
+
+
+    this.selectedCity =
+      '';
+
+    this.searchKeyword =
+      '';
+
+    this.propertyType =
+      'Full House';
+
+    this.selectedBhk =
+      '';
+
+    this.selectedStatus =
+      '';
+
+    this.newBuilderProjects =
+      false;
+
+    this.activeTab =
+      'Buy';
+
 
     this.properties =
       [...this.allProperties];
 
+
     this.filteredProperties =
       [...this.allProperties];
+
+
+    this.showAllProperties =
+      false;
+
+
+    console.log(
+      '🔄 HOME SEARCH RESET'
+    );
 
   }
 
 
-  // =====================================================
-  // BUILDER FILTER
-  // =====================================================
+  // ============================================================
+  // BUILDER LOCATION FILTER
+  // ============================================================
 
   filterBuilderProjects(
     location: string
@@ -526,19 +830,27 @@ export class HomeComponent implements OnInit {
   }
 
 
-  // =====================================================
-  // FILTERED BUILDERS
-  // =====================================================
-
   getFilteredBuilderProjects(): any[] {
 
     if (
-      this.selectedProjectLocation === 'All'
+      this.selectedProjectLocation ===
+      'All'
     ) {
 
       return this.builderProjects;
 
     }
+
+
+    if (
+      this.selectedProjectLocation ===
+      'Bangalore'
+    ) {
+
+      return this.builderProjects;
+
+    }
+
 
     return this.builderProjects.filter(
       (builder: any) => {
@@ -558,174 +870,248 @@ export class HomeComponent implements OnInit {
   }
 
 
-  // =====================================================
-  // OPEN BUILDER
-  // =====================================================
+  // ============================================================
+  // BUILDER CLICK
+  // ============================================================
 
   openBuilderProjects(
     builder: any
   ): void {
 
     if (!builder) {
+
+      console.error(
+        '❌ Builder missing'
+      );
+
       return;
+
     }
 
-    this.selectedBuilder =
-      builder;
 
-    setTimeout(() => {
+    const project =
+      builder.projects?.[0];
 
-      const section =
-        document.querySelector(
-          '.builder-project-details'
-        ) as HTMLElement | null;
 
-      if (section) {
+    if (!project) {
 
-        section.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+      console.error(
+        '❌ No project found for builder:',
+        builder
+      );
 
-      }
+      return;
 
-    }, 100);
+    }
+
+
+    if (!project.id) {
+
+      console.error(
+        '❌ Project ID missing:',
+        project
+      );
+
+
+      alert(
+        'Project ID missing. Please add project ID first.'
+      );
+
+      return;
+
+    }
+
+
+    console.log(
+      '➡️ Opening Project Details:',
+      project.id
+    );
+
+
+    this.router.navigate([
+      '/project-details',
+      project.id
+    ]);
 
   }
 
 
-  // =====================================================
-  // OPEN PROJECT DETAILS
-  // =====================================================
+  // ============================================================
+  // PROJECT CLICK → PROJECT DETAILS
+  // ============================================================
 
   openProjectDetails(
     project: any
   ): void {
 
+    console.log(
+      '🟢 PROJECT CLICK:',
+      project
+    );
+
+
     if (!project) {
-      return;
-    }
 
-    if (project.id) {
-
-      this.router.navigate(
-        [
-          '/project-details',
-          project.id
-        ]
+      console.error(
+        '❌ Project missing'
       );
 
       return;
 
     }
 
-    if (project.link) {
 
-      window.open(
-        project.link,
-        '_blank',
-        'noopener,noreferrer'
+    if (!project.id) {
+
+      console.error(
+        '❌ Project ID missing:',
+        project
       );
+
+
+      alert(
+        'Project ID not available.'
+      );
+
+      return;
 
     }
 
-  }
+
+    console.log(
+      '➡️ Going to project details:',
+      project.id
+    );
 
 
-  // =====================================================
-  // VIEW ALL PROJECTS
-  // =====================================================
+    this.router.navigate([
+      '/project-details',
+      project.id
+    ]).then(
 
-  viewAllProjects(): void {
+      success => {
 
-    this.selectedProjectLocation = 'All';
-    this.selectedBuilder = null;
+        console.log(
+          '🚀 Navigation success:',
+          success
+        );
 
-    setTimeout(() => {
+      },
 
-      const section =
-        document.querySelector(
-          '.upcoming-projects-section'
-        ) as HTMLElement | null;
+      error => {
 
-      if (section) {
-
-        section.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+        console.error(
+          '❌ Navigation failed:',
+          error
+        );
 
       }
 
-    }, 100);
-
-  }
-
-
-  // =====================================================
-  // ⭐ PROPERTY DETAILS — FIXED
-  // =====================================================
-
-  viewDetails(
-    property: any
-  ): void {
-
-    if (!property) {
-
-      console.error(
-        '❌ Property object missing'
-      );
-
-      return;
-
-    }
-
-    const uniqueId =
-      property.uniqueId ||
-      property.id ||
-      property._id;
-
-    if (!uniqueId) {
-
-      console.error(
-        '❌ Property ID not found:',
-        property
-      );
-
-      alert(
-        'Property ID not available.'
-      );
-
-      return;
-
-    }
-
-    console.log(
-      '➡️ Opening property details:',
-      uniqueId
-    );
-
-    this.router.navigate(
-      [
-        '/property-details',
-        uniqueId
-      ]
     );
 
   }
 
 
-  // =====================================================
-  // SHOW / HIDE PROPERTIES
-  // =====================================================
+  // ============================================================
+  // VIEW ALL PROJECTS
+  // ============================================================
+
+  viewAllProjects(): void {
+
+    this.selectedProjectLocation =
+      'All';
+
+    this.selectedBuilder =
+      null;
+
+  }
+
+
+  // ============================================================
+  // PROPERTY DETAILS
+  // ============================================================
+viewDetails(uniqueId: string): void {
+  if (!uniqueId) {
+    console.warn('Property ID not found');
+    return;
+  }
+
+  this.router.navigate([
+    '/property-details',
+    uniqueId
+  ]);
+}
+
+
+  // viewDetails(
+  //   property: any
+  // ): void {
+
+  //   if (!property) {
+
+  //     console.error(
+  //       '❌ Property object missing'
+  //     );
+
+  //     return;
+
+  //   }
+
+
+  //   const uniqueId =
+
+  //     property.uniqueId ||
+  //     property.id ||
+  //     property._id;
+
+
+  //   if (!uniqueId) {
+
+  //     console.error(
+  //       '❌ Property ID not found:',
+  //       property
+  //     );
+
+
+  //     alert(
+  //       'Property ID not available.'
+  //     );
+
+  //     return;
+
+  //   }
+
+
+  //   console.log(
+  //     '➡️ Opening property details:',
+  //     uniqueId
+  //   );
+
+
+  //   this.router.navigate(
+  //     [
+  //       '/property-details',
+  //       uniqueId
+  //     ]
+  //   );
+
+  // }
+
+
+  // ============================================================
+  // DISPLAYED PROPERTIES
+  // ============================================================
 
   get displayedProperties(): any[] {
 
-    if (this.showAllProperties) {
+    if (
+      this.showAllProperties
+    ) {
 
       return this.properties;
 
     }
+
 
     return this.properties.slice(
       0,
@@ -735,33 +1121,80 @@ export class HomeComponent implements OnInit {
   }
 
 
-  toggleAllProperties(): void {
+  // ============================================================
+  // TOGGLE ALL PROPERTIES
+  // ============================================================
 
-    this.showAllProperties =
-      !this.showAllProperties;
+toggleAllProperties(): void {
 
-  }
+  console.log(
+    '➡️ OPENING ALL PROPERTIES PAGE'
+  );
 
+  this.router.navigate([
+    '/properties-catlog'
+  ]);
 
-  // =====================================================
+}
+
+  // ============================================================
   // INITIAL LETTER
-  // =====================================================
+  // ============================================================
 
   getInitialLetter(
     name: any
   ): string {
 
     if (!name) {
+
       return '';
+
     }
+
 
     const cleanName =
       String(name).trim();
 
+
     return cleanName
-      ? cleanName.charAt(0).toUpperCase()
+      ? cleanName
+          .charAt(0)
+          .toUpperCase()
       : '';
 
   }
 
+formatPrice(value: any): string {
+  const price = Number(value);
+
+  if (!Number.isFinite(price) || price <= 0) {
+    return '₹ 0';
+  }
+
+  // Crore
+  if (price >= 10000000) {
+    const crore = price / 10000000;
+    return `₹ ${Number(crore.toFixed(2))} Crore`;
+  }
+
+  // Lakh
+  if (price >= 100000) {
+    const lakh = price / 100000;
+    return `₹ ${Number(lakh.toFixed(2))} Lakh`;
+  }
+
+  // Thousand
+  if (price >= 1000) {
+    const thousand = price / 1000;
+    return `₹ ${Number(thousand.toFixed(2))} Thousand`;
+  }
+
+  // Below 1000
+  return `₹ ${price.toLocaleString('en-IN')}`;
 }
+
+
+}
+
+
+

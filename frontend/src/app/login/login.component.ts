@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   private route = inject(ActivatedRoute);
   
 private clientId =
-  '109325296562-runu0ib2cf6oofmanaa799kja67jg1os.apps.googleusercontent.com';
+  '109325296562-68hmr28motfoli131krmvte964c4v6os.apps.googleusercontent.com';
   
     activeTab: 'login' | 'signup' = 'login';
   loginData = { email: '', password: '' };

@@ -2,1118 +2,1243 @@
 
   <main class="main-content">
 
-    <form
-      [formGroup]="propertyForm"
-      (ngSubmit)="onSubmit()"
-      class="property-grid"
-    >
+<form
+  [formGroup]="propertyForm"
+  (ngSubmit)="onSubmit()"
+  class="property-grid"
+>
 
-      <!-- =========================================================
-           LEFT COLUMN
-      ========================================================== -->
+  <!-- =========================================================
+       LEFT COLUMN
+  ========================================================== -->
 
-      <div class="left-column">
+  <div class="left-column">
 
-        <!-- PROPERTY BASIC DETAILS -->
+    <!-- PROPERTY BASIC DETAILS -->
 
-        <div class="card shadow-sm mb-4">
+    <div class="card shadow-sm mb-4">
 
-          <div class="form-group">
+      <div class="form-group">
 
-            <label>
-              Property Name
-              <span class="required">*</span>
-            </label>
+        <label>
+          Property Name
+          <span class="required">*</span>
+        </label>
 
-            <input
-              type="text"
-              formControlName="name"
-              placeholder="e.g. Ardente Office One"
-              class="main-input"
-            >
-
-          </div>
-
-
-          <!-- PERMALINK -->
-
-          <div class="form-group">
-
-            <label>
-              Permalink
-              <span class="required">*</span>
-            </label>
-
-            <div class="permalink-container">
-
-              <input
-                type="text"
-                formControlName="permalink"
-                class="main-input"
-                style="font-family: monospace; letter-spacing: 0.3px;"
-                placeholder="http://localhost:4200/properties/property-slug"
-              >
-
-            </div>
-
-
-            <p
-              class="preview-url"
-              style="font-size: 11px; margin-top: 8px;"
-            >
-
-              Preview:
-
-              <a
-                [href]="propertyForm.get('permalink')?.value"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {{ propertyForm.get('permalink')?.value }}
-              </a>
-
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <!-- =======================================================
-             CORE DETAILS
-        ======================================================== -->
-
-        <div class="glass-card mb-4 specs-container">
-
-          <div class="specs-header">
-
-            <h4>
-              Core Details & Specifications
-            </h4>
-
-          </div>
-
-
-          <div class="specs-grid">
-
-            <!-- PRICE -->
-
-            <div class="spec-input-group">
-
-              <label>
-                Expected Price (₹)
-              </label>
-
-              <div class="input-with-icon">
-
-                <span class="currency-tag">
-                  ₹
-                </span>
-
-                <input
-                  type="number"
-                  formControlName="price"
-                  placeholder="e.g. 8500000"
-                >
-
-              </div>
-
-            </div>
-
-
-            <!-- AREA -->
-
-            <div class="spec-input-group">
-
-              <label>
-                Area (Sq.Ft)
-              </label>
-
-              <input
-                type="text"
-                formControlName="area"
-                placeholder="e.g. 1250"
-              >
-
-            </div>
-
-
-            <!-- LOCATION -->
-
-            <div class="spec-input-group">
-
-              <label>
-                Location
-                <span class="required">*</span>
-              </label>
-
-              <select
-                formControlName="location"
-                (change)="onLocationSelect()"
-              >
-
-                <option value="Whitefield">
-                  Whitefield
-                </option>
-
-                <option value="Hoodi">
-                  Hoodi
-                </option>
-
-                <option value="Marathahalli">
-                  Marathahalli
-                </option>
-
-                <option value="KR Puram">
-                  KR Puram
-                </option>
-
-                <option value="Indiranagar">
-                  Indiranagar
-                </option>
-
-                <option value="Electronic City">
-                  Electronic City
-                </option>
-
-                <option value="Sarjapur Road">
-                  Sarjapur Road
-                </option>
-
-                <option value="HSR Layout">
-                  HSR Layout
-                </option>
-
-                <option value="Hebbal">
-                  Hebbal
-                </option>
-
-                <option value="Yelahanka">
-                  Yelahanka
-                </option>
-
-                <option value="Koramangala">
-                  Koramangala
-                </option>
-
-                <option value="Other">
-                  Other
-                </option>
-
-              </select>
-
-
-              <!-- CUSTOM LOCATION -->
-
-              <input
-                *ngIf="propertyForm.get('location')?.value === 'Other'"
-                type="text"
-                formControlName="customLocation"
-                placeholder="Enter location"
-                class="main-input mt-2"
-              >
-
-            </div>
-
-
-            <!-- BHK -->
-
-            <div class="spec-input-group">
-
-              <label>
-                Bedrooms (BHK)
-              </label>
-
-              <select formControlName="bhk">
-
-                <option value="1 BHK">
-                  1 BHK
-                </option>
-
-                <option value="2 BHK">
-                  2 BHK
-                </option>
-
-                <option value="3 BHK">
-                  3 BHK
-                </option>
-
-                <option value="4+ BHK">
-                  4+ BHK
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <!-- TOTAL FLOORS -->
-
-            <div class="spec-input-group">
-
-              <label>
-                Total Floors
-              </label>
-
-              <input
-                type="number"
-                formControlName="totalFloors"
-                placeholder="e.g. 12"
-              >
-
-            </div>
-
-
-            <!-- PROPERTY FLOOR -->
-
-            <div class="spec-input-group">
-
-              <label>
-                Property Floor
-              </label>
-
-              <input
-                type="number"
-                formControlName="propertyFloor"
-                placeholder="e.g. 5"
-              >
-
-            </div>
-
-
-            <!-- FURNISHING -->
-
-            <div class="spec-input-group">
-
-              <label>
-                Furnishing
-              </label>
-
-              <select formControlName="furnishing">
-
-                <option value="Unfurnished">
-                  Unfurnished
-                </option>
-
-                <option value="Semi-Furnished">
-                  Semi-Furnished
-                </option>
-
-                <option value="Fully-Furnished">
-                  Fully-Furnished
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <!-- FACING -->
-
-            <div class="spec-input-group">
-
-              <label>
-                Facing (Vastu)
-              </label>
-
-              <select formControlName="facing">
-
-                <option value="East Facing">
-                  East Facing
-                </option>
-
-                <option value="West Facing">
-                  West Facing
-                </option>
-
-                <option value="North Facing">
-                  North Facing
-                </option>
-
-                <option value="South Facing">
-                  South Facing
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <!-- BATHROOM -->
-
-            <div class="spec-input-group">
-
-              <label>
-                Bathrooms
-              </label>
-
-              <input
-                type="number"
-                formControlName="bathrooms"
-                placeholder="e.g. 2"
-              >
-
-            </div>
-
-
-            <!-- POSSESSION -->
-
-            <div class="spec-input-group">
-
-              <label>
-                Possession Status
-              </label>
-
-              <select formControlName="possession">
-
-                <option value="Ready to Move">
-                  Ready to Move
-                </option>
-
-                <option value="Under Construction">
-                  Under Construction
-                </option>
-
-              </select>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- =======================================================
-             DESCRIPTION / QUILL
-        ======================================================== -->
-
-        <div class="editor-workspace card shadow-sm mb-4">
-
-          <div class="workspace-header">
-
-            <h4>
-              Property Description
-            </h4>
-
-          </div>
-
-
-          <div class="modern-quill-wrapper">
-
-            <div id="toolbar">
-
-              <span class="ql-formats">
-
-                <select class="ql-header">
-
-                  <option value="1">
-                    Heading
-                  </option>
-
-                  <option value="2">
-                    Subheading
-                  </option>
-
-                  <option selected>
-                    Normal
-                  </option>
-
-                </select>
-
-              </span>
-
-
-              <span class="ql-formats">
-
-                <button
-                  type="button"
-                  class="ql-bold"
-                ></button>
-
-                <button
-                  type="button"
-                  class="ql-italic"
-                ></button>
-
-                <button
-                  type="button"
-                  class="ql-underline"
-                ></button>
-
-                <button
-                  type="button"
-                  class="ql-strike"
-                ></button>
-
-              </span>
-
-
-              <span class="ql-formats">
-
-                <select class="ql-color">
-                  <option selected></option>
-                </select>
-
-                <select class="ql-background">
-                  <option selected></option>
-                </select>
-
-              </span>
-
-
-              <span class="ql-formats">
-
-                <button
-                  type="button"
-                  class="ql-list"
-                  value="ordered"
-                ></button>
-
-                <button
-                  type="button"
-                  class="ql-list"
-                  value="bullet"
-                ></button>
-
-              </span>
-
-
-              <span class="ql-formats">
-
-                <select class="ql-align">
-                </select>
-
-              </span>
-
-
-              <span class="ql-formats">
-
-                <button
-                  type="button"
-                  class="ql-link"
-                ></button>
-
-                <button
-                  type="button"
-                  class="ql-image"
-                ></button>
-
-                <button
-                  type="button"
-                  class="ql-video"
-                ></button>
-
-              </span>
-
-
-              <span class="ql-formats">
-
-                <button
-                  type="button"
-                  class="ql-clean"
-                ></button>
-
-              </span>
-
-            </div>
-
-
-            <div
-              id="quill-editor"
-              style="height: 300px;"
-            ></div>
-
-          </div>
-
-        </div>
-
-
-        <!-- =======================================================
-             PHOTO GALLERY
-        ======================================================== -->
-
-        <div class="glass-card mb-4 media-container">
-
-          <div class="media-header">
-
-            <h4>
-              Property Photo Gallery
-            </h4>
-
-            <span class="small text-muted">
-              Maximum 10 images
-            </span>
-
-          </div>
-
-
-          <div class="image-grid-proactive">
-
-            <!-- UPLOADED IMAGES -->
-
-            <div
-              *ngFor="
-                let image of uploadedImages;
-                let i = index
-              "
-              class="image-preview-card"
-              [class.is-thumbnail]="image.isThumbnail"
-            >
-
-              <img
-                [src]="image.url"
-                alt="Property image"
-                loading="lazy"
-              >
-
-
-              <div class="image-actions-overlay">
-
-                <button
-                  type="button"
-                  class="action-btn delete-btn"
-                  (click)="deleteImage(i)"
-                  title="Delete image"
-                >
-                  🗑️
-                </button>
-
-
-                <button
-                  type="button"
-                  class="action-btn thumbnail-btn"
-                  (click)="setThumbnail(i)"
-                  title="Set main photo"
-                >
-                  ⭐
-                </button>
-
-              </div>
-
-
-              <div
-                *ngIf="image.isThumbnail"
-                class="thumbnail-badge"
-              >
-                Main Photo
-              </div>
-
-            </div>
-
-
-            <!-- UPLOAD -->
-
-            <label
-              class="upload-placeholder-proactive"
-              *ngIf="uploadedImages.length < 10"
-            >
-
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                (change)="handleProactiveUpload($event)"
-                style="display: none;"
-              >
-
-
-              <div class="upload-content">
-
-                <span class="upload-icon-big">
-                  📤
-                </span>
-
-                <span class="upload-text-main">
-                  Add Photos
-                </span>
-
-                <span class="upload-subtext">
-                  Max 10 images
-                </span>
-
-              </div>
-
-            </label>
-
-          </div>
-
-        </div>
-
-
-        <!-- =======================================================
-             MAP
-        ======================================================== -->
-
-        <div class="glass-card mb-4">
-
-          <div
-            class="card-header d-flex justify-content-between align-items-center"
-          >
-
-            <h5 class="fw-bold m-0 text-indigo">
-              Set Property Coordinates
-            </h5>
-
-            <span class="status-badge pulse">
-              ● Live Tracking
-            </span>
-
-          </div>
-
-
-          <div class="card-body">
-
-            <p class="text-muted small mb-3">
-              Drag the blue marker to pinpoint the exact
-              property location on the map.
-            </p>
-
-
-            <!-- LOCATION SEARCH
-
-            <div class="location-search-box mb-3">
-
-              <div class="d-flex gap-2">
-
-                <input
-                  type="text"
-                  formControlName="address"
-                  class="form-control"
-                  placeholder="Search property address / location"
-                >
-
-
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="searchLocation()"
-                >
-                  Search
-                </button>
-
-
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  (click)="useCurrentLocation()"
-                >
-                  📍 Current
-                </button>
-
-              </div>
-
-            </div>
- -->
-
-            <!-- MAP -->
-
-            <div
-              id="map-container"
-              class="modern-map-shadow mb-3"
-            ></div>
-
-
-            <!-- COORDINATES -->
-
-            <div class="d-flex gap-3 mt-2">
-
-              <div class="coord-pill">
-
-                <span class="label">
-                  Lat:
-                </span>
-
-                <span class="value">
-                  {{ propertyForm.get('latitude')?.value }}
-                </span>
-
-              </div>
-
-
-              <div class="coord-pill">
-
-                <span class="label">
-                  Lng:
-                </span>
-
-                <span class="value">
-                  {{ propertyForm.get('longitude')?.value }}
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- =======================================================
-             AI CONTENT
-        ======================================================== -->
-
-        <div
-          class="glass-card mb-4 ai-magic-container p-4 text-center"
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="e.g. Ardente Office One"
+          class="main-input"
         >
 
-          <div class="ai-icon-wrapper mb-3">
+        <!-- PROPERTY NAME VALIDATION -->
 
-            <span class="sparkle-emoji">
-              ✨
-            </span>
+        <div
+          class="field-error"
+          *ngIf="showError('name')"
+        >
 
-          </div>
-
-
-          <h6 class="fw-bold">
-            AI Content Assistant
-          </h6>
-
-
-          <p class="text-muted small">
-            Let AI write a unique, SEO-friendly description
-            based on your property details.
-          </p>
-
-
-          <button
-            type="button"
-            class="btn-ai-magic"
-            [disabled]="isAiGenerating"
-            (click)="generateDescriptionWithAI()"
+          <span
+            *ngIf="
+              propertyForm.get('name')?.hasError('required')
+            "
           >
+            Property Name is required.
+          </span>
 
-            <span *ngIf="!isAiGenerating">
-              Generate with Magic 🪄
-            </span>
-
-
-            <span
-              *ngIf="isAiGenerating"
-              class="spinner-border spinner-border-sm me-2"
-            ></span>
-
-
-            <span *ngIf="isAiGenerating">
-              AI is writing...
-            </span>
-
-          </button>
-
-        </div>
-
-
-        <!-- =======================================================
-             MARKET PRICE
-        ======================================================== -->
-
-        <div class="glass-card mb-4 p-4">
-
-          <h6 class="fw-bold mb-3">
-            Market Price Analysis
-          </h6>
-
-
-          <div class="heatmap-wrapper">
-
-            <div class="heatmap-bar">
-
-              <div
-                class="heatmap-pointer"
-                [style.left.%]="priceMarketPosition"
-              ></div>
-
-            </div>
-
-
-            <div
-              class="d-flex justify-content-between mt-2 small text-muted px-1"
-            >
-
-              <span>
-                Budget
-              </span>
-
-              <span>
-                Fair Price
-              </span>
-
-              <span>
-                Premium
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- =======================================================
-             PREMIUM AMENITIES
-        ======================================================== -->
-
-        <div class="glass-card mb-4 p-4">
-
-          <h6 class="fw-bold mb-3">
-            Premium Amenities
-          </h6>
-
-
-          <div class="amenities-grid">
-
-            <div
-              *ngFor="let amenity of amenities"
-              class="amenity-chip"
-              [class.active]="amenity.selected"
-              (click)="toggleAmenity(amenity.id)"
-            >
-
-              <i class="material-icons">
-                {{ amenity.icon }}
-              </i>
-
-              <span>
-                {{ amenity.name }}
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- =======================================================
-             TRUST RATING
-        ======================================================== -->
-
-        <div class="glass-card mb-4 p-4">
-
-          <h6 class="fw-bold mb-3">
-            Assign Trust Rating Score
-          </h6>
-
-
-          <div class="form-group m-0">
-
-            <label class="small text-muted mb-2">
-              Select property rating score based on
-              field verification
-            </label>
-
-
-            <select
-              formControlName="rating"
-              class="form-select"
-            >
-
-              <option value="5">
-                ⭐⭐⭐⭐⭐ (5.0 Perfect Asset)
-              </option>
-
-              <option value="4.5">
-                ⭐⭐⭐⭐★ (4.5 Highly Recommended)
-              </option>
-
-              <option value="4">
-                ⭐⭐⭐⭐☆ (4.0 Standard Quality)
-              </option>
-
-              <option value="3.5">
-                ⭐⭐⭐★☆ (3.5 Moderate Deal)
-              </option>
-
-            </select>
-
-          </div>
+          <span
+            *ngIf="
+              propertyForm.get('name')?.hasError('minlength')
+            "
+          >
+            Property Name must be at least 3 characters.
+          </span>
 
         </div>
 
       </div>
 
 
-      <!-- =========================================================
-           RIGHT SIDEBAR
-      ========================================================== -->
+      <!-- PERMALINK -->
 
-      <div class="right-column">
+      <div class="form-group">
 
-        <!-- PUBLISH -->
+        <label>
+          Permalink
+          <span class="required">*</span>
+        </label>
 
-        <div class="card shadow-sm side-card sticky-top">
+        <div class="permalink-container">
 
-          <h4 class="card-title">
-            Publish
-          </h4>
+          <input
+            type="text"
+            formControlName="permalink"
+            class="main-input"
+            style="font-family: monospace; letter-spacing: 0.3px;"
+            placeholder="http://localhost:4200/properties/property-slug"
+          >
+
+        </div>
 
 
-          <div class="btn-stack">
+        <!-- PERMALINK VALIDATION -->
 
-            <button
-              type="submit"
-              class="btn-save"
+        <div
+          class="field-error"
+          *ngIf="showError('permalink')"
+        >
+          Permalink is required.
+        </div>
+
+
+        <p
+          class="preview-url"
+          style="font-size: 11px; margin-top: 8px;"
+        >
+
+          Preview:
+
+          <a
+            [href]="propertyForm.get('permalink')?.value"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ propertyForm.get('permalink')?.value }}
+          </a>
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         CORE DETAILS
+    ======================================================== -->
+
+    <div class="glass-card mb-4 specs-container">
+
+      <div class="specs-header">
+
+        <h4>
+          Core Details & Specifications
+        </h4>
+
+      </div>
+
+
+      <div class="specs-grid">
+
+        <!-- PRICE -->
+
+        <div class="spec-input-group">
+
+          <label>
+            Expected Price (₹)
+          </label>
+
+          <div class="input-with-icon">
+
+            <span class="currency-tag">
+              ₹
+            </span>
+
+            <input
+              type="number"
+              formControlName="price"
+              placeholder="e.g. 8500000"
             >
-              💾 Save Property
-            </button>
+
+          </div>
 
 
-            <button
-              type="button"
-              class="btn-exit"
-              (click)="onSubmit()"
+          <!-- PRICE VALIDATION -->
+
+          <div
+            class="field-error"
+            *ngIf="showError('price')"
+          >
+
+            <span
+              *ngIf="
+                propertyForm.get('price')?.hasError('required')
+              "
             >
-              🏠 Save & Exit
-            </button>
+              Expected Price is required.
+            </span>
+
+            <span
+              *ngIf="
+                propertyForm.get('price')?.hasError('min')
+              "
+            >
+              Price cannot be negative.
+            </span>
 
           </div>
 
         </div>
 
 
-        <!-- PROPERTY TYPE / STATUS -->
+        <!-- AREA -->
 
-        <div class="card shadow-sm side-card">
+        <div class="spec-input-group">
 
           <label>
-            Property Type
+            Area (Sq.Ft)
           </label>
 
-
-          <select
-            formControlName="type"
-            class="side-select mb-3"
+          <input
+            type="text"
+            formControlName="area"
+            placeholder="e.g. 1250"
           >
 
-            <option value="Rent">
-              Rent
+
+          <!-- AREA VALIDATION -->
+
+          <div
+            class="field-error"
+            *ngIf="showError('area')"
+          >
+            Area is required.
+          </div>
+
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="spec-input-group">
+
+          <label>
+            Location
+            <span class="required">*</span>
+          </label>
+
+          <select
+            formControlName="location"
+            (change)="onLocationSelect()"
+          >
+
+            <option value="Whitefield">
+              Whitefield
             </option>
 
-            <option value="Sale">
-              Sale
+            <option value="Hoodi">
+              Hoodi
+            </option>
+
+            <option value="Marathahalli">
+              Marathahalli
+            </option>
+
+            <option value="KR Puram">
+              KR Puram
+            </option>
+
+            <option value="Indiranagar">
+              Indiranagar
+            </option>
+
+            <option value="Electronic City">
+              Electronic City
+            </option>
+
+            <option value="Sarjapur Road">
+              Sarjapur Road
+            </option>
+
+            <option value="HSR Layout">
+              HSR Layout
+            </option>
+
+            <option value="Hebbal">
+              Hebbal
+            </option>
+
+            <option value="Yelahanka">
+              Yelahanka
+            </option>
+
+            <option value="Koramangala">
+              Koramangala
+            </option>
+
+            <option value="Other">
+              Other
             </option>
 
           </select>
 
 
-          <!-- <label>
-            Listing Status
-          </label> -->
+          <!-- LOCATION VALIDATION -->
 
-
-          <!-- <select
-            formControlName="status"
-            class="side-select"
+          <div
+            class="field-error"
+            *ngIf="showError('location')"
           >
+            Location is required.
+          </div>
 
-            <option value="Renting">
-              Renting
-            </option>
 
-            <option value="Published">
-              Published
-            </option>
+          <!-- CUSTOM LOCATION -->
 
-          </select> -->
+          <input
+            *ngIf="
+              propertyForm.get('location')?.value === 'Other'
+            "
+            type="text"
+            formControlName="customLocation"
+            placeholder="Enter location"
+            class="main-input mt-2"
+          >
 
         </div>
 
 
-        <!-- TARGET CATEGORIES -->
+        <!-- BHK -->
 
-        <div class="glass-card gradient-border side-card">
+        <div class="spec-input-group">
 
-          <h4 class="sidebar-title">
-            Target Categories
-          </h4>
+          <label>
+            Bedrooms (BHK)
+          </label>
+
+          <select formControlName="bhk">
+
+            <option value="1 BHK">
+              1 BHK
+            </option>
+
+            <option value="2 BHK">
+              2 BHK
+            </option>
+
+            <option value="3 BHK">
+              3 BHK
+            </option>
+
+            <option value="4+ BHK">
+              4+ BHK
+            </option>
+
+          </select>
+
+        </div>
 
 
-          <div class="chip-container">
+        <!-- TOTAL FLOORS -->
 
-            <div
-              *ngFor="let cat of categories"
-              class="category-chip"
-              [class.selected]="cat.checked"
-              (click)="onCategoryChange(cat.name)"
+        <div class="spec-input-group">
+
+          <label>
+            Total Floors
+          </label>
+
+          <input
+            type="number"
+            formControlName="totalFloors"
+            placeholder="e.g. 12"
+          >
+
+
+          <!-- TOTAL FLOORS VALIDATION -->
+
+          <div
+            class="field-error"
+            *ngIf="showError('totalFloors')"
+          >
+
+            <span
+              *ngIf="
+                propertyForm.get('totalFloors')?.hasError('required')
+              "
             >
+              Total Floors is required.
+            </span>
 
-              {{ cat.name }}
-
-              <span class="plus-icon">
-                {{ cat.checked ? '✓' : '+' }}
-              </span>
-
-            </div>
+            <span
+              *ngIf="
+                propertyForm.get('totalFloors')?.hasError('min')
+              "
+            >
+              Total Floors cannot be negative.
+            </span>
 
           </div>
 
         </div>
 
 
-        <!-- SYSTEM ID -->
+        <!-- PROPERTY FLOOR -->
 
-        <div class="glass-card gradient-border side-card">
+        <div class="spec-input-group">
 
-          <label class="d-block mb-2">
-            System ID
+          <label>
+            Property Floor
           </label>
 
+          <input
+            type="number"
+            formControlName="propertyFloor"
+            placeholder="e.g. 5"
+          >
 
-          <div class="id-badge">
 
-            <code>
-              {{ propertyForm.get('uniqueId')?.value }}
-            </code>
+          <!-- PROPERTY FLOOR VALIDATION -->
+
+          <div
+            class="field-error"
+            *ngIf="showError('propertyFloor')"
+          >
+
+            <span
+              *ngIf="
+                propertyForm.get('propertyFloor')?.hasError('required')
+              "
+            >
+              Property Floor is required.
+            </span>
+
+            <span
+              *ngIf="
+                propertyForm.get('propertyFloor')?.hasError('min')
+              "
+            >
+              Property Floor cannot be negative.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- FURNISHING -->
+
+        <div class="spec-input-group">
+
+          <label>
+            Furnishing
+          </label>
+
+          <select formControlName="furnishing">
+
+            <option value="Unfurnished">
+              Unfurnished
+            </option>
+
+            <option value="Semi-Furnished">
+              Semi-Furnished
+            </option>
+
+            <option value="Fully-Furnished">
+              Fully-Furnished
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- FACING -->
+
+        <div class="spec-input-group">
+
+          <label>
+            Facing (Vastu)
+          </label>
+
+          <select formControlName="facing">
+
+            <option value="East Facing">
+              East Facing
+            </option>
+
+            <option value="West Facing">
+              West Facing
+            </option>
+
+            <option value="North Facing">
+              North Facing
+            </option>
+
+            <option value="South Facing">
+              South Facing
+            </option>
+
+
+            <option value="North-East Facing">North-East Facing</option>
+<option value="North-West Facing">North-West Facing</option>
+<option value="South-East Facing">South-East Facing</option>
+<option value="South-West Facing">South-West Facing</option>
+
+          </select>
+
+        </div>
+
+
+        <!-- BATHROOM -->
+
+        <div class="spec-input-group">
+
+          <label>
+            Bathrooms
+          </label>
+
+          <input
+            type="number"
+            formControlName="bathrooms"
+            placeholder="e.g. 2"
+          >
+
+
+          <!-- BATHROOM VALIDATION -->
+
+          <div
+            class="field-error"
+            *ngIf="showError('bathrooms')"
+          >
+
+            <span
+              *ngIf="
+                propertyForm.get('bathrooms')?.hasError('required')
+              "
+            >
+              Bathrooms is required.
+            </span>
+
+            <span
+              *ngIf="
+                propertyForm.get('bathrooms')?.hasError('min')
+              "
+            >
+              Bathrooms must be at least 1.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- POSSESSION -->
+
+        <div class="spec-input-group">
+
+          <label>
+            Possession Status
+          </label>
+
+          <select formControlName="possession">
+
+            <option value="Ready to Move">
+              Ready to Move
+            </option>
+
+            <option value="Under Construction">
+              Under Construction
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         DESCRIPTION / QUILL
+    ======================================================== -->
+
+    <div class="editor-workspace card shadow-sm mb-4">
+
+      <div class="workspace-header">
+
+        <h4>
+          Property Description
+        </h4>
+
+      </div>
+
+
+      <div class="modern-quill-wrapper">
+
+        <div id="toolbar">
+
+          <span class="ql-formats">
+
+            <select class="ql-header">
+
+              <option value="1">
+                Heading
+              </option>
+
+              <option value="2">
+                Subheading
+              </option>
+
+              <option selected>
+                Normal
+              </option>
+
+            </select>
+
+          </span>
+
+
+          <span class="ql-formats">
+
+            <button
+              type="button"
+              class="ql-bold"
+            ></button>
+
+            <button
+              type="button"
+              class="ql-italic"
+            ></button>
+
+            <button
+              type="button"
+              class="ql-underline"
+            ></button>
+
+            <button
+              type="button"
+              class="ql-strike"
+            ></button>
+
+          </span>
+
+
+          <span class="ql-formats">
+
+            <select class="ql-color">
+              <option selected></option>
+            </select>
+
+            <select class="ql-background">
+              <option selected></option>
+            </select>
+
+          </span>
+
+
+          <span class="ql-formats">
+
+            <button
+              type="button"
+              class="ql-list"
+              value="ordered"
+            ></button>
+
+            <button
+              type="button"
+              class="ql-list"
+              value="bullet"
+            ></button>
+
+          </span>
+
+
+          <span class="ql-formats">
+
+            <select class="ql-align">
+            </select>
+
+          </span>
+
+
+          <span class="ql-formats">
+
+            <button
+              type="button"
+              class="ql-link"
+            ></button>
+
+            <button
+              type="button"
+              class="ql-image"
+            ></button>
+
+            <button
+              type="button"
+              class="ql-video"
+            ></button>
+
+          </span>
+
+
+          <span class="ql-formats">
+
+            <button
+              type="button"
+              class="ql-clean"
+            ></button>
+
+          </span>
+
+        </div>
+
+
+        <div
+          id="quill-editor"
+          style="height: 300px;"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         PHOTO GALLERY
+    ======================================================== -->
+
+    <div class="glass-card mb-4 media-container">
+
+      <div class="media-header">
+
+        <h4>
+          Property Photo Gallery
+        </h4>
+
+        <span class="small text-muted">
+          Maximum 10 images
+        </span>
+
+      </div>
+
+
+      <div class="image-grid-proactive">
+
+        <!-- UPLOADED IMAGES -->
+
+        <div
+          *ngFor="
+            let image of uploadedImages;
+            let i = index
+          "
+          class="image-preview-card"
+          [class.is-thumbnail]="image.isThumbnail"
+        >
+
+          <img
+            [src]="image.url"
+            alt="Property image"
+            loading="lazy"
+          >
+
+
+          <div class="image-actions-overlay">
+
+            <button
+              type="button"
+              class="action-btn delete-btn"
+              (click)="deleteImage(i)"
+              title="Delete image"
+            >
+              🗑️
+            </button>
 
 
             <button
               type="button"
-              class="refresh-btn"
-              (click)="generateNewId()"
-              title="Generate new ID"
+              class="action-btn thumbnail-btn"
+              (click)="setThumbnail(i)"
+              title="Set main photo"
             >
-              🔄
+              ⭐
+            </button>
+
+          </div>
+
+
+          <div
+            *ngIf="image.isThumbnail"
+            class="thumbnail-badge"
+          >
+            Main Photo
+          </div>
+
+        </div>
+
+
+        <!-- UPLOAD -->
+
+        <label
+          class="upload-placeholder-proactive"
+          *ngIf="uploadedImages.length < 10"
+        >
+
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            (change)="handleProactiveUpload($event)"
+            style="display: none;"
+          >
+
+
+          <div class="upload-content">
+
+            <span class="upload-icon-big">
+              📤
+            </span>
+
+            <span class="upload-text-main">
+              Add Photos
+            </span>
+
+            <span class="upload-subtext">
+              Max 10 images
+            </span>
+
+          </div>
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         MAP
+    ======================================================== -->
+
+    <div class="glass-card mb-4">
+
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+
+        <h5 class="fw-bold m-0 text-indigo">
+          Set Property Coordinates
+        </h5>
+
+        <span class="status-badge pulse">
+          ● Live Tracking
+        </span>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <p class="text-muted small mb-3">
+          Drag the blue marker to pinpoint the exact
+          property location on the map.
+        </p>
+
+
+        <!-- LOCATION SEARCH
+
+        <div class="location-search-box mb-3">
+
+          <div class="d-flex gap-2">
+
+            <input
+              type="text"
+              formControlName="address"
+              class="form-control"
+              placeholder="Search property address / location"
+            >
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="searchLocation()"
+            >
+              Search
+            </button>
+
+
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="useCurrentLocation()"
+            >
+              📍 Current
             </button>
 
           </div>
 
         </div>
+        -->
+
+        <!-- MAP -->
+
+        <div
+          id="map-container"
+          class="modern-map-shadow mb-3"
+        ></div>
 
 
-        <!-- MODERATION -->
+        <!-- COORDINATES -->
 
-        <div class="card shadow-sm side-card">
+        <div class="d-flex gap-3 mt-2">
 
-          <label class="mb-2">
-            Moderation Status
-          </label>
+          <div class="coord-pill">
+
+            <span class="label">
+              Lat:
+            </span>
+
+            <span class="value">
+              {{ propertyForm.get('latitude')?.value }}
+            </span>
+
+          </div>
 
 
-          <div class="badge-pending">
+          <div class="coord-pill">
 
-            New Entry (Pending)
+            <span class="label">
+              Lng:
+            </span>
+
+            <span class="value">
+              {{ propertyForm.get('longitude')?.value }}
+            </span>
 
           </div>
 
         </div>
 
+      </div>
 
-        <!-- CLEAR FORM -->
+    </div>
 
-        <button
-          type="button"
-          class="btn-clear w-100 mt-3"
-          (click)="resetForm()"
+
+    <!-- =======================================================
+         AI CONTENT
+    ======================================================== -->
+
+    <div
+      class="glass-card mb-4 ai-magic-container p-4 text-center"
+    >
+
+      <div class="ai-icon-wrapper mb-3">
+
+        <span class="sparkle-emoji">
+          ✨
+        </span>
+
+      </div>
+
+
+      <h6 class="fw-bold">
+        AI Content Assistant
+      </h6>
+
+
+      <p class="text-muted small">
+        Let AI write a unique, SEO-friendly description
+        based on your property details.
+      </p>
+
+
+      <button
+        type="button"
+        class="btn-ai-magic"
+        [disabled]="isAiGenerating"
+        (click)="generateDescriptionWithAI()"
+      >
+
+        <span *ngIf="!isAiGenerating">
+          Generate with Magic 🪄
+        </span>
+
+
+        <span
+          *ngIf="isAiGenerating"
+          class="spinner-border spinner-border-sm me-2"
+        ></span>
+
+
+        <span *ngIf="isAiGenerating">
+          AI is writing...
+        </span>
+
+      </button>
+
+    </div>
+
+
+    <!-- =======================================================
+         MARKET PRICE
+    ======================================================== -->
+
+    <div class="glass-card mb-4 p-4">
+
+      <h6 class="fw-bold mb-3">
+        Market Price Analysis
+      </h6>
+
+
+      <div class="heatmap-wrapper">
+
+        <div class="heatmap-bar">
+
+          <div
+            class="heatmap-pointer"
+            [style.left.%]="priceMarketPosition"
+          ></div>
+
+        </div>
+
+
+        <div
+          class="d-flex justify-content-between mt-2 small text-muted px-1"
         >
 
-          🧹 Clear Form Entries
+          <span>
+            Budget
+          </span>
 
+          <span>
+            Fair Price
+          </span>
+
+          <span>
+            Premium
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- =======================================================
+         Premium Animities
+    ======================================================== --> 
+
+<div class="glass-card mb-4 p-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h6 class="fw-bold mb-0">
+      Premium Amenities
+    </h6>
+
+    <button
+      type="button"
+      class="view-all-btn"
+      (click)="selectAllAmenities()">
+
+      View All
+
+    </button>
+
+  </div>
+
+  <div class="amenities-grid">
+
+    <div
+      *ngFor="let amenity of amenities"
+      class="amenity-chip"
+      [class.active]="amenity.selected"
+      (click)="toggleAmenity(amenity.id)">
+
+      <i class="material-icons">
+        {{ amenity.icon }}
+      </i>
+
+      <span>
+        {{ amenity.name }}
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+    <!-- =======================================================
+         TRUST RATING
+    ======================================================== -->
+
+    <div class="glass-card mb-4 p-4">
+
+      <h6 class="fw-bold mb-3">
+        Assign Trust Rating Score
+      </h6>
+
+
+      <div class="form-group m-0">
+
+        <label class="small text-muted mb-2">
+          Select property rating score based on
+          field verification
+        </label>
+
+
+        <select
+          formControlName="rating"
+          class="form-select"
+        >
+
+          <option value="5">
+            ⭐⭐⭐⭐⭐ (5.0 Perfect Asset)
+          </option>
+
+          <option value="4.5">
+            ⭐⭐⭐⭐★ (4.5 Highly Recommended)
+          </option>
+
+          <option value="4">
+            ⭐⭐⭐⭐☆ (4.0 Standard Quality)
+          </option>
+
+          <option value="3.5">
+            ⭐⭐⭐★☆ (3.5 Moderate Deal)
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       RIGHT SIDEBAR
+  ========================================================== -->
+
+  <div class="right-column">
+
+    <!-- PUBLISH -->
+
+    <div class="card shadow-sm side-card sticky-top">
+
+      <h4 class="card-title">
+        Publish
+      </h4>
+
+
+      <div class="btn-stack">
+
+        <button
+          type="submit"
+          class="btn-save"
+        >
+          💾 Save Property
         </button>
 
       </div>
 
-    </form>
+    </div>
+
+
+    <!-- PROPERTY TYPE / STATUS -->
+
+    <div class="card shadow-sm side-card">
+
+      <label>
+        Property Type
+      </label>
+
+
+      <select
+        formControlName="type"
+        class="side-select mb-3"
+      >
+
+        <option value="Rent">
+          Rent
+        </option>
+
+        <option value="Sale">
+          Sale
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- TARGET CATEGORIES -->
+
+    <div class="glass-card gradient-border side-card">
+
+      <h4 class="sidebar-title">
+        Target Categories
+      </h4>
+
+
+      <div class="chip-container">
+
+        <div
+          *ngFor="let cat of categories"
+          class="category-chip"
+          [class.selected]="cat.checked"
+          (click)="onCategoryChange(cat.name)"
+        >
+
+          {{ cat.name }}
+
+          <span class="plus-icon">
+            {{ cat.checked ? '✓' : '+' }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SYSTEM ID -->
+
+    <div class="glass-card gradient-border side-card">
+
+      <label class="d-block mb-2">
+        System ID
+      </label>
+
+
+      <div class="id-badge">
+
+        <code>
+          {{ propertyForm.get('uniqueId')?.value }}
+        </code>
+
+
+        <button
+          type="button"
+          class="refresh-btn"
+          (click)="generateNewId()"
+          title="Generate new ID"
+        >
+          🔄
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- CLEAR FORM -->
+
+    <button
+      type="button"
+      class="btn-clear w-100 mt-3"
+      (click)="resetForm()"
+    >
+      🧹 Clear Form Entries
+    </button>
+
+  </div>
+
+</form>
 
   </main>
 

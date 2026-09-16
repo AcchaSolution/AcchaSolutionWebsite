@@ -35,13 +35,16 @@
 
 <div class="nav-dropdown-wrapper">
 
-  <button
-    type="button"
-    class="nav-base-link dropdown-toggle-btn"
-  >
-    Sale
-    <span class="arrow-indicator">▼</span>
-  </button>
+<a
+  routerLink="/properties/sale"
+  routerLinkActive="active-link"
+  class="nav-base-link dropdown-toggle-btn"
+>
+  Sale
+  <span class="arrow-indicator">▼</span>
+</a>
+
+
 
   <div class="magic-mega-dropdown-panel">
 
@@ -50,104 +53,114 @@
     <div class="mega-panel-grid">
 
       <!-- POPULAR CHOICES -->
+<!-- =====================================================
+     SALE COLUMN 1 — BROWSE SALE
+====================================================== -->
 
-      <div class="mega-grid-column">
+<div class="mega-grid-column">
 
-        <div class="column-group-title logo-blue-text">
-          📍 Popular Choices
-        </div>
+  <div class="column-group-title logo-blue-text">
+    📍 Browse Sale
+  </div>
 
-<a [routerLink]="['/properties/sale']"
-   [queryParams]="{ location: 'Whitefield' }"
-   class="mega-link-item">
-  Properties in Whitefield
-</a>
+  <a
+    routerLink="/properties/sale"
+    class="mega-link-item"
+  >
+    All Sale Properties
+  </a>
 
-<a [routerLink]="['/properties/sale']"
-   [queryParams]="{ location: 'Hoodi' }"
-   class="mega-link-item">
-  Properties in Hoodi
-</a>
+  <a
+    [routerLink]="['/properties/sale']"
+    [queryParams]="{ status: 'Ready' }"
+    class="mega-link-item"
+  >
+    Ready To Move
+  </a>
 
-<a [routerLink]="['/properties/sale']"
-   [queryParams]="{ location: 'Marathahalli' }"
-   class="mega-link-item">
-  Properties in Marathahalli
-</a>
+  <a
+    [routerLink]="['/properties/sale']"
+    [queryParams]="{ newProject: true }"
+    class="mega-link-item"
+  >
+    New Projects
+  </a>
+
+</div>
+
+<!-- =====================================================
+     SALE COLUMN 2 — PROPERTY TYPES
+====================================================== -->
+
+<div class="mega-grid-column">
+
+  <div class="column-group-title logo-blue-text">
+    🏠 Property Types
+  </div>
+
+  <a
+    [routerLink]="['/properties/sale']"
+    [queryParams]="{ type: 'Flat' }"
+    class="mega-link-item"
+  >
+    Flats & Apartments
+  </a>
+
+  <a
+    [routerLink]="['/properties/sale']"
+    [queryParams]="{ type: 'Villa' }"
+    class="mega-link-item"
+  >
+    Independent Villas
+  </a>
+
+  <a
+    [routerLink]="['/properties/sale']"
+    [queryParams]="{ type: 'Plot' }"
+    class="mega-link-item"
+  >
+    Residential Plots
+  </a>
+
+</div>
 
 
 
-      </div>
+<!-- =====================================================
+     SALE COLUMN 3 — BHK / HOME SIZE
+====================================================== -->
 
+<div class="mega-grid-column">
 
-      <!-- PROPERTY TYPES -->
+  <div class="column-group-title logo-blue-text">
+    🛏️ Home Size
+  </div>
 
-      <div class="mega-grid-column">
+  <a
+    [routerLink]="['/properties/sale']"
+    [queryParams]="{ bhk: '2 BHK' }"
+    class="mega-link-item"
+  >
+    2 BHK Homes
+  </a>
 
-        <div class="column-group-title logo-red-text">
-          🏢 Property Types
-        </div>
+  <a
+    [routerLink]="['/properties/sale']"
+    [queryParams]="{ bhk: '3 BHK' }"
+    class="mega-link-item"
+  >
+    3 BHK Homes
+  </a>
 
-        <a
-          [routerLink]="['/properties/sale']"
-          [queryParams]="{ type: 'Flat' }"
-          class="mega-link-item"
-        >
-          Flats & Apartments
-        </a>
+  <a
+    [routerLink]="['/properties/sale']"
+    [queryParams]="{ bhk: '4+ BHK' }"
+    class="mega-link-item"
+  >
+    4+ BHK Homes
+  </a>
 
-        <a
-          [routerLink]="['/properties/sale']"
-          [queryParams]="{ type: 'Villa' }"
-          class="mega-link-item"
-        >
-          Independent Villas
-        </a>
-
-        <a
-          [routerLink]="['/properties/sale']"
-          [queryParams]="{ type: 'Plot' }"
-          class="mega-link-item"
-        >
-          Residential Plots
-        </a>
-
-      </div>
-
-
-      <!-- BUDGET PREMIUM -->
-
-      <div class="mega-grid-column">
-
-        <div class="column-group-title logo-gold-text">
-          💰 Budget Premium
-        </div>
-
-        <a
-          [routerLink]="['/properties/sale']"
-          [queryParams]="{ budget: 'under-1-crore' }"
-          class="mega-link-item"
-        >
-          Under ₹1 Crore
-        </a>
-
-        <a
-          [routerLink]="['/properties/sale']"
-          [queryParams]="{ budget: '1-3-crore' }"
-          class="mega-link-item"
-        >
-          ₹1 Cr - ₹3 Crore
-        </a>
-
-        <a
-          [routerLink]="['/properties/sale']"
-          [queryParams]="{ budget: 'ultra-luxury' }"
-          class="mega-link-item highlight-royal-gold"
-        >
-          ✨ Ultra Luxury Segment
-        </a>
-
-      </div>
+</div>
 
 
       <!-- INSTANT ACTIONS -->
@@ -158,12 +171,13 @@
           🚀 Instant Actions
         </div>
 
-        <a
-          routerLink="/about"
-          class="mega-link-item"
-        >
-          Localities Guide
-        </a>
+  <a
+    [routerLink]="['/properties/sale']"
+    [queryParams]="{ newProject: true }"
+    class="mega-link-item"
+  >
+    New Builder Projects
+  </a>
 
         <a
           routerLink="/properties/sale"
@@ -185,13 +199,16 @@
 
 <div class="nav-dropdown-wrapper">
 
-  <button
-    type="button"
-    class="nav-base-link dropdown-toggle-btn"
-  >
-    Rent
-    <span class="arrow-indicator">▼</span>
-  </button>
+<a
+  routerLink="/properties/rent"
+  routerLinkActive="active-link"
+  class="nav-base-link dropdown-toggle-btn"
+>
+  Rent
+  <span class="arrow-indicator">▼</span>
+</a>
+
+
 
   <div class="magic-mega-dropdown-panel">
 
@@ -199,32 +216,40 @@
 
     <div class="mega-panel-grid">
 
-      <!-- RENTAL HOTSPOTS -->
+<!-- =====================================================
+     RENT COLUMN 1 — BROWSE RENT
+====================================================== -->
 
-      <div class="mega-grid-column">
+<div class="mega-grid-column">
 
-        <div class="column-group-title logo-blue-text">
-          📍 Rental Hotspots
-        </div>
+  <div class="column-group-title logo-blue-text">
+    🔎 Rental Discovery
+  </div>
 
-<a [routerLink]="['/properties/rent']"
-   [queryParams]="{ location: 'Whitefield' }"
-   class="mega-link-item">
-  Properties in Whitefield
-</a>
+  <a
+    routerLink="/properties/rent"
+    class="mega-link-item"
+  >
+    All Rental Properties
+  </a>
 
-<a [routerLink]="['/properties/rent']"
-   [queryParams]="{ location: 'Hoodi' }"
-   class="mega-link-item">
-  Properties in Hoodi
-</a>
+ <a
+    [routerLink]="['/properties/rent']"
+    [queryParams]="{ status: 'Ready' }"
+    class="mega-link-item"
+  >
+    Ready To Move Rentals
+  </a>
 
-<a [routerLink]="['/properties/rent']"
-   [queryParams]="{ location: 'Marathahalli' }"
-   class="mega-link-item">
-  Properties in Marathahalli
-</a>      </div>
 
+ <a
+    [routerLink]="['/properties/rent']"
+    [queryParams]="{ newProject: true }"
+    class="mega-link-item"
+  >
+    New Rental Projects
+  </a>
+</div>
 
 
 
@@ -473,13 +498,13 @@
 
 <!-- ================= PORTFOLIO ================= -->
 
-<a
-  routerLink="/portfolio"
+<!-- <a
+  routerLink=""
   routerLinkActive="active-link"
   class="nav-base-link portfolio-nav-link"
 >
   Portfolio
-</a>
+</a> -->
 
 
 <!-- ================= CONTACT ================= -->

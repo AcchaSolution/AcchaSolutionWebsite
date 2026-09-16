@@ -1,7 +1,7 @@
 const express = require('express');
 
 const Property =
-  require('../models/Property');
+  require('../models/property');
 
 const mongoose =
   require('mongoose');

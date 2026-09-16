@@ -5,7 +5,8 @@ import {
 } from '@angular/core';
 
 import {
-  provideRouter
+  provideRouter,
+  withInMemoryScrolling
 } from '@angular/router';
 
 import {
@@ -228,12 +229,20 @@ export const appConfig: ApplicationConfig = {
     // ROUTES
     // =====================================================
 
-    provideRouter([
+    provideRouter(
+      
+  [
 
-      // HOME
+              // HOME
+
+              {
+                  path: '',
+            component: HomeComponent
+           },
+
 
       {
-        path: '',
+        path: 'home',
         component: HomeComponent
       },
 
@@ -331,6 +340,13 @@ export const appConfig: ApplicationConfig = {
       },
 
 
+{
+  path: 'properties-catlog',
+  component: PropertiesCatalogComponent,
+  data: {
+    mode: 'All'
+  }
+},
       {
         path: 'pending-approval',
         component: PendingApprovalComponent
@@ -451,9 +467,16 @@ export const appConfig: ApplicationConfig = {
         path: '**',
         redirectTo: ''
       }
+      
 
-    ])
+    ],
+  
+  withInMemoryScrolling({
+    scrollPositionRestoration: 'top',
+    anchorScrolling: 'enabled'
+  })
 
-  ]
+
+  )]
 
 };

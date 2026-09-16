@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-details',
@@ -98,7 +98,9 @@ export class ProjectDetailsComponent implements OnInit {
   // =====================================================
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+      private router: Router
+
   ) {}
 
 
@@ -106,48 +108,60 @@ export class ProjectDetailsComponent implements OnInit {
   // LOAD PROJECT
   // =====================================================
 
-  ngOnInit(): void {
+ngOnInit(): void {
 
-    this.route.paramMap.subscribe(params => {
+  this.route.paramMap.subscribe(params => {
 
-      const projectId = params.get('id');
+    const id = params.get('id');
 
-      console.log('URL PROJECT ID:', projectId);
+    console.log('URL ID:', id);
 
+    if (!id) {
+      this.project = null;
+      return;
+    }
 
-      if (projectId) {
+    // =====================================================
+    // BUILDER LEVEL
+    // =====================================================
 
-        this.project = this.projects.find(
-          (item: any) =>
-            item.id === projectId
-        );
+    if (id === 'sobha') {
 
-      }
-
+      this.project = {
+        isBuilderPage: true,
+        builder: 'SOBHA',
+        projects: this.projects.filter(
+          (item: any) => item.builder === 'SOBHA'
+        )
+      };
 
       console.log(
-        'SELECTED PROJECT:',
-        this.project
+        'SOBHA ALL PROJECTS:',
+        this.project.projects
       );
 
+      return;
+    }
 
-      // =================================================
-      // TEST FALLBACK
-      // =================================================
+    // =====================================================
+    // INDIVIDUAL PROJECT LEVEL
+    // =====================================================
 
-      if (!this.project) {
+    this.project = this.projects.find(
+      (item: any) => item.id === id
+    );
 
-        this.project = this.projects[0];
+    console.log(
+      'SELECTED PROJECT:',
+      this.project
+    );
 
-        console.log(
-          'Fallback project loaded:',
-          this.project
-        );
+  });
 
-      }
+}
 
-    });
-
-  }
+  openProjectDetails(project: any): void {
+  this.router.navigate(['/project-details', project.id]);
+}
 
 }

@@ -47,7 +47,7 @@
     <i class="bi bi-youtube"></i>
   </a>
 
-<a href="https://www.linkedin.com/company/acchasolution/"
+<a href="https://www.linkedin.com/in/accha-solution-8152aa425/"
    target="_blank"
    rel="noopener noreferrer">
   <i class="bi bi-linkedin"></i>
@@ -65,9 +65,9 @@
 
 <ul>
 
-  <li><a routerLink="/">Home</a></li>
+  <li><a routerLink="/home">Home</a></li>
 
-  <li><a routerLink="/property">Properties</a></li>
+  <li><a routerLink="/services">Services</a></li>
 
   <li><a routerLink="/properties/sale">Buy Property</a></li>
 
@@ -75,7 +75,7 @@
 
   <li><a routerLink="/agents-view">Agents</a></li>
 
-  <li><a routerLink="/contact">Contact</a></li>
+  <li><a routerLink="/contact" (click)="scrollTop()">Contact</a></li>
 
 </ul>
 
@@ -118,7 +118,7 @@
 
           <li><a href="#">Our Services</a></li>
 
-          <li><a href="#">Meet Agents</a></li>
+          <li><a href="/agents-view">Meet Agents</a></li>
 
           <li><a href="#">Careers</a></li>
 
@@ -143,8 +143,17 @@
             <i class="bi bi-telephone-fill"></i>
 
             +91 6299978048
+                      </li>
+<li>
+  <i class="bi bi-telephone-fill"></i>
 
-          </li>
+  <a href="tel:+919304751016">
+    9304751016
+  </a>
+</li>
+
+
+
 
           <li>
 
@@ -300,3 +309,10 @@
 </div>
 
 </footer>
+<a
+  href="https://wa.me/919304751016?text=Hello%20AcchaSolution"
+  target="_blank"
+  class="floating-whatsapp"
+>
+  <i class="bi bi-whatsapp"></i>
+</a>

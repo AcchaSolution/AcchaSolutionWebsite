@@ -190,7 +190,7 @@ export class PropertiesCatalogComponent
 
 
         // ===================================================
-        // SALE / RENT MODE
+        // SALE / RENT / ALL MODE
         // ===================================================
 
         this.currentMode =
@@ -199,25 +199,34 @@ export class PropertiesCatalogComponent
           );
 
 
-        if (
+        // ===================================================
+        // PAGE TITLE
+        // ===================================================
+
+        const mode =
           this.currentMode
             .trim()
-            .toLowerCase() === 'rent'
-        ) {
+            .toLowerCase();
+
+
+        if (mode === 'rent') {
 
           this.pageTitle =
             'Properties For Rent';
 
         }
 
-        else if (
-          this.currentMode
-            .trim()
-            .toLowerCase() === 'commercial'
-        ) {
+        else if (mode === 'commercial') {
 
           this.pageTitle =
             'Commercial Properties';
+
+        }
+
+        else if (mode === 'all') {
+
+          this.pageTitle =
+            'All Properties';
 
         }
 
@@ -418,81 +427,96 @@ export class PropertiesCatalogComponent
 
 
     // =======================================================
-    // 1. SALE / RENT / COMMERCIAL
+    // 1. SALE / RENT / COMMERCIAL / ALL
     // =======================================================
 
-    result =
-      result.filter(
-        (property: any) => {
-
-          const propertyType =
-            String(
-              property?.type ||
-              property?.listingType ||
-              property?.transactionType ||
-              ''
-            )
-              .trim()
-              .toLowerCase();
+    const mode =
+      this.currentMode
+        .trim()
+        .toLowerCase();
 
 
-          const category =
-            String(
-              property?.category ||
-              property?.propertyCategory ||
-              property?.propertyType ||
-              ''
-            )
-              .trim()
-              .toLowerCase();
+    // =======================================================
+    // VIEW ALL PROPERTIES
+    // =======================================================
+
+    if (
+      mode !== 'all'
+    ) {
+
+      result =
+        result.filter(
+          (property: any) => {
 
 
-          const mode =
-            this.currentMode
-              .trim()
-              .toLowerCase();
+            const propertyType =
+              String(
+                property?.type ||
+                property?.listingType ||
+                property?.transactionType ||
+                ''
+              )
+                .trim()
+                .toLowerCase();
 
 
-          // -------------------------------------------------
-          // RENT
-          // -------------------------------------------------
+            const category =
+              String(
+                property?.category ||
+                property?.propertyCategory ||
+                property?.propertyType ||
+                ''
+              )
+                .trim()
+                .toLowerCase();
 
-          if (mode === 'rent') {
+
+            // -------------------------------------------------
+            // RENT
+            // -------------------------------------------------
+
+            if (
+              mode === 'rent'
+            ) {
+
+              return (
+                propertyType === 'rent' ||
+                propertyType === 'rental'
+              );
+
+            }
+
+
+            // -------------------------------------------------
+            // COMMERCIAL
+            // -------------------------------------------------
+
+            if (
+              mode === 'commercial'
+            ) {
+
+              return (
+                category.includes('commercial') ||
+                propertyType.includes('commercial')
+              );
+
+            }
+
+
+            // -------------------------------------------------
+            // SALE
+            // -------------------------------------------------
 
             return (
-              propertyType === 'rent' ||
-              propertyType === 'rental'
+              propertyType === 'sale' ||
+              propertyType === 'sell' ||
+              propertyType === 'buy'
             );
 
           }
+        );
 
-
-          // -------------------------------------------------
-          // COMMERCIAL
-          // -------------------------------------------------
-
-          if (mode === 'commercial') {
-
-            return (
-              category.includes('commercial') ||
-              propertyType.includes('commercial')
-            );
-
-          }
-
-
-          // -------------------------------------------------
-          // SALE
-          // -------------------------------------------------
-
-          return (
-            propertyType === 'sale' ||
-            propertyType === 'sell' ||
-            propertyType === 'buy'
-          );
-
-        }
-      );
+    }
 
 
     // =======================================================
@@ -831,54 +855,65 @@ export class PropertiesCatalogComponent
       '================================'
     );
 
+
     console.log(
       '🏠 CATALOG SEARCH'
     );
+
 
     console.log(
       'MODE:',
       this.currentMode
     );
 
+
     console.log(
       'LOCATION:',
       this.selectedLocation
     );
+
 
     console.log(
       'KEYWORD:',
       this.selectedKeyword
     );
 
+
     console.log(
       'TYPE:',
       this.selectedType
     );
+
 
     console.log(
       'BHK:',
       this.selectedBhk
     );
 
+
     console.log(
       'STATUS:',
       this.selectedStatus
     );
+
 
     console.log(
       'NEW PROJECT:',
       this.selectedNewProject
     );
 
+
     console.log(
       'TOTAL RESULT:',
       this.filteredProperties.length
     );
 
+
     console.log(
       'RESULT:',
       this.filteredProperties
     );
+
 
     console.log(
       '================================'
@@ -1076,7 +1111,7 @@ export class PropertiesCatalogComponent
 
         'service_9y43p7s',
 
-        'template_iqbq08b',
+        'template_iqbq08',
 
         templateParams,
 

@@ -5,7 +5,9 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule
+} from '@angular/common';
 
 import {
   ReactiveFormsModule,
@@ -14,9 +16,9 @@ import {
   Validators
 } from '@angular/forms';
 
-import { HttpClient } from '@angular/common/http';
-
-import { PropertyService } from '../services/property.service';
+import {
+  PropertyService
+} from '../services/property.service';
 
 import {
   ActivatedRoute,
@@ -24,7 +26,12 @@ import {
   RouterModule
 } from '@angular/router';
 
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {
+  CKEditorModule
+} from '@ckeditor/ckeditor5-angular';
+
+import * as ClassicEditor
+  from '@ckeditor/ckeditor5-build-classic';
 
 declare var Quill: any;
 declare var L: any;
@@ -38,12 +45,15 @@ declare var L: any;
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    CKEditorModule
   ],
 
   templateUrl: './add-property-form.component.html',
 
-  styleUrl: './add-property-form.component.css'
+  styleUrls: [
+    './add-property-form.component.css'
+  ]
 })
 
 
@@ -56,6 +66,15 @@ export class AddPropertyFormComponent
   // =========================================================
 
   propertyForm!: FormGroup;
+
+
+  // =========================================================
+  // EDIT MODE
+  // =========================================================
+
+  isEditMode: boolean = false;
+
+  editingPropertyId: string | null = null;
 
 
   // =========================================================
@@ -84,79 +103,149 @@ export class AddPropertyFormComponent
 
 
   // =========================================================
-  // EDIT MODE
-  // =========================================================
-
-  isEditMode = false;
-
-  editingPropertyId: string | null = null;
-
-
-  // =========================================================
-  // AI
-  // =========================================================
-
-  isAiGenerating = false;
-
-
-  // =========================================================
-  // MARKET PRICE
-  // =========================================================
-
-  priceMarketPosition = 65;
-
-
-  // =========================================================
-  // BASE PERMALINK
+  // PERMALINK
   // =========================================================
 
   private readonly BASE_PERMALINK =
-    'http://localhost:4200/properties/';
+    'https://acchaSolution.com/properties/';
+
+
+  // =========================================================
+  // UI STATES
+  // =========================================================
+
+  isLinkIconDisabled: boolean = false;
+
+  isAiGenerating: boolean = false;
+
+  priceMarketPosition: number = 65;
 
 
   // =========================================================
   // AMENITIES
   // =========================================================
 
-  amenities = [
 
-    {
-      id: 1,
-      name: 'Swimming Pool',
-      icon: 'pool',
-      selected: false
-    },
 
-    {
-      id: 2,
-      name: 'Smart Home Hub',
-      icon: 'hub',
-      selected: false
-    },
+  // =========================================================
 
-    {
-      id: 3,
-      name: 'EV Charging',
-      icon: 'ev_station',
-      selected: false
-    },
 
-    {
-      id: 4,
-      name: 'Private Garden',
-      icon: 'yard',
-      selected: false
-    },
 
-    {
-      id: 5,
-      name: 'Gym/Yoga Studio',
-      icon: 'fitness_center',
-      selected: false
-    }
+  // AMENITIES
 
-  ];
 
+
+  // =========================================================
+
+
+
+  amenities = [
+
+
+
+
+
+{ id: 1, name: 'Swimming Pool', icon: 'pool', selected: false },
+
+
+
+{ id: 2, name: 'Gym', icon: 'fitness_center', selected: false },
+
+
+
+{ id: 3, name: 'Club House', icon: 'apartment', selected: false },
+
+
+
+{ id: 4, name: 'Children Play Area', icon: 'child_care', selected: false },
+
+
+
+{ id: 5, name: 'Jogging Track', icon: 'directions_run', selected: false },
+
+
+
+{ id: 6, name: 'Power Backup', icon: 'battery_charging_full', selected: false },
+
+
+
+{ id: 7, name: 'Lift', icon: 'elevator', selected: false },
+
+
+
+{ id: 8, name: '24x7 Security', icon: 'security', selected: false },
+
+
+
+{ id: 9, name: 'CCTV', icon: 'videocam', selected: false },
+
+
+
+{ id: 10, name: 'Intercom', icon: 'call', selected: false },
+
+
+
+{ id: 11, name: 'Parking', icon: 'local_parking', selected: false },
+
+
+
+{ id: 12, name: 'Visitor Parking', icon: 'directions_car', selected: false },
+
+
+
+{ id: 13, name: 'EV Charging', icon: 'ev_station', selected: false },
+
+
+
+{ id: 14, name: 'Garden', icon: 'yard', selected: false },
+
+
+
+{ id: 15, name: 'Private Terrace', icon: 'deck', selected: false },
+
+
+
+{ id: 16, name: 'Smart Home', icon: 'hub', selected: false },
+
+
+
+{ id: 17, name: 'WiFi', icon: 'wifi', selected: false },
+
+
+
+{ id: 18, name: 'Tennis Court', icon: 'sports_tennis', selected: false },
+
+
+
+{ id: 19, name: 'Basketball Court', icon: 'sports_basketball', selected: false },
+
+
+
+{ id: 20, name: 'Badminton Court', icon: 'sports', selected: false },
+
+
+
+{ id: 21, name: 'Party Hall', icon: 'celebration', selected: false },
+
+
+
+{ id: 22, name: 'Library', icon: 'menu_book', selected: false },
+
+
+
+{ id: 23, name: 'Indoor Games', icon: 'sports_esports', selected: false },
+
+
+
+{ id: 24, name: 'Spa', icon: 'spa', selected: false },
+
+
+
+{ id: 25, name: 'Pet Park', icon: 'pets', selected: false }
+
+
+
+  ];
 
   // =========================================================
   // CATEGORIES
@@ -188,106 +277,6 @@ export class AddPropertyFormComponent
 
 
   // =========================================================
-  // KNOWN LOCATIONS
-  // =========================================================
-
-  private readonly knownLocations = [
-
-    'Whitefield',
-
-    'Hoodi',
-
-    'Marathahalli',
-
-    'KR Puram',
-
-    'Indiranagar',
-
-    'Electronic City',
-
-    'Sarjapur Road',
-
-    'HSR Layout',
-
-    'Hebbal',
-
-    'Yelahanka',
-
-    'Koramangala'
-
-  ];
-
-
-  // =========================================================
-  // LOCATION COORDINATES
-  // =========================================================
-
-  private locationCoordinates: {
-    [key: string]: {
-      lat: number;
-      lng: number;
-    }
-  } = {
-
-    'Whitefield': {
-      lat: 12.9698,
-      lng: 77.7500
-    },
-
-    'Hoodi': {
-      lat: 12.9916,
-      lng: 77.7150
-    },
-
-    'Marathahalli': {
-      lat: 12.9591,
-      lng: 77.6974
-    },
-
-    'KR Puram': {
-      lat: 13.0078,
-      lng: 77.6950
-    },
-
-    'Indiranagar': {
-      lat: 12.9784,
-      lng: 77.6408
-    },
-
-    'Electronic City': {
-      lat: 12.8452,
-      lng: 77.6602
-    },
-
-    'Sarjapur Road': {
-      lat: 12.9100,
-      lng: 77.6870
-    },
-
-    'HSR Layout': {
-      lat: 12.9116,
-      lng: 77.6389
-    },
-
-    'Hebbal': {
-      lat: 13.0358,
-      lng: 77.5970
-    },
-
-    'Yelahanka': {
-      lat: 13.1007,
-      lng: 77.5963
-    },
-
-    'Koramangala': {
-      lat: 12.9352,
-      lng: 77.6245
-    }
-
-  };
-
-
-  // =========================================================
   // CONSTRUCTOR
   // =========================================================
 
@@ -299,9 +288,7 @@ export class AddPropertyFormComponent
 
     private router: Router,
 
-    private route: ActivatedRoute,
-
-    private http: HttpClient
+    private route: ActivatedRoute
 
   ) {}
 
@@ -312,1778 +299,352 @@ export class AddPropertyFormComponent
 
   ngOnInit(): void {
 
-    // =======================================================
-    // FORM
-    // =======================================================
 
-    this.propertyForm = this.fb.group({
+    // -------------------------------------------------------
+    // CREATE FORM
+    // -------------------------------------------------------
 
-      // -----------------------------------------------------
-      // BASIC
-      // -----------------------------------------------------
+    this.propertyForm =
+      this.fb.group({
 
-      id: [''],
-
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3)
-        ]
-      ],
-
-      permalink: [
-        this.BASE_PERMALINK,
-        Validators.required
-      ],
-
-      type: ['Rent'],
-
-      description: [''],
-
-      status: ['Renting'],
-
-      is_featured: [false],
-
-      priority: [
-        10,
-        [
-          Validators.min(1),
-          Validators.max(100)
-        ]
-      ],
-
-      uniqueId: [''],
+        id: [''],
 
 
-      // -----------------------------------------------------
-      // PRICE / PROPERTY
-      // -----------------------------------------------------
-
-      price: [
-        0,
-        [
-          Validators.required,
-          Validators.min(0)
-        ]
-      ],
-
-      area: [
-        '',
-        Validators.required
-      ],
-
-      bhk: ['1 BHK'],
-
-      totalFloors: [
-        '',
-        [
-          Validators.required,
-          Validators.min(0)
-        ]
-      ],
-
-      propertyFloor: [
-        '',
-        [
-          Validators.required,
-          Validators.min(0)
-        ]
-      ],
-
-      furnishing: ['Unfurnished'],
-
-      facing: ['East Facing'],
-
-      bathrooms: [
-        '',
-        [
-          Validators.required,
-          Validators.min(1)
-        ]
-      ],
-
-      possession: ['Ready to Move'],
+        name: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3)
+          ]
+        ],
 
 
-      // -----------------------------------------------------
-      // LOCATION
-      // -----------------------------------------------------
-
-      location: [
-        'Whitefield',
-        Validators.required
-      ],
-
-      customLocation: [''],
-
-      address: [
-        '',
-        Validators.required
-      ],
-
-      city: [
-        'Bengaluru',
-        Validators.required
-      ],
-
-      locality: [
-        'Whitefield',
-        Validators.required
-      ],
-
-      subLocality: [''],
-
-      landmark: [''],
-
-      state: ['Karnataka'],
-
-      pincode: [''],
+        permalink: [
+          this.BASE_PERMALINK,
+          Validators.required
+        ],
 
 
-      // -----------------------------------------------------
-      // COORDINATES
-      // -----------------------------------------------------
-
-      latitude: [12.9698],
-
-      longitude: [77.7500],
+        type: ['Rent'],
 
 
-      // -----------------------------------------------------
-      // RATING
-      // -----------------------------------------------------
-
-      rating: ['']
-
-    });
+        description: [''],
 
 
-    // =======================================================
-    // SYSTEM ID
-    // =======================================================
+        status: ['Renting'],
+
+
+        is_featured: [false],
+
+
+        priority: [
+          10,
+          [
+            Validators.min(1),
+            Validators.max(100)
+          ]
+        ],
+
+
+        uniqueId: [''],
+
+
+        price: [
+          0,
+          [
+            Validators.required,
+            Validators.min(0)
+          ]
+        ],
+
+
+        area: [
+          '',
+          Validators.required
+        ],
+
+
+        bhk: ['1 BHK'],
+
+
+        totalFloors: [
+          '',
+          [
+            Validators.required,
+            Validators.min(0)
+          ]
+        ],
+
+
+        propertyFloor: [
+          '',
+          [
+            Validators.required,
+            Validators.min(0)
+          ]
+        ],
+
+
+        furnishing: ['Unfurnished'],
+
+
+        facing: ['East Facing'],
+
+
+        bathrooms: [
+          '',
+          [
+            Validators.required,
+            Validators.min(1)
+          ]
+        ],
+
+
+        possession: ['Ready to Move'],
+
+
+        rating: ['5'],
+
+
+        latitude: [12.9698],
+
+
+        longitude: [77.7500],
+
+
+        location: ['Whitefield']
+
+      });
+
+
+    // -------------------------------------------------------
+    // NEW PROPERTY ID
+    // -------------------------------------------------------
 
     this.generateNewId();
 
 
-    // =======================================================
-    // EDIT MODE
-    // =======================================================
+    // -------------------------------------------------------
+    // CHECK EDIT ID
+    //
+    // Supports:
+    //
+    // /property?id=PROP-1234
+    //
+    // AND
+    //
+    // /property/PROP-1234
+    // -------------------------------------------------------
 
-    const urlId =
+    const queryId =
+      this.route.snapshot.queryParamMap.get('id');
+
+
+    const routeId =
       this.route.snapshot.paramMap.get('id');
 
 
-    if (urlId) {
+    const propertyId =
+      queryId || routeId;
+
+
+    if (propertyId) {
 
       this.isEditMode = true;
 
-      this.editingPropertyId = urlId;
+      this.editingPropertyId =
+        propertyId.trim();
 
-      this.loadPropertyDataToForm(urlId);
+
+      console.log(
+        '✏️ EDIT MODE:',
+        this.editingPropertyId
+      );
+
+
+      this.loadPropertyDataToForm(
+        this.editingPropertyId
+      );
 
     }
 
 
-    // =======================================================
+    // -------------------------------------------------------
     // PROPERTY NAME → PERMALINK
-    // =======================================================
+    // -------------------------------------------------------
 
     this.propertyForm
       .get('name')
       ?.valueChanges
-      .subscribe(nameValue => {
+      .subscribe(
+        (nameValue: string) => {
 
-        if (!nameValue) {
+          if (this.isEditMode) {
 
-          if (!this.isEditMode) {
+            /*
+             * Edit mode mein permalink ko
+             * automatically change nahi karenge
+             * jab tak user property name change kare.
+             *
+             * Name change hone par new slug generate hoga.
+             */
+
+          }
+
+
+          if (nameValue) {
+
+            const slug =
+              String(nameValue)
+
+                .toLowerCase()
+
+                .trim()
+
+                .replace(
+                  /\s+/g,
+                  '-'
+                )
+
+                .replace(
+                  /[^a-z0-9-]/g,
+                  ''
+                );
+
+
+            const fullGeneratedUrl =
+              `${this.BASE_PERMALINK}${slug}`;
+
 
             this.propertyForm.patchValue(
+
               {
-                permalink: this.BASE_PERMALINK
+                permalink:
+                  fullGeneratedUrl
               },
+
               {
                 emitEvent: false
               }
+
             );
 
           }
 
-          return;
+          else {
+
+            this.propertyForm.patchValue(
+
+              {
+                permalink:
+                  this.BASE_PERMALINK
+              },
+
+              {
+                emitEvent: false
+              }
+
+            );
+
+          }
 
         }
+      );
 
 
-        const slug = nameValue
-
-          .toLowerCase()
-
-          .trim()
-
-          .replace(/\s+/g, '-')
-
-          .replace(/[^a-z0-9-]/g, '');
-
-
-        const fullGeneratedUrl =
-          `${this.BASE_PERMALINK}${slug}`;
-
-
-        this.propertyForm.patchValue(
-          {
-            permalink: fullGeneratedUrl
-          },
-          {
-            emitEvent: false
-          }
-        );
-
-      });
-
-
-    // =======================================================
+    // -------------------------------------------------------
     // PERMALINK PROTECTION
-    // =======================================================
+    // -------------------------------------------------------
 
     this.propertyForm
       .get('permalink')
       ?.valueChanges
-      .subscribe(currentUrl => {
+      .subscribe(
+        (currentUrl: string) => {
 
-        if (!currentUrl) {
+          if (
+            currentUrl &&
+            currentUrl.startsWith(
+              this.BASE_PERMALINK
+            )
+          ) {
 
-          return;
+            return;
 
-        }
+          }
 
-        if (
-          !currentUrl.startsWith(
-            this.BASE_PERMALINK
-          )
-        ) {
+
+          if (!currentUrl) {
+
+            return;
+
+          }
+
 
           this.propertyForm.patchValue(
+
             {
-              permalink: this.BASE_PERMALINK
+              permalink:
+                this.BASE_PERMALINK
             },
+
             {
               emitEvent: false
             }
+
           );
 
         }
+      );
 
-      });
 
-
-    // =======================================================
-    // PRICE HEATMAP
-    // =======================================================
+    // -------------------------------------------------------
+    // PRICE → MARKET HEATMAP
+    // -------------------------------------------------------
 
     this.propertyForm
       .get('price')
       ?.valueChanges
-      .subscribe(value => {
-
-        this.calculateMarketHeatmap(value);
-
-      });
-
-
-    /*
-     * IMPORTANT LOCATION FIX
-     *
-     * Yahan pehle locality/city ke valueChanges se
-     * location ko automatically overwrite kiya ja raha tha.
-     *
-     * Isi wajah se dropdown mein Whitefield/locality
-     * baar-baar aa raha tha.
-     *
-     * Ab hum location ko locality/city se overwrite nahi karenge.
-     */
-
-  }
-
-
-  // =========================================================
-  // LOCATION SELECT
-  // =========================================================
-
-  onLocationSelect(): void {
-
-    const selectedLocation =
-      this.propertyForm.get('location')?.value;
-
-
-    // -------------------------------------------------------
-    // OTHER
-    // -------------------------------------------------------
-
-    if (selectedLocation === 'Other') {
-
-      this.propertyForm.patchValue(
-        {
-          customLocation: ''
-        },
-        {
-          emitEvent: false
-        }
-      );
-
-      return;
-
-    }
-
-
-    // -------------------------------------------------------
-    // KNOWN LOCATION
-    // -------------------------------------------------------
-
-    const coordinates =
-      this.locationCoordinates[selectedLocation];
-
-
-    if (coordinates) {
-
-      this.propertyForm.patchValue(
-        {
-          locality: selectedLocation,
-          customLocation: ''
-        },
-        {
-          emitEvent: false
-        }
-      );
-
-
-      // Move map
-
-      if (this.map) {
-
-        this.map.setView(
-          [
-            coordinates.lat,
-            coordinates.lng
-          ],
-          15
-        );
-
-      }
-
-
-      // Move marker
-
-      if (this.marker) {
-
-        this.marker.setLatLng(
-          [
-            coordinates.lat,
-            coordinates.lng
-          ]
-        );
-
-      }
-
-
-      // Update coordinates
-
-      this.propertyForm.patchValue(
-        {
-          latitude: coordinates.lat,
-          longitude: coordinates.lng
-        },
-        {
-          emitEvent: false
-        }
-      );
-
-    }
-
-  }
-
-
-  // =========================================================
-  // GET FINAL LOCATION
-  // =========================================================
-
-  private getFinalLocation(): string {
-
-    const selectedLocation =
-      this.propertyForm.get('location')?.value;
-
-
-    if (selectedLocation === 'Other') {
-
-      return (
-        this.propertyForm
-          .get('customLocation')
-          ?.value
-          ?.trim() || 'Other'
-      );
-
-    }
-
-
-    return selectedLocation || 'Whitefield';
-
-  }
-
-
-  // =========================================================
-  // AFTER VIEW INIT
-  // =========================================================
-
-  ngAfterViewInit(): void {
-
-    setTimeout(() => {
-
-      this.initSmartMap();
-
-      this.initQuill();
-
-    }, 500);
-
-  }
-
-
-  // =========================================================
-  // QUILL
-  // =========================================================
-
-  private initQuill(): void {
-
-    if (typeof Quill === 'undefined') {
-
-      console.warn(
-        'Quill library is not loaded.'
-      );
-
-      return;
-
-    }
-
-
-    const editorElement =
-      document.querySelector(
-        '#quill-editor'
-      );
-
-
-    if (!editorElement) {
-
-      console.warn(
-        'Quill editor element not found.'
-      );
-
-      return;
-
-    }
-
-
-    if (this.quillInstance) {
-
-      return;
-
-    }
-
-
-    this.quillInstance =
-      new Quill(
-        '#quill-editor',
-        {
-
-          modules: {
-
-            toolbar: '#toolbar'
-
-          },
-
-          theme: 'snow',
-
-          placeholder:
-            'Property overview, specifications, features aur description yahan likhein...'
-
-        }
-      );
-
-
-    const currentDesc =
-      this.propertyForm
-        .get('description')
-        ?.value;
-
-
-    if (currentDesc) {
-
-      this.quillInstance.root.innerHTML =
-        currentDesc;
-
-    }
-
-
-    this.quillInstance.on(
-      'text-change',
-      () => {
-
-        const html =
-          this.quillInstance.root.innerHTML;
-
-
-        this.propertyForm
-          .get('description')
-          ?.setValue(html);
-
-      }
-    );
-
-  }
-
-
-  // =========================================================
-  // MAP
-  // =========================================================
-
-  private initSmartMap(): void {
-
-    const mapElement =
-      document.getElementById(
-        'map-container'
-      );
-
-
-    if (!mapElement) {
-
-      console.error(
-        'Map container not found'
-      );
-
-      return;
-
-    }
-
-
-    if (typeof L === 'undefined') {
-
-      console.error(
-        'Leaflet is not loaded'
-      );
-
-      return;
-
-    }
-
-
-    if (this.map) {
-
-      this.map.remove();
-
-      this.map = null;
-
-      this.marker = null;
-
-    }
-
-
-    const lat =
-      Number(
-        this.propertyForm
-          .get('latitude')
-          ?.value
-      ) || 12.9698;
-
-
-    const lng =
-      Number(
-        this.propertyForm
-          .get('longitude')
-          ?.value
-      ) || 77.7500;
-
-
-    this.map =
-      L.map(
-        'map-container'
-      ).setView(
-        [lat, lng],
-        14
-      );
-
-
-    L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      {
-        maxZoom: 19,
-        attribution:
-          '&copy; OpenStreetMap contributors'
-      }
-    ).addTo(this.map);
-
-
-    this.marker =
-      L.marker(
-        [lat, lng],
-        {
-          draggable: true
-        }
-      ).addTo(this.map);
-
-
-    this.marker.bindPopup(
-      '📍 Drag me to set property location'
-    );
-
-
-    this.marker.on(
-      'dragend',
-      (event: any) => {
-
-        const position =
-          event.target.getLatLng();
-
-
-        const newLat =
-          Number(
-            position.lat.toFixed(6)
-          );
-
-
-        const newLng =
-          Number(
-            position.lng.toFixed(6)
-          );
-
-
-        this.propertyForm.patchValue(
-          {
-            latitude: newLat,
-            longitude: newLng
-          },
-          {
-            emitEvent: false
-          }
-        );
-
-
-        this.reverseGeocode(
-          newLat,
-          newLng
-        );
-
-      }
-    );
-
-
-    setTimeout(() => {
-
-      if (this.map) {
-
-        this.map.invalidateSize();
-
-      }
-
-    }, 500);
-
-  }
-
-
-  // =========================================================
-  // REVERSE GEOCODING
-  // =========================================================
-
-  private reverseGeocode(
-    lat: number,
-    lng: number
-  ): void {
-
-    const url =
-      `https://nominatim.openstreetmap.org/reverse` +
-      `?format=json` +
-      `&lat=${lat}` +
-      `&lon=${lng}` +
-      `&zoom=18` +
-      `&addressdetails=1`;
-
-
-    fetch(
-      url,
-      {
-        headers: {
-          'Accept': 'application/json'
-        }
-      }
-    )
-
-      .then(response => {
-
-        if (!response.ok) {
-
-          throw new Error(
-            'Address service failed'
+      .subscribe(
+        (value: any) => {
+
+          this.calculateMarketHeatmap(
+            value
           );
 
         }
-
-        return response.json();
-
-      })
-
-      .then(data => {
-
-        console.log(
-          'MAP ADDRESS:',
-          data
-        );
-
-
-        const addr =
-          data?.address || {};
-
-
-        const fullAddress =
-          data?.display_name || '';
-
-
-        const locality =
-          addr.suburb ||
-          addr.neighbourhood ||
-          addr.residential ||
-          addr.city_district ||
-          '';
-
-
-        const city =
-          addr.city ||
-          addr.town ||
-          addr.municipality ||
-          addr.village ||
-          'Bengaluru';
-
-
-        const state =
-          addr.state ||
-          'Karnataka';
-
-
-        const pincode =
-          addr.postcode ||
-          '';
-
-
-        // ---------------------------------------------------
-        // FIND KNOWN LOCATION
-        // ---------------------------------------------------
-
-        const matchedLocation =
-          this.knownLocations.find(
-            item =>
-              fullAddress
-                .toLowerCase()
-                .includes(
-                  item.toLowerCase()
-                )
-          );
-
-
-        // ---------------------------------------------------
-        // LOCATION DATA
-        // ---------------------------------------------------
-
-        if (matchedLocation) {
-
-          this.propertyForm.patchValue(
-            {
-              location:
-                matchedLocation,
-
-              customLocation: '',
-
-              address:
-                fullAddress,
-
-              locality:
-                matchedLocation,
-
-              city:
-                city,
-
-              state:
-                state,
-
-              pincode:
-                pincode,
-
-              latitude:
-                Number(
-                  lat.toFixed(6)
-                ),
-
-              longitude:
-                Number(
-                  lng.toFixed(6)
-                )
-            },
-            {
-              emitEvent: false
-            }
-          );
-
-        }
-
-        else {
-
-          this.propertyForm.patchValue(
-            {
-              location: 'Other',
-
-              customLocation:
-                locality ||
-                city ||
-                fullAddress,
-
-              address:
-                fullAddress,
-
-              locality:
-                locality,
-
-              city:
-                city,
-
-              state:
-                state,
-
-              pincode:
-                pincode,
-
-              latitude:
-                Number(
-                  lat.toFixed(6)
-                ),
-
-              longitude:
-                Number(
-                  lng.toFixed(6)
-                )
-            },
-            {
-              emitEvent: false
-            }
-          );
-
-        }
-
-
-        // ---------------------------------------------------
-        // POPUP
-        // ---------------------------------------------------
-
-        if (this.marker) {
-
-          this.marker
-            .bindPopup(
-              `
-              <div style="font-size:13px;">
-                <strong>
-                  📍 Property Location
-                </strong>
-
-                <br><br>
-
-                ${
-                  fullAddress ||
-                  locality ||
-                  city
-                }
-
-              </div>
-              `
-            )
-            .openPopup();
-
-        }
-
-      })
-
-      .catch(error => {
-
-        console.error(
-          'Reverse geocoding error:',
-          error
-        );
-
-        alert(
-          'Address could not be detected from this location.'
-        );
-
-      });
-
-  }
-
-
-  // =========================================================
-  // SEARCH LOCATION
-  // =========================================================
-
-  searchLocation(): void {
-
-    const searchText =
-      this.propertyForm
-        .get('address')
-        ?.value;
-
-
-    if (
-      !searchText ||
-      searchText.trim().length < 3
-    ) {
-
-      alert(
-        'Please enter a location or address first.'
       );
 
-      return;
-
-    }
-
-
-    const url =
-      `https://nominatim.openstreetmap.org/search` +
-      `?format=json` +
-      `&q=${encodeURIComponent(
-        searchText
-      )}` +
-      `&limit=1` +
-      `&addressdetails=1`;
-
-
-    fetch(
-      url,
-      {
-        headers: {
-          'Accept': 'application/json'
-        }
-      }
-    )
-
-      .then(response => {
-
-        if (!response.ok) {
-
-          throw new Error(
-            'Location search failed'
-          );
-
-        }
-
-        return response.json();
-
-      })
-
-      .then(results => {
-
-        if (
-          !results ||
-          results.length === 0
-        ) {
-
-          alert(
-            'Location not found. Please try another address.'
-          );
-
-          return;
-
-        }
-
-
-        const result =
-          results[0];
-
-
-        const lat =
-          Number(
-            result.lat
-          );
-
-
-        const lng =
-          Number(
-            result.lon
-          );
-
-
-        const resultAddress =
-          result.address || {};
-
-
-        const city =
-          resultAddress.city ||
-          resultAddress.town ||
-          resultAddress.municipality ||
-          resultAddress.village ||
-          'Bengaluru';
-
-
-        const locality =
-          resultAddress.suburb ||
-          resultAddress.neighbourhood ||
-          resultAddress.residential ||
-          resultAddress.city_district ||
-          '';
-
-
-        const state =
-          resultAddress.state ||
-          'Karnataka';
-
-
-        const pincode =
-          resultAddress.postcode ||
-          '';
-
-
-        const fullAddress =
-          result.display_name ||
-          '';
-
-
-        // ---------------------------------------------------
-        // FIND KNOWN LOCATION
-        // ---------------------------------------------------
-
-        const matchedLocation =
-          this.knownLocations.find(
-            item =>
-              fullAddress
-                .toLowerCase()
-                .includes(
-                  item.toLowerCase()
-                )
-          );
-
-
-        // ---------------------------------------------------
-        // UPDATE LOCATION
-        // ---------------------------------------------------
-
-        if (matchedLocation) {
-
-          this.propertyForm.patchValue(
-            {
-
-              location:
-                matchedLocation,
-
-              customLocation: '',
-
-              latitude:
-                Number(
-                  lat.toFixed(6)
-                ),
-
-              longitude:
-                Number(
-                  lng.toFixed(6)
-                ),
-
-              address:
-                fullAddress,
-
-              city:
-                city,
-
-              locality:
-                matchedLocation,
-
-              state:
-                state,
-
-              pincode:
-                pincode
-
-            },
-            {
-              emitEvent: false
-            }
-          );
-
-        }
-
-        else {
-
-          this.propertyForm.patchValue(
-            {
-
-              location:
-                'Other',
-
-              customLocation:
-                locality ||
-                city ||
-                fullAddress,
-
-              latitude:
-                Number(
-                  lat.toFixed(6)
-                ),
-
-              longitude:
-                Number(
-                  lng.toFixed(6)
-                ),
-
-              address:
-                fullAddress,
-
-              city:
-                city,
-
-              locality:
-                locality,
-
-              state:
-                state,
-
-              pincode:
-                pincode
-
-            },
-            {
-              emitEvent: false
-            }
-          );
-
-        }
-
-
-        // ---------------------------------------------------
-        // MOVE MAP
-        // ---------------------------------------------------
-
-        if (this.map) {
-
-          this.map.setView(
-            [lat, lng],
-            16
-          );
-
-        }
-
-
-        // ---------------------------------------------------
-        // MOVE MARKER
-        // ---------------------------------------------------
-
-        if (this.marker) {
-
-          this.marker.setLatLng(
-            [lat, lng]
-          );
-
-        }
-
-      })
-
-      .catch(error => {
-
-        console.error(
-          'Location search error:',
-          error
-        );
-
-        alert(
-          'Location search failed. Please check your internet connection.'
-        );
-
-      });
-
   }
 
 
   // =========================================================
-  // CURRENT LOCATION
-  // =========================================================
-
-  useCurrentLocation(): void {
-
-    if (
-      !navigator.geolocation
-    ) {
-
-      alert(
-        'Your browser does not support location detection.'
-      );
-
-      return;
-
-    }
-
-
-    navigator.geolocation.getCurrentPosition(
-
-      position => {
-
-        const lat =
-          position.coords.latitude;
-
-
-        const lng =
-          position.coords.longitude;
-
-
-        this.propertyForm.patchValue(
-          {
-
-            latitude:
-              Number(
-                lat.toFixed(6)
-              ),
-
-            longitude:
-              Number(
-                lng.toFixed(6)
-              )
-
-          },
-          {
-            emitEvent: false
-          }
-        );
-
-
-        if (this.map) {
-
-          this.map.setView(
-            [lat, lng],
-            16
-          );
-
-        }
-
-
-        if (this.marker) {
-
-          this.marker.setLatLng(
-            [lat, lng]
-          );
-
-        }
-
-
-        this.reverseGeocode(
-          lat,
-          lng
-        );
-
-      },
-
-
-      error => {
-
-        console.error(
-          'Geolocation error:',
-          error
-        );
-
-
-        alert(
-          'Unable to access your current location. Please allow location permission.'
-        );
-
-      },
-
-
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0
-      }
-
-    );
-
-  }
-
-
-  // =========================================================
-  // MARKET HEATMAP
-  // =========================================================
-
-  calculateMarketHeatmap(
-    value: any
-  ): void {
-
-    const price =
-      Number(value);
-
-
-    if (
-      !price ||
-      price < 5000000
-    ) {
-
-      this.priceMarketPosition =
-        20;
-
-    }
-
-    else if (
-      price >= 5000000 &&
-      price < 15000000
-    ) {
-
-      this.priceMarketPosition =
-        55;
-
-    }
-
-    else {
-
-      this.priceMarketPosition =
-        85;
-
-    }
-
-  }
-
-
-  // =========================================================
-  // AMENITY
-  // =========================================================
-
-  toggleAmenity(
-    id: number
-  ): void {
-
-    const item =
-      this.amenities.find(
-        a => a.id === id
-      );
-
-
-    if (item) {
-
-      item.selected =
-        !item.selected;
-
-    }
-
-  }
-
-
-  // =========================================================
-  // CATEGORY
-  // =========================================================
-
-  onCategoryChange(
-    catName: string
-  ): void {
-
-    const category =
-      this.categories.find(
-        c => c.name === catName
-      );
-
-
-    if (category) {
-
-      category.checked =
-        !category.checked;
-
-    }
-
-  }
-
-
-  // =========================================================
-  // IMAGE UPLOAD
-  // =========================================================
-
-  handleProactiveUpload(
-    event: any
-  ): void {
-
-    const files =
-      event.target.files;
-
-
-    if (
-      !files ||
-      files.length === 0
-    ) {
-
-      return;
-
-    }
-
-
-    const remaining =
-      10 -
-      this.uploadedImages.length;
-
-
-    if (remaining <= 0) {
-
-      alert(
-        'Maximum 10 images are allowed.'
-      );
-
-      return;
-
-    }
-
-
-    const filesToUpload =
-      Array.from(files)
-        .slice(
-          0,
-          remaining
-        ) as File[];
-
-
-    filesToUpload.forEach(
-      (file: File) => {
-
-        if (
-          !file.type.startsWith(
-            'image/'
-          )
-        ) {
-
-          return;
-
-        }
-
-
-        const reader =
-          new FileReader();
-
-
-        reader.onload =
-          (e: any) => {
-
-            this.uploadedImages.push(
-              {
-
-                url:
-                  e.target.result,
-
-                file:
-                  file,
-
-                isThumbnail:
-                  this.uploadedImages.length === 0
-
-              }
-            );
-
-          };
-
-
-        reader.readAsDataURL(
-          file
-        );
-
-      }
-    );
-
-
-    event.target.value = '';
-
-  }
-
-
-  // =========================================================
-  // SET THUMBNAIL
-  // =========================================================
-
-  setThumbnail(
-    index: number
-  ): void {
-
-    this.uploadedImages.forEach(
-      (image, i) => {
-
-        image.isThumbnail =
-          i === index;
-
-      }
-    );
-
-  }
-
-
-  // =========================================================
-  // DELETE IMAGE
-  // =========================================================
-
-  deleteImage(
-    index: number
-  ): void {
-
-    this.uploadedImages.splice(
-      index,
-      1
-    );
-
-
-    if (
-      this.uploadedImages.length > 0 &&
-      !this.uploadedImages.some(
-        image =>
-          image.isThumbnail
-      )
-    ) {
-
-      this.uploadedImages[0]
-        .isThumbnail = true;
-
-    }
-
-  }
-
-
-  // =========================================================
-  // GENERATE ID
-  // =========================================================
-
-  generateNewId(): void {
-
-    const id =
-      'PROP-' +
-      Math.random()
-        .toString(36)
-        .substring(2, 6)
-        .toUpperCase();
-
-
-    this.propertyForm
-      ?.get('uniqueId')
-      ?.setValue(id);
-
-
-    if (
-      navigator.vibrate
-    ) {
-
-      navigator.vibrate(10);
-
-    }
-
-  }
-
-
-  // =========================================================
-  // COPY PERMALINK
-  // =========================================================
-
-  copyPermalink(): void {
-
-    const fullUrl =
-      this.propertyForm
-        .get('permalink')
-        ?.value;
-
-
-    if (!fullUrl) {
-
-      return;
-
-    }
-
-
-    navigator.clipboard
-      .writeText(fullUrl)
-
-      .then(() => {
-
-        alert(
-          'Link copied to clipboard! ✅'
-        );
-
-      })
-
-      .catch(() => {
-
-        alert(
-          'Unable to copy link.'
-        );
-
-      });
-
-  }
-
-
-  // =========================================================
-  // SELECT LINK
-  // =========================================================
-
-  selectLink(
-    event: any
-  ): void {
-
-    event.target.select();
-
-  }
-
-
-  // =========================================================
-  // RESET FORM
-  // =========================================================
-
-  resetForm(): void {
-
-    this.propertyForm.reset(
-
-      {
-
-        id: '',
-
-        name: '',
-
-        permalink:
-          this.BASE_PERMALINK,
-
-        type: 'Rent',
-
-        description: '',
-
-        status: 'Renting',
-
-        is_featured: false,
-
-        priority: 10,
-
-        uniqueId: '',
-
-        price: 0,
-
-        area: '',
-
-        bhk: '1 BHK',
-
-        totalFloors: '',
-
-        propertyFloor: '',
-
-        furnishing: 'Unfurnished',
-
-        facing: 'East Facing',
-
-        bathrooms: '',
-
-        possession: 'Ready to Move',
-
-
-        location:
-          'Whitefield',
-
-        customLocation:
-          '',
-
-        address: '',
-
-        city:
-          'Bengaluru',
-
-        locality:
-          'Whitefield',
-
-        subLocality: '',
-
-        landmark: '',
-
-        state:
-          'Karnataka',
-
-        pincode: '',
-
-
-        latitude:
-          12.9698,
-
-        longitude:
-          77.7500,
-
-
-        rating: ''
-
-      }
-
-    );
-
-
-    this.uploadedImages = [];
-
-
-    this.amenities.forEach(
-      item =>
-        item.selected = false
-    );
-
-
-    this.categories.forEach(
-      category => {
-
-        category.checked =
-          category.name === 'Commercial';
-
-      }
-    );
-
-
-    if (this.quillInstance) {
-
-      this.quillInstance.root.innerHTML =
-        '';
-
-    }
-
-
-    if (
-      this.map &&
-      this.marker
-    ) {
-
-      this.map.setView(
-        [
-          12.9698,
-          77.7500
-        ],
-        13
-      );
-
-
-      this.marker.setLatLng(
-        [
-          12.9698,
-          77.7500
-        ]
-      );
-
-    }
-
-
-    this.priceMarketPosition =
-      20;
-
-
-    this.generateNewId();
-
-  }
-
-
-  // =========================================================
-  // LOAD PROPERTY FOR EDIT
+  // LOAD EXISTING PROPERTY
   // =========================================================
 
   loadPropertyDataToForm(
     id: string
   ): void {
 
+
+    console.log(
+      '🔎 Loading property:',
+      id
+    );
+
+
     this.propService
       .getPropertyById(id)
       .subscribe({
 
         next: (property: any) => {
+
+
+          console.log(
+            '📦 Existing property:',
+            property
+          );
+
 
           if (!property) {
 
@@ -2092,9 +653,9 @@ export class AddPropertyFormComponent
             );
 
 
-            this.router.navigate(
-              ['/dashboard']
-            );
+            this.router.navigate([
+              '/dashboard'
+            ]);
 
 
             return;
@@ -2103,91 +664,126 @@ export class AddPropertyFormComponent
 
 
           // -------------------------------------------------
-          // LOCATION COMPATIBILITY
+          // PATCH MAIN FORM
           // -------------------------------------------------
 
-          let savedLocation =
-            property.location ||
-            'Whitefield';
+          this.propertyForm.patchValue({
+
+            id:
+              property.id ||
+              property._id ||
+              '',
 
 
-          let savedCustomLocation =
-            property.customLocation ||
-            '';
+            name:
+              property.name ||
+              '',
 
 
-          /*
-           * Agar old property mein location kuch aisa
-           * saved hai:
-           *
-           * Whitefield, Bengaluru
-           *
-           * to dropdown mein direct match nahi milega.
-           *
-           * Isliye known location check kar rahe hain.
-           */
-
-          const matchedLocation =
-            this.knownLocations.find(
-              item =>
-                savedLocation
-                  .toLowerCase()
-                  .includes(
-                    item.toLowerCase()
-                  )
-            );
+            permalink:
+              property.permalink ||
+              this.BASE_PERMALINK,
 
 
-          if (matchedLocation) {
+            type:
+              property.type ||
+              'Rent',
 
-            savedLocation =
-              matchedLocation;
 
-            savedCustomLocation =
-              '';
+            description:
+              property.description ||
+              '',
 
-          }
 
-          else if (
-            !this.knownLocations.includes(
-              savedLocation
-            )
-          ) {
+            status:
+              property.status ||
+              'Renting',
 
-            savedCustomLocation =
-              savedCustomLocation ||
-              savedLocation;
 
-            savedLocation =
-              'Other';
+            is_featured:
+              property.is_featured ??
+              false,
 
-          }
+
+            priority:
+              property.priority ??
+              10,
+
+
+            uniqueId:
+              property.uniqueId ||
+              '',
+
+
+            price:
+              property.price ??
+              0,
+
+
+            area:
+              property.area ||
+              '',
+
+
+            bhk:
+              property.bhk ||
+              '1 BHK',
+
+
+            totalFloors:
+              property.totalFloors ??
+              '',
+
+
+            propertyFloor:
+              property.propertyFloor ??
+              '',
+
+
+            furnishing:
+              property.furnishing ||
+              'Unfurnished',
+
+
+            facing:
+              property.facing ||
+              'East Facing',
+
+
+            bathrooms:
+              property.bathrooms ??
+              '',
+
+
+            possession:
+              property.possession ||
+              'Ready to Move',
+
+
+            rating:
+              property.rating ??
+              '5',
+
+
+            latitude:
+              property.latitude ??
+              12.9698,
+
+
+            longitude:
+              property.longitude ??
+              77.7500,
+
+
+            location:
+              property.location ||
+              'Whitefield'
+
+          });
 
 
           // -------------------------------------------------
-          // FORM DATA
-          // -------------------------------------------------
-
-          this.propertyForm.patchValue(
-            {
-
-              ...property,
-
-              location:
-                savedLocation,
-
-              customLocation:
-                savedCustomLocation
-
-            },
-            {
-              emitEvent: false
-            }
-          );
-
-
-          // -------------------------------------------------
-          // PRICE
+          // HEATMAP
           // -------------------------------------------------
 
           this.calculateMarketHeatmap(
@@ -2200,7 +796,6 @@ export class AddPropertyFormComponent
           // -------------------------------------------------
 
           if (
-            property.gallery &&
             Array.isArray(
               property.gallery
             )
@@ -2208,13 +803,15 @@ export class AddPropertyFormComponent
 
             this.uploadedImages =
               property.gallery.map(
-                (image: any) => ({
+                (img: any) => ({
 
                   url:
-                    image.url,
+                    img.url ||
+                    '',
 
                   isThumbnail:
-                    image.main
+                    img.main === true ||
+                    img.isThumbnail === true
 
                 })
               );
@@ -2233,11 +830,10 @@ export class AddPropertyFormComponent
           ) {
 
             this.amenities.forEach(
-              amenity => {
+              (amenity: any) => {
 
                 amenity.selected =
-                  property
-                    .selectedAmenities
+                  property.selectedAmenities
                     .includes(
                       amenity.name
                     );
@@ -2259,11 +855,10 @@ export class AddPropertyFormComponent
           ) {
 
             this.categories.forEach(
-              category => {
+              (category: any) => {
 
                 category.checked =
-                  property
-                    .selectedCategories
+                  property.selectedCategories
                     .includes(
                       category.name
                     );
@@ -2275,70 +870,52 @@ export class AddPropertyFormComponent
 
 
           // -------------------------------------------------
-          // QUILL + MAP
+          // QUILL
+          //
+          // Quill is initialized after view.
+          // So use timeout as backup.
           // -------------------------------------------------
 
-          setTimeout(() => {
+          setTimeout(
+            () => {
 
-            if (
-              this.quillInstance &&
-              property.description
-            ) {
+              if (
+                this.quillInstance &&
+                property.description
+              ) {
 
-              this.quillInstance.root.innerHTML =
-                property.description;
+                this.quillInstance.root.innerHTML =
+                  property.description;
 
-            }
+              }
 
+              this.updateMapPosition();
 
-            if (
-              this.map &&
-              this.marker
-            ) {
+            },
 
-              const lat =
-                Number(
-                  property.latitude
-                ) || 12.9698;
-
-
-              const lng =
-                Number(
-                  property.longitude
-                ) || 77.7500;
-
-
-              this.map.setView(
-                [lat, lng],
-                15
-              );
-
-
-              this.marker.setLatLng(
-                [lat, lng]
-              );
-
-
-              this.map.invalidateSize();
-
-            }
-
-          }, 500);
+            300
+          );
 
         },
 
 
-        error: (error) => {
+        error: (error: any) => {
+
 
           console.error(
-            'Load property error:',
+            '❌ Property load error:',
             error
           );
 
 
           alert(
-            'Unable to load property data.'
+            'Property data load nahi ho pa raha.'
           );
+
+
+          this.router.navigate([
+            '/dashboard'
+          ]);
 
         }
 
@@ -2348,258 +925,1523 @@ export class AddPropertyFormComponent
 
 
   // =========================================================
-  // SUBMIT
+  // MARKET HEATMAP
   // =========================================================
 
-  onSubmit(): void {
+  calculateMarketHeatmap(
+    value: any
+  ): void {
 
-if (this.propertyForm.invalid) {
+    const price =
+      Number(value);
 
-  this.propertyForm.markAllAsTouched();
 
-  const firstInvalidControl =
-    document.querySelector(
-      '.ng-invalid[formControlName]'
-    ) as HTMLElement;
+    if (
+      !price ||
+      price < 5000000
+    ) {
 
-  if (firstInvalidControl) {
+      this.priceMarketPosition = 20;
 
-    firstInvalidControl.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
-    });
+    }
 
-    setTimeout(() => {
-      firstInvalidControl.focus();
-    }, 300);
+    else if (
+      price >= 5000000 &&
+      price < 15000000
+    ) {
+
+      this.priceMarketPosition = 55;
+
+    }
+
+    else {
+
+      this.priceMarketPosition = 85;
+
+    }
 
   }
 
-  return;
+
+  // =========================================================
+  // AFTER VIEW INIT
+  // =========================================================
+
+  ngAfterViewInit(): void {
+
+    setTimeout(
+      () => {
+
+        this.initSmartMap();
+
+        this.initQuill();
+
+      },
+
+      200
+    );
+
+  }
+
+
+  // =========================================================
+  // QUILL
+  // =========================================================
+
+  private initQuill(): void {
+
+
+    if (
+      typeof Quill === 'undefined'
+    ) {
+
+      console.warn(
+        '⚠️ Quill library not found.'
+      );
+
+      return;
+
+    }
+
+
+    const editorElement =
+      document.querySelector(
+        '#quill-editor'
+      );
+
+
+    if (!editorElement) {
+
+      console.warn(
+        '⚠️ #quill-editor not found.'
+      );
+
+      return;
+
+    }
+
+
+    // -------------------------------------------------------
+    // CREATE INSTANCE
+    // -------------------------------------------------------
+
+    this.quillInstance =
+      new Quill(
+        '#quill-editor',
+        {
+
+          modules: {
+
+            toolbar:
+              '#toolbar'
+
+          },
+
+          theme: 'snow',
+
+          placeholder:
+            'Property elements, overview aur specifications yahan likhein...'
+
+        }
+      );
+
+
+    // -------------------------------------------------------
+    // EXISTING DESCRIPTION
+    // -------------------------------------------------------
+
+    const description =
+      this.propertyForm
+        .get('description')
+        ?.value;
+
+
+    if (description) {
+
+      this.quillInstance.root.innerHTML =
+        description;
+
+    }
+
+
+    // -------------------------------------------------------
+    // TEXT CHANGE
+    // -------------------------------------------------------
+
+    this.quillInstance.on(
+      'text-change',
+      () => {
+
+        const html =
+          this.quillInstance.root
+            .innerHTML;
+
+
+        this.propertyForm
+          .get('description')
+          ?.setValue(
+            html,
+            {
+              emitEvent: false
+            }
+          );
+
+      }
+    );
+
+  }
+
+
+  // =========================================================
+  // MAP
+  // =========================================================
+
+  private initSmartMap(): void {
+
+
+    const mapElement =
+      document.getElementById(
+        'map-container'
+      );
+
+
+    if (
+      !mapElement ||
+      typeof L === 'undefined'
+    ) {
+
+      console.warn(
+        '⚠️ Map container or Leaflet not available.'
+      );
+
+      return;
+
+    }
+
+
+    const lat =
+      Number(
+        this.propertyForm
+          .get('latitude')
+          ?.value
+      ) ||
+      12.9698;
+
+
+    const lng =
+      Number(
+        this.propertyForm
+          .get('longitude')
+          ?.value
+      ) ||
+      77.7500;
+
+
+    // -------------------------------------------------------
+    // MAP
+    // -------------------------------------------------------
+
+    this.map =
+      L.map(
+        'map-container'
+      ).setView(
+        [
+          lat,
+          lng
+        ],
+        13
+      );
+
+
+    // -------------------------------------------------------
+    // OPEN STREET MAP
+    // -------------------------------------------------------
+
+    L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+
+        attribution:
+          '&copy; OpenStreetMap contributors'
+
+      }
+    ).addTo(
+      this.map
+    );
+
+
+    // -------------------------------------------------------
+    // MARKER
+    // -------------------------------------------------------
+
+    this.marker =
+      L.marker(
+        [
+          lat,
+          lng
+        ],
+        {
+          draggable: true
+        }
+      )
+      .addTo(
+        this.map
+      );
+
+
+    // -------------------------------------------------------
+    // MARKER DRAG
+    // -------------------------------------------------------
+
+    this.marker.on(
+      'dragend',
+      (event: any) => {
+
+        const position =
+          event.target
+            .getLatLng();
+
+
+        this.propertyForm.patchValue({
+
+          latitude:
+            Number(
+              position.lat
+            ).toFixed(6),
+
+
+          longitude:
+            Number(
+              position.lng
+            ).toFixed(6)
+
+        });
+
+
+        this.reverseGeocode(
+          position.lat,
+          position.lng
+        );
+
+      }
+    );
+
+
+    // -------------------------------------------------------
+    // MAP REFRESH
+    // -------------------------------------------------------
+
+    setTimeout(
+      () => {
+
+        if (this.map) {
+
+          this.map.invalidateSize();
+
+        }
+
+      },
+
+      300
+    );
+
+  }
+
+
+  // =========================================================
+  // UPDATE MAP AFTER PROPERTY LOAD
+  // =========================================================
+
+  private updateMapPosition(): void {
+
+
+    if (
+      !this.map ||
+      !this.marker
+    ) {
+
+      return;
+
+    }
+
+
+    const lat =
+      Number(
+        this.propertyForm
+          .get('latitude')
+          ?.value
+      ) ||
+      12.9698;
+
+
+    const lng =
+      Number(
+        this.propertyForm
+          .get('longitude')
+          ?.value
+      ) ||
+      77.7500;
+
+
+    const position =
+      [
+        lat,
+        lng
+      ];
+
+
+    this.map.setView(
+      position,
+      13
+    );
+
+
+    this.marker.setLatLng(
+      position
+    );
+
+
+    setTimeout(
+      () => {
+
+        this.map.invalidateSize();
+
+      },
+
+      200
+    );
+
+  }
+
+
+  // =========================================================
+  // REVERSE GEOCODING
+  // =========================================================
+
+  private reverseGeocode(
+    lat: number,
+    lng: number
+  ): void {
+
+
+    fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+    )
+
+      .then(
+        response =>
+          response.json()
+      )
+
+      .then(
+        data => {
+
+          const address =
+            data?.address;
+
+
+          if (!address) {
+
+            return;
+
+          }
+
+
+          const area =
+            address.suburb ||
+            address.neighbourhood ||
+            address.residential ||
+            address.city_district ||
+            address.city ||
+            'Bengaluru';
+
+
+          this.propertyForm.patchValue({
+
+            location:
+              area
+
+          });
+
+        }
+      )
+
+      .catch(
+        error => {
+
+          console.error(
+            'Reverse geocoding error:',
+            error
+          );
+
+        }
+      );
+
+  }
+
+
+
+
+  // =========================================================
+// LOCATION SELECT
+// =========================================================
+
+onLocationSelect(): void {
+
+  const location =
+    this.propertyForm
+      .get('location')
+      ?.value;
+
+  const locationCoordinates: {
+    [key: string]: {
+      lat: number;
+      lng: number;
+    }
+  } = {
+
+    'Whitefield': {
+      lat: 12.9698,
+      lng: 77.7500
+    },
+
+    'Hoodi': {
+      lat: 13.0012,
+      lng: 77.7147
+    },
+
+    'Marathahalli': {
+      lat: 12.9591,
+      lng: 77.6974
+    },
+
+    'KR Puram': {
+      lat: 13.0098,
+      lng: 77.6950
+    },
+
+    'Indiranagar': {
+      lat: 12.9784,
+      lng: 77.6408
+    },
+
+    'Electronic City': {
+      lat: 12.8452,
+      lng: 77.6602
+    },
+
+    'Sarjapur Road': {
+      lat: 12.9100,
+      lng: 77.6870
+    },
+
+    'HSR Layout': {
+      lat: 12.9116,
+      lng: 77.6474
+    },
+
+    'Hebbal': {
+      lat: 13.0358,
+      lng: 77.5970
+    },
+
+    'Yelahanka': {
+      lat: 13.1007,
+      lng: 77.5963
+    },
+
+    'Koramangala': {
+      lat: 12.9352,
+      lng: 77.6245
+    }
+
+  };
+
+
+  const coordinates =
+    locationCoordinates[location];
+
+
+  if (!coordinates) {
+
+    return;
+
+  }
+
+
+  // Update form coordinates
+
+  this.propertyForm.patchValue({
+
+    latitude:
+      coordinates.lat,
+
+    longitude:
+      coordinates.lng
+
+  });
+
+
+  // Update map and marker
+
+  if (
+    this.map &&
+    this.marker
+  ) {
+
+    const position = [
+      coordinates.lat,
+      coordinates.lng
+    ];
+
+
+    this.map.setView(
+      position,
+      13
+    );
+
+
+    this.marker.setLatLng(
+      position
+    );
+
+  }
+
 }
 
-    // =======================================================
-    // LOGGED USER
-    // =======================================================
 
-    let storedUser: any = null;
+  // =========================================================
+  // AI DESCRIPTION
+  // =========================================================
 
 
-    try {
+generateDescriptionWithAI(): void {
+  if (!this.propertyForm) {
+    return;
+  }
 
-      storedUser =
-        JSON.parse(
-          localStorage.getItem(
-            'user'
-          ) || 'null'
+  const form = this.propertyForm.value;
+
+  if (!form.name) {
+    alert('Pehle property ka naam enter karein!');
+    return;
+  }
+
+  this.isAiGenerating = true;
+
+  const propertyData = {
+
+    name: form.name,
+
+    type: form.type,
+
+    status: form.status,
+
+    price: form.price,
+
+    area: form.area,
+
+    bhk: form.bhk,
+
+    totalFloors: form.totalFloors,
+
+    propertyFloor: form.propertyFloor,
+
+    furnishing: form.furnishing,
+
+    facing: form.facing,
+
+    bathrooms: form.bathrooms,
+
+    possession: form.possession,
+
+    location: form.location,
+
+    address: form.address,
+
+    city: form.city,
+
+    locality: form.locality,
+
+    subLocality: form.subLocality,
+
+    landmark: form.landmark,
+
+    state: form.state,
+
+    pincode: form.pincode,
+
+    amenities: this.amenities
+      .filter((item: any) => item.selected)
+      .map((item: any) => item.name)
+      .join(', ')
+
+  };
+
+
+  this.propService
+    .generateAIDescription(propertyData)
+    .subscribe({
+
+      next: (response: any) => {
+
+        if (
+          response?.success &&
+          response?.text
+        ) {
+
+          const aiText = response.text;
+
+          // Form description update
+          this.propertyForm.patchValue({
+            description: aiText
+          });
+
+          // Quill editor update
+          if (this.quillInstance) {
+
+            this.quillInstance.root.innerHTML =
+              aiText;
+
+          } else {
+
+            const editor =
+              document.querySelector('.ql-editor');
+
+            if (editor) {
+              editor.innerHTML = aiText;
+            }
+
+          }
+
+        } else {
+
+          alert(
+            response?.message ||
+            'AI description generate nahi ho paya.'
+          );
+
+        }
+
+        this.isAiGenerating = false;
+
+      },
+
+      error: (error: any) => {
+
+        console.error(
+          'AI Description Error:',
+          error
+        );
+
+        alert(
+          'AI description generate nahi ho paya. Backend check karein.'
+        );
+
+        this.isAiGenerating = false;
+
+      }
+
+    });
+
+}
+
+
+  // =========================================================
+  // AMENITY
+  // =========================================================
+
+  toggleAmenity(
+    id: number
+  ): void {
+
+
+    const item =
+      this.amenities.find(
+        (amenity: any) =>
+          amenity.id === id
+      );
+
+
+    if (item) {
+
+      item.selected =
+        !item.selected;
+
+    }
+
+  }
+
+
+  // =========================================================
+  // CATEGORY
+  // =========================================================
+
+  onCategoryChange(
+    categoryName: string
+  ): void {
+
+
+    const category =
+      this.categories.find(
+        (item: any) =>
+          item.name === categoryName
+      );
+
+
+    if (category) {
+
+      category.checked =
+        !category.checked;
+
+    }
+
+  }
+
+
+  // =========================================================
+  // IMAGE UPLOAD
+  // =========================================================
+
+  handleProactiveUpload(
+    event: any
+  ): void {
+
+
+    const files =
+      event?.target?.files;
+
+
+    if (
+      !files ||
+      files.length === 0
+    ) {
+
+      return;
+
+    }
+
+
+    // -------------------------------------------------------
+    // MAX 10 IMAGES
+    // -------------------------------------------------------
+
+    const remainingSlots =
+      10 -
+      this.uploadedImages.length;
+
+
+    if (
+      remainingSlots <= 0
+    ) {
+
+      alert(
+        'Maximum 10 images allowed.'
+      );
+
+      return;
+
+    }
+
+
+    const selectedFiles =
+      Array.from(files)
+        .slice(
+          0,
+          remainingSlots
+        ) as File[];
+
+
+    selectedFiles.forEach(
+      (file: File) => {
+
+
+        if (
+          !file.type.startsWith(
+            'image/'
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload =
+          (e: any) => {
+
+
+            const isFirstImage =
+              this.uploadedImages.length === 0;
+
+
+            this.uploadedImages.push({
+
+              url:
+                e.target.result,
+
+              file:
+                file,
+
+              isThumbnail:
+                isFirstImage
+
+            });
+
+          };
+
+
+        reader.readAsDataURL(
+          file
+        );
+
+      }
+    );
+
+
+    // Reset file input
+    if (
+      event.target
+    ) {
+
+      event.target.value = '';
+
+    }
+
+  }
+
+
+  // =========================================================
+  // SET THUMBNAIL
+  // =========================================================
+
+  setThumbnail(
+    index: number
+  ): void {
+
+
+    if (
+      index < 0 ||
+      index >=
+        this.uploadedImages.length
+    ) {
+
+      return;
+
+    }
+
+
+    this.uploadedImages.forEach(
+      (
+        image: any,
+        imageIndex: number
+      ) => {
+
+        image.isThumbnail =
+          imageIndex === index;
+
+      }
+    );
+
+  }
+
+
+  // =========================================================
+  // DELETE IMAGE
+  // =========================================================
+
+  deleteImage(
+    index: number
+  ): void {
+
+
+    if (
+      index < 0 ||
+      index >=
+        this.uploadedImages.length
+    ) {
+
+      return;
+
+    }
+
+
+    const deletingThumbnail =
+      this.uploadedImages[index]
+        ?.isThumbnail;
+
+
+    this.uploadedImages.splice(
+      index,
+      1
+    );
+
+
+    // -------------------------------------------------------
+    // ALWAYS KEEP ONE MAIN PHOTO
+    // -------------------------------------------------------
+
+    if (
+      this.uploadedImages.length > 0 &&
+      (
+        deletingThumbnail ||
+        !this.uploadedImages.some(
+          (image: any) =>
+            image.isThumbnail
+        )
+      )
+    ) {
+
+      this.uploadedImages[0]
+        .isThumbnail = true;
+
+    }
+
+  }
+
+
+  // =========================================================
+  // GENERATE SYSTEM ID
+  // =========================================================
+
+  generateNewId(): void {
+
+
+    if (
+      !this.propertyForm
+    ) {
+
+      return;
+
+    }
+
+
+    const id =
+      'PROP-' +
+      Math.random()
+        .toString(36)
+        .substring(2, 6)
+        .toUpperCase();
+
+
+    this.propertyForm
+      .get('uniqueId')
+      ?.setValue(id);
+
+
+    if (
+      typeof navigator !==
+      'undefined' &&
+      navigator.vibrate
+    ) {
+
+      navigator.vibrate(10);
+
+    }
+
+  }
+
+
+  // =========================================================
+  // COPY PERMALINK
+  // =========================================================
+
+  copyPermalink(): void {
+
+
+    const fullUrl =
+      this.propertyForm
+        .get('permalink')
+        ?.value;
+
+
+    if (!fullUrl) {
+
+      return;
+
+    }
+
+
+    if (
+      navigator.clipboard
+    ) {
+
+      navigator.clipboard
+        .writeText(
+          fullUrl
+        )
+
+        .then(
+          () => {
+
+            alert(
+              'Link copied to clipboard! ✅'
+            );
+
+          }
+        )
+
+        .catch(
+          () => {
+
+            alert(
+              'Link copy nahi ho saka.'
+            );
+
+          }
         );
 
     }
 
-    catch {
+  }
 
-      storedUser = null;
+
+  // =========================================================
+  // SELECT LINK
+  // =========================================================
+
+  selectLink(
+    event: any
+  ): void {
+
+    event?.target?.select();
+
+  }
+
+
+  // =========================================================
+  // RESET FORM
+  // =========================================================
+
+  resetForm(): void {
+
+
+    this.isEditMode = false;
+
+    this.editingPropertyId = null;
+
+
+    this.propertyForm.reset({
+
+      id: '',
+
+      name: '',
+
+      permalink:
+        this.BASE_PERMALINK,
+
+      type:
+        'Rent',
+
+      description:
+        '',
+
+      status:
+        'Renting',
+
+      is_featured:
+        false,
+
+      priority:
+        10,
+
+      uniqueId:
+        '',
+
+      price:
+        0,
+
+      area:
+        '',
+
+      bhk:
+        '1 BHK',
+
+      totalFloors:
+        '',
+
+      propertyFloor:
+        '',
+
+      furnishing:
+        'Unfurnished',
+
+      facing:
+        'East Facing',
+
+      bathrooms:
+        '',
+
+      possession:
+        'Ready to Move',
+
+      rating:
+        '5',
+
+      latitude:
+        12.9698,
+
+      longitude:
+        77.7500,
+
+      location:
+        'Whitefield'
+
+    });
+
+
+    this.uploadedImages = [];
+
+
+    this.amenities.forEach(
+      (amenity: any) => {
+
+        amenity.selected =
+          false;
+
+      }
+    );
+
+
+    this.categories.forEach(
+      (category: any) => {
+
+        category.checked =
+          category.name ===
+          'Commercial';
+
+      }
+    );
+
+
+    this.generateNewId();
+
+
+    // -------------------------------------------------------
+    // CLEAR QUILL
+    // -------------------------------------------------------
+
+    if (
+      this.quillInstance
+    ) {
+
+      this.quillInstance.root.innerHTML =
+        '';
 
     }
 
 
-    // =======================================================
-    // FINAL LOCATION
-    // =======================================================
+    // -------------------------------------------------------
+    // RESET MAP
+    // -------------------------------------------------------
 
-    const finalLocation =
-      this.getFinalLocation();
+    if (
+      this.map &&
+      this.marker
+    ) {
 
-
-    // =======================================================
-    // PAYLOAD
-    // =======================================================
-
-    const compiledPayload = {
-
-      ...this.propertyForm.value,
-
-
-      // IMPORTANT:
-      // Final location yahan save hogi.
-
-      location:
-        finalLocation,
+      const position =
+        [
+          12.9698,
+          77.7500
+        ];
 
 
-      postedById:
-        storedUser?.id ||
-        storedUser?._id ||
-        '',
+      this.map.setView(
+        position,
+        13
+      );
 
 
-      postedByEmail:
-        storedUser?.email ||
-        localStorage.getItem(
-          'userEmail'
-        ) ||
-        '',
+      this.marker.setLatLng(
+        position
+      );
+
+    }
 
 
-      postedByName:
-        storedUser?.name ||
-        localStorage.getItem(
-          'userName'
-        ) ||
-        '',
+    this.priceMarketPosition =
+      20;
+
+  }
 
 
-      priceAnalysis:
-        this.priceMarketPosition,
+  showError(controlName: string): boolean {
+  const control = this.propertyForm?.get(controlName);
+
+  return !!(
+    control &&
+    control.invalid &&
+    (control.touched || control.dirty)
+  );
+}
+
+  // =========================================================
+  // SUBMIT
+  // =========================================================
+
+// =========================================================
+// SUBMIT
+// =========================================================
+
+onSubmit(): void {
+
+  // -------------------------------------------------------
+  // VALIDATION
+  // -------------------------------------------------------
+
+  if (this.propertyForm.invalid) {
+
+    this.propertyForm.markAllAsTouched();
+
+    alert(
+      'Please fill out all required parameters highlighted with an asterisk.'
+    );
+
+    return;
+  }
 
 
-      selectedAmenities:
+  // -------------------------------------------------------
+  // GET DESCRIPTION FROM QUILL
+  // -------------------------------------------------------
 
-        this.amenities
+  if (this.quillInstance) {
 
-          .filter(
-            item =>
-              item.selected
-          )
+    this.propertyForm
+      .get('description')
+      ?.setValue(
+        this.quillInstance.root.innerHTML,
+        {
+          emitEvent: false
+        }
+      );
 
-          .map(
-            item =>
-              item.name
-          ),
-
-
-      selectedCategories:
-
-        this.categories
-
-          .filter(
-            category =>
-              category.checked
-          )
-
-          .map(
-            category =>
-              category.name
-          ),
+  }
 
 
-      gallery:
+  // -------------------------------------------------------
+  // CREATE FINAL PAYLOAD
+  // -------------------------------------------------------
 
-        this.uploadedImages.map(
-          image => ({
+  const formValue =
+    this.propertyForm.value;
 
-            url:
-              image.url,
 
-            main:
-              image.isThumbnail
+  const compiledPayload = {
 
-          })
+    ...formValue,
+
+    priceAnalysis:
+      this.priceMarketPosition,
+
+    selectedAmenities:
+      this.amenities
+        .filter(
+          (amenity: any) =>
+            amenity.selected
         )
+        .map(
+          (amenity: any) =>
+            amenity.name
+        ),
 
-    };
+    selectedCategories:
+      this.categories
+        .filter(
+          (category: any) =>
+            category.checked
+        )
+        .map(
+          (category: any) =>
+            category.name
+        ),
 
+    gallery:
+      this.uploadedImages.map(
+        (image: any) => ({
+
+          url:
+            image.url,
+
+          main:
+            image.isThumbnail === true
+
+        })
+      )
+
+  };
+
+
+  console.log(
+    '📤 FINAL PROPERTY PAYLOAD:',
+    compiledPayload
+  );
+
+
+  // =======================================================
+  // EDIT → UPDATE EXISTING RECORD
+  // =======================================================
+
+  if (
+    this.isEditMode &&
+    this.editingPropertyId
+  ) {
 
     console.log(
-      'PROPERTY PAYLOAD:',
-      compiledPayload
+      '✏️ UPDATING PROPERTY:',
+      this.editingPropertyId
     );
 
 
-    // =======================================================
-    // EDIT
-    // =======================================================
+    this.propService
+      .updateProperty(
+        this.editingPropertyId,
+        compiledPayload
+      )
 
-    if (
-      this.isEditMode &&
-      this.editingPropertyId
-    ) {
+      .subscribe({
 
-      this.propService
-        .deleteProperty(
-          this.editingPropertyId
-        )
-        .subscribe({
+        next:
+          (response: any) => {
 
-          next: () => {
-
-            this.saveDataDirectlyToService(
-              compiledPayload
+            console.log(
+              '✅ PROPERTY UPDATED:',
+              response
             );
+
+
+            alert(
+              'Property Successfully Updated on AcchaSolution! 🚀'
+            );
+
+
+            // ---------------------------------------------
+            // AFTER UPDATE → HOME → CURATED PROPERTIES
+            // ---------------------------------------------
+
+            this.router
+              .navigateByUrl('/home')
+              .then(() => {
+
+                setTimeout(() => {
+
+                  const curatedSection =
+                    document.getElementById(
+                      'curated-properties'
+                    );
+
+
+                  if (curatedSection) {
+
+                    curatedSection.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+
+                  }
+
+                }, 300);
+
+              });
 
           },
 
 
-          error: (error) => {
+        error:
+          (error: any) => {
 
             console.error(
-              'Delete old property error:',
+              '❌ UPDATE ERROR:',
               error
             );
 
 
             alert(
-              'Unable to update old property record.'
+              'Database update error. Property update nahi ho paya.'
             );
 
           }
 
-        });
-
-    }
+      });
 
 
-    // =======================================================
-    // NEW PROPERTY
-    // =======================================================
-
-    else {
-
-      this.saveDataDirectlyToService(
-        compiledPayload
-      );
-
-    }
+    return;
 
   }
 
 
-  // =========================================================
-  // SAVE SERVICE
-  // =========================================================
+  // =======================================================
+  // NEW → CREATE
+  // =======================================================
 
-  private saveDataDirectlyToService(
-    payload: any
-  ): void {
+  console.log(
+    '🆕 CREATING NEW PROPERTY'
+  );
 
-    this.propService
-      .addProperty(payload)
-      .subscribe({
 
-        next: () => {
+  this.propService
+    .addProperty(
+      compiledPayload
+    )
+
+    .subscribe({
+
+      next:
+        (response: any) => {
+
+          console.log(
+            '✅ PROPERTY CREATED:',
+            response
+          );
+
 
           alert(
-
-            this.isEditMode
-
-              ? 'Property Successfully Updated on AcchaSolution! 🚀'
-
-              : 'Property Successfully Listed! 🚀'
-
+            'Property successfully listed! 🚀'
           );
 
 
-          this.router.navigateByUrl(
-            '/home'
-          );
+          // ---------------------------------------------
+          // AFTER CREATE → HOME → CURATED PROPERTIES
+          // ---------------------------------------------
+
+          this.router
+            .navigateByUrl('/home')
+            .then(() => {
+
+              setTimeout(() => {
+
+                const curatedSection =
+                  document.getElementById(
+                    'curated-properties'
+                  );
+
+
+                if (curatedSection) {
+
+                  curatedSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+
+                }
+
+              }, 300);
+
+            });
 
         },
 
 
-        error: (error: any) => {
+      error:
+        (error: any) => {
 
           console.error(
-            'Property save error:',
+            '❌ CREATE ERROR:',
             error
           );
 
@@ -2610,253 +2452,26 @@ if (this.propertyForm.invalid) {
 
         }
 
-      });
+    });
 
-  }
+}
 
-
-  // =========================================================
-  // AI DESCRIPTION
-  // =========================================================
-
-  generateDescriptionWithAI(): void {
-
-    const currentFormValues =
-      this.propertyForm.value;
-
-
-    if (
-      !currentFormValues.name ||
-      currentFormValues.name.trim().length < 3
-    ) {
-
-      alert(
-        'Please enter Property Name first (minimum 3 characters).'
-      );
-
-
-      return;
-
-    }
-
-
-    this.isAiGenerating =
-      true;
-
-
-    const activeAmenitiesList =
-
-      this.amenities
-
-        .filter(
-          item =>
-            item.selected
-        )
-
-        .map(
-          item =>
-            item.name
-        )
-
-        .join(', ');
-
-
-    const activeCategoryType =
-
-      this.categories
-
-        .filter(
-          category =>
-            category.checked
-        )
-
-        .map(
-          category =>
-            category.name
-        )
-
-        .join(' / ');
-
-
-    const payload = {
-
-      apartmentName:
-        currentFormValues.name,
-
-
-      location:
-        this.getFinalLocation(),
-
-
-      bhk:
-        currentFormValues.bhk
-          ? currentFormValues.bhk
-              .replace(
-                /[^0-9]/g,
-                ''
-              )
-          : '1',
-
-
-      budget:
-        currentFormValues.price
-          ? `₹${currentFormValues.price}`
-          : 'Market Competitive Pricing',
-
-
-      amenities:
-
-        `Category Spec:
-        ${activeCategoryType || 'Residential'}.
-
-        Specs:
-
-        Furnishing level:
-        ${currentFormValues.furnishing},
-
-        Facing:
-        ${currentFormValues.facing},
-
-        Footprint Area:
-        ${currentFormValues.area || 'Standard'} Sq.Ft,
-
-        Bathrooms:
-        ${currentFormValues.bathrooms || '1'},
-
-        Floor Matrix:
-        ${currentFormValues.propertyFloor}
-        of
-        ${currentFormValues.totalFloors}
-        total floors.
-
-        Extras:
-        ${
-          activeAmenitiesList ||
-          'Standard community benefits'
-        }.
-
-        Deal Mode:
-        ${currentFormValues.type}`
-
-    };
-
-
-    console.log(
-      'Sending AI payload:',
-      payload
-    );
-
-
-    this.http
-      .post<any>(
-        'http://localhost:5000/api/ai/generate-description',
-        payload
-      )
-      .subscribe({
-
-        next: (
-          response: any
-        ) => {
-
-          this.isAiGenerating =
-            false;
-
-
-          if (
-            response &&
-            response.success &&
-            response.text
-          ) {
-
-            const aiText =
-              response.text;
-
-
-            this.propertyForm.patchValue(
-              {
-                description:
-                  aiText
-              }
-            );
-
-
-            if (
-              this.quillInstance
-            ) {
-
-              const formattedHTML =
-                aiText
-                  .replace(
-                    /\n/g,
-                    '<br>'
-                  );
-
-
-              this.quillInstance.root.innerHTML =
-                formattedHTML;
-
-            }
-
-          }
-
-          else {
-
-            alert(
-              'AI backend returned an invalid response.'
-            );
-
-          }
-
-        },
-
-
-        error: (
-          error: any
-        ) => {
-
-          console.error(
-            'AI Service Error:',
-            error
-          );
-
-
-          this.isAiGenerating =
-            false;
-
-
-          alert(
-            'AI server processing failed. Please try again.'
-          );
-
-        }
-
-      });
-
-  }
-
-
-  // =========================================================
-  // COMPATIBILITY
-  // =========================================================
-
-  generateAIDescription(): void {
-
-    this.generateDescriptionWithAI();
-
-  }
-
-
-  // =========================================================
+// =========================================================
   // DESTROY
   // =========================================================
 
   ngOnDestroy(): void {
 
-    if (this.map) {
+
+    if (
+      this.map
+    ) {
 
       this.map.remove();
 
       this.map = null;
+
+      this.marker = null;
 
     }
 
@@ -2866,4 +2481,19 @@ if (this.propertyForm.invalid) {
 
   }
 
+
+
+
+selectAllAmenities(): void {
+
+  const allSelected =
+    this.amenities.every(a => a.selected);
+
+  this.amenities.forEach(a => {
+    a.selected = !allSelected;
+  });
+
 }
+
+
+  }

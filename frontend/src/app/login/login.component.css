@@ -512,43 +512,115 @@
 
 
 /* =========================================================
-   OWNER / AGENT
+   OWNER / AGENT SELECTION
 ========================================================= */
 
 .selection-group {
+  width: 100%;
   display: flex;
-
-  gap: 15px;
-
+  gap: 12px;
   margin-bottom: 22px;
+  box-sizing: border-box;
 }
 
 .selection-group button {
   flex: 1;
+  min-height: 52px;
 
-  padding: 12px;
+  padding: 14px 20px;
 
-  border: 1px solid var(--gold);
+  border: 1.5px solid #d4af37;
+  border-radius: 12px;
 
   background: #ffffff;
-
-  border-radius: 10px;
+  color: #1a1a1a;
 
   cursor: pointer;
 
-  transition: 0.3s;
-
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
   font-weight: 600;
+
+  outline: none;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
+/* Hover */
 .selection-group button:hover {
   background: #faf7eb;
+  border-color: #c49f2f;
+  color: #1a1a1a;
 }
 
+/* Selected Owner / Agent */
 .selection-group button.active {
-  background: var(--charcoal);
+  background: #1a1a1a;
+  border-color: #1a1a1a;
 
-  color: var(--gold);
+  color: #d4af37;
+
+  box-shadow:
+    0 5px 14px rgba(26, 26, 26, 0.18);
+}
+
+/* Selected button hover */
+.selection-group button.active:hover {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #d4af37;
+
+  transform: translateY(-1px);
+}
+
+/* Click / press */
+.selection-group button:active {
+  transform: scale(0.98);
+}
+
+/* Keyboard focus */
+.selection-group button:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 55, 0.20);
+}
+
+/* Keep selected state even after focus moves away */
+.selection-group button.active:focus,
+.selection-group button.active:focus-visible {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #d4af37;
+
+  box-shadow:
+    0 5px 14px rgba(26, 26, 26, 0.18);
+}
+
+
+/* =========================================================
+   MOBILE OWNER / AGENT
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .selection-group {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .selection-group button {
+    min-height: 50px;
+    padding: 13px 10px;
+    font-size: 14px;
+  }
+
 }
 
 
