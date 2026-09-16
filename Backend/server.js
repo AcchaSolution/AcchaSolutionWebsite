@@ -28,13 +28,15 @@ connectDB();
 // =====================================================
 app.use(
   cors({
-    origin:
+    origin: [
       'http://localhost:4200',
       'https://acchasolution.com',
-      'https://www.acchasolution.com',
+      'https://www.acchasolution.com'
+    ],
     credentials: true
   })
 );
+
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
