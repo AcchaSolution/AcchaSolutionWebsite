@@ -28,7 +28,10 @@ connectDB();
 // =====================================================
 app.use(
   cors({
-    origin: 'http://localhost:4200', // Angular app request accepted perfectly
+    origin:
+      'http://localhost:4200',
+      'https://acchasolution.com',
+      'https://www.acchasolution.com',
     credentials: true
   })
 );
