@@ -20,6 +20,28 @@ const upload = multer({
   }
 });
 
+router.get('/test', async (req, res) => {
+  try {
+    const result = await cloudinary.api.ping();
+
+    return res.status(200).json({
+      success: true,
+      message: 'Cloudinary connection working',
+      result
+    });
+
+  } catch (error) {
+
+    console.error('❌ CLOUDINARY TEST ERROR:', error);
+
+    return res.status(500).json({
+      success: false,
+      message: 'Cloudinary connection failed',
+      error: error.message
+    });
+  }
+});
+
 router.post(
   '/property-image',
   upload.single('image'),
