@@ -782,119 +782,462 @@
 
   <div class="mobile-navigation-inner">
 
-<a
-  routerLink="/"
-  routerLinkActive="mobile-active-link"
-  [routerLinkActiveOptions]="{ exact: true }"
-  class="mobile-nav-link"
-  (click)="closeMobileMenu()"
->
-  <span>01</span>
-  Home
-</a>
+    <!-- ================= HOME ================= -->
+
+    <a
+      routerLink="/"
+      routerLinkActive="mobile-active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="mobile-nav-link"
+      (click)="closeMobileMenu()"
+    >
+      Home
+    </a>
 
 
-<a
-  routerLink="/properties/sale"
-  routerLinkActive="mobile-active-link"
-  class="mobile-nav-link"
-  (click)="closeMobileMenu()"
->
-  <span>02</span>
-  Sale
-</a>
+    <!-- ================= SALE ================= -->
+
+    <div class="mobile-accordion-item">
+
+      <button
+        type="button"
+        class="mobile-accordion-button"
+        [class.mobile-accordion-open]="mobileSaleOpen"
+        (click)="toggleMobileSection('sale')"
+      >
+        <span class="mobile-menu-number"></span>
+
+        <span class="mobile-menu-title">
+          Sale
+        </span>
+
+        <span class="mobile-menu-arrow">
+          {{ mobileSaleOpen ? '−' : '+' }}
+        </span>
+      </button>
 
 
-<a
-  routerLink="/properties/rent"
-  routerLinkActive="mobile-active-link"
-  class="mobile-nav-link"
-  (click)="closeMobileMenu()"
->
-  <span>03</span>
-  Rent
-</a>
+      <div
+        class="mobile-accordion-content"
+        *ngIf="mobileSaleOpen"
+      >
+
+        <div class="mobile-submenu-heading">
+          📍 Browse Sale
+        </div>
+
+        <a
+          routerLink="/properties/sale"
+          (click)="closeMobileMenu()"
+        >
+          All Sale Properties
+        </a>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ status: 'Ready' }"
+          (click)="closeMobileMenu()"
+        >
+          Ready To Move
+        </a>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ newProject: true }"
+          (click)="closeMobileMenu()"
+        >
+          New Projects
+        </a>
 
 
-<a
-  routerLink="/services/cleaning"
-  routerLinkActive="mobile-active-link"
-  class="mobile-nav-link"
-  (click)="closeMobileMenu()"
->
-  <span>04</span>
-  Services
-</a>
+        <div class="mobile-submenu-heading">
+          🏠 Property Types
+        </div>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ type: 'Flat' }"
+          (click)="closeMobileMenu()"
+        >
+          Flats & Apartments
+        </a>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ type: 'Villa' }"
+          (click)="closeMobileMenu()"
+        >
+          Independent Villas
+        </a>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ type: 'Plot' }"
+          (click)="closeMobileMenu()"
+        >
+          Residential Plots
+        </a>
 
 
-<a
-  routerLink="/about"
-  routerLinkActive="mobile-active-link"
-  class="mobile-nav-link"
-  (click)="closeMobileMenu()"
->
-  <span>05</span>
-  About Us
-</a>
+        <div class="mobile-submenu-heading">
+          🛏️ Home Size
+        </div>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ bhk: '2 BHK' }"
+          (click)="closeMobileMenu()"
+        >
+          2 BHK Homes
+        </a>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ bhk: '3 BHK' }"
+          (click)="closeMobileMenu()"
+        >
+          3 BHK Homes
+        </a>
+
+        <a
+          [routerLink]="['/properties/sale']"
+          [queryParams]="{ bhk: '4+ BHK' }"
+          (click)="closeMobileMenu()"
+        >
+          4+ BHK Homes
+        </a>
 
 
-<!-- PORTFOLIO -->
+        <a
+          routerLink="/properties/sale"
+          class="mobile-submenu-cta"
+          (click)="closeMobileMenu()"
+        >
+          Explore All Sale →
+        </a>
 
-<!-- <a
-  routerLink="/portfolio"
-  routerLinkActive="mobile-active-link"
-  class="mobile-nav-link mobile-portfolio-link"
-  (click)="closeMobileMenu()"
->
-  <span>06</span>
-  Portfolio
-  <b>↗</b>
-</a> -->
+      </div>
 
-
-<a
-  routerLink="/contact"
-  routerLinkActive="mobile-active-link"
-  class="mobile-nav-link"
-  (click)="closeMobileMenu()"
->
-  <span>07</span>
-  Contact
-</a>
+    </div>
 
 
-<a
-  routerLink="/agents-view"
-  routerLinkActive="mobile-active-link"
-  class="mobile-nav-link"
-  (click)="closeMobileMenu()"
->
-  <span>08</span>
-  Agent
-</a>
+    <!-- ================= RENT ================= -->
+
+    <div class="mobile-accordion-item">
+
+      <button
+        type="button"
+        class="mobile-accordion-button"
+        [class.mobile-accordion-open]="mobileRentOpen"
+        (click)="toggleMobileSection('rent')"
+      >
+        <span class="mobile-menu-number"></span>
+
+        <span class="mobile-menu-title">
+          Rent
+        </span>
+
+        <span class="mobile-menu-arrow">
+          {{ mobileRentOpen ? '−' : '+' }}
+        </span>
+      </button>
 
 
-<div class="mobile-menu-divider"></div>
+      <div
+        class="mobile-accordion-content"
+        *ngIf="mobileRentOpen"
+      >
+
+        <div class="mobile-submenu-heading">
+          🔎 Rental Discovery
+        </div>
+
+        <a
+          routerLink="/properties/rent"
+          (click)="closeMobileMenu()"
+        >
+          All Rental Properties
+        </a>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ status: 'Ready' }"
+          (click)="closeMobileMenu()"
+        >
+          Ready To Move Rentals
+        </a>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ newProject: true }"
+          (click)="closeMobileMenu()"
+        >
+          New Rental Projects
+        </a>
 
 
-<button
-  type="button"
-  class="mobile-post-property"
-  routerLink="/post-property"
-  (click)="closeMobileMenu()"
->
-  Post Property
-  <span>FREE</span>
-</button>
+        <div class="mobile-submenu-heading">
+          🏠 Property Types
+        </div>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ type: 'Flat' }"
+          (click)="closeMobileMenu()"
+        >
+          Flat for Rent
+        </a>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ type: 'House' }"
+          (click)="closeMobileMenu()"
+        >
+          House for Rent
+        </a>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ type: 'Villa' }"
+          (click)="closeMobileMenu()"
+        >
+          Villa for Rent
+        </a>
 
 
-<a
-  routerLink="/login"
-  class="mobile-login-link"
-  (click)="closeMobileMenu()"
->
-  Login →
-</a>
+        <div class="mobile-submenu-heading">
+          💳 Rental Budget
+        </div>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ budget: 'under-20000' }"
+          (click)="closeMobileMenu()"
+        >
+          Under ₹20,000
+        </a>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ budget: '20000-50000' }"
+          (click)="closeMobileMenu()"
+        >
+          ₹20,000 - ₹50,000
+        </a>
+
+        <a
+          [routerLink]="['/properties/rent']"
+          [queryParams]="{ budget: 'above-50000' }"
+          (click)="closeMobileMenu()"
+        >
+          Above ₹50,000
+        </a>
+
+
+        <a
+          routerLink="/properties/rent"
+          class="mobile-submenu-cta"
+          (click)="closeMobileMenu()"
+        >
+          View All Rentals →
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= SERVICES ================= -->
+
+    <div class="mobile-accordion-item">
+
+      <button
+        type="button"
+        class="mobile-accordion-button"
+        [class.mobile-accordion-open]="mobileServicesOpen"
+        (click)="toggleMobileSection('services')"
+      >
+        <span class="mobile-menu-number"></span>
+
+        <span class="mobile-menu-title">
+          Services
+        </span>
+
+        <span class="mobile-menu-arrow">
+          {{ mobileServicesOpen ? '−' : '+' }}
+        </span>
+      </button>
+
+
+      <div
+        class="mobile-accordion-content"
+        *ngIf="mobileServicesOpen"
+      >
+
+        <div class="mobile-submenu-heading">
+          🧹 Elite Cleaning
+        </div>
+
+        <a
+          routerLink="/full-home-cleaning"
+          [queryParams]="{ type: 'deep' }"
+          (click)="closeMobileMenu()"
+        >
+          Full Home Deep Cleaning
+        </a>
+
+        <a
+          routerLink="/kitchen-bathroom-cleaning"
+          [queryParams]="{ type: 'kitchen' }"
+          (click)="closeMobileMenu()"
+        >
+          Kitchen & Bathroom Intense
+        </a>
+
+        <a
+          routerLink="/sofa-carpet-claening"
+          [queryParams]="{ type: 'sofa' }"
+          (click)="closeMobileMenu()"
+        >
+          Sofa & Carpet Shampooing
+        </a>
+
+
+        <div class="mobile-submenu-heading">
+          🎨 Master Painting
+        </div>
+
+        <a
+          routerLink="/luxury-painting"
+          [queryParams]="{ type: 'interior' }"
+          (click)="closeMobileMenu()"
+        >
+          Interior Luxury Wallcare
+        </a>
+
+        <a
+          routerLink="/weatherproofing"
+          [queryParams]="{ type: 'exterior' }"
+          (click)="closeMobileMenu()"
+        >
+          Exterior Weatherproofing
+        </a>
+
+        <a
+          routerLink="/designer-walpaper"
+          [queryParams]="{ type: 'texture' }"
+          (click)="closeMobileMenu()"
+        >
+          Designer Texture & Wallpapers
+        </a>
+
+
+        <div class="mobile-submenu-heading">
+          🤝 Legal & Deals
+        </div>
+
+        <a
+          routerLink="/property-verification"
+          [queryParams]="{ type: 'verification' }"
+          (click)="closeMobileMenu()"
+        >
+          Property Verification & Due Diligence
+        </a>
+
+        <a
+          routerLink="/rental-agreement"
+          [queryParams]="{ type: 'agreement' }"
+          (click)="closeMobileMenu()"
+        >
+          Instant Rental Agreement
+        </a>
+
+
+        <div class="mobile-submenu-heading">
+          ✨ Premium Benefits
+        </div>
+
+        <a
+          routerLink="/contact"
+          (click)="closeMobileMenu()"
+        >
+          Book Consult Session
+        </a>
+
+        <a
+          routerLink="/about"
+          class="highlight-royal-gold"
+          (click)="closeMobileMenu()"
+        >
+          🔥 Combo Offers Pack
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <a
+      routerLink="/about"
+      routerLinkActive="mobile-active-link"
+      class="mobile-nav-link"
+      (click)="closeMobileMenu()"
+    >
+      About Us
+    </a>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <a
+      routerLink="/contact"
+      routerLinkActive="mobile-active-link"
+      class="mobile-nav-link"
+      (click)="closeMobileMenu()"
+    >
+      Contact
+    </a>
+
+
+    <!-- ================= AGENT ================= -->
+
+    <a
+      routerLink="/agents-view"
+      routerLinkActive="mobile-active-link"
+      class="mobile-nav-link"
+      (click)="closeMobileMenu()"
+    >
+      Agent
+    </a>
+
+
+    <div class="mobile-menu-divider"></div>
+
+
+    <!-- ================= POST PROPERTY ================= -->
+
+    <button
+      type="button"
+      class="mobile-post-property"
+      routerLink="/post-property"
+      (click)="closeMobileMenu()"
+    >
+      Post Property
+      <span>FREE</span>
+    </button>
+
+
+    <!-- ================= LOGIN ================= -->
+
+    <a
+      routerLink="/login"
+      class="mobile-login-link"
+      (click)="closeMobileMenu()"
+    >
+      Login →
+    </a>
 
   </div>
 

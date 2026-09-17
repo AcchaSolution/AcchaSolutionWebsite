@@ -503,8 +503,8 @@ img {
   background:
     linear-gradient(
       135deg,
-      #f4d074,
-      #425436
+      #dfa651,
+      #7c4a2a
     ) !important;
 
   color: #ffffff !important;
@@ -519,8 +519,8 @@ img {
   background:
     linear-gradient(
       135deg,
-      #e6f081,
-      #599376
+      #f0c66a,
+      #4a3e3d
     ) !important;
 
   box-shadow:
@@ -826,8 +826,8 @@ img {
   background:
     linear-gradient(
       135deg,
-      #328490,
-      #d1ea8d
+      #dfa651,
+      #7c4a2a
     );
 
   color: #fff !important;
@@ -869,7 +869,7 @@ img {
     linear-gradient(
       180deg,
       #f7f3ef 0%,
-      #bbdf77 100%
+      #ead8c5 100%
     );
 
   overflow: hidden;
@@ -891,8 +891,8 @@ img {
   background:
     radial-gradient(
       circle,
-      rgba(131, 229, 218, 0.13),
-      transparent 68%
+      rgba(223, 166, 81, 0.18),
+      transparent 100%
     );
 
   pointer-events: none;
@@ -1105,7 +1105,7 @@ img {
   background:
     radial-gradient(
       circle,
-      rgba(78, 122, 30, 0.14),
+      rgba(223, 166, 81, 0.16),
       transparent 100%
     );
 
@@ -1340,7 +1340,7 @@ img {
     linear-gradient(
       180deg,
       #f1ebe5 0%,
-      #e4faf4 100%
+      #eee4da 100%
     );
 
   overflow: hidden;
@@ -1853,12 +1853,6 @@ img {
 
 /* ==========================================================================
    30. VIEW DETAILS
-   ==========================================================================
-
-   IMPORTANT:
-   ONLY ONE VIEW DETAILS RULE.
-   NO HOVER DEPENDENCY.
-   ALWAYS VISIBLE.
    ========================================================================== */
 
 .property-card .property-view-details-btn {
@@ -2068,10 +2062,16 @@ span:last-child {
 }
 
 .properties-view-all-btn:hover {
-  /* background: var(--accha-dark); */
-  background-color: #6f9a85;
+  background:
+    linear-gradient(
+      135deg,
+      var(--accha-gold),
+      #c99848
+    );
 
-  color: #fff;
+  border-color: var(--accha-gold);
+
+  color: var(--accha-dark);
 
   transform: translateY(-2px);
 
@@ -2308,9 +2308,9 @@ span:last-child {
   }
 
   .builder-logo-card {
-    flex-basis: 160px;
+    flex-basis: 145px;
 
-    width: 160px;
+    width: 145px;
   }
 
   .property-card .property-view-details-btn {
@@ -2514,7 +2514,9 @@ span:last-child {
   }
 
 
-  /* PROMO */
+  /* ========================================================================
+     PROMO
+     ======================================================================== */
 
   .promo-action-box-home {
     flex-direction: column;
@@ -2555,34 +2557,134 @@ span:last-child {
   }
 
 
-  /* PROJECTS */
+  /* ========================================================================
+     UPCOMING PROJECTS — MOBILE PREMIUM
+     ======================================================================== */
 
   .upcoming-projects-section {
-    padding: 58px 14px 65px;
+    padding: 52px 0 58px;
+
+    background:
+      linear-gradient(
+        180deg,
+        #f8f3ee 0%,
+        #ead8c5 100%
+      );
+
+    overflow: hidden;
   }
 
-  .projects-section-title,
-  .properties-section-title {
-    font-size: 2.15rem;
+  .upcoming-projects-section::before {
+    width: 260px;
+    height: 260px;
+
+    top: -100px;
+    right: -110px;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(223, 166, 81, 0.20),
+        transparent 70%
+      );
   }
 
-  .projects-section-description,
-  .properties-section-description {
-    font-size: 10px;
+  .projects-section-header {
+    width: 100%;
 
-    line-height: 1.7;
+    padding: 0 18px;
+
+    margin: 0 auto 24px;
+
+    text-align: center;
+  }
+
+  .projects-section-subtitle {
+    margin-bottom: 7px;
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+    color: #a17949;
+  }
+
+  .projects-section-title {
+    margin-bottom: 9px;
+
+    font-size: 2rem;
+
+    line-height: 1.05;
+
+    letter-spacing: -0.4px;
+  }
+
+  .projects-section-description {
+    max-width: 340px;
+
+    font-size: 9px;
+
+    line-height: 1.65;
   }
 
   .project-location-tabs {
-    gap: 6px;
+    width: 100%;
 
-    margin-bottom: 24px;
+    justify-content: flex-start;
+
+    flex-wrap: nowrap;
+
+    gap: 7px;
+
+    margin-bottom: 20px;
+
+    padding: 0 14px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+
+    scroll-behavior: smooth;
+  }
+
+  .project-location-tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .project-location-tab {
-    padding: 8px 12px;
+    flex: 0 0 auto;
+
+    padding: 8px 13px;
+
+    border: 1px solid #ddcdbd;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.82);
+
+    color: #6f5c51;
 
     font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.55px;
+
+    white-space: nowrap;
+
+    box-shadow:
+      0 4px 12px rgba(36, 24, 21, 0.04);
+  }
+
+  .project-location-tab.active {
+    border-color: #4a3e3d;
+
+    background: #4a3e3d;
+
+    color: #fff;
+
+    box-shadow:
+      0 7px 16px rgba(36, 24, 21, 0.16);
   }
 
   .builders-grid {
@@ -2592,19 +2694,21 @@ span:last-child {
 
     flex-direction: row;
 
-    align-items: center;
+    align-items: stretch;
 
-    justify-content: center;
+    justify-content: flex-start;
 
-    gap: 32px;
+    gap: 10px;
+
+    padding: 4px 14px 16px;
 
     overflow-x: auto;
 
     overflow-y: hidden;
 
-    padding: 12px 10px 22px;
+    scroll-snap-type: x mandatory;
 
-    scroll-behavior: smooth;
+    scroll-padding-left: 14px;
 
     scrollbar-width: none;
   }
@@ -2614,45 +2718,188 @@ span:last-child {
   }
 
   .builder-logo-card {
-    flex: 0 0 135px;
+    position: relative;
 
-    width: 135px;
+    flex: 0 0 108px;
 
-    height: 112px;
+    width: 108px;
+
+    height: 126px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 9px;
+
+    padding: 9px 7px 10px;
+
+    border: 1px solid rgba(223, 166, 81, 0.30);
+
+    border-radius: 17px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.96),
+        rgba(250, 244, 237, 0.96)
+      );
+
+    box-shadow:
+      0 8px 22px rgba(36, 24, 21, 0.07);
+
+    scroll-snap-align: start;
+
+    cursor: pointer;
+
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .builder-logo-card:active {
+    transform: scale(0.97);
+  }
+
+  .builder-logo-card::before {
+    content: '';
+
+    position: absolute;
+
+    width: 80px;
+    height: 80px;
+
+    top: 4px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(223, 166, 81, 0.20),
+        transparent 70%
+      );
+
+    opacity: 1;
+
+    pointer-events: none;
   }
 
   .builder-logo-wrapper {
-    width: 68px;
-    height: 68px;
+    position: relative;
+
+    z-index: 2;
+
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background:
+      linear-gradient(
+        145deg,
+        #fffaf4,
+        #eadbc9
+      );
+
+    border: 1px solid rgba(223, 166, 81, 0.48);
+
+    box-shadow:
+      0 7px 16px rgba(36, 24, 21, 0.09);
+
+    overflow: hidden;
+  }
+
+  .builder-logo-image {
+    width: 72%;
+    height: 72%;
+
+    object-fit: contain;
   }
 
   .builder-logo-fallback {
     font-size: 22px;
   }
 
+  .builder-name {
+    position: relative;
+
+    z-index: 3;
+
+    display: block;
+
+    width: 100%;
+
+    margin: 0;
+
+    color: #4a3e3d;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    line-height: 1.25;
+
+    letter-spacing: 0.25px;
+
+    text-align: center;
+
+    text-transform: uppercase;
+
+    display: -webkit-box;
+
+    -webkit-box-orient: vertical;
+
+    -webkit-line-clamp: 2;
+
+    overflow: hidden;
+  }
+
   .builder-project-details {
-    padding: 48px 14px 58px;
+    padding: 42px 14px 52px;
+
+    background: #fff;
+
+    border-top: 1px solid #eadfd5;
   }
 
   .selected-builder-header {
-    gap: 13px;
+    gap: 12px;
+
+    margin-bottom: 25px;
   }
 
   .selected-builder-logo {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
   }
 
   .selected-builder-info h2 {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .builder-projects-grid {
     grid-template-columns: 1fr;
+
+    gap: 13px;
   }
 
 
-  /* CURATED */
+  /* ========================================================================
+     CURATED PROPERTIES
+     ======================================================================== */
 
   .curated-properties-section {
     padding: 58px 14px 65px;
@@ -2660,6 +2907,16 @@ span:last-child {
 
   .properties-section-header {
     margin-bottom: 28px;
+  }
+
+  .properties-section-title {
+    font-size: 2.15rem;
+  }
+
+  .properties-section-description {
+    font-size: 10px;
+
+    line-height: 1.7;
   }
 
   .property-cards-grid {
@@ -2796,7 +3053,7 @@ span:last-child {
   }
 
 
-  /* VIEW DETAILS — ALWAYS VISIBLE */
+  /* VIEW DETAILS */
 
   .property-card .property-view-details-btn {
     width: 100%;
@@ -2841,7 +3098,9 @@ span:last-child {
   }
 
 
-  /* CTA */
+  /* ========================================================================
+     CTA
+     ======================================================================== */
 
   .home-property-cta-section {
     padding: 65px 15px;
@@ -2916,18 +3175,55 @@ span:last-child {
     flex: 1 1 100%;
   }
 
+
+  /* UPCOMING PROJECTS */
+
+  .projects-section-header {
+    padding: 0 14px;
+  }
+
+  .projects-section-title {
+    font-size: 1.85rem;
+  }
+
+  .projects-section-description {
+    font-size: 8px;
+  }
+
+  .project-location-tabs {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .builders-grid {
+    gap: 9px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .builder-logo-card {
-    flex: 0 0 120px;
+    flex: 0 0 101px;
 
-    width: 120px;
+    width: 101px;
 
-    height: 99px;
+    height: 120px;
+
+    padding: 8px 6px;
   }
 
   .builder-logo-wrapper {
-    width: 59px;
-    height: 59px;
+    width: 67px;
+
+    height: 67px;
   }
+
+  .builder-name {
+    font-size: 6.5px;
+  }
+
+
+  /* CURATED */
 
   .curated-properties-section {
     padding-left: 10px;
@@ -3040,6 +3336,9 @@ span:last-child {
     min-height: 40px;
   }
 
+
+  /* CTA */
+
   .home-property-cta-section {
     padding: 58px 12px;
   }
@@ -3080,18 +3379,44 @@ span:last-child {
     font-size: 8px;
   }
 
+
+  /* UPCOMING PROJECTS */
+
+  .projects-section-title {
+    font-size: 1.7rem;
+  }
+
+  .projects-section-description {
+    font-size: 7.5px;
+  }
+
+  .builders-grid {
+    gap: 8px;
+
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
   .builder-logo-card {
-    flex: 0 0 110px;
+    flex: 0 0 94px;
 
-    width: 110px;
+    width: 94px;
 
-    height: 92px;
+    height: 114px;
   }
 
   .builder-logo-wrapper {
-    width: 53px;
-    height: 53px;
+    width: 62px;
+
+    height: 62px;
   }
+
+  .builder-name {
+    font-size: 6px;
+  }
+
+
+  /* PROPERTY */
 
   .property-card {
     height: 158px;

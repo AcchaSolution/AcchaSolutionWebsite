@@ -821,263 +821,106 @@ export class DashboardComponent
   }
 
 
-  // =====================================================
-  // APPROVE AGENT
-  // =====================================================
+// =====================================================
+// APPROVE AGENT
+// =====================================================
 
-  grantAgentApproval(
-    agentId: string
-  ): void {
+async grantAgentApproval(agentId: string): Promise<void> {
 
-    console.log(
-      'APPROVAL BUTTON CLICKED'
-    );
-
-
-    console.log(
-      'Agent ID:',
-      agentId
-    );
-
-
-    this.authService
-      .approveAgent(agentId)
-      .subscribe({
-
-        // =============================================
-        // SUCCESS
-        // =============================================
-
-        next: (res: any) => {
-
-          console.log(
-            'APPROVAL API RESPONSE:',
-            res
-          );
-
-
-          if (
-            res?.success
-          ) {
-
-            alert(
-              'Agent approved successfully!'
-            );
-
-
-            // -----------------------------------------
-            // UPDATE SELECTED AGENT
-            // -----------------------------------------
-
-            if (
-              this.selectedAgent
-            ) {
-
-              this.selectedAgent.status =
-                'approved';
-
-            }
-
-
-            // -----------------------------------------
-            // REFRESH USERS
-            // -----------------------------------------
-
-            this.fetchUsers();
-
-
-            // -----------------------------------------
-            // AGENT LIST
-            // -----------------------------------------
-
-            this.viewMode =
-              'agents';
-
-
-            // -----------------------------------------
-            // CLEAR SELECTED AGENT
-            // -----------------------------------------
-
-            this.selectedAgent =
-              null;
-
-          }
-
-          else {
-
-            alert(
-              res?.message ||
-              'Agent approval failed.'
-            );
-
-          }
-
-        },
-
-
-        // =============================================
-        // ERROR
-        // =============================================
-
-        error: (error: any) => {
-
-          console.error(
-            'APPROVAL API ERROR:',
-            error
-          );
-
-
-          alert(
-            error?.error?.message ||
-            'Failed to approve agent.'
-          );
-
-        }
-
-      });
-
+  if (!agentId) {
+    alert('Agent ID not found.');
+    return;
   }
 
+  const confirmed = confirm(
+    'Do you want to approve this agent?'
+  );
 
-  // =====================================================
-  // REVOKE AGENT APPROVAL
-  // =====================================================
+  if (!confirmed) {
+    return;
+  }
 
-  revokeAgentApproval(
-    agentId: string
-  ): void {
+  try {
 
-    console.log(
-      'REVOKE APPROVAL REQUESTED:',
-      agentId
+    console.log('Approving agent:', agentId);
+
+    await this.authService.approveAgent(agentId);
+
+    alert('Agent approved successfully.');
+
+    // Refresh users from MongoDB
+    await this.fetchUsers();
+
+    // Find updated agent
+    const updatedAgent = this.agents.find(
+      (agent: any) =>
+        agent.id === agentId ||
+        agent._id === agentId
     );
 
+    if (updatedAgent) {
+      this.selectedAgent = updatedAgent;
+    }
 
-    this.authService
-      .revokeAgent(agentId)
-      .subscribe({
+    // Back to agent directory
+    this.viewMode = 'agents';
 
-        // =============================================
-        // SUCCESS
-        // =============================================
+  } catch (error) {
 
-        next: (res: any) => {
+    console.error(
+      'Agent approval failed:',
+      error
+    );
 
-          console.log(
-            '========== REVOKE API RESPONSE =========='
-          );
-
-
-          console.log(
-            res
-          );
-
-
-          console.log(
-            'Success:',
-            res?.success
-          );
-
-
-          console.log(
-            'Message:',
-            res?.message
-          );
-
-
-          console.log(
-            '========================================='
-          );
-
-
-          if (
-            res?.success === true
-          ) {
-
-            alert(
-              'Agent approval revoked successfully!'
-            );
-
-
-            // -----------------------------------------
-            // REFRESH USERS
-            // -----------------------------------------
-
-            this.fetchUsers();
-
-
-            // -----------------------------------------
-            // AGENT LIST
-            // -----------------------------------------
-
-            this.viewMode =
-              'agents';
-
-
-            // -----------------------------------------
-            // CLEAR SELECTED AGENT
-            // -----------------------------------------
-
-            this.selectedAgent =
-              null;
-
-          }
-
-          else {
-
-            alert(
-              res?.message ||
-              'Failed to revoke agent approval.'
-            );
-
-          }
-
-        },
-
-
-        // =============================================
-        // ERROR
-        // =============================================
-
-        error: (error: any) => {
-
-          console.error(
-            '========== REVOKE API ERROR =========='
-          );
-
-
-          console.error(
-            error
-          );
-
-
-          console.error(
-            'STATUS:',
-            error?.status
-          );
-
-
-          console.error(
-            'ERROR BODY:',
-            error?.error
-          );
-
-
-          console.error(
-            '======================================'
-          );
-
-
-          alert(
-            error?.error?.message ||
-            'Failed to revoke agent approval.'
-          );
-
-        }
-
-      });
-
+    alert(
+      'Agent approval failed. Please try again.'
+    );
   }
+}
+
+  // // =====================================================
+// REVOKE AGENT APPROVAL
+// =====================================================
+
+async revokeAgentApproval(agentId: string): Promise<void> {
+
+  if (!agentId) {
+    alert('Agent ID not found.');
+    return;
+  }
+
+  const confirmed = confirm(
+    'Do you want to move this agent back to pending?'
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  try {
+
+    console.log('Revoking agent approval:', agentId);
+
+    await this.authService.revokeAgentApproval(agentId);
+
+    alert('Agent moved to pending.');
+
+    await this.fetchUsers();
+
+    this.viewMode = 'agents';
+
+  } catch (error) {
+
+    console.error(
+      'Revoke approval failed:',
+      error
+    );
+
+    alert(
+      'Status update failed. Please try again.'
+    );
+  }
+}
 
 
   // =====================================================

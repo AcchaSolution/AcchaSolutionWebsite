@@ -199,17 +199,14 @@ approveAgent(agentId: string): Observable<any> {
 // REVOKE AGENT APPROVAL
 // =========================================================
 
-revokeAgent(agentId: string): Observable<any> {
-
-  console.log('REVOKE SERVICE ID:', agentId);
+revokeAgentApproval(agentId: string): Observable<any> {
+  console.log('REVOKE APPROVAL SERVICE ID:', agentId);
 
   return this.http.put<any>(
     `${this.apiUrl}/revoke/${agentId}`,
     {}
   );
-
 }
-
 
 // =========================================================
 // DELETE AGENT

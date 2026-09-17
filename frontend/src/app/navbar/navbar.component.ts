@@ -38,6 +38,9 @@ export class NavbarComponent implements OnInit {
   isDropdownOpen: boolean = false;
 
   isMobileMenuOpen = false;
+mobileSaleOpen = false;
+mobileRentOpen = false;
+mobileServicesOpen = false;
 
 
   constructor(
@@ -171,9 +174,39 @@ export class NavbarComponent implements OnInit {
   }
 }
 
-closeMobileMenu(): void {
-  this.isMobileMenuOpen = false;
-  document.body.classList.remove('mobile-menu-active');
+toggleMobileSection(section: 'sale' | 'rent' | 'services'): void {
+
+  if (section === 'sale') {
+    this.mobileSaleOpen = !this.mobileSaleOpen;
+    this.mobileRentOpen = false;
+    this.mobileServicesOpen = false;
+  }
+
+  if (section === 'rent') {
+    this.mobileRentOpen = !this.mobileRentOpen;
+    this.mobileSaleOpen = false;
+    this.mobileServicesOpen = false;
+  }
+
+  if (section === 'services') {
+    this.mobileServicesOpen = !this.mobileServicesOpen;
+    this.mobileSaleOpen = false;
+    this.mobileRentOpen = false;
+  }
 
 }
+
+
+closeMobileMenu(): void {
+
+  this.isMobileMenuOpen = false;
+
+  this.mobileSaleOpen = false;
+  this.mobileRentOpen = false;
+  this.mobileServicesOpen = false;
+
+  document.body.classList.remove('mobile-menu-active');
+}
+
+
 }
