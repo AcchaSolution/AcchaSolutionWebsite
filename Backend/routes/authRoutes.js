@@ -299,6 +299,91 @@ router.get('/approved-agents/:id', async (req, res) => {
 });
 
 
+
+// =====================================================
+// APPROVE USER / AGENT - ADMIN DASHBOARD
+// =====================================================
+
+router.put('/approve/:id', async (req, res) => {
+
+  console.log(
+    'APPROVE USER API HIT:',
+    req.params.id
+  );
+
+  try {
+
+    const user = await User.findById(
+      req.params.id
+    );
+
+    if (!user) {
+
+      return res.status(404).json({
+        success: false,
+        message: 'User not found.'
+      });
+
+    }
+
+    // APPROVE USER
+    user.status = 'approved';
+
+    await user.save();
+
+    console.log(
+      'USER STATUS AFTER APPROVAL:',
+      user.status
+    );
+
+    return res.status(200).json({
+
+      success: true,
+
+      message:
+        'Agent approved successfully.',
+
+      user: {
+
+        id: user._id,
+
+        name: user.name,
+
+        email: user.email,
+
+        phone: user.phone,
+
+        experience: user.experience,
+
+        role: user.role,
+
+        status: user.status
+
+      }
+
+    });
+
+  } catch (error) {
+
+    console.error(
+      'Approve User Error:',
+      error
+    );
+
+    return res.status(500).json({
+
+      success: false,
+
+      message:
+        'Failed to approve agent.'
+
+    });
+
+  }
+
+});
+
+
 // =====================================================
 // APPROVE USER / AGENT - ADMIN DASHBOARD
 // =====================================================
