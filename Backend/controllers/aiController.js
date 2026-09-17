@@ -105,7 +105,9 @@ exports.generatePropertyDescription = async (req, res) => {
         value !== null &&
         String(value).trim() !== ''
       )
-      .map(value => String(value).trim().toLowerCase())
+      .map(value =>
+        String(value).trim().toLowerCase()
+      )
       .join(' ');
 
     let propertyPurpose = '';
@@ -184,7 +186,9 @@ exports.generatePropertyDescription = async (req, res) => {
         value !== null &&
         String(value).trim() !== ''
       )
-      .map(value => String(value).trim())
+      .map(value =>
+        String(value).trim()
+      )
       .filter(
         (value, index, array) =>
           array.indexOf(value) === index
@@ -222,7 +226,9 @@ exports.generatePropertyDescription = async (req, res) => {
           value !== null &&
           String(value).trim() !== ''
         )
-        .map(value => String(value).trim())
+        .map(value =>
+          String(value).trim()
+        )
         .join(', ');
 
     } else if (
@@ -231,7 +237,8 @@ exports.generatePropertyDescription = async (req, res) => {
       String(amenities).trim() !== ''
     ) {
 
-      finalAmenities = String(amenities).trim();
+      finalAmenities =
+        String(amenities).trim();
     }
 
     if (!finalAmenities) {
@@ -243,14 +250,15 @@ exports.generatePropertyDescription = async (req, res) => {
     // 🤖 GEMINI MODEL
     // ============================================================
 
-const model = genAI.getGenerativeModel({
-  model: 'gemini-3.6-flash',
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-3.6-flash',
 
-  generationConfig: {
-    temperature: 0.4,
-    maxOutputTokens: 3000
-  }
-});
+      generationConfig: {
+        temperature: 0.4,
+        maxOutputTokens: 3000
+      }
+    });
+
 
     // ============================================================
     // 🧠 STRICT + FAST + FACTUAL SEO PROMPT
@@ -287,8 +295,7 @@ IT parks, highways, roads, distances or travel times.
 10. NEVER claim guaranteed investment returns, appreciation or rental
 yield.
 
-11. NEVER say "Vastu-friendly" unless Vastu information is explicitly
-provided.
+11. NEVER say "Vastu-friendly" unless Vastu information is explicitly provided.
 
 12. NEVER infer sunlight, ventilation, privacy, views, peaceful
 environment or similar benefits from floor, facing, area or direction.
@@ -448,14 +455,34 @@ Return ONLY the final property description.
 
 
     // ============================================================
-    // 🚀 GENERATE CONTENT
+    // 🚀 GENERATE CONTENT + TIMING CHECK
     // ============================================================
 
-    const result = await model.generateContent(prompt);
+    const aiStartTime = Date.now();
 
-    const response = await result.response;
+    console.log(
+      '🤖 AI PROPERTY DESCRIPTION GENERATION STARTED'
+    );
 
-    const generatedText = response.text();
+    const result =
+      await model.generateContent(prompt);
+
+    const aiResponseTime =
+      Date.now() - aiStartTime;
+
+    console.log(
+      `⏱️ GEMINI RESPONSE TIME: ${aiResponseTime} ms`
+    );
+
+    const response =
+      await result.response;
+
+    const generatedText =
+      response.text();
+
+    console.log(
+      `📝 GENERATED TEXT LENGTH: ${generatedText.length} characters`
+    );
 
 
     // ============================================================
@@ -480,7 +507,6 @@ Return ONLY the final property description.
       message:
         'AI side se description generate nahi ho paya.'
     });
-
   }
 };
 
@@ -540,11 +566,13 @@ Respond with pure JSON wrapper only.
     // 🤖 AI RESPONSE
     // ============================================================
 
-    const result = await model.generateContent(prompt);
+    const result =
+      await model.generateContent(prompt);
 
-    const filtersParsed = JSON.parse(
-      result.response.text()
-    );
+    const filtersParsed =
+      JSON.parse(
+        result.response.text()
+      );
 
 
     // ============================================================

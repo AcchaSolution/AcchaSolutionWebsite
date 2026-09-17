@@ -32,6 +32,7 @@ import {
 
 import * as ClassicEditor
   from '@ckeditor/ckeditor5-build-classic';
+import { HttpClient } from '@angular/common/http';
 
 declare var Quill: any;
 declare var L: any;
@@ -117,6 +118,8 @@ export class AddPropertyFormComponent
   isLinkIconDisabled: boolean = false;
 
   isAiGenerating: boolean = false;
+
+  isUploadingImages: boolean = false;
 
   priceMarketPosition: number = 65;
 
@@ -288,7 +291,8 @@ export class AddPropertyFormComponent
 
     private router: Router,
 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient
 
   ) {}
 
@@ -1699,122 +1703,218 @@ generateDescriptionWithAI(): void {
   }
 
 
-  // =========================================================
-  // IMAGE UPLOAD
-  // =========================================================
+  // // =========================================================
+// IMAGE UPLOAD → CLOUDINARY
+// =========================================================
 
-  handleProactiveUpload(
-    event: any
-  ): void {
+handleProactiveUpload(
+  event: any
+): void {
 
+  const files =
+    event?.target?.files;
 
-    const files =
-      event?.target?.files;
-
-
-    if (
-      !files ||
-      files.length === 0
-    ) {
-
-      return;
-
-    }
-
-
-    // -------------------------------------------------------
-    // MAX 10 IMAGES
-    // -------------------------------------------------------
-
-    const remainingSlots =
-      10 -
-      this.uploadedImages.length;
-
-
-    if (
-      remainingSlots <= 0
-    ) {
-
-      alert(
-        'Maximum 10 images allowed.'
-      );
-
-      return;
-
-    }
-
-
-    const selectedFiles =
-      Array.from(files)
-        .slice(
-          0,
-          remainingSlots
-        ) as File[];
-
-
-    selectedFiles.forEach(
-      (file: File) => {
-
-
-        if (
-          !file.type.startsWith(
-            'image/'
-          )
-        ) {
-
-          return;
-
-        }
-
-
-        const reader =
-          new FileReader();
-
-
-        reader.onload =
-          (e: any) => {
-
-
-            const isFirstImage =
-              this.uploadedImages.length === 0;
-
-
-            this.uploadedImages.push({
-
-              url:
-                e.target.result,
-
-              file:
-                file,
-
-              isThumbnail:
-                isFirstImage
-
-            });
-
-          };
-
-
-        reader.readAsDataURL(
-          file
-        );
-
-      }
-    );
-
-
-    // Reset file input
-    if (
-      event.target
-    ) {
-
-      event.target.value = '';
-
-    }
-
+  if (
+    !files ||
+    files.length === 0
+  ) {
+    return;
   }
 
 
+  // -------------------------------------------------------
+  // MAX 10 IMAGES
+  // -------------------------------------------------------
+
+  const remainingSlots =
+    10 -
+    this.uploadedImages.length;
+
+
+  if (
+    remainingSlots <= 0
+  ) {
+
+    alert(
+      'Maximum 10 images allowed.'
+    );
+
+    return;
+  }
+
+
+  const selectedFiles =
+    Array.from(files)
+      .slice(
+        0,
+        remainingSlots
+      ) as File[];
+
+
+  // -------------------------------------------------------
+  // VALID IMAGE FILES
+  // -------------------------------------------------------
+
+  const validFiles =
+    selectedFiles.filter(
+      (file: File) =>
+        file.type.startsWith('image/')
+    );
+
+
+  if (
+    validFiles.length === 0
+  ) {
+
+    alert(
+      'Please select valid image files.'
+    );
+
+    return;
+  }
+
+
+  // -------------------------------------------------------
+  // UPLOAD START
+  // -------------------------------------------------------
+
+  this.isUploadingImages = true;
+
+
+  let completedUploads = 0;
+
+
+  validFiles.forEach(
+    (file: File) => {
+
+      const formData =
+        new FormData();
+
+
+      formData.append(
+        'image',
+        file
+      );
+
+
+      this.http
+        .post<any>(
+          'https://api.acchasolution.com/api/upload/property-image',
+          formData
+        )
+        .subscribe({
+
+          next:
+            (response: any) => {
+
+              if (
+                response?.success &&
+                response?.url
+              ) {
+
+                const isFirstImage =
+                  this.uploadedImages.length === 0;
+
+
+                this.uploadedImages.push({
+
+                  // Cloudinary URL
+                  url:
+                    response.url,
+
+                  // Keep original file
+                  file:
+                    file,
+
+                  // First image = thumbnail
+                  isThumbnail:
+                    isFirstImage
+
+                });
+
+
+                console.log(
+                  '✅ Cloudinary upload successful:',
+                  response.url
+                );
+
+              }
+              else {
+
+                console.error(
+                  '❌ Cloudinary upload failed:',
+                  response
+                );
+
+              }
+
+
+              completedUploads++;
+
+
+              if (
+                completedUploads ===
+                validFiles.length
+              ) {
+
+                this.isUploadingImages =
+                  false;
+
+                console.log(
+                  '✅ All selected images uploaded.'
+                );
+
+              }
+
+            },
+
+
+          error:
+            (error: any) => {
+
+              console.error(
+                '❌ Cloudinary image upload error:',
+                error
+              );
+
+
+              completedUploads++;
+
+
+              if (
+                completedUploads ===
+                validFiles.length
+              ) {
+
+                this.isUploadingImages =
+                  false;
+
+              }
+
+            }
+
+        });
+
+    }
+  );
+
+
+  // -------------------------------------------------------
+  // RESET FILE INPUT
+  // -------------------------------------------------------
+
+  if (
+    event.target
+  ) {
+
+    event.target.value = '';
+
+  }
+
+}
+
+
+  
   // =========================================================
   // SET THUMBNAIL
   // =========================================================
@@ -2205,6 +2305,19 @@ onSubmit(): void {
     return;
   }
 
+
+  // -------------------------------------------------------
+// WAIT FOR IMAGE UPLOAD
+// -------------------------------------------------------
+
+if (this.isUploadingImages) {
+
+  alert(
+    'Please wait. Property images are still uploading.'
+  );
+
+  return;
+}
 
   // -------------------------------------------------------
   // GET DESCRIPTION FROM QUILL

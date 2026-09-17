@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PropertyService } from '../services/property.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -10,7 +10,8 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
@@ -319,25 +320,53 @@ searchProperties(): void {
      LOCATION
      ===================================================== */
 
-  if (selectedCity) {
+/* if (searchText) {
 
-    result = result.filter((property: any) => {
-
-      const locationText = normalize([
-        property.location,
-        property.city,
-        property.locality,
-        property.subLocality,
-        property.address,
-        property.landmark
-      ].join(' '));
-
-      return locationText.includes(selectedCity);
-    });
-  }
+  // Bangalore aur Bengaluru ko same keyword maana jayega
+  const normalizedSearchText = searchText
+    .replace(/\bbangalore\b/gi, 'bengaluru')
+    .replace(/\bbengaluru\b/gi, 'bengaluru');
 
 
-  /* =====================================================
+  result = result.filter((property: any) => {
+
+    const searchable = normalize([
+      property.name,
+      property.title,
+      property.location,
+      property.city,
+      property.locality,
+      property.subLocality,
+      property.address,
+      property.landmark,
+      property.description,
+      property.uniqueId
+    ].join(' '));
+
+
+    const normalizedSearchable = searchable
+      .replace(/\bbangalore\b/gi, 'bengaluru')
+      .replace(/\bbengaluru\b/gi, 'bengaluru');
+
+
+    console.log(
+      'KEYWORD CHECK:',
+      normalizedSearchText,
+      '→',
+      normalizedSearchable,
+      '→',
+      normalizedSearchable.includes(normalizedSearchText)
+    );
+
+
+    return normalizedSearchable.includes(
+      normalizedSearchText
+    );
+  });
+}
+
+
+/* =====================================================
      KEYWORD / NATURAL SEARCH
      ===================================================== */
 
