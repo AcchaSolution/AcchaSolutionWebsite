@@ -1508,3 +1508,140 @@ select option {
     0 12px 25px rgba(255,153,51,.35);
 
 }
+
+
+.amenity-chip {
+
+  background: #ffffff;
+
+  border: 1px solid #ececec;
+
+  border-radius: 16px;
+
+  padding: 14px;
+
+  cursor: pointer;
+
+  transition: all .3s ease;
+
+}
+
+.amenity-chip:hover {
+
+  transform: translateY(-4px);
+
+  border-color: #ff9933;
+
+  box-shadow:
+    0 12px 30px rgba(255,153,51,.15);
+
+}
+
+.amenity-chip.active {
+
+  background: linear-gradient(
+    135deg,
+    #ff9933,
+    #ffb347
+  );
+
+  color: white;
+
+  border-color: transparent;
+
+}
+
+
+/* =========================================================
+   ACCHASOLUTION — FURNISHING INCLUDED ITEMS CARD
+   ========================================================= */
+
+.furnishing-field {
+  position: relative;
+}
+
+.furnishing-info-card {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(124, 74, 42, 0.18);
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    #fffaf5,
+    #fdf3e8
+  );
+  box-shadow: 0 5px 16px rgba(74, 62, 61, 0.08);
+  animation: furnishingCardIn 0.25s ease;
+}
+
+.furnishing-info-title {
+  margin-bottom: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #4a3e3d;
+  text-transform: uppercase;
+}
+
+.furnishing-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 5px 0;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #5b504d;
+}
+
+.furnishing-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #dfa651;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+/* Small screen */
+@media (max-width: 768px) {
+
+  .furnishing-info-card {
+    margin-top: 8px;
+    padding: 9px 10px;
+    border-radius: 9px;
+  }
+
+  .furnishing-info-title {
+    font-size: 10px;
+  }
+
+  .furnishing-item {
+    font-size: 10px;
+  }
+
+  .furnishing-check {
+    width: 16px;
+    height: 16px;
+    flex-basis: 16px;
+    font-size: 9px;
+  }
+}
+
+@keyframes furnishingCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

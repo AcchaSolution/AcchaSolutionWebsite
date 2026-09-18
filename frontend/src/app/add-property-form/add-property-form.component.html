@@ -223,6 +223,14 @@
             (change)="onLocationSelect()"
           >
 
+  <option value="All Cities">
+    All Cities
+  </option>
+
+  <option value="Bangalore">
+    Bangalore
+  </option>
+
             <option value="Whitefield">
               Whitefield
             </option>
@@ -418,29 +426,40 @@
 
         <!-- FURNISHING -->
 
-        <div class="spec-input-group">
+<div class="spec-input-group furnishing-field">
+  <label>Furnishing</label>
 
-          <label>
-            Furnishing
-          </label>
+  <select formControlName="furnishing">
 
-          <select formControlName="furnishing">
+    <!-- Placeholder: user ko furnishing select karni hai -->
+    <option value="" disabled>Select Furnishing</option>
 
-            <option value="Unfurnished">
-              Unfurnished
-            </option>
+    <option value="Unfurnished">Unfurnished</option>
+    <option value="Partially-Furnished">Partially Furnished</option>
+    <option value="Fully-Furnished">Fully Furnished</option>
 
-            <option value="Semi-Furnished">
-              Semi-Furnished
-            </option>
+  </select>
 
-            <option value="Fully-Furnished">
-              Fully-Furnished
-            </option>
+  <!-- Card ONLY after furnishing selection -->
+  <div
+    class="furnishing-info-card"
+  *ngIf="showFurnishingCard"
+  >
 
-          </select>
+    <div class="furnishing-info-title">
+      Included Items
+    </div>
 
-        </div>
+    <div
+      class="furnishing-item"
+      *ngFor="let item of getFurnishingItems()"
+    >
+      <span class="furnishing-check">✓</span>
+      <span>{{ item }}</span>
+    </div>
+
+  </div>
+</div>
 
 
         <!-- FACING -->
@@ -1214,6 +1233,8 @@
 
         <button
           type="button"
+
+          
           class="refresh-btn"
           (click)="generateNewId()"
           title="Generate new ID"

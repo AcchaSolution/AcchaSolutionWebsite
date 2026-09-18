@@ -85,6 +85,7 @@ export class AddPropertyFormComponent
   public Editor: any = ClassicEditor;
 
   quillInstance: any = null;
+  showFurnishingCard: boolean = false;
 
 
   // =========================================================
@@ -301,7 +302,9 @@ export class AddPropertyFormComponent
   // ON INIT
   // =========================================================
 
-  ngOnInit(): void {
+  ngOnInit(): void
+   
+  {
 
 
     // -------------------------------------------------------
@@ -329,13 +332,13 @@ export class AddPropertyFormComponent
         ],
 
 
-        type: ['Rent'],
+        type: [''],
 
 
         description: [''],
 
 
-        status: ['Renting'],
+        status: [''],
 
 
         is_featured: [false],
@@ -368,7 +371,14 @@ export class AddPropertyFormComponent
         ],
 
 
-        bhk: ['1 BHK'],
+        bhk: [
+          '',
+          [
+             Validators.required,
+            Validators.min(0)
+
+          ]
+        ],
 
 
         totalFloors: [
@@ -389,10 +399,10 @@ export class AddPropertyFormComponent
         ],
 
 
-        furnishing: ['Unfurnished'],
+        furnishing: [''],
 
 
-        facing: ['East Facing'],
+        facing: [''],
 
 
         bathrooms: [
@@ -416,9 +426,8 @@ export class AddPropertyFormComponent
         longitude: [77.7500],
 
 
-        location: ['Whitefield']
-
-      });
+             location: ['All Cities']
+        });
 
 
     // -------------------------------------------------------
@@ -602,6 +611,30 @@ export class AddPropertyFormComponent
       );
 
 
+      // -------------------------------------------------------
+// FURNISHING → SHOW INFO CARD TEMPORARILY
+// -------------------------------------------------------
+
+this.propertyForm
+  .get('furnishing')
+  ?.valueChanges
+  .subscribe((value: string) => {
+
+    if (value) {
+
+      this.showFurnishingCard = true;
+
+      setTimeout(() => {
+        this.showFurnishingCard = false;
+      }, 3000);
+
+    } else {
+
+      this.showFurnishingCard = false;
+
+    }
+
+  });
     // -------------------------------------------------------
     // PRICE → MARKET HEATMAP
     // -------------------------------------------------------
@@ -658,7 +691,7 @@ export class AddPropertyFormComponent
 
 
             this.router.navigate([
-              '/dashboard'
+              '/'
             ]);
 
 
@@ -781,8 +814,7 @@ export class AddPropertyFormComponent
 
             location:
               property.location ||
-              'Whitefield'
-
+              'All Cities'
           });
 
 
@@ -987,6 +1019,49 @@ export class AddPropertyFormComponent
 
   }
 
+
+
+  getFurnishingItems(): string[] {
+  const furnishing =
+    this.propertyForm?.get('furnishing')?.value;
+
+  switch (furnishing) {
+
+    case 'Fully-Furnished':
+      return [
+        'Bed',
+        'Sofa',
+        'Dining Table',
+        'Wardrobe',
+        'TV Unit',
+        'Curtains',
+        'Modular Kitchen',
+        'Refrigerator',
+        'Washing Machine',
+        'AC',
+        'Lights & Fans'
+      ];
+
+    case 'Partially-Furnished':
+      return [
+        'Wardrobe',
+        'Modular Kitchen',
+        'Curtains',
+        'Lights & Fans',
+        'Basic Fixtures'
+      ];
+
+    case 'Unfurnished':
+      return [
+        'Basic Electrical Fixtures',
+        'Bathroom Fixtures',
+        'Kitchen Platform'
+      ];
+
+    default:
+      return [];
+  }
+}
 
   // =========================================================
   // QUILL
@@ -1404,6 +1479,17 @@ onLocationSelect(): void {
     }
   } = {
 
+    'All Cities': {
+  lat: 12.9716,
+  lng: 77.5946
+},
+
+'Bangalore': {
+  lat: 12.9716,
+  lng: 77.5946
+},
+
+
     'Whitefield': {
       lat: 12.9698,
       lng: 77.7500
@@ -1710,6 +1796,10 @@ generateDescriptionWithAI(): void {
 handleProactiveUpload(
   event: any
 ): void {
+
+
+    console.log('📸 FILE INPUT CHANGED');
+  console.log('📸 SELECTED FILES:', event?.target?.files);
 
   const files =
     event?.target?.files;
@@ -2189,8 +2279,7 @@ handleProactiveUpload(
         77.7500,
 
       location:
-        'Whitefield'
-
+            'All Cities'
     });
 
 

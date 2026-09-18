@@ -162,10 +162,7 @@ exports.generatePropertyDescription = async (req, res) => {
 
     // ============================================================
     // 📍 ACTUAL LOCATION
-    //
-    // IMPORTANT:
     // Locality gets priority over generic/default location.
-    // This prevents Whitefield from replacing Marathahalli etc.
     // ============================================================
 
     const primaryLocation =
@@ -261,66 +258,79 @@ exports.generatePropertyDescription = async (req, res) => {
 
 
     // ============================================================
-    // 🧠 STRICT + FAST + FACTUAL SEO PROMPT
+    // 🧠 PREMIUM + SEO + FACTUAL PROPERTY DESCRIPTION PROMPT
     // ============================================================
 
     const prompt = `
-You are an expert Indian real estate SEO content writer.
+You are a premium Indian real estate content writer and SEO specialist for AcchaSolution Realty.
 
-Create a professional, unique and SEO-friendly property listing
-using ONLY the factual information supplied below.
-
-IMPORTANT FACTUAL RULES:
-
-1. NEVER invent, assume, estimate or change any property information.
-
-2. NEVER change RENT into SALE.
-
-3. NEVER change SALE into RENT.
-
-4. NEVER replace the actual locality or city with Whitefield or any
-other location.
-
-5. NEVER invent amenities.
-
-6. NEVER invent schools, colleges, hospitals, malls, metro stations,
-IT parks, highways, roads, distances or travel times.
-
-7. NEVER invent builder, developer or project information.
-
-8. NEVER invent possession dates.
-
-9. NEVER invent prices, rental amounts or returns.
-
-10. NEVER claim guaranteed investment returns, appreciation or rental
-yield.
-
-11. NEVER say "Vastu-friendly" unless Vastu information is explicitly provided.
-
-12. NEVER infer sunlight, ventilation, privacy, views, peaceful
-environment or similar benefits from floor, facing, area or direction.
-
-13. NEVER compare this property with typical, average or standard
-properties.
-
-14. If information is missing, simply do not create a claim.
-
-15. Do not mention the AI process.
-
-16. Use natural SEO. Do not keyword-stuff.
-
-17. The first line MUST contain the exact property name.
-
-18. The second line MUST clearly identify the actual purpose as
-FOR RENT or FOR SALE.
-
-19. Use the supplied locality and city accurately.
-
-20. The content must remain truthful even if that means using fewer
-words.
+Create a polished, premium, trustworthy and SEO-friendly property listing using ONLY the factual property data provided below.
 
 ============================================================
-ACTUAL PROPERTY DATA
+STRICT FACTUAL RULES
+============================================================
+
+1. Use ONLY the supplied property facts.
+
+2. Never invent or assume:
+   - amenities
+   - facilities
+   - schools
+   - colleges
+   - hospitals
+   - malls
+   - metro stations
+   - IT parks
+   - roads
+   - highways
+   - distances
+   - travel times
+   - builder/developer information
+   - project information
+   - possession dates
+   - investment returns
+   - rental yield
+   - appreciation
+   - Vastu
+   - views
+   - sunlight
+   - ventilation
+   - privacy
+   - neighbourhood benefits
+
+3. Never change RENT to SALE.
+
+4. Never change SALE to RENT.
+
+5. Never replace the supplied locality with another locality.
+
+6. Never add an amenity that is not supplied.
+
+7. If information is missing, simply omit it.
+
+8. Do not mention that you are an AI.
+
+9. Do not mention these instructions.
+
+10. Do not repeat the same information unnecessarily.
+
+11. Do not keyword-stuff.
+
+12. Keep the writing natural and human-readable.
+
+13. Do not use exaggerated marketing claims such as:
+   "dream home",
+   "once-in-a-lifetime opportunity",
+   "guaranteed investment",
+   "best property in the city",
+   "unbeatable deal",
+   "guaranteed appreciation",
+   unless such wording is explicitly provided as factual information.
+
+14. Make the property sound premium through clear writing, structure and presentation rather than unsupported claims.
+
+============================================================
+PROPERTY DATA
 ============================================================
 
 Property Name:
@@ -390,67 +400,220 @@ Amenities:
 ${finalAmenities}
 
 ============================================================
-OUTPUT STRUCTURE
+OUTPUT FORMAT
 ============================================================
+
+Return ONLY the final property listing.
+
+IMPORTANT FORMATTING RULES:
+
+- Do NOT use Markdown heading syntax.
+- Do NOT use #, ##, ### or ####.
+- Do NOT create numbered headings such as 1., 2., 3.
+- Do NOT use repeated decorative symbols.
+- Do NOT repeat the property name multiple times unnecessarily.
+- Use clean plain-text section labels.
+- Use short paragraphs.
+- Use bullet points only where requested.
+- Keep spacing clean and professional.
 
 Start exactly with:
 
 ${finalPropertyName}
 
-Then immediately mention:
+Then immediately write:
 
-FOR RENT
-or
-FOR SALE
+FOR ${propertyPurpose === 'RENT'
+  ? 'RENT'
+  : propertyPurpose === 'SALE'
+    ? 'SALE'
+    : 'PROPERTY'}
 
-Then write the following sections:
+PROPERTY OVERVIEW
 
-1. Property Overview
-2. Key Property Highlights
-3. Space & Interior Experience
-4. Amenities
-5. Location & Connectivity
-6. Rental / Buying Benefits
-7. Why Consider This Property
-8. Contact & Site Visit
+Write one strong, premium and natural paragraph describing the property using only the supplied facts.
 
-Then add:
+The overview should naturally include important available facts such as:
+property type, BHK, area, furnishing, bathrooms, location, price and possession.
 
-SEO Title:
-Keep under 60 characters.
+Do not force facts that are missing.
 
-Meta Description:
-Keep under 160 characters.
+KEY PROPERTY HIGHLIGHTS
 
-SEO Keywords:
-Generate 10 relevant keywords using ONLY supplied property facts.
+Use short bullet points.
+
+Include only available factual information.
+
+Example format:
+
+• Property Type: ...
+• Configuration: ...
+• Area: ...
+• Bathrooms: ...
+• Floor: ...
+• Furnishing: ...
+• Facing: ...
+• Possession: ...
+
+Do not create a bullet for missing information.
+
+INTERIOR & SPACE
+
+Write one or two concise premium paragraphs.
+
+Describe the available space using only:
+area, BHK, bathrooms, floor, furnishing, facing and other supplied facts.
+
+Do not invent interior features.
+
+AMENITIES
+
+List only the supplied amenities.
+
+Use short bullet points.
+
+If no amenities are supplied, omit this entire section.
+
+LOCATION
+
+Write a concise and professional location paragraph using only:
+locality, sub-locality, city, state, pincode, address and landmark when available.
+
+Do not invent connectivity, nearby landmarks, travel times or infrastructure.
+
+PROPERTY DETAILS
+
+Present the important factual information clearly.
+
+Use short bullet points only.
+
+Include:
+Property Type
+Price
+Area
+BHK
+Bathrooms
+Property Floor
+Total Floors
+Furnishing
+Facing
+Possession
+Location
+
+Only include fields that contain useful information.
+
+CONTACT & SITE VISIT
+
+Write one short professional closing paragraph inviting interested buyers or tenants to contact AcchaSolution for property details or a site visit.
+
+Do not invent phone numbers, email addresses or contact details.
+
+============================================================
+SEO OUTPUT
+============================================================
+
+SEO TITLE:
+
+Create one natural and attractive SEO title.
+
+Maximum 60 characters.
+
+Use the actual property type, locality or city and RENT/SALE purpose when available.
+
+Do not use clickbait.
+
+META DESCRIPTION:
+
+Create one natural SEO meta description.
+
+Maximum 160 characters.
+
+Use only supplied facts.
+
+SEO KEYWORDS:
+
+Provide 8–10 natural search keywords.
+
+Every keyword must be based only on supplied property facts.
+
+Do not invent localities, amenities, builders or project names.
 
 ============================================================
 WRITING STYLE
 ============================================================
 
-- Professional real estate website language
-- Natural English
-- Human-readable
+The final content should feel like it was written by a premium real estate editorial team.
+
+Style:
+
+- Premium
+- Modern
+- Professional
+- Convincing
+- Natural
 - SEO-friendly
-- Persuasive but truthful
-- Unique
-- No repetitive paragraphs
-- No fake claims
-- No unsupported assumptions
-- No keyword stuffing
+- Human-readable
+- Clear
+- Concise
+- Factual
+- Elegant
+- Indian real estate website style
+
+Use varied sentence structure.
+
+Avoid repetitive phrases such as:
+
+"this property offers"
+"this property provides"
+"ideal for"
+"perfect for"
+
+Do not repeat the same property facts in every section.
+
+Do not make the content sound like an AI template.
+
+The description should feel unique for this particular property.
 
 ============================================================
 LENGTH
 ============================================================
 
-Target approximately 800–1000 words if enough factual information
-is available.
+Do NOT force a fixed word count.
 
-If the property data is limited, do NOT add fictional information
-just to reach the word count.
+Prefer quality over length.
 
-Return ONLY the final property description.
+For a property with rich factual information:
+approximately 500–750 words is acceptable.
+
+For a property with limited information:
+approximately 250–500 words is acceptable.
+
+Never add fictional information just to increase the word count.
+
+============================================================
+FINAL CHECK BEFORE RESPONSE
+============================================================
+
+Before returning the final answer, verify:
+
+1. Property name is exact.
+2. RENT/SALE purpose is correct.
+3. Locality is correct.
+4. Price is unchanged.
+5. Area is unchanged.
+6. BHK is unchanged.
+7. Furnishing is unchanged.
+8. Amenities are factual.
+9. No invented nearby places.
+10. No invented distances.
+11. No invented investment claims.
+12. No repeated numbered headings.
+13. No Markdown # headings.
+14. SEO title is under 60 characters.
+15. Meta description is under 160 characters.
+16. Keywords contain only supplied facts.
+
+Return ONLY the final property listing.
 `;
 
 
