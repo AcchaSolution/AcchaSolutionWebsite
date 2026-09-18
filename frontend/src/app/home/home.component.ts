@@ -1058,74 +1058,44 @@ searchProperties(): void {
   // ============================================================
   // PROPERTY DETAILS
   // ============================================================
-viewDetails(uniqueId: string): void {
-  if (!uniqueId) {
-    console.warn('Property ID not found');
+viewDetails(property: any): void {
+
+  if (!property) {
+    console.warn('Property data not found');
     return;
   }
 
+  const propertyName =
+    property.name ||
+    property.title ||
+    '';
+
+  if (!propertyName.trim()) {
+    console.warn('Property name not found');
+    return;
+  }
+
+  const slug = propertyName
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  if (!slug) {
+    console.warn('Unable to create property URL');
+    return;
+  }
+
+  console.log(
+    '➡️ Opening Property Details:',
+    slug
+  );
+
   this.router.navigate([
     '/property-details',
-    uniqueId
+    slug
   ]);
 }
-
-
-  // viewDetails(
-  //   property: any
-  // ): void {
-
-  //   if (!property) {
-
-  //     console.error(
-  //       '❌ Property object missing'
-  //     );
-
-  //     return;
-
-  //   }
-
-
-  //   const uniqueId =
-
-  //     property.uniqueId ||
-  //     property.id ||
-  //     property._id;
-
-
-  //   if (!uniqueId) {
-
-  //     console.error(
-  //       '❌ Property ID not found:',
-  //       property
-  //     );
-
-
-  //     alert(
-  //       'Property ID not available.'
-  //     );
-
-  //     return;
-
-  //   }
-
-
-  //   console.log(
-  //     '➡️ Opening property details:',
-  //     uniqueId
-  //   );
-
-
-  //   this.router.navigate(
-  //     [
-  //       '/property-details',
-  //       uniqueId
-  //     ]
-  //   );
-
-  // }
-
-
   // ============================================================
   // DISPLAYED PROPERTIES
   // ============================================================

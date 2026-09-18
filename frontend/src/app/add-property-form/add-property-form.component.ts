@@ -16,6 +16,7 @@ import {
   Validators
 } from '@angular/forms';
 
+import { AuthService } from '../services/auth.service';
 import {
   PropertyService
 } from '../services/property.service';
@@ -32,6 +33,7 @@ import {
 
 import * as ClassicEditor
   from '@ckeditor/ckeditor5-build-classic';
+
 import { HttpClient } from '@angular/common/http';
 
 declare var Quill: any;
@@ -85,6 +87,7 @@ export class AddPropertyFormComponent
   public Editor: any = ClassicEditor;
 
   quillInstance: any = null;
+
   showFurnishingCard: boolean = false;
 
 
@@ -129,127 +132,185 @@ export class AddPropertyFormComponent
   // AMENITIES
   // =========================================================
 
+  amenities = [
+
+    {
+      id: 1,
+      name: 'Swimming Pool',
+      icon: 'pool',
+      selected: false
+    },
+
+    {
+      id: 2,
+      name: 'Gym',
+      icon: 'fitness_center',
+      selected: false
+    },
+
+    {
+      id: 3,
+      name: 'Club House',
+      icon: 'apartment',
+      selected: false
+    },
+
+    {
+      id: 4,
+      name: 'Children Play Area',
+      icon: 'child_care',
+      selected: false
+    },
+
+    {
+      id: 5,
+      name: 'Jogging Track',
+      icon: 'directions_run',
+      selected: false
+    },
+
+    {
+      id: 6,
+      name: 'Power Backup',
+      icon: 'battery_charging_full',
+      selected: false
+    },
+
+    {
+      id: 7,
+      name: 'Lift',
+      icon: 'elevator',
+      selected: false
+    },
+
+    {
+      id: 8,
+      name: '24x7 Security',
+      icon: 'security',
+      selected: false
+    },
+
+    {
+      id: 9,
+      name: 'CCTV',
+      icon: 'videocam',
+      selected: false
+    },
+
+    {
+      id: 10,
+      name: 'Intercom',
+      icon: 'call',
+      selected: false
+    },
+
+    {
+      id: 11,
+      name: 'Parking',
+      icon: 'local_parking',
+      selected: false
+    },
+
+    {
+      id: 12,
+      name: 'Visitor Parking',
+      icon: 'directions_car',
+      selected: false
+    },
+
+    {
+      id: 13,
+      name: 'EV Charging',
+      icon: 'ev_station',
+      selected: false
+    },
+
+    {
+      id: 14,
+      name: 'Garden',
+      icon: 'yard',
+      selected: false
+    },
+
+    {
+      id: 15,
+      name: 'Private Terrace',
+      icon: 'deck',
+      selected: false
+    },
+
+    {
+      id: 16,
+      name: 'Smart Home',
+      icon: 'hub',
+      selected: false
+    },
+
+    {
+      id: 17,
+      name: 'WiFi',
+      icon: 'wifi',
+      selected: false
+    },
+
+    {
+      id: 18,
+      name: 'Tennis Court',
+      icon: 'sports_tennis',
+      selected: false
+    },
+
+    {
+      id: 19,
+      name: 'Basketball Court',
+      icon: 'sports_basketball',
+      selected: false
+    },
+
+    {
+      id: 20,
+      name: 'Badminton Court',
+      icon: 'sports',
+      selected: false
+    },
+
+    {
+      id: 21,
+      name: 'Party Hall',
+      icon: 'celebration',
+      selected: false
+    },
+
+    {
+      id: 22,
+      name: 'Library',
+      icon: 'menu_book',
+      selected: false
+    },
+
+    {
+      id: 23,
+      name: 'Indoor Games',
+      icon: 'sports_esports',
+      selected: false
+    },
+
+    {
+      id: 24,
+      name: 'Spa',
+      icon: 'spa',
+      selected: false
+    },
+
+    {
+      id: 25,
+      name: 'Pet Park',
+      icon: 'pets',
+      selected: false
+    }
+
+  ];
 
-
-  // =========================================================
-
-
-
-  // AMENITIES
-
-
-
-  // =========================================================
-
-
-
-  amenities = [
-
-
-
-
-
-{ id: 1, name: 'Swimming Pool', icon: 'pool', selected: false },
-
-
-
-{ id: 2, name: 'Gym', icon: 'fitness_center', selected: false },
-
-
-
-{ id: 3, name: 'Club House', icon: 'apartment', selected: false },
-
-
-
-{ id: 4, name: 'Children Play Area', icon: 'child_care', selected: false },
-
-
-
-{ id: 5, name: 'Jogging Track', icon: 'directions_run', selected: false },
-
-
-
-{ id: 6, name: 'Power Backup', icon: 'battery_charging_full', selected: false },
-
-
-
-{ id: 7, name: 'Lift', icon: 'elevator', selected: false },
-
-
-
-{ id: 8, name: '24x7 Security', icon: 'security', selected: false },
-
-
-
-{ id: 9, name: 'CCTV', icon: 'videocam', selected: false },
-
-
-
-{ id: 10, name: 'Intercom', icon: 'call', selected: false },
-
-
-
-{ id: 11, name: 'Parking', icon: 'local_parking', selected: false },
-
-
-
-{ id: 12, name: 'Visitor Parking', icon: 'directions_car', selected: false },
-
-
-
-{ id: 13, name: 'EV Charging', icon: 'ev_station', selected: false },
-
-
-
-{ id: 14, name: 'Garden', icon: 'yard', selected: false },
-
-
-
-{ id: 15, name: 'Private Terrace', icon: 'deck', selected: false },
-
-
-
-{ id: 16, name: 'Smart Home', icon: 'hub', selected: false },
-
-
-
-{ id: 17, name: 'WiFi', icon: 'wifi', selected: false },
-
-
-
-{ id: 18, name: 'Tennis Court', icon: 'sports_tennis', selected: false },
-
-
-
-{ id: 19, name: 'Basketball Court', icon: 'sports_basketball', selected: false },
-
-
-
-{ id: 20, name: 'Badminton Court', icon: 'sports', selected: false },
-
-
-
-{ id: 21, name: 'Party Hall', icon: 'celebration', selected: false },
-
-
-
-{ id: 22, name: 'Library', icon: 'menu_book', selected: false },
-
-
-
-{ id: 23, name: 'Indoor Games', icon: 'sports_esports', selected: false },
-
-
-
-{ id: 24, name: 'Spa', icon: 'spa', selected: false },
-
-
-
-{ id: 25, name: 'Pet Park', icon: 'pets', selected: false }
-
-
-
-  ];
 
   // =========================================================
   // CATEGORIES
@@ -293,7 +354,10 @@ export class AddPropertyFormComponent
     private router: Router,
 
     private route: ActivatedRoute,
-    private http: HttpClient
+
+    private http: HttpClient,
+      private authService: AuthService
+
 
   ) {}
 
@@ -302,10 +366,7 @@ export class AddPropertyFormComponent
   // ON INIT
   // =========================================================
 
-  ngOnInit(): void
-   
-  {
-
+  ngOnInit(): void {
 
     // -------------------------------------------------------
     // CREATE FORM
@@ -316,7 +377,6 @@ export class AddPropertyFormComponent
 
         id: [''],
 
-
         name: [
           '',
           [
@@ -325,24 +385,18 @@ export class AddPropertyFormComponent
           ]
         ],
 
-
         permalink: [
           this.BASE_PERMALINK,
           Validators.required
         ],
 
-
         type: [''],
-
 
         description: [''],
 
-
         status: [''],
 
-
         is_featured: [false],
-
 
         priority: [
           10,
@@ -352,9 +406,7 @@ export class AddPropertyFormComponent
           ]
         ],
 
-
         uniqueId: [''],
-
 
         price: [
           0,
@@ -364,22 +416,18 @@ export class AddPropertyFormComponent
           ]
         ],
 
-
         area: [
           '',
           Validators.required
         ],
 
-
         bhk: [
           '',
           [
-             Validators.required,
+            Validators.required,
             Validators.min(0)
-
           ]
         ],
-
 
         totalFloors: [
           '',
@@ -389,7 +437,6 @@ export class AddPropertyFormComponent
           ]
         ],
 
-
         propertyFloor: [
           '',
           [
@@ -398,12 +445,9 @@ export class AddPropertyFormComponent
           ]
         ],
 
-
         furnishing: [''],
 
-
         facing: [''],
-
 
         bathrooms: [
           '',
@@ -413,25 +457,21 @@ export class AddPropertyFormComponent
           ]
         ],
 
-
         possession: ['Ready to Move'],
-
 
         rating: ['5'],
 
-
         latitude: [12.9698],
-
 
         longitude: [77.7500],
 
+        location: ['All Cities']
 
-             location: ['All Cities']
-        });
+      });
 
 
     // -------------------------------------------------------
-    // NEW PROPERTY ID
+    // GENERATE NEW PROPERTY ID
     // -------------------------------------------------------
 
     this.generateNewId();
@@ -452,10 +492,8 @@ export class AddPropertyFormComponent
     const queryId =
       this.route.snapshot.queryParamMap.get('id');
 
-
     const routeId =
       this.route.snapshot.paramMap.get('id');
-
 
     const propertyId =
       queryId || routeId;
@@ -468,12 +506,10 @@ export class AddPropertyFormComponent
       this.editingPropertyId =
         propertyId.trim();
 
-
       console.log(
         '✏️ EDIT MODE:',
         this.editingPropertyId
       );
-
 
       this.loadPropertyDataToForm(
         this.editingPropertyId
@@ -495,11 +531,11 @@ export class AddPropertyFormComponent
           if (this.isEditMode) {
 
             /*
-             * Edit mode mein permalink ko
-             * automatically change nahi karenge
-             * jab tak user property name change kare.
+             * In edit mode, the permalink is not
+             * automatically changed unless the
+             * property name is changed.
              *
-             * Name change hone par new slug generate hoga.
+             * When the name changes, a new slug is generated.
              */
 
           }
@@ -530,16 +566,13 @@ export class AddPropertyFormComponent
 
 
             this.propertyForm.patchValue(
-
               {
                 permalink:
                   fullGeneratedUrl
               },
-
               {
                 emitEvent: false
               }
-
             );
 
           }
@@ -547,16 +580,13 @@ export class AddPropertyFormComponent
           else {
 
             this.propertyForm.patchValue(
-
               {
                 permalink:
                   this.BASE_PERMALINK
               },
-
               {
                 emitEvent: false
               }
-
             );
 
           }
@@ -595,46 +625,47 @@ export class AddPropertyFormComponent
 
 
           this.propertyForm.patchValue(
-
             {
               permalink:
                 this.BASE_PERMALINK
             },
-
             {
               emitEvent: false
             }
-
           );
 
         }
       );
 
 
-      // -------------------------------------------------------
-// FURNISHING → SHOW INFO CARD TEMPORARILY
-// -------------------------------------------------------
+    // -------------------------------------------------------
+    // FURNISHING → SHOW INFO CARD TEMPORARILY
+    // -------------------------------------------------------
 
-this.propertyForm
-  .get('furnishing')
-  ?.valueChanges
-  .subscribe((value: string) => {
+    this.propertyForm
+      .get('furnishing')
+      ?.valueChanges
+      .subscribe((value: string) => {
 
-    if (value) {
+        if (value) {
 
-      this.showFurnishingCard = true;
+          this.showFurnishingCard = true;
 
-      setTimeout(() => {
-        this.showFurnishingCard = false;
-      }, 3000);
+          setTimeout(() => {
+            this.showFurnishingCard = false;
+          }, 3000);
 
-    } else {
+        }
 
-      this.showFurnishingCard = false;
+        else {
 
-    }
+          this.showFurnishingCard = false;
 
-  });
+        }
+
+      });
+
+
     // -------------------------------------------------------
     // PRICE → MARKET HEATMAP
     // -------------------------------------------------------
@@ -663,7 +694,6 @@ this.propertyForm
     id: string
   ): void {
 
-
     console.log(
       '🔎 Loading property:',
       id
@@ -675,7 +705,6 @@ this.propertyForm
       .subscribe({
 
         next: (property: any) => {
-
 
           console.log(
             '📦 Existing property:',
@@ -689,11 +718,9 @@ this.propertyForm
               'Error: Property record not found.'
             );
 
-
             this.router.navigate([
               '/'
             ]);
-
 
             return;
 
@@ -711,115 +738,95 @@ this.propertyForm
               property._id ||
               '',
 
-
             name:
               property.name ||
               '',
-
 
             permalink:
               property.permalink ||
               this.BASE_PERMALINK,
 
-
             type:
               property.type ||
               'Rent',
-
 
             description:
               property.description ||
               '',
 
-
             status:
               property.status ||
               'Renting',
-
 
             is_featured:
               property.is_featured ??
               false,
 
-
             priority:
               property.priority ??
               10,
-
 
             uniqueId:
               property.uniqueId ||
               '',
 
-
             price:
               property.price ??
               0,
-
 
             area:
               property.area ||
               '',
 
-
             bhk:
               property.bhk ||
               '1 BHK',
-
 
             totalFloors:
               property.totalFloors ??
               '',
 
-
             propertyFloor:
               property.propertyFloor ??
               '',
-
 
             furnishing:
               property.furnishing ||
               'Unfurnished',
 
-
             facing:
               property.facing ||
               'East Facing',
-
 
             bathrooms:
               property.bathrooms ??
               '',
 
-
             possession:
               property.possession ||
               'Ready to Move',
-
 
             rating:
               property.rating ??
               '5',
 
-
             latitude:
               property.latitude ??
               12.9698,
-
 
             longitude:
               property.longitude ??
               77.7500,
 
-
             location:
               property.location ||
               'All Cities'
+
           });
 
 
           // -------------------------------------------------
-          // HEATMAP
+          // MARKET HEATMAP
           // -------------------------------------------------
 
           this.calculateMarketHeatmap(
@@ -908,8 +915,8 @@ this.propertyForm
           // -------------------------------------------------
           // QUILL
           //
-          // Quill is initialized after view.
-          // So use timeout as backup.
+          // Quill is initialized after the view.
+          // Use a timeout as a backup.
           // -------------------------------------------------
 
           setTimeout(
@@ -928,7 +935,6 @@ this.propertyForm
               this.updateMapPosition();
 
             },
-
             300
           );
 
@@ -937,17 +943,14 @@ this.propertyForm
 
         error: (error: any) => {
 
-
           console.error(
             '❌ Property load error:',
             error
           );
 
-
           alert(
-            'Property data load nahi ho pa raha.'
+            'Unable to load property data.'
           );
-
 
           this.router.navigate([
             '/dashboard'
@@ -1013,62 +1016,75 @@ this.propertyForm
         this.initQuill();
 
       },
-
       200
     );
 
   }
 
 
+  // =========================================================
+  // FURNISHING INFORMATION
+  // =========================================================
 
   getFurnishingItems(): string[] {
-  const furnishing =
-    this.propertyForm?.get('furnishing')?.value;
 
-  switch (furnishing) {
+    const furnishing =
+      this.propertyForm?.get('furnishing')?.value;
 
-    case 'Fully-Furnished':
-      return [
-        'Bed',
-        'Sofa',
-        'Dining Table',
-        'Wardrobe',
-        'TV Unit',
-        'Curtains',
-        'Modular Kitchen',
-        'Refrigerator',
-        'Washing Machine',
-        'AC',
-        'Lights & Fans'
-      ];
 
-    case 'Partially-Furnished':
-      return [
-        'Wardrobe',
-        'Modular Kitchen',
-        'Curtains',
-        'Lights & Fans',
-        'Basic Fixtures'
-      ];
+    switch (furnishing) {
 
-    case 'Unfurnished':
-      return [
-        'Basic Electrical Fixtures',
-        'Bathroom Fixtures',
-        'Kitchen Platform'
-      ];
+      case 'Fully-Furnished':
 
-    default:
-      return [];
+        return [
+          'Bed',
+          'Sofa',
+          'Dining Table',
+          'Wardrobe',
+          'TV Unit',
+          'Curtains',
+          'Modular Kitchen',
+          'Refrigerator',
+          'Washing Machine',
+          'AC',
+          'Lights & Fans'
+        ];
+
+
+      case 'Partially-Furnished':
+
+        return [
+          'Wardrobe',
+          'Modular Kitchen',
+          'Curtains',
+          'Lights & Fans',
+          'Basic Fixtures'
+        ];
+
+
+      case 'Unfurnished':
+
+        return [
+          'Basic Electrical Fixtures',
+          'Bathroom Fixtures',
+          'Kitchen Platform'
+        ];
+
+
+      default:
+
+        return [];
+
+    }
+
   }
-}
+
 
   // =========================================================
-  // QUILL
+  // QUILL EDITOR
   // =========================================================
 
   private initQuill(): void {
-
 
     if (
       typeof Quill === 'undefined'
@@ -1101,7 +1117,7 @@ this.propertyForm
 
 
     // -------------------------------------------------------
-    // CREATE INSTANCE
+    // CREATE QUILL INSTANCE
     // -------------------------------------------------------
 
     this.quillInstance =
@@ -1119,7 +1135,7 @@ this.propertyForm
           theme: 'snow',
 
           placeholder:
-            'Property elements, overview aur specifications yahan likhein...'
+            'Write the property overview, features, and specifications here...'
 
         }
       );
@@ -1177,7 +1193,6 @@ this.propertyForm
 
   private initSmartMap(): void {
 
-
     const mapElement =
       document.getElementById(
         'map-container'
@@ -1190,7 +1205,7 @@ this.propertyForm
     ) {
 
       console.warn(
-        '⚠️ Map container or Leaflet not available.'
+        '⚠️ Map container or Leaflet is not available.'
       );
 
       return;
@@ -1288,7 +1303,6 @@ this.propertyForm
               position.lat
             ).toFixed(6),
 
-
           longitude:
             Number(
               position.lng
@@ -1320,7 +1334,6 @@ this.propertyForm
         }
 
       },
-
       300
     );
 
@@ -1332,7 +1345,6 @@ this.propertyForm
   // =========================================================
 
   private updateMapPosition(): void {
-
 
     if (
       !this.map ||
@@ -1386,7 +1398,6 @@ this.propertyForm
         this.map.invalidateSize();
 
       },
-
       200
     );
 
@@ -1401,7 +1412,6 @@ this.propertyForm
     lat: number,
     lng: number
   ): void {
-
 
     fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
@@ -1459,282 +1469,317 @@ this.propertyForm
   }
 
 
-
-
   // =========================================================
-// LOCATION SELECT
-// =========================================================
+  // LOCATION SELECT
+  // =========================================================
 
-onLocationSelect(): void {
+  onLocationSelect(): void {
 
-  const location =
-    this.propertyForm
-      .get('location')
-      ?.value;
+    const location =
+      this.propertyForm
+        .get('location')
+        ?.value;
 
-  const locationCoordinates: {
-    [key: string]: {
-      lat: number;
-      lng: number;
+
+    const locationCoordinates: {
+      [key: string]: {
+        lat: number;
+        lng: number;
+      }
+    } = {
+
+      'All Cities': {
+        lat: 12.9716,
+        lng: 77.5946
+      },
+
+      'Bangalore': {
+        lat: 12.9716,
+        lng: 77.5946
+      },
+
+      'Whitefield': {
+        lat: 12.9698,
+        lng: 77.7500
+      },
+
+      'Hoodi': {
+        lat: 13.0012,
+        lng: 77.7147
+      },
+
+      'Marathahalli': {
+        lat: 12.9591,
+        lng: 77.6974
+      },
+
+      'KR Puram': {
+        lat: 13.0098,
+        lng: 77.6950
+      },
+
+      'Indiranagar': {
+        lat: 12.9784,
+        lng: 77.6408
+      },
+
+      'Electronic City': {
+        lat: 12.8452,
+        lng: 77.6602
+      },
+
+      'Sarjapur Road': {
+        lat: 12.9100,
+        lng: 77.6870
+      },
+
+      'HSR Layout': {
+        lat: 12.9116,
+        lng: 77.6474
+      },
+
+      'Hebbal': {
+        lat: 13.0358,
+        lng: 77.5970
+      },
+
+      'Yelahanka': {
+        lat: 13.1007,
+        lng: 77.5963
+      },
+
+      'Koramangala': {
+        lat: 12.9352,
+        lng: 77.6245
+      }
+
+    };
+
+
+    const coordinates =
+      locationCoordinates[location];
+
+
+    if (!coordinates) {
+
+      return;
+
     }
-  } = {
-
-    'All Cities': {
-  lat: 12.9716,
-  lng: 77.5946
-},
-
-'Bangalore': {
-  lat: 12.9716,
-  lng: 77.5946
-},
 
 
-    'Whitefield': {
-      lat: 12.9698,
-      lng: 77.7500
-    },
+    // Update form coordinates
 
-    'Hoodi': {
-      lat: 13.0012,
-      lng: 77.7147
-    },
+    this.propertyForm.patchValue({
 
-    'Marathahalli': {
-      lat: 12.9591,
-      lng: 77.6974
-    },
+      latitude:
+        coordinates.lat,
 
-    'KR Puram': {
-      lat: 13.0098,
-      lng: 77.6950
-    },
+      longitude:
+        coordinates.lng
 
-    'Indiranagar': {
-      lat: 12.9784,
-      lng: 77.6408
-    },
+    });
 
-    'Electronic City': {
-      lat: 12.8452,
-      lng: 77.6602
-    },
 
-    'Sarjapur Road': {
-      lat: 12.9100,
-      lng: 77.6870
-    },
+    // Update map and marker
 
-    'HSR Layout': {
-      lat: 12.9116,
-      lng: 77.6474
-    },
+    if (
+      this.map &&
+      this.marker
+    ) {
 
-    'Hebbal': {
-      lat: 13.0358,
-      lng: 77.5970
-    },
+      const position = [
+        coordinates.lat,
+        coordinates.lng
+      ];
 
-    'Yelahanka': {
-      lat: 13.1007,
-      lng: 77.5963
-    },
 
-    'Koramangala': {
-      lat: 12.9352,
-      lng: 77.6245
+      this.map.setView(
+        position,
+        13
+      );
+
+
+      this.marker.setLatLng(
+        position
+      );
+
     }
-
-  };
-
-
-  const coordinates =
-    locationCoordinates[location];
-
-
-  if (!coordinates) {
-
-    return;
 
   }
-
-
-  // Update form coordinates
-
-  this.propertyForm.patchValue({
-
-    latitude:
-      coordinates.lat,
-
-    longitude:
-      coordinates.lng
-
-  });
-
-
-  // Update map and marker
-
-  if (
-    this.map &&
-    this.marker
-  ) {
-
-    const position = [
-      coordinates.lat,
-      coordinates.lng
-    ];
-
-
-    this.map.setView(
-      position,
-      13
-    );
-
-
-    this.marker.setLatLng(
-      position
-    );
-
-  }
-
-}
 
 
   // =========================================================
   // AI DESCRIPTION
   // =========================================================
 
+  generateDescriptionWithAI(): void {
 
-generateDescriptionWithAI(): void {
-  if (!this.propertyForm) {
-    return;
-  }
-
-  const form = this.propertyForm.value;
-
-  if (!form.name) {
-    alert('Pehle property ka naam enter karein!');
-    return;
-  }
-
-  this.isAiGenerating = true;
-
-  const propertyData = {
-
-    name: form.name,
-
-    type: form.type,
-
-    status: form.status,
-
-    price: form.price,
-
-    area: form.area,
-
-    bhk: form.bhk,
-
-    totalFloors: form.totalFloors,
-
-    propertyFloor: form.propertyFloor,
-
-    furnishing: form.furnishing,
-
-    facing: form.facing,
-
-    bathrooms: form.bathrooms,
-
-    possession: form.possession,
-
-    location: form.location,
-
-    address: form.address,
-
-    city: form.city,
-
-    locality: form.locality,
-
-    subLocality: form.subLocality,
-
-    landmark: form.landmark,
-
-    state: form.state,
-
-    pincode: form.pincode,
-
-    amenities: this.amenities
-      .filter((item: any) => item.selected)
-      .map((item: any) => item.name)
-      .join(', ')
-
-  };
+    if (!this.propertyForm) {
+      return;
+    }
 
 
-  this.propService
-    .generateAIDescription(propertyData)
-    .subscribe({
+    const form =
+      this.propertyForm.value;
 
-      next: (response: any) => {
 
-        if (
-          response?.success &&
-          response?.text
-        ) {
+    if (!form.name) {
 
-          const aiText = response.text;
+      alert(
+        'Please enter the property name first.'
+      );
 
-          // Form description update
-          this.propertyForm.patchValue({
-            description: aiText
-          });
+      return;
 
-          // Quill editor update
-          if (this.quillInstance) {
+    }
 
-            this.quillInstance.root.innerHTML =
-              aiText;
 
-          } else {
+    this.isAiGenerating = true;
 
-            const editor =
-              document.querySelector('.ql-editor');
 
-            if (editor) {
-              editor.innerHTML = aiText;
+    const propertyData = {
+
+      name: form.name,
+
+      type: form.type,
+
+      status: form.status,
+
+      price: form.price,
+
+      area: form.area,
+
+      bhk: form.bhk,
+
+      totalFloors: form.totalFloors,
+
+      propertyFloor: form.propertyFloor,
+
+      furnishing: form.furnishing,
+
+      facing: form.facing,
+
+      bathrooms: form.bathrooms,
+
+      possession: form.possession,
+
+      location: form.location,
+
+      address: form.address,
+
+      city: form.city,
+
+      locality: form.locality,
+
+      subLocality: form.subLocality,
+
+      landmark: form.landmark,
+
+      state: form.state,
+
+      pincode: form.pincode,
+
+      amenities: this.amenities
+        .filter(
+          (item: any) =>
+            item.selected
+        )
+        .map(
+          (item: any) =>
+            item.name
+        )
+        .join(', ')
+
+    };
+
+
+    this.propService
+      .generateAIDescription(propertyData)
+      .subscribe({
+
+        next: (response: any) => {
+
+          if (
+            response?.success &&
+            response?.text
+          ) {
+
+            const aiText =
+              response.text;
+
+
+            // Update form description
+
+            this.propertyForm.patchValue({
+              description:
+                aiText
+            });
+
+
+            // Update Quill editor
+
+            if (this.quillInstance) {
+
+              this.quillInstance.root.innerHTML =
+                aiText;
+
+            }
+
+            else {
+
+              const editor =
+                document.querySelector(
+                  '.ql-editor'
+                );
+
+              if (editor) {
+
+                editor.innerHTML =
+                  aiText;
+
+              }
+
             }
 
           }
 
-        } else {
+          else {
+
+            alert(
+              response?.message ||
+              'Unable to generate the AI property description.'
+            );
+
+          }
+
+
+          this.isAiGenerating =
+            false;
+
+        },
+
+
+        error: (error: any) => {
+
+          console.error(
+            'AI Description Error:',
+            error
+          );
+
 
           alert(
-            response?.message ||
-            'AI description generate nahi ho paya.'
+            'Unable to generate the AI property description. Please check the backend.'
           );
+
+
+          this.isAiGenerating =
+            false;
 
         }
 
-        this.isAiGenerating = false;
+      });
 
-      },
-
-      error: (error: any) => {
-
-        console.error(
-          'AI Description Error:',
-          error
-        );
-
-        alert(
-          'AI description generate nahi ho paya. Backend check karein.'
-        );
-
-        this.isAiGenerating = false;
-
-      }
-
-    });
-
-}
+  }
 
 
   // =========================================================
@@ -1744,7 +1789,6 @@ generateDescriptionWithAI(): void {
   toggleAmenity(
     id: number
   ): void {
-
 
     const item =
       this.amenities.find(
@@ -1771,7 +1815,6 @@ generateDescriptionWithAI(): void {
     categoryName: string
   ): void {
 
-
     const category =
       this.categories.find(
         (item: any) =>
@@ -1789,222 +1832,230 @@ generateDescriptionWithAI(): void {
   }
 
 
-  // // =========================================================
-// IMAGE UPLOAD → CLOUDINARY
-// =========================================================
+  // =========================================================
+  // IMAGE UPLOAD → CLOUDINARY
+  // =========================================================
 
-handleProactiveUpload(
-  event: any
-): void {
+  handleProactiveUpload(
+    event: any
+  ): void {
 
-
-    console.log('📸 FILE INPUT CHANGED');
-  console.log('📸 SELECTED FILES:', event?.target?.files);
-
-  const files =
-    event?.target?.files;
-
-  if (
-    !files ||
-    files.length === 0
-  ) {
-    return;
-  }
-
-
-  // -------------------------------------------------------
-  // MAX 10 IMAGES
-  // -------------------------------------------------------
-
-  const remainingSlots =
-    10 -
-    this.uploadedImages.length;
-
-
-  if (
-    remainingSlots <= 0
-  ) {
-
-    alert(
-      'Maximum 10 images allowed.'
+    console.log(
+      '📸 FILE INPUT CHANGED'
     );
 
-    return;
-  }
-
-
-  const selectedFiles =
-    Array.from(files)
-      .slice(
-        0,
-        remainingSlots
-      ) as File[];
-
-
-  // -------------------------------------------------------
-  // VALID IMAGE FILES
-  // -------------------------------------------------------
-
-  const validFiles =
-    selectedFiles.filter(
-      (file: File) =>
-        file.type.startsWith('image/')
+    console.log(
+      '📸 SELECTED FILES:',
+      event?.target?.files
     );
 
 
-  if (
-    validFiles.length === 0
-  ) {
-
-    alert(
-      'Please select valid image files.'
-    );
-
-    return;
-  }
+    const files =
+      event?.target?.files;
 
 
-  // -------------------------------------------------------
-  // UPLOAD START
-  // -------------------------------------------------------
+    if (
+      !files ||
+      files.length === 0
+    ) {
 
-  this.isUploadingImages = true;
+      return;
 
-
-  let completedUploads = 0;
-
-
-  validFiles.forEach(
-    (file: File) => {
-
-      const formData =
-        new FormData();
+    }
 
 
-      formData.append(
-        'image',
-        file
+    // -------------------------------------------------------
+    // MAXIMUM 10 IMAGES
+    // -------------------------------------------------------
+
+    const remainingSlots =
+      10 -
+      this.uploadedImages.length;
+
+
+    if (
+      remainingSlots <= 0
+    ) {
+
+      alert(
+        'Maximum 10 images are allowed.'
+      );
+
+      return;
+
+    }
+
+
+    const selectedFiles =
+      Array.from(files)
+        .slice(
+          0,
+          remainingSlots
+        ) as File[];
+
+
+    // -------------------------------------------------------
+    // VALID IMAGE FILES
+    // -------------------------------------------------------
+
+    const validFiles =
+      selectedFiles.filter(
+        (file: File) =>
+          file.type.startsWith('image/')
       );
 
 
-      this.http
-        .post<any>(
-          'https://api.acchasolution.com/api/upload/property-image',
-          formData
-        )
-        .subscribe({
+    if (
+      validFiles.length === 0
+    ) {
 
-          next:
-            (response: any) => {
+      alert(
+        'Please select valid image files.'
+      );
 
-              if (
-                response?.success &&
-                response?.url
-              ) {
-
-                const isFirstImage =
-                  this.uploadedImages.length === 0;
-
-
-                this.uploadedImages.push({
-
-                  // Cloudinary URL
-                  url:
-                    response.url,
-
-                  // Keep original file
-                  file:
-                    file,
-
-                  // First image = thumbnail
-                  isThumbnail:
-                    isFirstImage
-
-                });
-
-
-                console.log(
-                  '✅ Cloudinary upload successful:',
-                  response.url
-                );
-
-              }
-              else {
-
-                console.error(
-                  '❌ Cloudinary upload failed:',
-                  response
-                );
-
-              }
-
-
-              completedUploads++;
-
-
-              if (
-                completedUploads ===
-                validFiles.length
-              ) {
-
-                this.isUploadingImages =
-                  false;
-
-                console.log(
-                  '✅ All selected images uploaded.'
-                );
-
-              }
-
-            },
-
-
-          error:
-            (error: any) => {
-
-              console.error(
-                '❌ Cloudinary image upload error:',
-                error
-              );
-
-
-              completedUploads++;
-
-
-              if (
-                completedUploads ===
-                validFiles.length
-              ) {
-
-                this.isUploadingImages =
-                  false;
-
-              }
-
-            }
-
-        });
+      return;
 
     }
-  );
 
 
-  // -------------------------------------------------------
-  // RESET FILE INPUT
-  // -------------------------------------------------------
+    // -------------------------------------------------------
+    // START UPLOAD
+    // -------------------------------------------------------
 
-  if (
-    event.target
-  ) {
+    this.isUploadingImages = true;
 
-    event.target.value = '';
+
+    let completedUploads = 0;
+
+
+    validFiles.forEach(
+      (file: File) => {
+
+        const formData =
+          new FormData();
+
+
+        formData.append(
+          'image',
+          file
+        );
+
+
+        this.http
+          .post<any>(
+            'https://api.acchasolution.com/api/upload/property-image',
+            formData
+          )
+          .subscribe({
+
+            next:
+              (response: any) => {
+
+                if (
+                  response?.success &&
+                  response?.url
+                ) {
+
+                  const isFirstImage =
+                    this.uploadedImages.length === 0;
+
+
+                  this.uploadedImages.push({
+
+                    url:
+                      response.url,
+
+                    file:
+                      file,
+
+                    isThumbnail:
+                      isFirstImage
+
+                  });
+
+
+                  console.log(
+                    '✅ Cloudinary upload successful:',
+                    response.url
+                  );
+
+                }
+
+                else {
+
+                  console.error(
+                    '❌ Cloudinary upload failed:',
+                    response
+                  );
+
+                }
+
+
+                completedUploads++;
+
+
+                if (
+                  completedUploads ===
+                  validFiles.length
+                ) {
+
+                  this.isUploadingImages =
+                    false;
+
+                  console.log(
+                    '✅ All selected images uploaded successfully.'
+                  );
+
+                }
+
+              },
+
+
+            error:
+              (error: any) => {
+
+                console.error(
+                  '❌ Cloudinary image upload error:',
+                  error
+                );
+
+
+                completedUploads++;
+
+
+                if (
+                  completedUploads ===
+                  validFiles.length
+                ) {
+
+                  this.isUploadingImages =
+                    false;
+
+                }
+
+              }
+
+          });
+
+      }
+    );
+
+
+    // -------------------------------------------------------
+    // RESET FILE INPUT
+    // -------------------------------------------------------
+
+    if (
+      event.target
+    ) {
+
+      event.target.value = '';
+
+    }
 
   }
 
-}
 
-
-  
   // =========================================================
   // SET THUMBNAIL
   // =========================================================
@@ -2012,7 +2063,6 @@ handleProactiveUpload(
   setThumbnail(
     index: number
   ): void {
-
 
     if (
       index < 0 ||
@@ -2047,7 +2097,6 @@ handleProactiveUpload(
   deleteImage(
     index: number
   ): void {
-
 
     if (
       index < 0 ||
@@ -2100,7 +2149,6 @@ handleProactiveUpload(
 
   generateNewId(): void {
 
-
     if (
       !this.propertyForm
     ) {
@@ -2142,7 +2190,6 @@ handleProactiveUpload(
 
   copyPermalink(): void {
 
-
     const fullUrl =
       this.propertyForm
         .get('permalink')
@@ -2179,7 +2226,7 @@ handleProactiveUpload(
           () => {
 
             alert(
-              'Link copy nahi ho saka.'
+              'Unable to copy the link.'
             );
 
           }
@@ -2208,7 +2255,6 @@ handleProactiveUpload(
   // =========================================================
 
   resetForm(): void {
-
 
     this.isEditMode = false;
 
@@ -2279,7 +2325,8 @@ handleProactiveUpload(
         77.7500,
 
       location:
-            'All Cities'
+        'All Cities'
+
     });
 
 
@@ -2333,11 +2380,10 @@ handleProactiveUpload(
       this.marker
     ) {
 
-      const position =
-        [
-          12.9698,
-          77.7500
-        ];
+      const position = [
+        12.9698,
+        77.7500
+      ];
 
 
       this.map.setView(
@@ -2359,150 +2405,297 @@ handleProactiveUpload(
   }
 
 
-  showError(controlName: string): boolean {
-  const control = this.propertyForm?.get(controlName);
+  // =========================================================
+  // FORM ERROR
+  // =========================================================
 
-  return !!(
-    control &&
-    control.invalid &&
-    (control.touched || control.dirty)
-  );
-}
+  showError(
+    controlName: string
+  ): boolean {
+
+    const control =
+      this.propertyForm
+        ?.get(controlName);
+
+
+    return !!(
+      control &&
+      control.invalid &&
+      (
+        control.touched ||
+        control.dirty
+      )
+    );
+
+  }
+
 
   // =========================================================
   // SUBMIT
   // =========================================================
 
-// =========================================================
-// SUBMIT
-// =========================================================
+  onSubmit(): void {
 
-onSubmit(): void {
+    // -------------------------------------------------------
+    // VALIDATION
+    // -------------------------------------------------------
 
-  // -------------------------------------------------------
-  // VALIDATION
-  // -------------------------------------------------------
+    if (
+      this.propertyForm.invalid
+    ) {
 
-  if (this.propertyForm.invalid) {
+      this.propertyForm.markAllAsTouched();
 
-    this.propertyForm.markAllAsTouched();
-
-    alert(
-      'Please fill out all required parameters highlighted with an asterisk.'
-    );
-
-    return;
-  }
-
-
-  // -------------------------------------------------------
-// WAIT FOR IMAGE UPLOAD
-// -------------------------------------------------------
-
-if (this.isUploadingImages) {
-
-  alert(
-    'Please wait. Property images are still uploading.'
-  );
-
-  return;
-}
-
-  // -------------------------------------------------------
-  // GET DESCRIPTION FROM QUILL
-  // -------------------------------------------------------
-
-  if (this.quillInstance) {
-
-    this.propertyForm
-      .get('description')
-      ?.setValue(
-        this.quillInstance.root.innerHTML,
-        {
-          emitEvent: false
-        }
+      alert(
+        'Please fill out all required fields highlighted with an asterisk.'
       );
 
-  }
+      return;
+
+    }
 
 
-  // -------------------------------------------------------
-  // CREATE FINAL PAYLOAD
-  // -------------------------------------------------------
+    // -------------------------------------------------------
+    // WAIT FOR IMAGE UPLOAD
+    // -------------------------------------------------------
 
-  const formValue =
-    this.propertyForm.value;
+    if (
+      this.isUploadingImages
+    ) {
+
+      alert(
+        'Please wait. Property images are still uploading.'
+      );
+
+      return;
+
+    }
 
 
-  const compiledPayload = {
+    // -------------------------------------------------------
+    // GET DESCRIPTION FROM QUILL
+    // -------------------------------------------------------
 
-    ...formValue,
+    if (
+      this.quillInstance
+    ) {
 
-    priceAnalysis:
-      this.priceMarketPosition,
+      this.propertyForm
+        .get('description')
+        ?.setValue(
+          this.quillInstance.root.innerHTML,
+          {
+            emitEvent: false
+          }
+        );
 
-    selectedAmenities:
-      this.amenities
-        .filter(
-          (amenity: any) =>
-            amenity.selected
-        )
-        .map(
-          (amenity: any) =>
-            amenity.name
-        ),
+    }
 
-    selectedCategories:
-      this.categories
-        .filter(
-          (category: any) =>
-            category.checked
-        )
-        .map(
-          (category: any) =>
-            category.name
-        ),
 
-    gallery:
-      this.uploadedImages.map(
-        (image: any) => ({
+    // -------------------------------------------------------
+    // CREATE FINAL PAYLOAD
+    // -------------------------------------------------------
 
-          url:
-            image.url,
+const formValue = this.propertyForm.value;
 
-          main:
-            image.isThumbnail === true
+// =========================================================
+// LOGGED-IN USER / AGENT DETAILS
+// =========================================================
 
-        })
+const loggedInUser = this.authService.getUser();
+
+console.log('👤 LOGGED-IN USER:', loggedInUser);
+console.log('👤 USER NAME:', loggedInUser?.name);
+console.log('👤 USER EMAIL:', loggedInUser?.email);
+
+const postedById =
+  loggedInUser?._id ||
+  loggedInUser?.id ||
+  loggedInUser?.uniqueId ||
+  '';
+
+const postedByName =
+  loggedInUser?.name ||
+  this.authService.getUserName() ||
+  '';
+
+const postedByEmail =
+  loggedInUser?.email ||
+  this.authService.getUserEmail() ||
+  '';
+
+// =========================================================
+// FINAL PROPERTY PAYLOAD
+// =========================================================
+
+
+
+const compiledPayload = {
+
+  ...formValue,
+
+  // =======================================================
+  // LOGGED-IN USER / AGENT DETAILS
+  // =======================================================
+
+  postedById:
+    postedById,
+
+  postedByName:
+    postedByName,
+
+  postedByEmail:
+    postedByEmail,
+
+  priceAnalysis:
+    this.priceMarketPosition,
+
+  selectedAmenities:
+    this.amenities
+      .filter(
+        (amenity: any) =>
+          amenity.selected
       )
+      .map(
+        (amenity: any) =>
+          amenity.name
+      ),
 
-  };
+  selectedCategories:
+    this.categories
+      .filter(
+        (category: any) =>
+          category.checked
+      )
+      .map(
+        (category: any) =>
+          category.name
+      ),
 
+  gallery:
+    this.uploadedImages.map(
+      (image: any) => ({
 
-  console.log(
-    '📤 FINAL PROPERTY PAYLOAD:',
-    compiledPayload
-  );
+        url:
+          image.url,
 
+        main:
+          image.isThumbnail === true
 
-  // =======================================================
-  // EDIT → UPDATE EXISTING RECORD
-  // =======================================================
+      })
+    )
 
-  if (
-    this.isEditMode &&
-    this.editingPropertyId
-  ) {
+};
 
     console.log(
-      '✏️ UPDATING PROPERTY:',
+      '📤 FINAL PROPERTY PAYLOAD:',
+      compiledPayload
+    );
+
+
+    // =======================================================
+    // EDIT → UPDATE EXISTING RECORD
+    // =======================================================
+
+    if (
+      this.isEditMode &&
       this.editingPropertyId
+    ) {
+
+      console.log(
+        '✏️ UPDATING PROPERTY:',
+        this.editingPropertyId
+      );
+
+
+      this.propService
+        .updateProperty(
+          this.editingPropertyId,
+          compiledPayload
+        )
+
+        .subscribe({
+
+          next:
+            (response: any) => {
+
+              console.log(
+                '✅ PROPERTY UPDATED:',
+                response
+              );
+
+
+              alert(
+                'Property successfully updated on AcchaSolution! 🚀'
+              );
+
+
+              // ---------------------------------------------
+              // AFTER UPDATE → HOME → CURATED PROPERTIES
+              // ---------------------------------------------
+
+              this.router
+                .navigateByUrl('/home')
+                .then(() => {
+
+                  setTimeout(() => {
+
+                    const curatedSection =
+                      document.getElementById(
+                        'curated-properties'
+                      );
+
+
+                    if (curatedSection) {
+
+                      curatedSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+
+                    }
+
+                  }, 300);
+
+                });
+
+            },
+
+
+          error:
+            (error: any) => {
+
+              console.error(
+                '❌ UPDATE ERROR:',
+                error
+              );
+
+
+              alert(
+                'Database update error. The property could not be updated.'
+              );
+
+            }
+
+        });
+
+
+      return;
+
+    }
+
+
+    // =======================================================
+    // NEW → CREATE
+    // =======================================================
+
+    console.log(
+      '🆕 CREATING NEW PROPERTY'
     );
 
 
     this.propService
-      .updateProperty(
-        this.editingPropertyId,
+      .addProperty(
         compiledPayload
       )
 
@@ -2512,18 +2705,18 @@ if (this.isUploadingImages) {
           (response: any) => {
 
             console.log(
-              '✅ PROPERTY UPDATED:',
+              '✅ PROPERTY CREATED:',
               response
             );
 
 
             alert(
-              'Property Successfully Updated on AcchaSolution! 🚀'
+              'Property successfully listed! 🚀'
             );
 
 
             // ---------------------------------------------
-            // AFTER UPDATE → HOME → CURATED PROPERTIES
+            // AFTER CREATE → HOME → CURATED PROPERTIES
             // ---------------------------------------------
 
             this.router
@@ -2558,112 +2751,27 @@ if (this.isUploadingImages) {
           (error: any) => {
 
             console.error(
-              '❌ UPDATE ERROR:',
+              '❌ CREATE ERROR:',
               error
             );
 
 
             alert(
-              'Database update error. Property update nahi ho paya.'
+              'Database submission error.'
             );
 
           }
 
       });
 
-
-    return;
-
   }
 
 
-  // =======================================================
-  // NEW → CREATE
-  // =======================================================
-
-  console.log(
-    '🆕 CREATING NEW PROPERTY'
-  );
-
-
-  this.propService
-    .addProperty(
-      compiledPayload
-    )
-
-    .subscribe({
-
-      next:
-        (response: any) => {
-
-          console.log(
-            '✅ PROPERTY CREATED:',
-            response
-          );
-
-
-          alert(
-            'Property successfully listed! 🚀'
-          );
-
-
-          // ---------------------------------------------
-          // AFTER CREATE → HOME → CURATED PROPERTIES
-          // ---------------------------------------------
-
-          this.router
-            .navigateByUrl('/home')
-            .then(() => {
-
-              setTimeout(() => {
-
-                const curatedSection =
-                  document.getElementById(
-                    'curated-properties'
-                  );
-
-
-                if (curatedSection) {
-
-                  curatedSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                  });
-
-                }
-
-              }, 300);
-
-            });
-
-        },
-
-
-      error:
-        (error: any) => {
-
-          console.error(
-            '❌ CREATE ERROR:',
-            error
-          );
-
-
-          alert(
-            'Database submission error.'
-          );
-
-        }
-
-    });
-
-}
-
-// =========================================================
+  // =========================================================
   // DESTROY
   // =========================================================
 
   ngOnDestroy(): void {
-
 
     if (
       this.map
@@ -2684,18 +2792,27 @@ if (this.isUploadingImages) {
   }
 
 
+  // =========================================================
+  // SELECT ALL AMENITIES
+  // =========================================================
+
+  selectAllAmenities(): void {
+
+    const allSelected =
+      this.amenities.every(
+        a => a.selected
+      );
 
 
-selectAllAmenities(): void {
+    this.amenities.forEach(
+      a => {
 
-  const allSelected =
-    this.amenities.every(a => a.selected);
+        a.selected =
+          !allSelected;
 
-  this.amenities.forEach(a => {
-    a.selected = !allSelected;
-  });
-
-}
-
+      }
+    );
 
   }
+
+}

@@ -844,9 +844,26 @@ async grantAgentApproval(agentId: string): Promise<void> {
 
     console.log('Approving agent:', agentId);
 
-    await this.authService.approveAgent(agentId);
+const response = await firstValueFrom(
+  this.authService.approveAgent(agentId)
+);
 
-    alert('Agent approved successfully.');
+console.log(
+  '========== APPROVAL API RESPONSE =========='
+);
+
+console.log(response);
+
+if (!response || response.success !== true) {
+  throw new Error(
+    response?.message ||
+    'Agent approval failed.'
+  );
+}
+
+alert('Agent approved successfully.');
+
+
 
     // Refresh users from MongoDB
     await this.fetchUsers();

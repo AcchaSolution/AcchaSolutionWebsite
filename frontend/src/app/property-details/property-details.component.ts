@@ -87,60 +87,81 @@ export class PropertyDetailsComponent
     this.route.paramMap.subscribe(
       params => {
 
-        const id =
+        const value =
           params.get('id');
-
-        const permalink =
-          params.get('permalink');
 
 
         console.log(
-          '🔎 PROPERTY DETAILS ROUTE PARAMS:',
-          {
-            id,
-            permalink
-          }
+          '🔎 PROPERTY DETAILS ROUTE VALUE:',
+          value
         );
-
-
-        // ===================================================
-        // ID ROUTE
-        // ===================================================
-
-        if (id) {
-
-          this.loadPropertyById(id);
-
-          return;
-
-        }
-
-
-        // ===================================================
-        // PERMALINK ROUTE
-        // ===================================================
-
-        if (permalink) {
-
-          this.loadPropertyByPermalink(
-            permalink
-          );
-
-          return;
-
-        }
 
 
         // ===================================================
         // NOTHING FOUND
         // ===================================================
 
-        this.propertyData = null;
+        if (!value) {
 
-        this.errorMessage =
-          'Property ID or permalink not found.';
+          this.propertyData = null;
 
-        this.isLoading = false;
+          this.errorMessage =
+            'Property ID or permalink not found.';
+
+          this.isLoading = false;
+
+          return;
+
+        }
+
+
+        // ===================================================
+        // CHECK MONGODB OBJECT ID
+        // ===================================================
+
+        const isMongoId =
+          /^[a-f\d]{24}$/i.test(value);
+
+
+        // ===================================================
+        // OLD ID URL
+        // Example:
+        // /property-details/6aabb0f1ea3fc368c42768da
+        // ===================================================
+
+        if (isMongoId) {
+
+          console.log(
+            '🆔 MongoDB ID detected:',
+            value
+          );
+
+
+          this.loadPropertyById(
+            value
+          );
+
+
+          return;
+
+        }
+
+
+        // ===================================================
+        // NEW SEO PROPERTY URL
+        // Example:
+        // /property-details/gopalan-millennium-habitat
+        // ===================================================
+
+        console.log(
+          '🔗 Property slug detected:',
+          value
+        );
+
+
+        this.loadPropertyByPermalink(
+          value
+        );
 
       }
     );
@@ -227,6 +248,7 @@ export class PropertyDetailsComponent
 
           this.propertyData = null;
 
+
           if (
             error?.status === 404
           ) {
@@ -288,6 +310,7 @@ export class PropertyDetailsComponent
           );
 
 
+          
           if (!property) {
 
             this.propertyData = null;
@@ -322,6 +345,7 @@ export class PropertyDetailsComponent
 
           this.propertyData = null;
 
+
           if (
             error?.status === 404
           ) {
@@ -346,129 +370,212 @@ export class PropertyDetailsComponent
       });
 
   }
+// =========================================================
+// NORMALIZE PROPERTY
+// =========================================================
 
+private normalizeProperty(
+  property: any
+): any {
 
-  // =========================================================
-  // NORMALIZE PROPERTY
-  // =========================================================
+  if (!property) {
 
-  private normalizeProperty(
-    property: any
-  ): any {
-
-    if (!property) {
-
-      return null;
-
-    }
-
-
-    const normalized =
-      {
-        ...property
-      };
-
-
-    // -------------------------------------------------------
-    // MONGODB ID SUPPORT
-    // -------------------------------------------------------
-
-    if (
-      !normalized.id &&
-      normalized._id
-    ) {
-
-      normalized.id =
-        String(normalized._id);
-
-    }
-
-
-    // -------------------------------------------------------
-    // UNIQUE ID SUPPORT
-    // -------------------------------------------------------
-
-    if (
-      !normalized.uniqueId &&
-      normalized.id
-    ) {
-
-      normalized.uniqueId =
-        normalized.id;
-
-    }
-
-
-    // -------------------------------------------------------
-    // GALLERY SAFETY
-    // -------------------------------------------------------
-
-    if (
-      !Array.isArray(
-        normalized.gallery
-      )
-    ) {
-
-      normalized.gallery = [];
-
-    }
-
-
-    // -------------------------------------------------------
-    // AMENITIES SAFETY
-    // -------------------------------------------------------
-
-    if (
-      !Array.isArray(
-        normalized.selectedAmenities
-      )
-    ) {
-
-      normalized.selectedAmenities = [];
-
-    }
-
-
-    // -------------------------------------------------------
-    // IMAGE URL FALLBACK
-    // -------------------------------------------------------
-
-    if (
-      normalized.gallery.length === 0
-    ) {
-
-      if (
-        normalized.image
-      ) {
-
-        normalized.gallery = [
-          {
-            url: normalized.image
-          }
-        ];
-
-      }
-
-      else if (
-        normalized.imageUrl
-      ) {
-
-        normalized.gallery = [
-          {
-            url: normalized.imageUrl
-          }
-        ];
-
-      }
-
-    }
-
-
-    return normalized;
+    return null;
 
   }
 
 
+  const normalized = {
+    ...property
+  };
+
+
+  // -------------------------------------------------------
+  // MONGODB ID SUPPORT
+  // -------------------------------------------------------
+
+  if (
+    !normalized.id &&
+    normalized._id
+  ) {
+
+    normalized.id =
+      String(normalized._id);
+
+  }
+
+
+  // -------------------------------------------------------
+  // UNIQUE ID SUPPORT
+  // -------------------------------------------------------
+
+  if (
+    !normalized.uniqueId &&
+    normalized.id
+  ) {
+
+    normalized.uniqueId =
+      normalized.id;
+
+  }
+
+
+  // -------------------------------------------------------
+  // GALLERY SAFETY
+  // -------------------------------------------------------
+
+  if (
+    !Array.isArray(
+      normalized.gallery
+    )
+  ) {
+
+    normalized.gallery = [];
+
+  }
+
+
+  // -------------------------------------------------------
+  // AMENITIES SAFETY
+  // -------------------------------------------------------
+
+  if (
+    !Array.isArray(
+      normalized.selectedAmenities
+    )
+  ) {
+
+    normalized.selectedAmenities = [];
+
+  }
+
+
+  // -------------------------------------------------------
+  // IMAGE URL FALLBACK
+  // -------------------------------------------------------
+
+  if (
+    normalized.gallery.length === 0
+  ) {
+
+    if (
+      normalized.image
+    ) {
+
+      normalized.gallery = [
+        {
+          url: normalized.image
+        }
+      ];
+
+    }
+
+    else if (
+      normalized.imageUrl
+    ) {
+
+      normalized.gallery = [
+        {
+          url: normalized.imageUrl
+        }
+      ];
+
+    }
+
+  }
+
+
+  // =======================================================
+  // AGENT / OWNER DETAILS NORMALIZATION
+  // =======================================================
+
+  const agent =
+    normalized.agent ||
+    normalized.agentDetails ||
+    normalized.postedBy ||
+    normalized.owner ||
+    {};
+
+
+  // -------------------------------------------------------
+  // NAME
+  // -------------------------------------------------------
+
+  normalized.postedByName =
+    normalized.postedByName ||
+    normalized.agentName ||
+    normalized.ownerName ||
+    agent?.name ||
+    agent?.fullName ||
+    agent?.displayName ||
+    '';
+
+
+  // -------------------------------------------------------
+  // EMAIL
+  // -------------------------------------------------------
+
+  normalized.postedByEmail =
+    normalized.postedByEmail ||
+    normalized.agentEmail ||
+    normalized.ownerEmail ||
+    agent?.email ||
+    '';
+
+
+  // -------------------------------------------------------
+  // PHONE
+  // -------------------------------------------------------
+
+  normalized.postedByPhone =
+    normalized.postedByPhone ||
+    normalized.agentPhone ||
+    normalized.ownerPhone ||
+    agent?.phone ||
+    agent?.mobile ||
+    agent?.phoneNumber ||
+    '';
+
+
+  // -------------------------------------------------------
+  // KEEP AGENT OBJECT ALSO
+  // -------------------------------------------------------
+
+  if (
+    !normalized.agent &&
+    Object.keys(agent).length > 0
+  ) {
+
+    normalized.agent = agent;
+
+  }
+
+
+  // -------------------------------------------------------
+  // DEBUG
+  // -------------------------------------------------------
+
+  console.log(
+    '👤 NORMALIZED AGENT DATA:',
+    {
+      name:
+        normalized.postedByName,
+
+      email:
+        normalized.postedByEmail,
+
+      phone:
+        normalized.postedByPhone,
+
+      agent:
+        normalized.agent
+    }
+  );
+
+
+  return normalized;
+
+}
   // =========================================================
   // PRICE FORMAT
   // =========================================================
@@ -725,6 +832,401 @@ export class PropertyDetailsComponent
       );
 
     }
+
+  }
+
+
+  // =========================================================
+  // FORMAT AI DESCRIPTION
+  // Converts plain AI text into structured HTML
+  // Removes visible HTML tags and SEO metadata
+  // =========================================================
+
+  formatDescription(
+    description: string
+  ): string {
+
+    if (!description) {
+
+      return '';
+
+    }
+
+
+    // -------------------------------------------------------
+    // STEP 1 — CONVERT VALUE TO STRING
+    // -------------------------------------------------------
+
+    let text =
+      String(description)
+        .replace(/\r\n/g, '\n')
+        .replace(/\r/g, '\n')
+        .trim();
+
+
+    if (!text) {
+
+      return '';
+
+    }
+
+
+    // -------------------------------------------------------
+    // STEP 2 — REMOVE LITERAL / ESCAPED HTML TAGS
+    //
+    // Handles:
+    // <p>
+    // </p>
+    // \<p>
+    // \</p>
+    // <br>
+    // <div>
+    // -------------------------------------------------------
+
+    text =
+      text
+        .replace(/\\<br\s*\/?\\?>/gi, '\n')
+        .replace(/<br\s*\/?>/gi, '\n')
+
+        .replace(/\\<\/p>/gi, '\n')
+        .replace(/\\<p[^>]*>/gi, '')
+
+        .replace(/<\/p>/gi, '\n')
+        .replace(/<p[^>]*>/gi, '')
+
+        .replace(/\\<\/div>/gi, '\n')
+        .replace(/\\<div[^>]*>/gi, '')
+
+        .replace(/<\/div>/gi, '\n')
+        .replace(/<div[^>]*>/gi, '')
+
+        .replace(/<[^>]*>/g, '');
+
+
+
+    // -------------------------------------------------------
+    // STEP 3 — REMOVE MARKDOWN HEADING SYMBOLS
+    //
+    // ### Property Overview
+    // becomes:
+    // Property Overview
+    // -------------------------------------------------------
+
+    text =
+      text.replace(
+        /^\s*#{1,6}\s*/gm,
+        ''
+      );
+
+
+    // -------------------------------------------------------
+    // STEP 4 — REMOVE ESCAPED MARKDOWN SYMBOLS
+    // -------------------------------------------------------
+
+    text =
+      text.replace(
+        /\\#/g,
+        ''
+      );
+
+
+    // -------------------------------------------------------
+    // STEP 5 — REMOVE SEO METADATA
+    //
+    // These should NEVER appear in the visible property
+    // description.
+    // -------------------------------------------------------
+
+    text =
+      text.replace(
+        /(?:^|\n)\s*SEO\s*Title\s*:?.*?(?=\n|$)/gi,
+        ''
+      );
+
+
+    text =
+      text.replace(
+        /(?:^|\n)\s*Meta\s*Description\s*:?.*?(?=\n|$)/gi,
+        ''
+      );
+
+
+    text =
+      text.replace(
+        /(?:^|\n)\s*SEO\s*Keywords?\s*:?.*?(?=\n|$)/gi,
+        ''
+      );
+
+
+    text =
+      text.replace(
+        /(?:^|\n)\s*Keywords?\s*:?.*?(?=\n|$)/gi,
+        ''
+      );
+
+
+    // -------------------------------------------------------
+    // STEP 6 — REMOVE SEO BLOCK IF IT IS AT THE END
+    // -------------------------------------------------------
+
+    text =
+      text.replace(
+        /(?:^|\n)\s*SEO\s*(?:Information|Metadata|Details)\s*:?.*$/gis,
+        ''
+      );
+
+
+    // -------------------------------------------------------
+    // STEP 7 — REMOVE SECTION NUMBERING
+    //
+    // 1. Property Overview
+    // 2. Key Property Highlights
+    // -------------------------------------------------------
+
+    text =
+      text.replace(
+        /(\n|^)\s*\d+\.\s*(?=(?:Property Overview|Key Property Highlights|Interior & Space|Amenities|Location|Property Details|Contact & Site Visit))/gi,
+        '$1'
+      );
+
+
+    // -------------------------------------------------------
+    // STEP 8 — FORCE SECTION BREAKS
+    // -------------------------------------------------------
+
+    const sectionNames =
+      [
+        'Property Overview',
+        'Key Property Highlights',
+        'Interior & Space',
+        'Amenities',
+        'Location',
+        'Property Details',
+        'Contact & Site Visit'
+      ];
+
+
+    sectionNames.forEach(
+      section => {
+
+        const escapedSection =
+          section.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            '\\$&'
+          );
+
+
+        const sectionRegex =
+          new RegExp(
+            `\\s*(?:\\d+\\.\\s*)?(${escapedSection})\\s*:?\\s*`,
+            'gi'
+          );
+
+
+        text =
+          text.replace(
+            sectionRegex,
+            '\n§§SECTION§§$1\n'
+          );
+
+      }
+    );
+
+
+    // -------------------------------------------------------
+    // STEP 9 — NORMALIZE BULLETS
+    // -------------------------------------------------------
+
+    text =
+      text
+        .replace(
+          /\s+-\s+(?=[A-Z][^-\n]{1,100}:)/g,
+          '\n- '
+        )
+        .replace(
+          /\s+•\s+/g,
+          '\n• '
+        )
+        .replace(
+          /\s+\*\s+/g,
+          '\n* '
+        );
+
+
+    // -------------------------------------------------------
+    // STEP 10 — REMOVE LONE DASHES
+    // -------------------------------------------------------
+
+    text =
+      text.replace(
+        /(?:^|\n)\s*(?:-|–|—)\s*(?=\n|$)/g,
+        '\n'
+      );
+
+
+    // -------------------------------------------------------
+    // STEP 11 — CLEAN ESCAPED SLASHES
+    // -------------------------------------------------------
+
+    text =
+      text.replace(
+        /\\(?=\s|$)/g,
+        ''
+      );
+
+
+    // -------------------------------------------------------
+    // STEP 12 — CREATE CLEAN LINES
+    // -------------------------------------------------------
+
+    const lines =
+      text
+        .split(/\n|§§SECTION§§/)
+        .map(
+          line =>
+            line
+              .replace(/\s+/g, ' ')
+              .trim()
+        )
+        .filter(
+          line =>
+            line.length > 0
+        );
+
+
+    // -------------------------------------------------------
+    // STEP 13 — BUILD HTML
+    // -------------------------------------------------------
+
+    let html = '';
+
+    let listOpen =
+      false;
+
+
+    const closeList =
+      () => {
+
+        if (listOpen) {
+
+          html += '</ul>';
+
+          listOpen = false;
+
+        }
+
+      };
+
+
+    for (
+      let i = 0;
+      i < lines.length;
+      i++
+    ) {
+
+      const line =
+        lines[i];
+
+
+      // -----------------------------------------------------
+      // SECTION HEADING
+      // -----------------------------------------------------
+
+      const sectionMatch =
+        line.match(
+          /^(?:\d+\.\s*)?(Property Overview|Key Property Highlights|Interior & Space|Amenities|Location|Property Details|Contact & Site Visit)\s*:?\s*$/i
+        );
+
+
+      if (
+        sectionMatch
+      ) {
+
+        closeList();
+
+
+        html +=
+          `<h3>${sectionMatch[1]}</h3>`;
+
+
+        continue;
+
+      }
+
+
+      // -----------------------------------------------------
+      // BULLET POINT
+      // -----------------------------------------------------
+
+      const bulletMatch =
+        line.match(
+          /^[-•*]\s+(.+)$/
+        );
+
+
+      if (
+        bulletMatch
+      ) {
+
+        if (!listOpen) {
+
+          html += '<ul>';
+
+          listOpen = true;
+
+        }
+
+
+        html +=
+          `<li>${bulletMatch[1]}</li>`;
+
+
+        continue;
+
+      }
+
+
+      // -----------------------------------------------------
+      // CLOSE LIST BEFORE NORMAL PARAGRAPH
+      // -----------------------------------------------------
+
+      closeList();
+
+
+      // -----------------------------------------------------
+      // PROPERTY TITLE / FIRST LINE
+      // -----------------------------------------------------
+
+      if (
+        i === 0
+      ) {
+
+        html +=
+          `<p class="description-property-title">${line}</p>`;
+
+        continue;
+
+      }
+
+
+      // -----------------------------------------------------
+      // NORMAL PARAGRAPH
+      // -----------------------------------------------------
+
+      html +=
+        `<p>${line}</p>`;
+
+    }
+
+
+    // -------------------------------------------------------
+    // CLOSE FINAL LIST
+    // -------------------------------------------------------
+
+    closeList();
+
+
+    return html;
 
   }
 

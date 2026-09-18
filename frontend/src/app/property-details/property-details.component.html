@@ -65,10 +65,11 @@
         Overview & Architecture Description
       </h2>
 
-      <div
-        class="rich-text-content"
-        [innerHTML]="propertyData.description"
-      ></div>
+<div
+  class="rich-text-content"
+  [innerHTML]="formatDescription(propertyData.description)"
+></div>
+
 
     </div>
 
@@ -426,63 +427,60 @@
     </div>
 
 
-    <!-- =====================================================
-         LISTED BY AGENT
-    ====================================================== -->
+<!-- =========================================================
+     AGENT DETAILS
+========================================================= -->
 
-    <div
-      class="detail-section"
-      *ngIf="propertyData?.postedByName"
-    >
+<div
+  class="detail-section agent-details-section"
+  *ngIf="propertyData?.postedByName"
+>
 
-      <h2>
-        Listed By
-      </h2>
-
-
-      <div class="listed-agent-card">
+  <h2>
+    Listed By
+  </h2>
 
 
-        <!-- AGENT INITIAL -->
+  <div class="listed-agent-card">
 
-        <div class="agent-avatar">
+    <!-- AVATAR -->
 
-          {{
-            propertyData.postedByName
-              .charAt(0)
-              .toUpperCase()
-          }}
+    <div class="agent-avatar">
 
-        </div>
-
-
-        <!-- AGENT INFORMATION -->
-
-        <div class="agent-info">
-
-          <h3>
-            {{ propertyData.postedByName }}
-          </h3>
-
-
-          <p
-            *ngIf="propertyData.postedByEmail"
-          >
-            {{ propertyData.postedByEmail }}
-          </p>
-
-
-          <span class="verified-agent">
-            ✓ Verified Agent
-          </span>
-
-        </div>
-
-      </div>
+      {{
+        propertyData.postedByName
+          .charAt(0)
+          .toUpperCase()
+      }}
 
     </div>
 
 
+    <!-- AGENT INFORMATION -->
+
+    <div class="agent-info">
+
+      <h3>
+        {{ propertyData.postedByName }}
+      </h3>
+
+
+      <p
+        *ngIf="propertyData?.postedByEmail"
+      >
+        {{ propertyData.postedByEmail }}
+      </p>
+
+
+      <span class="verified-agent">
+        Property Agent
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
     <!-- =====================================================
          RATINGS
     ====================================================== -->
