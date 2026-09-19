@@ -2,6 +2,8 @@ const express = require('express');
 
 const Property =
   require('../models/property');
+  const adminAuth = require('../middleware/adminAuth');
+const userAuth = require('../middleware/userAuth');
 
 const mongoose =
   require('mongoose');
@@ -524,8 +526,7 @@ router.get(
 // PUT /api/properties/:id
 // =====================================================
 
-router.put('/:id', async (req, res) => {
-
+router.put('/:id', adminAuth, async (req, res) => {
   console.log(
     'UPDATE PROPERTY API HIT:',
     req.params.id
@@ -631,15 +632,130 @@ router.put('/:id', async (req, res) => {
   }
 
 });
+// =====================================================
+// UPDATE OWN PROPERTY
+// PUT /api/properties/my-property/:id
+// =====================================================
 
+
+router.put(
+  '/my-property/:id',
+  userAuth,
+  async (req, res) => {
+
+    console.log(
+      'USER PROPERTY UPDATE API HIT:',
+      req.params.id
+    );
+
+    try {
+
+      const requestedId =
+        String(
+          req.params.id || ''
+        ).trim();
+
+      const userEmail =
+        String(
+          req.user?.email || ''
+        )
+        .trim()
+        .toLowerCase();
+
+      if (!userEmail) {
+        return res.status(401).json({
+          success: false,
+          message: 'User email not found in token.'
+        });
+      }
+
+      const conditions = [
+        {
+          id: requestedId
+        },
+        {
+          uniqueId: requestedId
+        }
+      ];
+
+      if (
+        mongoose.Types.ObjectId.isValid(
+          requestedId
+        )
+      ) {
+        conditions.push({
+          _id: requestedId
+        });
+      }
+
+      const property =
+        await Property.findOne({
+          $or: conditions
+        });
+
+      if (!property) {
+        return res.status(404).json({
+          success: false,
+          message: 'Property not found.'
+        });
+      }
+
+      const postedByEmail =
+        String(
+          property.postedByEmail || ''
+        )
+        .trim()
+        .toLowerCase();
+
+      if (
+        postedByEmail !== userEmail
+      ) {
+        return res.status(403).json({
+          success: false,
+          message:
+            'You can only edit your own property.'
+        });
+      }
+
+      Object.assign(
+        property,
+        req.body
+      );
+
+      await property.save();
+
+      return res.status(200).json({
+        success: true,
+        message:
+          'Property updated successfully.',
+        property
+      });
+
+    } catch (error) {
+
+      console.error(
+        'USER PROPERTY UPDATE ERROR:',
+        error
+      );
+
+      return res.status(500).json({
+        success: false,
+        message:
+          'Failed to update property.',
+        error: error.message
+      });
+
+    }
+
+  }
+);
 
 // =====================================================
 // DELETE PROPERTY
 // DELETE /api/properties/:id
 // =====================================================
 
-router.delete('/:id', async (req, res) => {
-
+router.delete('/:id', adminAuth, async (req, res) => {
   console.log(
     'DELETE PROPERTY API HIT:',
     req.params.id

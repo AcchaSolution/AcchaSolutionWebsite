@@ -60,6 +60,22 @@ export class PropertyService {
 
 
   // =========================================================
+// UPDATE OWN PROPERTY
+// =========================================================
+
+updateMyProperty(
+  id: string,
+  propertyData: any
+): Observable<any> {
+
+  return this.http.put(
+    `${this.API_URL}/my-property/${encodeURIComponent(id)}`,
+    propertyData
+  );
+
+}
+
+  // =========================================================
   // GET ALL
   // =========================================================
 

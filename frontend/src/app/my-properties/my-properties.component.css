@@ -1,0 +1,162 @@
+.my-properties-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 24px;
+}
+
+.my-properties-header {
+  margin-bottom: 30px;
+}
+
+.my-properties-header h1 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  color: #4a3e3d;
+}
+
+.my-properties-header p {
+  margin-top: 8px;
+  color: #777;
+  font-size: 15px;
+}
+
+.loading-state {
+  padding: 60px 20px;
+  text-align: center;
+  color: #777;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  border: 1px solid #eee;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.empty-icon {
+  font-size: 45px;
+  margin-bottom: 15px;
+}
+
+.empty-state h2 {
+  margin: 0;
+  color: #4a3e3d;
+}
+
+.empty-state p {
+  color: #777;
+}
+
+.properties-list {
+  display: grid;
+  gap: 20px;
+}
+
+.property-card {
+  display: flex;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.property-image {
+  width: 280px;
+  min-width: 280px;
+  height: 210px;
+}
+
+.property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.no-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f2ef;
+  color: #888;
+}
+
+.property-details {
+  padding: 22px;
+  flex: 1;
+}
+
+.property-details h2 {
+  margin: 0 0 10px;
+  color: #4a3e3d;
+  font-size: 22px;
+}
+
+.property-location {
+  color: #666;
+  margin: 8px 0;
+}
+
+.property-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #7c4a2a;
+}
+
+.property-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.property-meta span {
+  padding: 7px 12px;
+  background: #f8f3ee;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #5f514c;
+}
+
+.edit-property-btn {
+  border: none;
+  padding: 11px 20px;
+  border-radius: 9px;
+  background: #7c4a2a;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.edit-property-btn:hover {
+  background: #4a3e3d;
+}
+
+@media (max-width: 700px) {
+
+  .my-properties-page {
+    padding: 30px 16px;
+  }
+
+  .my-properties-header h1 {
+    font-size: 28px;
+  }
+
+  .property-card {
+    flex-direction: column;
+  }
+
+  .property-image {
+    width: 100%;
+    min-width: 100%;
+    height: 220px;
+  }
+
+  .property-details {
+    padding: 18px;
+  }
+
+}

@@ -1,0 +1,119 @@
+<div class="my-properties-page">
+
+  <div class="my-properties-header">
+    <h1>My Properties</h1>
+
+    <p>
+      Properties posted by you
+    </p>
+  </div>
+
+
+  <!-- Loading -->
+  <div
+    *ngIf="loading"
+    class="loading-state"
+  >
+    Loading your properties...
+  </div>
+
+
+  <!-- No Properties -->
+  <div
+    *ngIf="!loading && properties.length === 0"
+    class="empty-state"
+  >
+
+    <div class="empty-icon">
+      🏠
+    </div>
+
+    <h2>
+      No Properties Posted
+    </h2>
+
+    <p>
+      You have not posted any property yet.
+    </p>
+
+  </div>
+
+
+  <!-- Properties -->
+  <div
+    *ngIf="!loading && properties.length > 0"
+    class="properties-list"
+  >
+
+    <div
+      class="property-card"
+      *ngFor="let property of properties"
+    >
+
+      <!-- Image -->
+      <div class="property-image">
+
+        <img
+          *ngIf="property.gallery?.length"
+          [src]="property.gallery[0]?.url"
+          [alt]="property.name"
+        >
+
+        <div
+          *ngIf="!property.gallery?.length"
+          class="no-image"
+        >
+          No Image
+        </div>
+
+      </div>
+
+
+      <!-- Details -->
+      <div class="property-details">
+
+        <h2>
+          {{ property.name }}
+        </h2>
+
+        <p class="property-location">
+          📍 {{ property.location }}
+        </p>
+
+        <p class="property-price">
+          ₹ {{ property.price }}
+        </p>
+
+        <div class="property-meta">
+
+          <span>
+            {{ property.bhk }}
+          </span>
+
+          <span>
+            {{ property.area }}
+          </span>
+
+          <span>
+            {{ property.type }}
+          </span>
+
+        </div>
+
+
+        <!-- ONLY EDIT BUTTON -->
+        <button
+          type="button"
+          class="edit-property-btn"
+          (click)="editProperty(property)"
+        >
+          Edit Property
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

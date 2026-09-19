@@ -488,15 +488,18 @@ export class AddPropertyFormComponent
     //
     // /property/PROP-1234
     // -------------------------------------------------------
+const queryId =
+  this.route.snapshot.queryParamMap.get('id');
 
-    const queryId =
-      this.route.snapshot.queryParamMap.get('id');
+const editId =
+  this.route.snapshot.queryParamMap.get('edit');
 
-    const routeId =
-      this.route.snapshot.paramMap.get('id');
+const routeId =
+  this.route.snapshot.paramMap.get('id');
 
-    const propertyId =
-      queryId || routeId;
+const propertyId =
+  editId || queryId || routeId;
+
 
 
     if (propertyId) {
@@ -2608,12 +2611,11 @@ const compiledPayload = {
       );
 
 
-      this.propService
-        .updateProperty(
-          this.editingPropertyId,
-          compiledPayload
-        )
-
+this.propService
+  .updateMyProperty(
+    this.editingPropertyId,
+    compiledPayload
+  )
         .subscribe({
 
           next:
