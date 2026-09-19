@@ -1,9 +1,10 @@
+
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { OAuth2Client } = require('google-auth-library');
-
+const adminAuth = require('../middleware/adminAuth');
 const router = express.Router();
 console.log('AUTH ROUTES LOADED');
 
@@ -144,16 +145,13 @@ router.post('/signup', async (req, res) => {
 
 });
 
-// =====================================================
-// GET ALL USERS - ADMIN DASHBOARD
-// =====================================================
+
 
 // =====================================================
 // GET ALL USERS - ADMIN DASHBOARD
 // =====================================================
 
-router.get('/users', async (req, res) => {
-
+router.get('/users', adminAuth, async (req, res) => {
   console.log('GET USERS API HIT');
 
   try {
@@ -304,8 +302,7 @@ router.get('/approved-agents/:id', async (req, res) => {
 // APPROVE USER / AGENT - ADMIN DASHBOARD
 // =====================================================
 
-router.put('/approve/:id', async (req, res) => {
-
+router.put('/approve/:id', adminAuth, async (req, res) => {
   console.log(
     'APPROVE USER API HIT:',
     req.params.id
@@ -388,8 +385,7 @@ router.put('/approve/:id', async (req, res) => {
 // APPROVE USER / AGENT - ADMIN DASHBOARD
 // =====================================================
 
-router.put('/revoke/:id', async (req, res) => {
-
+router.put('/revoke/:id', adminAuth, async (req, res) => {
   console.log('REVOKE USER API HIT:', req.params.id);
 
   try {
@@ -454,8 +450,7 @@ router.put('/revoke/:id', async (req, res) => {
 // DELETE USER / AGENT - ADMIN DASHBOARD
 // =====================================================
 
-router.delete('/delete/:id', async (req, res) => {
-
+router.delete('/delete/:id', adminAuth, async (req, res) => {
   console.log('DELETE USER API HIT:', req.params.id);
 
   try {
@@ -946,6 +941,15 @@ console.error('Google Login Error:', error);
 
   }
 
+});
+
+
+router.get('/verify-admin', adminAuth, async (req, res) => {
+  return res.status(200).json({
+    success: true,
+    isAdmin: true,
+    user: req.admin
+  });
 });
 
 module.exports = router;
