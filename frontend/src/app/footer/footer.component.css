@@ -9,7 +9,7 @@
     background:
         radial-gradient(circle at 15% 10%, rgba(223,166,81,.10), transparent 30%),
         radial-gradient(circle at 85% 80%, rgba(124,74,42,.16), transparent 35%),
-        linear-gradient(135deg, #241815 0%, #3b2923 52%, #4a3e3d 100%);
+        linear-gradient(135deg, #715048 0%, #3b2923 52%, #87706e 100%);
     color: #fff;
     padding: 70px 0 0;
 }
