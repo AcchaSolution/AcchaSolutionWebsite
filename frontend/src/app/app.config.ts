@@ -314,11 +314,11 @@ export const appConfig: ApplicationConfig = {
       },
 
 
-      {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-
+{
+  path: 'dashboard',
+  component: DashboardComponent,
+  canActivate: [adminGuard]
+},
 
       {
         path: 'admin-login',
@@ -339,6 +339,13 @@ export const appConfig: ApplicationConfig = {
         component: AddPropertyFormComponent
       },
 
+
+      {
+  path: 'my-properties',
+  loadComponent: () =>
+    import('./my-properties/my-properties.component')
+      .then(m => m.MyPropertiesComponent)
+},
 
 {
   path: 'properties-catlog',

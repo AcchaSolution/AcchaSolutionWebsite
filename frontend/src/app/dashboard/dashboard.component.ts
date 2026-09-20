@@ -114,90 +114,150 @@ export class DashboardComponent
 
   ngOnInit(): void {
 
-    console.log(
-      '================================='
-    );
-
-    console.log(
-      'DASHBOARD COMPONENT LOADED'
-    );
-
-    console.log(
-      '================================='
-    );
-
-
     // ===================================================
-    // CHECK NODE.JS JWT
+    // ADMIN AUTHORIZATION CHECK
     // ===================================================
 
     const token =
       localStorage.getItem('authToken');
 
+    const adminEmail =
+      localStorage
+        .getItem('adminEmail')
+        ?.trim()
+        .toLowerCase();
 
     const adminLoggedIn =
-      localStorage.getItem('adminLoggedIn');
-
-
-    console.log(
-      'JWT Token:',
-      token ? 'FOUND' : 'NOT FOUND'
-    );
-
-
-    console.log(
-      'Admin Logged In:',
-      adminLoggedIn
-    );
+      localStorage.getItem('adminLoggedIn') === 'true';
 
 
     // ===================================================
-    // IF JWT NOT PRESENT
+    // ONLY AUTHORIZED ADMIN CAN OPEN DASHBOARD
     // ===================================================
 
-    if (!token) {
+    const isAuthorizedAdmin =
+      !!token &&
+      adminLoggedIn &&
+      adminEmail === 'tanubanglore35@gmail.com';
 
-      console.warn(
-        'No authToken found. Redirecting to login.'
-      );
 
-      this.router.navigate([
-        '/login'
-      ]);
+    // ===================================================
+    // ACCESS DENIED
+    // ===================================================
+
+    if (!isAuthorizedAdmin) {
+
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('adminLoggedIn');
+      localStorage.removeItem('adminEmail');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userName');
+
+      this.router.navigate(['/login']);
 
       return;
     }
 
 
     // ===================================================
-    // ADMIN INFORMATION
+    // BACKEND ADMIN VERIFICATION
     // ===================================================
 
-    this.adminUser = {
+    this.authService.verifyAdmin().subscribe({
 
-      email:
-        localStorage.getItem('adminEmail') ||
-        localStorage.getItem('userEmail') ||
-        '',
+      next: (res: any) => {
 
-      displayName:
-        localStorage.getItem('userName') ||
-        'Admin'
+        // =================================================
+        // BACKEND CONFIRMED ADMIN
+        // =================================================
 
-    };
+        if (
+          res?.success === true &&
+          res?.isAdmin === true
+        ) {
+
+          this.adminUser = {
+
+            email:
+              localStorage.getItem('adminEmail') || '',
+
+            displayName:
+              localStorage.getItem('userName') || 'Admin'
+
+          };
 
 
-    console.log(
-      'Admin User:',
-      this.adminUser
+          // =================================================
+          // LOAD DASHBOARD
+          // =================================================
+
+          this.loadDashboardData();
+
+          return;
+        }
+
+
+        // =================================================
+        // BACKEND DID NOT CONFIRM ADMIN
+        // =================================================
+
+        this.logoutAndRedirect();
+
+      },
+
+
+error: (error: any) => {
+
+  console.error(
+    'Admin backend verification failed:',
+    error
+  );
+
+  alert(
+    'VERIFY ADMIN FAILED:\n' +
+    (
+      error?.error?.message ||
+      error?.message ||
+      'Unknown error'
+    )
+  );
+
+}
+
+    });
+
+  }
+
+
+  // =====================================================
+  // LOGOUT INVALID ADMIN SESSION
+  // =====================================================
+
+  private logoutAndRedirect(): void {
+
+    localStorage.removeItem(
+      'authToken'
     );
 
+    localStorage.removeItem(
+      'adminLoggedIn'
+    );
 
-    // ===================================================
-    // LOAD DASHBOARD
-    // ===================================================
+    localStorage.removeItem(
+      'adminEmail'
+    );
 
-    this.loadDashboardData();
+    localStorage.removeItem(
+      'userEmail'
+    );
+
+    localStorage.removeItem(
+      'userName'
+    );
+
+    this.router.navigate([
+      '/login'
+    ]);
 
   }
 
@@ -844,25 +904,24 @@ async grantAgentApproval(agentId: string): Promise<void> {
 
     console.log('Approving agent:', agentId);
 
-const response = await firstValueFrom(
-  this.authService.approveAgent(agentId)
-);
+    const response = await firstValueFrom(
+      this.authService.approveAgent(agentId)
+    );
 
-console.log(
-  '========== APPROVAL API RESPONSE =========='
-);
+    console.log(
+      '========== APPROVAL API RESPONSE =========='
+    );
 
-console.log(response);
+    console.log(response);
 
-if (!response || response.success !== true) {
-  throw new Error(
-    response?.message ||
-    'Agent approval failed.'
-  );
-}
+    if (!response || response.success !== true) {
+      throw new Error(
+        response?.message ||
+        'Agent approval failed.'
+      );
+    }
 
-alert('Agent approved successfully.');
-
+    alert('Agent approved successfully.');
 
 
     // Refresh users from MongoDB
@@ -895,9 +954,10 @@ alert('Agent approved successfully.');
   }
 }
 
-  // // =====================================================
-// REVOKE AGENT APPROVAL
-// =====================================================
+
+  // =====================================================
+  // REVOKE AGENT APPROVAL
+  // =====================================================
 
 async revokeAgentApproval(agentId: string): Promise<void> {
 
@@ -1231,95 +1291,97 @@ deleteProperty(property: any): void {
       }
 
     });
+
 }
 
-  // =====================================================
-  // ADMIN NAME
-  // =====================================================
 
-  getAdminName(): string {
+// =====================================================
+// ADMIN NAME
+// =====================================================
 
-    if (!this.adminUser) {
+getAdminName(): string {
 
-      return 'Admin';
+  if (!this.adminUser) {
 
-    }
-
-
-    return (
-
-      this.adminUser.displayName ||
-
-      localStorage.getItem(
-        'userName'
-      ) ||
-
-      'Admin'
-
-    );
+    return 'Admin';
 
   }
 
 
-  // =====================================================
-  // ADMIN EMAIL
-  // =====================================================
+  return (
 
-  getAdminEmail(): string {
+    this.adminUser.displayName ||
 
-    return (
+    localStorage.getItem(
+      'userName'
+    ) ||
 
-      this.adminUser?.email ||
+    'Admin'
 
-      localStorage.getItem(
-        'adminEmail'
-      ) ||
+  );
 
-      localStorage.getItem(
-        'userEmail'
-      ) ||
-
-      ''
-
-    );
-
-  }
+}
 
 
-  // =====================================================
-  // ADMIN INITIAL
-  // =====================================================
+// =====================================================
+// ADMIN EMAIL
+// =====================================================
 
-  getAdminInitial(): string {
+getAdminEmail(): string {
 
-    const name =
-      this.getAdminName();
+  return (
+
+    this.adminUser?.email ||
+
+    localStorage.getItem(
+      'adminEmail'
+    ) ||
+
+    localStorage.getItem(
+      'userEmail'
+    ) ||
+
+    ''
+
+  );
+
+}
 
 
-    if (!name) {
+// =====================================================
+// ADMIN INITIAL
+// =====================================================
 
-      return 'A';
+getAdminInitial(): string {
 
-    }
-
-
-    return name
-      .trim()
-      .charAt(0)
-      .toUpperCase();
-
-  }
+  const name =
+    this.getAdminName();
 
 
-  // =====================================================
-  // ADMIN MENU
-  // =====================================================
+  if (!name) {
 
-  toggleAdminMenu(): void {
-
-    this.showAdminMenu =
-      !this.showAdminMenu;
+    return 'A';
 
   }
+
+
+  return name
+    .trim()
+    .charAt(0)
+    .toUpperCase();
+
+}
+
+
+// =====================================================
+// ADMIN MENU
+// =====================================================
+
+toggleAdminMenu(): void {
+
+  this.showAdminMenu =
+    !this.showAdminMenu;
+
+}
 
 }

@@ -674,8 +674,8 @@
       >
 
         <div class="profile-circle">
-          {{ userInitial$ | async }}
-        </div>
+{{ profileInitial }}     
+     </div>
 
         <span class="profile-arrow">
           {{ isDropdownOpen ? '▲' : '▼' }}
@@ -693,8 +693,7 @@
         <div class="profile-dropdown-header">
 
           <div class="profile-circle dropdown-avatar">
-            {{ userInitial$ | async }}
-          </div>
+{{ profileInitial }}          </div>
 
           <div>
 
@@ -715,7 +714,7 @@
 
 
         <a
-          routerLink="/"
+          routerLink="/my-properties"
           (click)="isDropdownOpen = false"
         >
           🏠 My Properties
@@ -1229,16 +1228,22 @@
     </button>
 
 
-    <!-- ================= LOGIN ================= -->
 
-    <a
-      routerLink="/login"
-      class="mobile-login-link"
-      (click)="closeMobileMenu()"
-    >
-      Login →
-    </a>
+<!-- ================= LOGIN ================= -->
 
+<ng-container
+  *ngIf="!authService.isPublicUserLoggedIn()"
+>
+
+  <a
+    routerLink="/login"
+    class="mobile-login-link"
+    (click)="closeMobileMenu()"
+  >
+    Login →
+  </a>
+
+</ng-container>
   </div>
 
 </div>

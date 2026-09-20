@@ -87,10 +87,12 @@ export class PropertyDetailsComponent
     this.route.paramMap.subscribe(
       params => {
 
-        const value =
-          params.get('id');
+const value =
+  params.get('permalink') ||
+  params.get('id');
 
 
+  
         console.log(
           '🔎 PROPERTY DETAILS ROUTE VALUE:',
           value

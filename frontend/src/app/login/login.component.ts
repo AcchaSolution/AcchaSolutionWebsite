@@ -1,244 +1,394 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  inject
+} from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router
+} from '@angular/router';
+
 import { AuthService } from '../services/auth.service';
 
-// TypeScript ke liye global declaration (Class ke bahar hona chahiye)
 declare var google: any;
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent
+  implements OnInit, AfterViewInit {
+
   private authService = inject(AuthService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
-  
-private clientId =
-  '109325296562-68hmr28motfoli131krmvte964c4v6os.apps.googleusercontent.com';
-  
-    activeTab: 'login' | 'signup' = 'login';
-  loginData = { email: '', password: '' };
-  signUpData = { name: '', email: '', password: '', phone: '', experience: '' };
-  selectedUser: string = 'Owner';
-  showPassword = false;
 
-  ngOnInit() {
-    // Component load hote hi Google Sign-In initialize ho jayega
-    this.initGoogleSign();
-  }
+  private clientId =
+    '109325296562-68hmr28motfoli131krmvte964c4v6os.apps.googleusercontent.com';
 
-  // Tab Switching
-  toggleAuthMode() {
-    this.activeTab = (this.activeTab === 'login') ? 'signup' : 'login';
-  }
+  activeTab: 'login' | 'signup' = 'login';
 
-  // =========================================================
-  // LOGIN LOGIC (Using Custom Node.js Backend)
-  // =========================================================
-onLoginSubmit() {
-
-  const credentials = {
-    email: this.loginData.email.trim(),
-    password: this.loginData.password
+  loginData = {
+    email: '',
+    password: ''
   };
 
-  this.authService.loginUser(credentials).subscribe({
+  signUpData = {
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+    experience: ''
+  };
 
-    next: (res: any) => {
+  selectedUser: string = 'Owner';
 
-      console.log('Login Response:', res);
+  showPassword = false;
 
-      if (res && res.success) {
+  private googleInitialized = false;
+  private googleCheckTimer: any = null;
 
-        // ==============================
-        // ADMIN LOGIN
-        // ==============================
 
-        if (
-          res.user &&
-          res.user.role === 'admin'
-        ) {
-
-          this.router.navigate(['/dashboard']);
-
-        }
-
-        // ==============================
-        // NORMAL USER LOGIN
-        // ==============================
-
-        else {
-
-          const returnUrl =
-            this.route.snapshot.queryParams['returnUrl']
-            || '/agent-portal';
-
-          this.router.navigateByUrl(returnUrl);
-
-        }
-
-      }
-
-    },
-
-    error: (error: any) => {
-
-      console.error(
-        'User Login Error:',
-        error
-      );
-
-      const errorMessage =
-        error?.error?.message ||
-        error?.message ||
-        'Invalid email or password.';
-
-      alert(errorMessage);
-
-    }
-
-  });
-
-}
   // =========================================================
-  // USER SIGNUP (Via Node.js Backend)
+  // COMPONENT INIT
   // =========================================================
-  onSignUpSubmit() {
-    const signupDataPayload = {
-      name: this.signUpData.name,
-      email: this.signUpData.email,
-      password: this.signUpData.password,
-      phone: this.signUpData.phone,
-      experience: this.signUpData.experience,
-      role: this.selectedUser.toLowerCase()
-    };
 
-    this.authService.signup(signupDataPayload).subscribe({
-      next: (res: any) => {
-        alert('Registration Successful! Please wait for Admin approval.');
-        this.activeTab = 'login';
-        this.signUpData = {
-          name: '',
-          email: '',
-          password: '',
-          phone: '',
-          experience: ''
-        };
-      },
-      error: (error: any) => {
-        console.error('Registration Error:', error);
-        const errorMessage = error?.error?.message || error?.message || 'Server connection failed.';
-        alert('Registration failed: ' + errorMessage);
-      }
-    });
+  ngOnInit(): void {
+    // Google ko yahan initialize nahi karna hai.
+    // Sirf ngAfterViewInit() se button render hoga.
   }
 
 
   // =========================================================
-  // GOOGLE IDENTITY SERVICES (GIS) LOGIC
+  // GOOGLE BUTTON INITIALIZATION
   // =========================================================
-//   initGoogleSign() {
-//     // Yahan apna Google Client ID dalein (jo Google Cloud Console se milega)
-// const clientId = '109325296562-6drgbfpcmh8a04olspata31cj90m4l9d.apps.googleusercontent.com';
 
-//     if (!clientId || clientId.includes('YOUR_GOOGLE_CLIENT_ID')) {
-//     console.error('Client ID is missing or invalid!');
-//     return;
-//   }
-  
-//     if (typeof google !== 'undefined' && google.accounts) {
-//       google.accounts.id.initialize({
-//         client_id: clientId,
-//         callback: (response: any) => this.handleGoogleResponse(response)
-//       });
-//     }
-//   }
-
-initGoogleSign() {
-
-  if (typeof google !== 'undefined' && google.accounts) {
-    google.accounts.id.initialize({
-      client_id: this.clientId,
-      callback: (response: any) => this.handleGoogleResponse(response),
-      use_fedcm_for_prompt: false // <--- Yeh line zaroor add karein local testing ke liye
-    });
-
-    // Google ka official button HTML container mein render karega
-    const googleBtnElement = document.getElementById('google-btn');
-      if (googleBtnElement) {
-        google.accounts.id.renderButton(googleBtnElement, {
-          theme: 'outline',
-          size: 'large',
-          width: '100%'
-        });
-      }
-    } else {
-      // Agar script load hone mein thoda time lag raha ho toh 1 second baad dobara try karein
-      setTimeout(() => this.initGoogleSign(), 1000);
-    }
-  }
-  
-ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
     this.renderGoogleButtonWhenReady();
   }
 
-  renderGoogleButtonWhenReady() {
-    const checkGoogle = setInterval(() => {
-      if (typeof google !== 'undefined' && google.accounts) {
-        clearInterval(checkGoogle);
-        
-        google.accounts.id.initialize({
-          client_id: this.clientId,
-          callback: (response: any) => this.handleGoogleResponse(response),
-          use_fedcm_for_prompt: false
-        });
 
-        const buttonElement = document.getElementById('google-btn');
-        if (buttonElement) {
-          google.accounts.id.renderButton(buttonElement, {
-            theme: 'outline',
-            size: 'large',
-            type: 'standard',
-            shape: 'rectangular'
-          });
+  renderGoogleButtonWhenReady(): void {
+
+    // Already initialized hai to dobara mat karo
+    if (this.googleInitialized) {
+      return;
+    }
+
+    // Existing timer ko clear karo
+    if (this.googleCheckTimer) {
+      clearInterval(this.googleCheckTimer);
+    }
+
+    this.googleCheckTimer = setInterval(() => {
+
+      // Google Identity Services abhi load nahi hua
+      if (
+        typeof google === 'undefined' ||
+        !google.accounts ||
+        !google.accounts.id
+      ) {
+        return;
+      }
+
+      const buttonElement =
+        document.getElementById('google-btn');
+
+      // HTML button container abhi available nahi
+      if (!buttonElement) {
+        return;
+      }
+
+      clearInterval(this.googleCheckTimer);
+      this.googleCheckTimer = null;
+
+      // Google ko sirf EK baar initialize karo
+      google.accounts.id.initialize({
+        client_id: this.clientId,
+
+        callback: (response: any) => {
+          this.handleGoogleResponse(response);
+        },
+
+        use_fedcm_for_prompt: false
+      });
+
+      // Google official button render
+      google.accounts.id.renderButton(
+        buttonElement,
+        {
+          theme: 'outline',
+          size: 'large',
+          width: '100%',
+          type: 'standard',
+          shape: 'rectangular'
         }
-      }
-    }, 100); // Har 100ms mein check karega jab tak script load na ho jaye
-  }
+      );
 
-  handleGoogleResponse(response: any) {
-    const token = response.credential;
+      this.googleInitialized = true;
 
-    this.authService.googleLogin({ token }).subscribe({
-      next: (res: any) => {
-        console.log('Google Login Success:', res);
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/dashboard']);
-      },
-      error: (err) => {
-        console.error('Backend Google Auth Failed:', err);
-        alert(err.error?.message || 'Google login failed on server.');
-      }
-    });
+    }, 100);
   }
 
 
-  triggerGoogleLogin() {
-  if (typeof google !== 'undefined' && google.accounts) {
-    google.accounts.id.prompt((notification: any) => {
-      if (notification.isNotDisplayed()) {
-        console.warn('Prompt display nahi hua, reason:', notification.getNotDisplayedReason());
-      }
-    });
+  // =========================================================
+  // TAB SWITCHING
+  // =========================================================
+
+  toggleAuthMode(): void {
+
+    this.activeTab =
+      this.activeTab === 'login'
+        ? 'signup'
+        : 'login';
   }
-}
 
 
+  // =========================================================
+  // NORMAL LOGIN
+  // =========================================================
 
+  onLoginSubmit(): void {
+
+    const credentials = {
+      email: this.loginData.email.trim(),
+      password: this.loginData.password
+    };
+
+    this.authService
+      .loginUser(credentials)
+      .subscribe({
+
+        next: (res: any) => {
+
+          console.log(
+            'Login Response:',
+            res
+          );
+
+          if (
+            res &&
+            res.success
+          ) {
+
+            // ADMIN LOGIN
+            if (
+              res.user &&
+              res.user.role === 'admin'
+            ) {
+
+              this.router.navigate([
+                '/dashboard'
+              ]);
+
+            }
+
+            // NORMAL USER LOGIN
+            else {
+
+              const returnUrl =
+                this.route.snapshot.queryParams[
+                  'returnUrl'
+                ] || '/agent-portal';
+
+              this.router.navigateByUrl(
+                returnUrl
+              );
+            }
+          }
+        },
+
+        error: (error: any) => {
+
+          console.error(
+            'User Login Error:',
+            error
+          );
+
+          const errorMessage =
+            error?.error?.message ||
+            error?.message ||
+            'Invalid email or password.';
+
+          alert(errorMessage);
+        }
+
+      });
+  }
+
+
+  // =========================================================
+  // USER SIGNUP
+  // =========================================================
+
+  onSignUpSubmit(): void {
+
+    const signupDataPayload = {
+
+      name: this.signUpData.name,
+
+      email: this.signUpData.email,
+
+      password: this.signUpData.password,
+
+      phone: this.signUpData.phone,
+
+      experience:
+        this.signUpData.experience,
+
+      role:
+        this.selectedUser.toLowerCase()
+    };
+
+    this.authService
+      .signup(signupDataPayload)
+      .subscribe({
+
+        next: (res: any) => {
+
+          alert(
+            'Registration Successful! Please wait for Admin approval.'
+          );
+
+          this.activeTab = 'login';
+
+          this.signUpData = {
+            name: '',
+            email: '',
+            password: '',
+            phone: '',
+            experience: ''
+          };
+        },
+
+        error: (error: any) => {
+
+          console.error(
+            'Registration Error:',
+            error
+          );
+
+          const errorMessage =
+            error?.error?.message ||
+            error?.message ||
+            'Server connection failed.';
+
+          alert(
+            'Registration failed: ' +
+            errorMessage
+          );
+        }
+
+      });
+  }
+
+
+  // =========================================================
+  // GOOGLE LOGIN RESPONSE
+  // =========================================================
+
+  handleGoogleResponse(
+    response: any
+  ): void {
+
+    if (
+      !response ||
+      !response.credential
+    ) {
+
+      alert(
+        'Google login failed. Google credential was not received.'
+      );
+
+      return;
+    }
+
+    const token =
+      response.credential;
+
+    this.authService
+      .googleLogin({ token })
+      .subscribe({
+
+        next: (res: any) => {
+
+          console.log(
+            'Google Login Success:',
+            res
+          );
+
+          if (
+            res &&
+            res.success &&
+            res.token
+          ) {
+
+            localStorage.setItem(
+              'authToken',
+              res.token
+            );
+
+            this.router.navigate([
+              '/dashboard'
+            ]);
+          }
+        },
+
+        error: (err: any) => {
+
+          console.error(
+            'Backend Google Auth Failed:',
+            err
+          );
+
+          alert(
+            err?.error?.message ||
+            'Google login failed on server.'
+          );
+        }
+
+      });
+  }
+
+
+  // =========================================================
+  // OPTIONAL GOOGLE PROMPT
+  // =========================================================
+  // Is method ko automatically call nahi kiya ja raha.
+  // Official Google button upar render kiya gaya hai.
+
+  triggerGoogleLogin(): void {
+
+    if (
+      typeof google !== 'undefined' &&
+      google.accounts &&
+      google.accounts.id
+    ) {
+
+      google.accounts.id.prompt(
+        (notification: any) => {
+
+          if (
+            notification.isNotDisplayed()
+          ) {
+
+            console.warn(
+              'Google prompt not displayed:',
+              notification.getNotDisplayedReason()
+            );
+          }
+        }
+      );
+    }
+  }
 }

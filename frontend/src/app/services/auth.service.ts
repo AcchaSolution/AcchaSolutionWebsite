@@ -593,4 +593,23 @@ deleteAgent(agentId: string): Observable<any> {
 
   }
 
+
+verifyAdmin(): Observable<any> {
+
+  const token =
+    localStorage.getItem('authToken');
+
+  return this.http.get<any>(
+    `${this.apiUrl}/verify-admin`,
+    {
+      headers: token
+        ? {
+            Authorization: `Bearer ${token}`
+          }
+        : {}
+    }
+  );
+
+}
+
 }
