@@ -14,10 +14,12 @@
 
 <div class="luxury-hero">
 
-  <img
-    [src]="propertyData.gallery?.[0]?.url"
-    alt="Main Photo"
-  >
+<img
+  [src]="propertyData.gallery?.[0]?.url"
+  alt="Main Photo"
+  fetchpriority="high"
+  decoding="async"
+>
 
   <div class="hero-overlay-title">
 
@@ -361,10 +363,12 @@
             (click)="setActiveImage(idx)"
           >
 
-            <img
-              [src]="img.url"
-              alt="Property Thumbnail"
-            >
+<img
+  [src]="img.url"
+  alt="Property Thumbnail"
+  loading="lazy"
+  decoding="async"
+>
 
           </div>
 

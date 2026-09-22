@@ -1,7 +1,9 @@
 <!-- ============================================================
      🏠 ACCHASOLUTION FIXED SINGLE ROW LIGHT COSMIC BANNER
-     ============================================================ -->
-<section class="accha-modern-hero">
+   ============================================================ -->
+<div class="accha-home-page">
+
+   <section class="accha-modern-hero">
 
   <!-- 🌌 MASSIVE TEXTBOOK ORBITS (SPREAD WIDE ALONG THE BANNER EDGES) -->
   <div class="textbook-solar-system">
@@ -229,9 +231,6 @@
 
   <div class="projects-section-header">
 
-    <div class="projects-section-subtitle">
-      ACCHASOLUTION REALTY
-    </div>
 
     <h2 class="projects-section-title">
       Upcoming & New Projects
@@ -375,51 +374,79 @@
      4️⃣ CURATED / VERIFIED PROPERTY SECTION
      ============================================================ -->
 
+<!-- ============================================================
+     CURATED / VERIFIED PROPERTY SECTION
+     ============================================================ -->
+
 <section
   id="curated-properties"
   class="curated-properties-section"
 >
 
-  <!-- SECTION HEADER -->
+  <!-- ==========================================================
+       SECTION HEADER
+       ========================================================== -->
 
   <div class="properties-section-header">
 
-    <div class="properties-section-subtitle">
-      ACCHASOLUTION REALTY
-    </div>
 
     <h2 class="properties-section-title">
       Curated Properties
     </h2>
 
     <p class="properties-section-description">
-
       Discover verified properties from trusted owners and builders
       across prime locations in India.
-
     </p>
 
   </div>
 
 
-  <!-- ==========================================================
-       PROPERTY CARDS GRID
+<!-- ==========================================================
+     VIEW ALL PROPERTIES
+     ========================================================== -->
+
+
+     <div
+  class="properties-view-all-wrapper"
+  *ngIf="properties.length > 8"
+>
+
+<!-- <div
+  class="properties-view-all-wrapper"
+> -->
+  <button
+    type="button"
+    class="properties-view-all-btn"
+    (click)="toggleAllProperties()"
+  >
+    <span>View All Properties</span>
+    <span>→</span>
+  </button>
+</div>
+
+
+<!-- ==========================================================
+       PROPERTY CARDS
        ========================================================== -->
+       
 
   <div
     class="property-cards-grid"
     *ngIf="displayedProperties.length > 0"
   >
 
-<div
-  class="property-card"
-  *ngFor="let property of displayedProperties"
-  (click)="viewDetails($any(property)._id || $any(property).id)"
->
+  
 
-      <!-- ====================================================
+    <article
+      class="property-card"
+      *ngFor="let property of displayedProperties"
+      (click)="viewDetails($any(property)._id || $any(property).id)"
+    >
+
+      <!-- ======================================================
            PROPERTY IMAGE
-           ==================================================== -->
+           ====================================================== -->
 
       <div class="property-card-image-wrapper">
 
@@ -437,167 +464,167 @@
 
         <!-- STATUS -->
 
+        <span
+          class="property-status-badge"
+          *ngIf="
+            $any(property).transactionType ||
+            $any(property).listingType ||
+            $any(property).mode
+          "
+        >
+          {{
+            (
+              $any(property).transactionType ||
+              $any(property).listingType ||
+              $any(property).mode ||
+              ''
+            ).toString().toUpperCase()
+          }}
+        </span>
 
-<span
-  class="property-status-badge"
-  *ngIf="$any(property).transactionType || $any(property).listingType || $any(property).mode"
->
-  {{
-    (
-      $any(property).transactionType ||
-      $any(property).listingType ||
-      $any(property).mode ||
-      ''
-    ).toString().toUpperCase()
-  }}
-</span>
+
+        <!-- VERIFIED LABEL -->
+
+        <span class="property-verified-badge">
+          <i class="bi bi-patch-check-fill"></i>
+          Verified
+        </span>
+
       </div>
 
 
-
-      <!-- ====================================================
+      <!-- ======================================================
            PROPERTY CONTENT
-           ==================================================== -->
+           ====================================================== -->
 
-<!-- ====================================================
-     PROPERTY CONTENT
-     ==================================================== -->
+      <div class="property-card-content">
 
-<div class="property-card-content">
+        <!-- PROPERTY NAME -->
 
-  <!-- PROPERTY NAME -->
+        <h3 class="property-card-title">
+          {{ $any(property).name || 'Verified Property' }}
+        </h3>
 
-  <h3 class="property-card-title">
-    {{ $any(property).name || 'Verified Property' }}
-  </h3>
+        
 
+        <!-- LOCATION -->
 
-  <!-- TYPE + BHK -->
+        <div
+          class="property-card-location"
+          *ngIf="$any(property).location"
+        >
+          <i class="bi bi-geo-alt-fill"></i>
 
-  <div class="property-card-meta">
-
-    <span *ngIf="$any(property).type">
-      {{ $any(property).type }}
-    </span>
-
-    <span *ngIf="$any(property).bhk">
-      {{ $any(property).bhk }}
-    </span>
-
-  </div>
+          <span>
+            {{ $any(property).location }}
+          </span>
+        </div>
 
 
-  <!-- LOCATION -->
+        <!-- PRICE -->
 
-  <div
-    class="property-card-location"
-    *ngIf="$any(property).location"
-  >
-    📍 {{ $any(property).location }}
-  </div>
-
-
-  <!-- PROPERTY INFORMATION -->
-
-  <div class="property-info-row">
-
-    <div
-      class="property-info-item"
-      *ngIf="$any(property).area"
-    >
-      <span class="property-info-label">
-        AREA
-      </span>
-
-      <strong>
-        {{ $any(property).area }}
-      </strong>
-    </div>
+        <div
+          class="property-price"
+          *ngIf="$any(property).price"
+        >
+          {{ formatPrice($any(property).price) }}
+        </div>
 
 
-    <div
-      class="property-info-item"
-      *ngIf="$any(property).bhk"
-    >
-      <span class="property-info-label">
-        BHK
-      </span>
+        <!-- PROPERTY QUICK INFO -->
 
-      <strong>
-        {{ $any(property).bhk }}
-      </strong>
-    </div>
+        <div class="property-card-meta">
 
+          <span *ngIf="$any(property).bhk">
+            {{ $any(property).bhk }}
+          </span>
 
-    <div
-      class="property-info-item"
-      *ngIf="$any(property).type"
-    >
-      <span class="property-info-label">
-        TYPE
-      </span>
+          <span *ngIf="$any(property).area">
+            {{ $any(property).area }}
+          </span>
 
-      <strong>
-        {{ $any(property).type }}
-      </strong>
-    </div>
+          <span *ngIf="$any(property).type">
+            {{ $any(property).type }}
+          </span>
 
-  </div>
+        </div>
 
 
-  <!-- PRICE -->
+<!-- ==========================================================
+     PROPERTY ACTIONS
+     ========================================================== -->
 
-  <div class="property-card-details">
+<div
+  class="property-card-actions"
+  (click)="$event.stopPropagation()"
+>
 
-    <div
-      class="property-price"
-      *ngIf="$any(property).price"
-      style="font-weight: 500;"
-    >
-      {{ formatPrice($any(property).price) }}
-    </div>
-
-  </div>
-
-
-  <!-- DESCRIPTION -->
-
-  <div
-    class="property-card-description"
-    *ngIf="$any(property).description"
-    [innerHTML]="$any(property).description"
-  >
-  </div>
-
-
-  <!-- VIEW DETAILS -->
-
+  <!-- 👁 VIEW -->
   <button
     type="button"
-    class="property-view-details-btn"
+    class="property-action-btn"
+    title="View Property"
+    aria-label="View Property"
     (click)="viewDetails($any(property))"
   >
+    <i class="bi bi-eye"></i>
+  </button>
 
-    <span>
-      View Details
-    </span>
 
-    <span>
-      →
-    </span>
+  <!-- 💬 WHATSAPP -->
+  <button
+    type="button"
+    class="property-action-btn whatsapp-action"
+    title="WhatsApp"
+    aria-label="WhatsApp"
+    (click)="openWhatsApp($any(property))"
+  >
+    <i class="bi bi-whatsapp"></i>
+  </button>
 
+
+  <!-- 🔗 SHARE -->
+  <button
+    type="button"
+    class="property-action-btn"
+    title="Share Property"
+    aria-label="Share Property"
+    (click)="shareProperty($any(property))"
+  >
+    <i class="bi bi-share"></i>
+  </button>
+
+
+  <!-- ❤️ SAVE -->
+  <button
+    type="button"
+    class="property-action-btn"
+    title="Save Property"
+    aria-label="Save Property"
+    (click)="toggleWishlist($any(property))"
+  >
+    <i
+      class="bi"
+      [ngClass]="
+        isWishlisted($any(property))
+          ? 'bi-heart-fill'
+          : 'bi-heart'
+      "
+    ></i>
   </button>
 
 </div>
+     
+     
+      </div>
 
-    </div>
+    </article>
 
   </div>
 
 
-
   <!-- ==========================================================
-       NO PROPERTY MESSAGE
+       EMPTY STATE
        ========================================================== -->
 
   <div
@@ -606,7 +633,7 @@
   >
 
     <div class="no-properties-icon">
-      🏠
+      <i class="bi bi-house-door"></i>
     </div>
 
     <h3>
@@ -614,57 +641,13 @@
     </h3>
 
     <p>
-
       Verified properties will appear here once they are available.
-
     </p>
 
   </div>
 
 
-
-  <!-- ==========================================================
-       VIEW ALL PROPERTIES
-       ========================================================== -->
-
-  <div
-    class="properties-view-all-wrapper"
-    *ngIf="properties.length > 4"
-  >
-
-    <button
-      type="button"
-      class="properties-view-all-btn"
-      (click)="toggleAllProperties()"
-    >
-
-      <span>
-
-        {{
-          showAllProperties
-            ? 'Show Less'
-            : 'View All Properties'
-        }}
-
-      </span>
-
-
-      <span>
-
-        {{
-          showAllProperties
-            ? '↑'
-            : '→'
-        }}
-
-      </span>
-
-    </button>
-
-  </div>
-
 </section>
-
 
 
 <!-- ============================================================
@@ -674,10 +657,6 @@
 <section class="home-property-cta-section">
 
   <div class="home-property-cta-content">
-
-    <span class="home-property-cta-badge">
-      ACCHASOLUTION
-    </span>
 
 
     <h2>
@@ -702,3 +681,4 @@
   </div>
 
 </section>
+</div>  `

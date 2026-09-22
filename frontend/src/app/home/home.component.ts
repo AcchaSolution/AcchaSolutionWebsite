@@ -1056,8 +1056,8 @@ searchProperties(): void {
 
 
   // ============================================================
-  // PROPERTY DETAILS
-  // ============================================================
+// PROPERTY DETAILS
+// ============================================================
 viewDetails(property: any): void {
 
   if (!property) {
@@ -1091,32 +1091,36 @@ viewDetails(property: any): void {
     slug
   );
 
-  this.router.navigate([
-    '/property-details',
-    slug
-  ]);
-}
-  // ============================================================
-  // DISPLAYED PROPERTIES
-  // ============================================================
-
-  get displayedProperties(): any[] {
-
-    if (
-      this.showAllProperties
-    ) {
-
-      return this.properties;
-
+  // 🚀 PROPERTY DATA DIRECTLY PASS
+  this.router.navigate(
+    ['/property-details', slug],
+    {
+      state: {
+        property: property
+      }
     }
+  );
+}
 
 
-    return this.properties.slice(
-      0,
-      4
-    );
+
+  // ============================================================
+// DISPLAYED PROPERTIES
+// ============================================================
+
+get displayedProperties(): any[] {
+
+  if (this.showAllProperties) {
+
+    return this.properties;
 
   }
+
+  // Initial Home Page:
+  // Maximum 8 properties = 4 cards × 2 rows
+  return this.properties.slice(0, 8);
+
+}
 
 
   // ============================================================
@@ -1191,6 +1195,117 @@ formatPrice(value: any): string {
   return `₹ ${price.toLocaleString('en-IN')}`;
 }
 
+
+// WhatsApp
+openWhatsApp(property: any): void {
+  const phone = '919304751016';
+
+  const propertyName =
+    property?.name ||
+    property?.title ||
+    'Property';
+
+  const message =
+    `Hi, I am interested in ${propertyName}. Please share more details.`;
+
+  const url =
+    `https://wa.me/${phone}?text=` +
+    encodeURIComponent(message);
+
+  window.open(url, '_blank');
+}
+
+
+// Share
+shareProperty(property: any): void {
+
+  const propertyName =
+    property?.name ||
+    property?.title ||
+    'Property';
+
+  const slug = propertyName
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  const propertyUrl =
+    `${window.location.origin}/property-details/${slug}`;
+
+  if (navigator.share) {
+
+    navigator.share({
+      title: propertyName,
+      text: `Check this property: ${propertyName}`,
+      url: propertyUrl
+    }).catch(() => {});
+
+  } else {
+
+    navigator.clipboard
+      ?.writeText(propertyUrl)
+      .then(() => {
+        alert('Property link copied!');
+      })
+      .catch(() => {
+        alert(propertyUrl);
+      });
+  }
+}
+
+
+// Wishlist
+toggleWishlist(property: any): void {
+
+  const propertyId =
+    property?._id ||
+    property?.id ||
+    property?.name;
+
+  if (!propertyId) {
+    return;
+  }
+
+  const saved =
+    JSON.parse(
+      localStorage.getItem('acchaWishlist') || '[]'
+    );
+
+  const index =
+    saved.indexOf(propertyId);
+
+  if (index >= 0) {
+    saved.splice(index, 1);
+  } else {
+    saved.push(propertyId);
+  }
+
+  localStorage.setItem(
+    'acchaWishlist',
+    JSON.stringify(saved)
+  );
+}
+
+
+isWishlisted(property: any): boolean {
+
+  const propertyId =
+    property?._id ||
+    property?.id ||
+    property?.name;
+
+  if (!propertyId) {
+    return false;
+  }
+
+  const saved =
+    JSON.parse(
+      localStorage.getItem('acchaWishlist') || '[]'
+    );
+
+  return saved.includes(propertyId);
+}
 
 }
 

@@ -2147,7 +2147,8 @@ padding:50px 4% 40px;
 .properties-section-subtitle {
   display: block;
 
-  margin-bottom: 12px;
+  margin-bottom: 0px;
+  margin-top: -42px;
 
   color: var(--home-copper-dark);
 
@@ -2189,7 +2190,7 @@ padding:50px 4% 40px;
 
   color: var(--home-muted);
 
-  font-size: 11px;
+  font-size: 15px;
 
   line-height: 1.8;
 }
@@ -2613,13 +2614,13 @@ padding:50px 4% 40px;
 
   padding: 110px 5% 105px;
 
-  background:
-    linear-gradient(
-      180deg,
-      #f8f7f4 0%,
-      #eeece7 100%
-    );
-
+background:
+  linear-gradient(
+    180deg,
+    #fdf8f5 0%,
+    #f6eee9 55%,
+    #fdf8f5 100%
+  );
   overflow: hidden;
 }
 
@@ -2632,64 +2633,198 @@ padding:50px 4% 40px;
   text-align: center;
 }
 
+/* ==========================================================
+   VIEW ALL PROPERTIES — TOP RIGHT
+   ========================================================== */
+
+.properties-view-all-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0 0 18px;
+}
+
+.properties-view-all-btn {
+  min-height: 38px;
+  padding: 0 16px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border: 1px solid rgba(113, 80, 72, 0.35);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.72);
+  color: #715048;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 18px rgba(113, 80, 72, 0.10);
+
+  backdrop-filter: blur(12px);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.properties-view-all-btn span:last-child {
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.properties-view-all-btn:hover {
+  background: #715048;
+  color: #ffffff;
+  border-color: #715048;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(113, 80, 72, 0.20);
+}
+
+.properties-view-all-btn:hover span:last-child {
+  transform: translateX(4px);
+}
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+  .properties-view-all-wrapper {
+    margin-bottom: 14px;
+  }
+
+  .properties-view-all-btn {
+    min-height: 35px;
+    padding: 0 13px;
+
+    font-size: 10px;
+  }
+
+  .properties-view-all-btn span:last-child {
+    font-size: 14px;
+  }
+
+}
 
 /* ==========================================================================
-   19. PROPERTY GRID
+   19. PROPERTY GRID — 4 CARDS PER ROW
    ========================================================================== */
 
 .property-cards-grid {
   width: 100%;
-  max-width: 1180px;
+  max-width: 100%;
 
-  margin: 0 auto;
+  display: grid;
 
-  display: flex;
-  flex-direction: column;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
-  gap: 15px;
+  gap: 18px;
+
+  align-items: stretch;
+  box-sizing: border-box;
 }
 
 
-/* ==========================================================================
-   20. PROPERTY CARD
-   ========================================================================== */
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .property-cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+  .property-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+  .property-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+}
+
+
+ /* ==========================================================================
+    20. PROPERTY CARD — PREMIUM COMPACT REDESIGN
+    ========================================================================== */
 
 .property-card {
   position: relative;
 
   width: 100%;
-  height: 225px;
+  height: 292px;
 
   display: flex;
+  flex-direction: column;
 
   overflow: hidden;
 
-  border:
-    1px solid var(--home-line);
+  border: 1px solid rgba(113, 80, 72, 0.14);
 
-  border-radius: 13px;
+  border-radius: 18px;
 
-  background: #fff;
+  background: #ffffff;
 
   cursor: pointer;
 
   box-shadow:
-    var(--home-shadow-sm);
+    0 8px 24px rgba(74, 62, 61, 0.07);
 
   transition:
-    transform var(--home-transition),
-    box-shadow var(--home-transition),
-    border-color var(--home-transition);
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .property-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 
   border-color:
-    rgba(182,120,75,0.35);
+    rgba(223, 166, 81, 0.65);
 
   box-shadow:
-    var(--home-shadow-md);
+    0 18px 42px rgba(74, 62, 61, 0.14);
 }
 
 
@@ -2700,14 +2835,36 @@ padding:50px 4% 40px;
 .property-card-image-wrapper {
   position: relative;
 
-  flex: 0 0 34%;
+  width: 100%;
+  height: 150px;
 
-  width: 34%;
-  height: 225px;
+  flex: 0 0 150px;
 
   overflow: hidden;
 
-  background: #ddd9d1;
+  background:
+    linear-gradient(
+      135deg,
+      #e9e1db,
+      #d8ccc4
+    );
+}
+
+.property-card-image-wrapper::after {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0.02) 35%,
+      rgba(45,31,27,0.30) 100%
+    );
+
+  pointer-events: none;
 }
 
 .property-card-image {
@@ -2717,30 +2874,16 @@ padding:50px 4% 40px;
   object-fit: cover;
 
   transition:
-    transform 0.65s ease,
-    filter 0.35s ease;
+    transform 0.7s cubic-bezier(.2,.7,.2,1),
+    filter 0.4s ease;
 }
 
 .property-card:hover .property-card-image {
-  transform: scale(1.055);
+  transform: scale(1.07);
 
-  filter: saturate(0.92);
-}
-
-.property-card-image-wrapper::after {
-  content: '';
-
-  position: absolute;
-  inset: 0;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent 65%,
-      rgba(37,40,43,0.18)
-    );
-
-  pointer-events: none;
+  filter:
+    saturate(0.95)
+    contrast(1.02);
 }
 
 
@@ -2751,24 +2894,27 @@ padding:50px 4% 40px;
 .property-status-badge {
   position: absolute;
 
-  top: 12px;
-  left: 12px;
+  top: 11px;
+  left: 11px;
 
-  z-index: 3;
+  z-index: 4;
+
+  min-height: 23px;
+
+  padding: 0 10px;
 
   display: inline-flex;
   align-items: center;
 
-  min-height: 25px;
+  border: 1px solid
+    rgba(255,255,255,0.22);
 
-  padding: 0 9px;
-
-  border-radius: 5px;
+  border-radius: 999px;
 
   background:
-    rgba(37,40,43,0.88);
+    rgba(113,80,72,0.94);
 
-  color: #fff;
+  color: #ffffff;
 
   font-size: 7px;
 
@@ -2778,7 +2924,10 @@ padding:50px 4% 40px;
 
   text-transform: uppercase;
 
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,0.14);
 }
 
 .property-status-badge::before {
@@ -2791,7 +2940,57 @@ padding:50px 4% 40px;
 
   border-radius: 50%;
 
-  background: var(--home-copper);
+  background: #dfa651;
+
+  box-shadow:
+    0 0 0 3px rgba(223,166,81,0.15);
+}
+
+
+/* ==========================================================================
+   22.5 VERIFIED BADGE
+   ========================================================================== */
+
+.property-verified-badge {
+  position: absolute;
+
+  right: 10px;
+  bottom: 10px;
+
+  z-index: 4;
+
+  min-height: 23px;
+
+  padding: 0 9px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  border:
+    1px solid rgba(255,255,255,0.24);
+
+  border-radius: 999px;
+
+  background:
+    rgba(113,80,72,0.90);
+
+  color: #ffffff;
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.4px;
+
+  backdrop-filter: blur(10px);
+}
+
+.property-verified-badge i {
+  color: #dfa651;
+
+  font-size: 9px;
 }
 
 
@@ -2802,20 +3001,22 @@ padding:50px 4% 40px;
 .property-card-content {
   position: relative;
 
-  flex: 1 1 auto;
+  width: 100%;
+  height: 142px;
 
-  min-width: 0;
-
-  height: 225px;
-
-  padding: 20px 23px;
+  padding: 11px 13px 8px;
 
   display: flex;
   flex-direction: column;
 
-  overflow: hidden;
+  min-width: 0;
 
-  background: #fff;
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fdfaf8 100%
+    );
 }
 
 
@@ -2826,213 +3027,97 @@ padding:50px 4% 40px;
 .property-card-title {
   width: 100%;
 
-  margin: 0 0 7px;
+  margin: 0 0 4px;
 
-  color: var(--home-navy);
+  color: #715048;
 
   font-family:
     'Manrope',
     sans-serif;
 
-  font-size: 19px;
+  font-size: 13px;
 
   font-weight: 800;
 
-  line-height: 1.25;
+  line-height: 1.2;
 
-  display: -webkit-box;
-
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  white-space: nowrap;
 
   overflow: hidden;
 
-  transition: color var(--home-transition);
+  text-overflow: ellipsis;
+
+  transition:
+    color 0.25s ease;
 }
 
 .property-card:hover .property-card-title {
-  color: var(--home-copper-dark);
+  color: #a96f29;
 }
 
 
 /* ==========================================================================
-   25. PROPERTY META
-   ========================================================================== */
-
-.property-card-meta {
-  display: flex;
-  align-items: center;
-
-  flex-wrap: wrap;
-
-  gap: 5px;
-
-  margin-bottom: 8px;
-}
-
-.property-card-meta span {
-  display: inline-flex;
-  align-items: center;
-
-  min-height: 23px;
-
-  padding: 0 8px;
-
-  border:
-    1px solid #ddd9d1;
-
-  border-radius: 5px;
-
-  background: #f7f6f2;
-
-  color: #6e706d;
-
-  font-size: 7px;
-
-  font-weight: 800;
-
-  letter-spacing: 0.4px;
-
-  text-transform: uppercase;
-}
-
-
-/* ==========================================================================
-   26. PROPERTY LOCATION
+   25. PROPERTY LOCATION
    ========================================================================== */
 
 .property-card-location {
   width: 100%;
 
-  display: block;
-
-  margin: 0 0 8px;
-
-  color: var(--home-muted);
-
-  font-size: 9px;
-
-  font-weight: 600;
-
-  line-height: 1.4;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-}
-
-
-/* ==========================================================================
-   27. PROPERTY INFO
-   ========================================================================== */
-
-.property-info-row {
-  width: 100%;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0,1fr));
-
-  gap: 0;
-
-  margin: 2px 0 7px;
-
-  padding: 8px 0;
-
-  border-top:
-    1px solid #e7e4de;
-
-  border-bottom:
-    1px solid #e7e4de;
-}
-
-.property-info-item {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-
-  align-items: flex-start;
-
-  gap: 3px;
-
-  padding: 0 9px;
-
-  border-right:
-    1px solid #e7e4de;
-}
-
-.property-info-item:first-child {
-  padding-left: 0;
-}
-
-.property-info-item:last-child {
-  border-right: none;
-}
-
-.property-info-label {
-  color: #9a9a95;
-
-  font-size: 6.5px;
-
-  font-weight: 800;
-
-  letter-spacing: 0.9px;
-
-  text-transform: uppercase;
-}
-
-.property-info-item strong {
-  width: 100%;
-
-  color: var(--home-ink-soft);
-
-  font-size: 8.5px;
-
-  font-weight: 800;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-}
-
-
-/* ==========================================================================
-   28. PROPERTY PRICE
-   ========================================================================== */
-
-.property-card-details {
-  width: 100%;
+  margin: 0 0 5px;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
-  gap: 15px;
+  gap: 4px;
 
-  margin: 0 0 7px;
+  color: #8b817b;
 
-  padding: 8px 0;
+  font-size: 8px;
 
-  border-bottom:
-    1px solid #e7e4de;
+  font-weight: 600;
+
+  line-height: 1.25;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }
 
-.property-price {
+.property-card-location i {
+  flex: 0 0 auto;
+
+  color: #dfa651;
+
+  font-size: 8px;
+}
+
+.property-card-location span {
   min-width: 0;
 
-  color: var(--home-navy);
+  overflow: hidden;
 
-  font-size: 20px;
+  text-overflow: ellipsis;
+}
+
+
+/* ==========================================================================
+   26. PROPERTY PRICE
+   ========================================================================== */
+
+.property-price {
+  width: 100%;
+
+  margin: 0 0 6px;
+
+  color: #715048;
+
+  font-size: 14px;
 
   font-weight: 800;
 
-  line-height: 1.15;
+  line-height: 1.1;
 
   white-space: nowrap;
 
@@ -3042,256 +3127,271 @@ padding:50px 4% 40px;
 }
 
 .property-price::first-letter {
-  color: var(--home-copper);
+  color: #dfa651;
 }
 
-.property-area {
+
+/* ==========================================================================
+   27. PROPERTY META
+   ========================================================================== */
+
+.property-card-meta {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
   min-width: 0;
 
-  color: #8a8b87;
+  overflow: hidden;
+}
 
-  font-size: 7px;
+.property-card-meta span {
+  min-width: 0;
+
+  max-width: 33%;
+
+  padding: 4px 7px;
+
+  border:
+    1px solid rgba(113,80,72,0.12);
+
+  border-radius: 6px;
+
+  background:
+    #fdf8f5;
+
+  color: #715048;
+
+  font-size: 6.5px;
 
   font-weight: 800;
 
-  text-align: right;
+  letter-spacing: 0.35px;
+
+  text-transform: uppercase;
 
   white-space: nowrap;
 
   overflow: hidden;
 
   text-overflow: ellipsis;
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.5px;
 }
 
-
 /* ==========================================================================
-   29. DESCRIPTION
+  28  PROPERTY ACTION ICONS — BOLD + COLOURFUL
    ========================================================================== */
 
-.property-card-description {
+.property-card-actions {
   width: 100%;
-
-  margin: 0 0 7px;
-
-  color: #858681;
-
-  font-size: 8px;
-
-  line-height: 1.5;
-
-  display: -webkit-box;
-
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-
-  overflow: hidden;
-}
-
-
-/* ==========================================================================
-   30. VIEW DETAILS
-   ========================================================================== */
-
-.property-card .property-view-details-btn {
-  width: 150px;
-
-  height: 35px;
-  min-height: 35px;
-
   margin-top: auto;
-
-  flex-shrink: 0;
-
-  padding: 0 12px;
+  padding-top: 8px;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
   gap: 8px;
 
-  border:
-    1px solid var(--home-navy);
-
-  border-radius: 6px;
-
-  background: var(--home-navy);
-
-  color: #fff;
-
-  font-size: 8px;
-
-  font-weight: 800;
-
-  letter-spacing: 0.7px;
-
-  text-transform: uppercase;
-
-  visibility: visible;
-  opacity: 1;
-
-  position: relative;
-
-  z-index: 5;
-
-  pointer-events: auto;
-
-  transition:
-    background var(--home-transition),
-    border-color var(--home-transition),
-    transform var(--home-transition),
-    box-shadow var(--home-transition);
+  border-top: 1px solid rgba(113, 80, 72, 0.12);
 }
 
-.property-card .property-view-details-btn:hover {
-  background: var(--home-copper);
+.property-action-btn {
+  width: 32px;
+  height: 32px;
 
-  border-color: var(--home-copper);
+  flex: 0 0 32px;
 
-  transform: translateY(-1px);
-
-  box-shadow:
-    0 9px 20px rgba(182,120,75,0.22);
-}
-
-.property-card .property-view-details-btn span:last-child {
-  font-size: 14px;
-
-  transition: transform var(--home-transition);
-}
-
-.property-card .property-view-details-btn:hover span:last-child {
-  transform: translateX(4px);
-}
-
-
-/* ==========================================================================
-   31. EMPTY STATE
-   ========================================================================== */
-
-.no-properties-message {
-  width: 100%;
-  max-width: 680px;
-
-  margin: 30px auto 0;
-
-  padding: 55px 25px;
-
-  border:
-    1px solid var(--home-line);
-
-  border-radius: 13px;
-
-  background: #fff;
-
-  text-align: center;
-
-  box-shadow: var(--home-shadow-sm);
-}
-
-.no-properties-icon {
-  width: 60px;
-  height: 60px;
-
-  margin: 0 auto 15px;
-
-  display: grid;
-  place-items: center;
-
-  border-radius: 50%;
-
-  background: #eeeae2;
-
-  color: var(--home-copper);
-
-  font-size: 27px;
-}
-
-.no-properties-message h3 {
-  margin: 0 0 8px;
-
-  color: var(--home-navy);
-
-  font-family:
-    'DM Serif Display',
-    Georgia,
-    serif;
-
-  font-size: 27px;
-
-  font-weight: 400;
-}
-
-.no-properties-message p {
-  margin: 0;
-
-  color: var(--home-muted);
-
-  font-size: 10px;
-
-  line-height: 1.7;
-}
-
-
-/* ==========================================================================
-   32. VIEW ALL PROPERTIES
-   ========================================================================== */
-
-.properties-view-all-wrapper {
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-
-  margin-top: 30px;
-}
-
-.properties-view-all-btn {
-  min-width: 215px;
-
-  min-height: 45px;
-
-  padding: 0 20px;
+  padding: 0;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  gap: 10px;
+  border-radius: 50%;
 
-  border:
-    1px solid var(--home-navy);
+  cursor: pointer;
 
-  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 900;
 
-  background: transparent;
-
-  color: var(--home-navy);
-
-  font-size: 8px;
-
-  font-weight: 800;
-
-  letter-spacing: 1px;
-
-  text-transform: uppercase;
-
-  transition: var(--home-transition);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    color 0.22s ease;
 }
 
-.properties-view-all-btn:hover {
-  background: var(--home-navy);
+.property-action-btn i {
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+}
 
-  color: #fff;
 
-  transform: translateY(-2px);
+/* ============================================================
+   1. VIEW — CHOCOLATE
+   ============================================================ */
+
+.property-action-btn:nth-child(1) {
+  color: #715048;
+
+  background: #f6ebe7;
+
+  border: 2px solid #c9aaa0;
 
   box-shadow:
-    0 12px 28px rgba(38,55,70,0.16);
+    0 4px 10px rgba(113, 80, 72, 0.12);
+}
+
+.property-action-btn:nth-child(1):hover {
+  color: #ffffff;
+  background: #715048;
+  border-color: #715048;
+
+  transform: translateY(-3px) scale(1.08);
+}
+
+
+/* ============================================================
+   2. WHATSAPP — GREEN
+   ============================================================ */
+
+.property-action-btn:nth-child(2) {
+  color: #159447;
+
+  background: #e8f8ee;
+
+  border: 2px solid #8fd4aa;
+
+  box-shadow:
+    0 4px 10px rgba(21, 148, 71, 0.14);
+}
+
+.property-action-btn:nth-child(2):hover {
+  color: #ffffff;
+  background: #159447;
+  border-color: #159447;
+
+  transform: translateY(-3px) scale(1.08);
+}
+
+
+/* ============================================================
+   3. SHARE — GOLD
+   ============================================================ */
+
+.property-action-btn:nth-child(3) {
+  color: #c4811c;
+
+  background: #fff5df;
+
+  border: 2px solid #e4bd72;
+
+  box-shadow:
+    0 4px 10px rgba(196, 129, 28, 0.14);
+}
+
+.property-action-btn:nth-child(3):hover {
+  color: #ffffff;
+  background: #dfa651;
+  border-color: #dfa651;
+
+  transform: translateY(-3px) scale(1.08);
+}
+
+
+/* ============================================================
+   4. SAVE — PREMIUM ROSE
+   ============================================================ */
+
+.property-action-btn:nth-child(4) {
+  color: #b44d68;
+
+  background: #fdf0f3;
+
+  border: 2px solid #dfaeba;
+
+  box-shadow:
+    0 4px 10px rgba(180, 77, 104, 0.14);
+}
+
+.property-action-btn:nth-child(4):hover {
+  color: #ffffff;
+  background: #b44d68;
+  border-color: #b44d68;
+
+  transform: translateY(-3px) scale(1.08);
+}
+
+
+/* ==========================================================================
+   30. RESPONSIVE PROPERTY CARDS
+   ========================================================================== */
+
+@media (max-width: 900px) {
+
+  .property-cards-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .property-cards-grid {
+    grid-template-columns: 1fr;
+
+    width: 100%;
+
+    max-width: 350px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    gap: 14px;
+  }
+
+  .property-card {
+    height: 274px;
+
+    border-radius: 16px;
+  }
+
+  .property-card-image-wrapper {
+    height: 138px;
+
+    flex-basis: 138px;
+  }
+
+  .property-card-content {
+    height: 136px;
+
+    padding:
+      10px 12px 7px;
+  }
+
+  .property-card-title {
+    font-size: 12px;
+  }
+
+  .property-price {
+    font-size: 13px;
+  }
+
+  .property-action-btn {
+    width: 28px;
+    height: 28px;
+
+    flex-basis: 28px;
+
+    font-size: 10px;
+  }
+
 }
 
 
@@ -3377,21 +3477,6 @@ padding:50px 4% 40px;
   margin: 0 auto;
 }
 
-.home-property-cta-badge {
-  display: inline-block;
-
-  margin-bottom: 15px;
-
-  color: #d7b58d;
-
-  font-size: 8px;
-
-  font-weight: 800;
-
-  letter-spacing: 3px;
-
-  text-transform: uppercase;
-}
 
 .home-property-cta-content h2 {
   max-width: 800px;
@@ -3418,9 +3503,9 @@ padding:50px 4% 40px;
 
   margin: 0 auto 28px;
 
-  color: rgba(255,255,255,0.70);
+  color: rgba(255, 255, 255, 0.7);
 
-  font-size: 11px;
+  font-size: 21px;
 
   line-height: 1.8;
 }
@@ -3470,7 +3555,7 @@ padding:50px 4% 40px;
 }
 
 .home-property-cta-btn:hover {
-  background: #fff;
+  background: #e3b863;
 
   border-color: #fff;
 
@@ -4805,6 +4890,278 @@ a:focus-visible {
   font-weight: 800 !important;
   line-height: 1.2 !important;
 }
+
+
+.accha-home-page {
+  width: 100%;
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      135deg,
+      #E8DCCF 0%,
+      #F3E8DC 25%,
+      #D9C8B8 50%,
+      #F7EFE7 75%,
+      #D6C2AF 100%
+    );
+
+  background-attachment: fixed;
+}
+
+.accha-home-page > section {
+  background: transparent !important;
+}
+
+/* =========================================================
+   📱 CURATED PROPERTIES — MOBILE
+   PREMIUM 1 CARD PER ROW
+========================================================= */
+
+@media (max-width: 600px) {
+
+  /* PROPERTY GRID */
+  .property-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+
+  /* =======================================================
+     PROPERTY CARD
+     Image = 50%
+     Content = 50%
+  ======================================================= */
+
+  .property-card {
+    width: 100%;
+    height: 190px;
+    min-height: 190px;
+
+    border-radius: 15px;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+
+    overflow: hidden;
+  }
+
+
+  /* =======================================================
+     🖼️ IMAGE WRAPPER
+     THIS IS THE ACTUAL IMAGE AREA
+  ======================================================= */
+
+  .property-card-image-wrapper {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+
+    position: relative;
+    overflow: hidden;
+  }
+
+
+  /* ACTUAL IMAGE */
+
+  .property-card-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+  }
+
+
+  /* =======================================================
+     CONTENT
+     ❗UNCHANGED
+  ======================================================= */
+
+  .property-card-content {
+    min-width: 0;
+
+    padding: 12px 10px 7px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+
+  /* TITLE */
+
+  .property-card h3,
+  .property-card-title {
+    font-size: 13px;
+    line-height: 1.35;
+
+    margin: 0 0 6px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+  }
+
+
+  /* LOCATION */
+
+  .property-card-location {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+
+  /* PRICE */
+
+  .property-price {
+    font-size: 12px;
+    line-height: 1.3;
+
+    margin-bottom: 5px;
+  }
+
+
+  /* DETAILS */
+
+  .property-card-meta {
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+
+  /* =======================================================
+     ACTION ICONS
+     ❗UNCHANGED DESIGN
+  ======================================================= */
+
+.property-card-actions {
+  margin-top: auto;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 0;
+
+  padding: 5px 2px 2px 0;
+
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+
+.property-action-btn {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+
+  flex: 0 0 27px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-size: 10px;
+
+  box-sizing: border-box;
+}
+
+
+}
+
+
+/* =========================================================
+   📱 SMALL PHONES
+   Up to 380px
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .property-card {
+    height: 175px;
+    min-height: 175px;
+
+    grid-template-columns: 50% 50%;
+  }
+
+
+  /* IMAGE WRAPPER */
+
+  .property-card-image-wrapper {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+
+    position: relative;
+    overflow: hidden;
+  }
+
+
+  /* IMAGE */
+
+  .property-card-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+  }
+
+
+  /* CONTENT */
+
+  .property-card-content {
+    padding: 10px 8px 6px;
+  }
+
+
+  /* TITLE */
+
+  .property-card h3,
+  .property-card-title {
+    font-size: 12px;
+  }
+
+
+  /* PRICE */
+
+  .property-price {
+    font-size: 11px;
+  }
+
+
+  /* ACTIONS */
+
+  .property-card-actions {
+    gap: 4px;
+  }
+
+
+  .property-action-btn {
+    width: 27px;
+    height: 27px;
+    min-width: 27px;
+
+    font-size: 10px;
+  }
+
+}
+
 /* ==========================================================================
    END — ACCHASOLUTION WESTERN HOME UI 2026
    ========================================================================== */

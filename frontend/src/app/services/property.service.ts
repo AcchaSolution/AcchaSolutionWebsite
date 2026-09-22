@@ -8,9 +8,11 @@ import {
 
 import {
   Observable,
-  map
+  map,
+  of,
+  tap,
+  shareReplay
 } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,16 @@ export class PropertyService {
   private readonly API_URL =
 'https://api.acchasolution.com/api/properties'
 
-  constructor(
+  // =========================================================
+// FAST PROPERTY CACHE
+// =========================================================
+
+private propertiesCache: any[] | null = null;
+
+private propertiesRequest$:
+  Observable<any[]> | null = null;
+
+constructor(
     private http: HttpClient
   ) {}
 
