@@ -9,8 +9,10 @@ import {
 
 import {
   ActivatedRoute,
+  Router,
   RouterModule
 } from '@angular/router';
+
 
 import {
   PropertyService
@@ -96,7 +98,7 @@ export class PropertiesCatalogComponent
   aiFilters: any = null;
 
   isAiResult: boolean = false;
-
+isLoading: boolean = true;
 
   // =========================================================
   // CONTACT MODAL
@@ -121,7 +123,9 @@ export class PropertiesCatalogComponent
 
     private propService: PropertyService,
 
-    private fb: FormBuilder
+    private fb: FormBuilder,
+      private router: Router
+
 
   ) {}
 
@@ -353,67 +357,53 @@ export class PropertiesCatalogComponent
   // =========================================================
   // FETCH PROPERTIES
   // =========================================================
+fetchAndFilterData(): void {
 
-  fetchAndFilterData(): void {
+  // Loading immediately start
+  this.isLoading = true;
 
+  this.propService
+    .getProperties()
+    .subscribe({
 
-    this.propService
-      .getProperties()
-      .subscribe({
+      next: (list: any[]) => {
 
-        next: (list: any[]) => {
+        this.allProperties =
+          Array.isArray(list)
+            ? list
+            : [];
 
-
-          // =================================================
-          // API DATA
-          // =================================================
-
-          this.allProperties =
-            Array.isArray(list)
-              ? list
-              : [];
-
-
-          // =================================================
-          // AI RESULT EXISTS
-          // =================================================
-
-          if (
-            this.isAiResult &&
-            this.filteredProperties.length > 0
-          ) {
-
-            return;
-
-          }
-
-
-          // =================================================
-          // NORMAL FILTERING
-          // =================================================
-
-          this.applyAllFilters();
-
-        },
-
-
-        error: (err: any) => {
-
-          console.error(
-            '❌ Error loading properties:',
-            err
-          );
-
-          this.allProperties = [];
-
-          this.filteredProperties = [];
-
+        // AI result already available
+        if (
+          this.isAiResult &&
+          this.filteredProperties.length > 0
+        ) {
+          this.isLoading = false;
+          return;
         }
 
-      });
+        this.applyAllFilters();
 
-  }
+        // Data/filtering complete
+        this.isLoading = false;
+      },
 
+      error: (err: any) => {
+
+        console.error(
+          '❌ Error loading properties:',
+          err
+        );
+
+        this.allProperties = [];
+        this.filteredProperties = [];
+
+        this.isLoading = false;
+      }
+
+    });
+
+}
 
   // =========================================================
   // APPLY ALL FILTERS
@@ -1271,47 +1261,53 @@ export class PropertiesCatalogComponent
   // PROPERTY DETAILS
   // =========================================================
 
-  openPropertyDetails(
-    property: any,
-    event?: Event
-  ): void {
+openPropertyDetails(
+  property: any,
+  event?: Event
+): void {
 
-
-    if (event) {
-
-      event.stopPropagation();
-
-    }
-
-
-    if (!property) {
-
-      return;
-
-    }
-
-
-    const id =
-      property.id ||
-      property.uniqueId;
-
-
-    if (!id) {
-
-      console.error(
-        'Property ID not found:',
-        property
-      );
-
-      return;
-
-    }
-
-
-    // RouterLink HTML already handles this,
-    // but this method is available for buttons.
-
+  if (event) {
+    event.stopPropagation();
   }
 
+  if (!property) {
+    console.warn('❌ Property data not found');
+    return;
+  }
 
+  const propertyName =
+    property.name ||
+    property.title ||
+    '';
+
+  if (!propertyName.trim()) {
+    console.warn('❌ Property name not found');
+    return;
+  }
+
+  const slug = propertyName
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  if (!slug) {
+    console.warn('❌ Unable to create property slug');
+    return;
+  }
+
+  console.log(
+    '➡️ Opening Property Details:',
+    slug
+  );
+
+  this.router.navigate(
+    ['/property-details', slug],
+    {
+      state: {
+        property: property
+      }
+    }
+  );
+}
 }

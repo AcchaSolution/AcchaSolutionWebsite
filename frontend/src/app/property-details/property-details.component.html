@@ -1,7 +1,21 @@
 
-<!-- DETAILS -->
+<!-- ============================================================ 
+ PROPERTY DETAILS — LOADING
+  ============================================================ --> 
+ 
+  <div class="no-properties-message property-loading-message" *ngIf="isLoading" >
+   <div class="no-properties-icon">
+     <i class="bi bi-hourglass-split"></i>
+     </div>
+      <h3>Please Wait...</h3>
+       <p> Property details are loading. This will only take a moment. </p>
+ </div>
 
-<div
+  <!-- ============================================================
+    PROPERTY DETAILS 
+    ============================================================ -->
+
+    <div
   class="details-page-wrapper"
   *ngIf="!isLoading && propertyData"
 >

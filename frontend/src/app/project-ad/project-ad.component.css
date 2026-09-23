@@ -414,3 +414,1485 @@
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* ============================================================
+   ACCHASOLUTION PROJECT PROMOTE
+   PREMIUM IVORY + DARK RED THEME
+   FINAL OVERRIDE
+   ============================================================ */
+
+/* ============================================================
+   1. PAGE BACKGROUND
+   ============================================================ */
+
+.promote-container {
+  max-width: 1180px;
+  margin: 45px auto;
+  padding: 0 20px;
+
+  font-family:
+    "Manrope",
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  color: #4a302c;
+}
+
+
+/* ============================================================
+   2. TOP HEADER
+   ============================================================ */
+
+.promote-header {
+  margin-bottom: 42px;
+  text-align: center;
+}
+
+.promote-header h1 {
+  max-width: 900px;
+  margin: 0 auto 15px;
+
+  font-family:
+    "DM Serif Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(34px, 4vw, 50px);
+  line-height: 1.12;
+  font-weight: 400;
+
+  color: #7b2525;
+}
+
+.promote-header p {
+  max-width: 820px;
+  margin: 0 auto;
+
+  color: #75645e;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+
+/* ============================================================
+   3. COMMON SECTION CARDS
+   ============================================================ */
+
+.form-section,
+.pricing-section {
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf9 0%,
+      #faf4ed 55%,
+      #f4e9de 100%
+    );
+
+  border: 1px solid #eaded5;
+  border-radius: 24px;
+
+  box-shadow:
+    0 18px 45px rgba(91, 54, 43, 0.08);
+
+  margin-bottom: 35px;
+}
+
+
+/* ============================================================
+   4. PROJECT DETAILS FORM
+   ============================================================ */
+
+.form-section {
+  padding: 32px;
+}
+
+.form-section h2 {
+  margin: 0 0 28px;
+
+  color: #7b2525;
+
+  border-left: 4px solid #a52f2f;
+  padding-left: 13px;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.form-grid {
+  gap: 22px;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+
+  color: #5c4640;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  box-sizing: border-box;
+
+  min-height: 48px;
+  padding: 12px 14px;
+
+  color: #4a302c;
+
+  background: #fffdf9;
+
+  border: 1px solid #dfd0c6;
+  border-radius: 11px;
+
+  outline: none;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.form-group input::placeholder {
+  color: #a08f87;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #a52f2f;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(165, 47, 47, 0.08);
+}
+
+
+/* ============================================================
+   5. AMENITIES
+   ============================================================ */
+
+.amenities-grid {
+  background: #fdf8f3;
+
+  border: 1px solid #e8d9cf;
+  border-radius: 13px;
+
+  padding: 16px;
+
+  gap: 10px;
+}
+
+.amenities-grid label {
+  min-height: 42px;
+  box-sizing: border-box;
+
+  padding: 9px 11px;
+
+  background: #fffdf9;
+
+  border: 1px solid #eaded6;
+  border-radius: 9px;
+
+  color: #654f48;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.amenities-grid label:hover {
+  border-color: #c98982;
+  background: #fff8f5;
+  transform: translateY(-1px);
+}
+
+.amenities-grid input {
+  accent-color: #a52f2f;
+}
+
+
+/* ============================================================
+   6. PRICING SECTION
+   ============================================================ */
+
+.pricing-section {
+  padding: 32px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf9 0%,
+      #f8f0e8 60%,
+      #f1e3d7 100%
+    );
+
+  background-image: none;
+}
+
+.pricing-section h2 {
+  margin: 0 0 20px;
+
+  color: #7b2525;
+
+  border-left: 4px solid #a52f2f;
+  padding-left: 13px;
+
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.form-warning {
+  padding: 12px 15px;
+
+  color: #8b3030;
+
+  background: #fff4f1;
+
+  border: 1px solid #edcfca;
+  border-radius: 10px;
+
+  font-size: 13px;
+}
+
+
+/* ============================================================
+   7. PRICING TABLE
+   ============================================================ */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+
+  border-radius: 15px;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.pricing-table {
+  min-width: 820px;
+
+  border: 1px solid #e6d8ce;
+  border-radius: 15px;
+
+  overflow: hidden;
+
+  background: #fffdf9;
+}
+
+.pricing-table th {
+  background:
+    linear-gradient(
+      135deg,
+      #8f2929,
+      #7b2525
+    );
+
+  color: #ffffff;
+
+  padding: 17px 12px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  border-color: rgba(255,255,255,0.12);
+}
+
+.pricing-table th.best-choice-header {
+  background:
+    linear-gradient(
+      135deg,
+      #a52f2f,
+      #7b2525
+    );
+
+  border-top: 4px solid #d7a15d;
+}
+
+.pricing-table td {
+  padding: 15px 12px;
+
+  color: #654f48;
+
+  background: #fffdf9;
+
+  border-bottom: 1px solid #eee3db;
+
+  font-size: 13px;
+}
+
+.pricing-table tbody tr:nth-child(even) td:not(.feature-name) {
+  background: #faf4ee;
+}
+
+.feature-name {
+  color: #5c3e37 !important;
+  background: #f7eee7 !important;
+
+  font-weight: 800;
+}
+
+.price {
+  color: #8f2929 !important;
+  font-size: 18px !important;
+  font-weight: 800;
+}
+
+
+/* ============================================================
+   8. BUY NOW BUTTONS
+   ============================================================ */
+
+.buy-btn {
+  min-width: 105px;
+
+  padding: 10px 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a52f2f,
+      #7b2525
+    );
+
+  color: #ffffff;
+
+  border: none;
+  border-radius: 9px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 18px rgba(123, 37, 37, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.buy-btn:hover:not(:disabled) {
+  background:
+    linear-gradient(
+      135deg,
+      #8f2929,
+      #681e1e
+    );
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 24px rgba(123, 37, 37, 0.25);
+}
+
+.buy-btn:disabled {
+  background: #ddd2cc;
+  color: #9a8b85;
+
+  border: none;
+
+  box-shadow: none;
+}
+
+
+/* ============================================================
+   9. TOOLTIP
+   ============================================================ */
+
+.tooltip-icon {
+  background: rgba(255,255,255,0.16);
+  color: #ffffff;
+
+  border-radius: 50%;
+}
+
+.tooltip-text {
+  background: #5c2525;
+
+  border-top: 3px solid #d7a15d;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 15px 35px rgba(58, 30, 26, 0.25);
+}
+
+
+/* ============================================================
+   10. SUPPORT BANNER
+   ============================================================ */
+
+.support-banner {
+  margin-top: 25px;
+  padding: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff9f4,
+      #f6e9df
+    );
+
+  border: 1px solid #e3cfc4;
+  border-radius: 18px;
+
+  box-shadow:
+    0 10px 28px rgba(91, 54, 43, 0.06);
+}
+
+.support-banner p {
+  color: #604b44;
+  font-size: 13px;
+}
+
+.support-link {
+  color: #a52f2f;
+
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.support-link:hover {
+  color: #7b2525;
+}
+
+
+/* ============================================================
+   11. QR MODAL OVERLAY
+   ============================================================ */
+
+.qr-modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: rgba(58, 32, 28, 0.72);
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  overflow-y: auto;
+}
+
+
+/* ============================================================
+   12. QR MODAL CARD
+   ============================================================ */
+
+.qr-modal-card {
+  width: min(920px, 100%);
+  max-height: calc(100vh - 40px);
+
+  margin: auto;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf9,
+      #f8efe7
+    );
+
+  border: 1px solid #ead9cf;
+  border-radius: 22px;
+
+  box-shadow:
+    0 30px 80px rgba(50, 25, 20, 0.28);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  animation:
+    slideUp 0.3s ease;
+}
+
+
+/* ============================================================
+   13. QR MODAL HEADER
+   ============================================================ */
+
+.qr-modal-header {
+  padding: 18px 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8f2929,
+      #7b2525
+    );
+
+  color: #ffffff;
+
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.qr-modal-header h3 {
+  color: #ffffff;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.close-btn {
+  color: rgba(255,255,255,0.75);
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 10px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #ffffff;
+  background: rgba(255,255,255,0.12);
+}
+
+
+/* ============================================================
+   14. QR MODAL BODY
+   ============================================================ */
+
+.qr-modal-body {
+  padding: 25px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 22px;
+
+  background: #fffdf9;
+
+  border-bottom: 1px solid #eaded6;
+}
+
+
+/* ============================================================
+   15. PAYMENT SUMMARY
+   ============================================================ */
+
+.ad-summary {
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffaf5,
+      #f7ece4
+    );
+
+  border: 1px solid #ead8ce;
+  border-left: 4px solid #a52f2f;
+
+  border-radius: 14px;
+}
+
+.ad-summary h4 {
+  color: #7b2525;
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.ad-summary p {
+  color: #66534d;
+
+  line-height: 1.55;
+}
+
+.plan-badge {
+  display: inline-block;
+
+  background: #8f2929;
+  color: #ffffff;
+
+  padding: 4px 9px;
+
+  border-radius: 6px;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.final-price {
+  color: #8f2929 !important;
+
+  border-top-color: #ddcfc7;
+
+  font-size: 17px;
+}
+
+
+/* ============================================================
+   16. QR SCANNER
+   ============================================================ */
+
+.qr-holder {
+  min-height: 270px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf9,
+      #f8eee6
+    );
+
+  border: 1px solid #ead8ce;
+  border-radius: 14px;
+}
+
+.qr-img {
+  width: 190px;
+  height: 190px;
+
+  max-width: 70vw;
+  max-height: 40vh;
+
+  object-fit: contain;
+
+  padding: 10px;
+
+  background: #ffffff;
+
+  border: 1px solid #ddcec4;
+  border-radius: 14px;
+
+  box-shadow:
+    0 10px 25px rgba(91, 54, 43, 0.10);
+}
+
+.qr-tip {
+  max-width: 280px;
+
+  margin: 12px auto 0;
+
+  color: #786760;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   17. QR MODAL FOOTER
+   ============================================================ */
+
+.qr-modal-footer {
+  padding: 20px 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8eee6,
+      #f3e5db
+    );
+}
+
+.warning-text {
+  color: #705b54;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.confirm-btn {
+  min-height: 52px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a52f2f,
+      #7b2525
+    );
+
+  color: #ffffff;
+
+  border: none;
+  border-radius: 11px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  box-shadow:
+    0 10px 22px rgba(123, 37, 37, 0.20);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.confirm-btn:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #8f2929,
+      #681e1e
+    );
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 28px rgba(123, 37, 37, 0.28);
+}
+
+
+/* ============================================================
+   18. TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .promote-container {
+    margin: 30px auto;
+    padding: 0 16px;
+  }
+
+  .form-section,
+  .pricing-section {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .promote-header h1 {
+    font-size: 34px;
+  }
+
+  .qr-modal-card {
+    width: 100%;
+  }
+
+}
+
+
+/* ============================================================
+   19. MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+  .promote-container {
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    margin: 20px auto;
+    padding: 0 11px;
+  }
+
+
+  /* HEADER */
+
+  .promote-header {
+    margin-bottom: 25px;
+  }
+
+  .promote-header h1 {
+    font-size: 28px;
+    line-height: 1.18;
+  }
+
+  .promote-header p {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+
+  /* FORM */
+
+  .form-section,
+  .pricing-section {
+    padding: 17px 13px;
+
+    margin-bottom: 22px;
+
+    border-radius: 16px;
+  }
+
+  .form-section h2,
+  .pricing-section h2 {
+    font-size: 18px;
+    line-height: 1.35;
+
+    padding-left: 10px;
+
+    margin-bottom: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+
+  .form-group input,
+  .form-group select {
+    min-height: 45px;
+
+    padding: 10px 12px;
+
+    font-size: 13px;
+
+    border-radius: 9px;
+  }
+
+
+  /* AMENITIES */
+
+  .amenities-grid {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 7px;
+
+    padding: 9px;
+  }
+
+  .amenities-grid label {
+    min-height: 40px;
+
+    padding: 7px;
+
+    font-size: 10px;
+
+    border-radius: 7px;
+  }
+
+
+  /* PRICING */
+
+  .table-responsive {
+    margin-right: -2px;
+  }
+
+  .pricing-table {
+    min-width: 760px;
+  }
+
+  .pricing-table th {
+    padding: 12px 8px;
+    font-size: 11px;
+  }
+
+  .pricing-table td {
+    padding: 11px 8px;
+    font-size: 11px;
+  }
+
+  .price {
+    font-size: 15px !important;
+  }
+
+  .buy-btn {
+    min-width: 88px;
+
+    padding: 9px 12px;
+
+    font-size: 10px;
+  }
+
+
+  /* SUPPORT */
+
+  .support-banner {
+    padding: 17px 13px;
+
+    border-radius: 14px;
+  }
+
+  .support-banner p {
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .support-link {
+    font-size: 13px;
+  }
+
+
+  /* QR MODAL */
+
+  .qr-modal-overlay {
+    align-items: flex-start;
+
+    padding: 10px;
+
+    overflow-y: auto;
+  }
+
+  .qr-modal-card {
+    width: 100%;
+
+    max-height: calc(100vh - 20px);
+
+    margin: 0 auto;
+
+    border-radius: 16px;
+  }
+
+  .qr-modal-header {
+    padding: 14px 15px;
+  }
+
+  .qr-modal-header h3 {
+    padding-right: 8px;
+
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .close-btn {
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+
+    font-size: 24px;
+  }
+
+
+  /* QR BODY */
+
+  .qr-modal-body {
+    grid-template-columns: 1fr;
+
+    gap: 13px;
+
+    padding: 14px;
+  }
+
+  .ad-summary {
+    padding: 14px;
+
+    border-radius: 11px;
+  }
+
+  .ad-summary h4 {
+    font-size: 15px;
+  }
+
+  .ad-summary p {
+    margin: 6px 0;
+
+    font-size: 11px;
+  }
+
+  .final-price {
+    font-size: 14px !important;
+  }
+
+
+  /* SCANNER */
+
+  .qr-holder {
+    min-height: auto;
+
+    padding: 15px;
+
+    border-radius: 11px;
+  }
+
+  .qr-img {
+    width: 155px;
+    height: 155px;
+
+    padding: 8px;
+
+    border-radius: 11px;
+  }
+
+  .qr-tip {
+    margin-top: 9px;
+
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+
+  /* FOOTER */
+
+  .qr-modal-footer {
+    padding: 15px;
+  }
+
+  .warning-text {
+    margin-bottom: 14px;
+
+    font-size: 10px;
+    line-height: 1.55;
+  }
+
+  .confirm-btn {
+    min-height: 46px;
+
+    padding: 10px;
+
+    font-size: 12px;
+
+    border-radius: 9px;
+  }
+
+}
+
+
+/* ============================================================
+   20. VERY SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 400px) {
+
+  .promote-container {
+    padding: 0 9px;
+  }
+
+  .promote-header h1 {
+    font-size: 25px;
+  }
+
+  .promote-header p {
+    font-size: 12px;
+  }
+
+  .form-section,
+  .pricing-section {
+    padding: 14px 10px;
+  }
+
+  .form-section h2,
+  .pricing-section h2 {
+    font-size: 16px;
+  }
+
+  .amenities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-table {
+    min-width: 720px;
+  }
+
+  .qr-modal-overlay {
+    padding: 7px;
+  }
+
+  .qr-modal-card {
+    max-height: calc(100vh - 14px);
+  }
+
+  .qr-modal-body {
+    padding: 10px;
+  }
+
+  .qr-img {
+    width: 135px;
+    height: 135px;
+  }
+
+  .qr-tip {
+    font-size: 9px;
+  }
+
+}
+
+/* ============================================================
+   COMPACT AMENITIES SECTION
+   ============================================================ */
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 6px;
+
+  padding: 8px;
+
+  background: #fdf8f3;
+  border: 1px solid #e8d9cf;
+  border-radius: 9px;
+}
+
+.amenities-grid label {
+  min-height: 32px;
+
+  padding: 5px 7px;
+
+  box-sizing: border-box;
+
+  background: #fffdf9;
+  border: 1px solid #eaded6;
+  border-radius: 6px;
+
+  gap: 5px;
+
+  color: #654f48;
+
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.amenities-grid label input {
+  width: 13px;
+  height: 13px;
+
+  margin: 0;
+
+  flex-shrink: 0;
+
+  accent-color: #a52f2f;
+}
+
+
+/* ============================================================
+   MOBILE — EXTRA COMPACT
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+  .amenities-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 5px;
+
+    padding: 6px;
+
+    border-radius: 7px;
+  }
+
+  .amenities-grid label {
+    min-height: 29px;
+
+    padding: 4px 5px;
+
+    gap: 4px;
+
+    font-size: 9px;
+
+    border-radius: 5px;
+  }
+
+  .amenities-grid label input {
+    width: 11px;
+    height: 11px;
+  }
+
+}
+
+
+/* ============================================================
+   VERY SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 400px) {
+
+  .amenities-grid {
+    gap: 4px;
+    padding: 5px;
+  }
+
+  .amenities-grid label {
+    min-height: 27px;
+
+    padding: 3px 4px;
+
+    font-size: 8px;
+  }
+
+  .amenities-grid label input {
+    width: 10px;
+    height: 10px;
+  }
+
+}
+
+
+/* ============================================================
+   FINAL QR SCANNER
+   ============================================================ */
+
+.qr-holder {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  min-height: 300px;
+
+  padding: 22px;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background: #fffdf9;
+
+  border: 1px solid #ead8ce;
+  border-radius: 16px;
+}
+
+.qr-scanner-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 15px;
+}
+
+.qr-scanner-title span {
+  color: #a52f2f;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.qr-scanner-title strong {
+  margin-top: 4px;
+
+  color: #7b2525;
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.qr-image-frame {
+  width: 220px;
+  height: 220px;
+
+  padding: 10px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  border: 2px solid #a52f2f;
+  border-radius: 16px;
+
+  box-shadow:
+    0 12px 30px rgba(123, 37, 37, 0.12);
+}
+
+.qr-holder .qr-img {
+  display: block !important;
+
+  width: 190px !important;
+  height: 190px !important;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+
+  padding: 0;
+
+  border: none;
+
+  background: #ffffff;
+}
+
+.qr-holder .qr-tip {
+  max-width: 300px;
+
+  margin: 14px 0 0;
+
+  color: #75645e;
+
+  text-align: center;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .qr-holder {
+    min-height: 245px;
+    padding: 15px;
+  }
+
+  .qr-image-frame {
+    width: 175px;
+    height: 175px;
+  }
+
+  .qr-holder .qr-img {
+    width: 150px !important;
+    height: 150px !important;
+  }
+
+  .qr-scanner-title strong {
+    font-size: 15px;
+  }
+
+  .qr-holder .qr-tip {
+    font-size: 10px;
+  }
+
+}
+
+
+/* ============================================================
+   PAYMENT CONTACT DETAILS
+   MOBILE NUMBER + UPI ID
+   NO LABELS
+   ============================================================ */
+
+.payment-contact-details {
+  width: 100%;
+  max-width: 320px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 8px;
+
+  margin: 14px auto 0;
+}
+
+.payment-contact-item {
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 10px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf9,
+      #fff6f0
+    );
+
+  border: 1px solid #ead8ce;
+  border-radius: 9px;
+
+  box-shadow:
+    0 5px 14px rgba(123, 37, 37, 0.06);
+}
+
+.payment-contact-item strong {
+  display: block;
+
+  color: #7b2525;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  text-align: center;
+
+  word-break: break-word;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+  .payment-contact-details {
+    max-width: 100%;
+
+    gap: 6px;
+
+    margin-top: 10px;
+  }
+
+  .payment-contact-item {
+    min-height: 38px;
+
+    padding: 7px 5px;
+
+    border-radius: 7px;
+  }
+
+  .payment-contact-item strong {
+    font-size: 9px;
+  }
+
+}
+
+
+/* ============================================================
+   VERY SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 400px) {
+
+  .payment-contact-details {
+    gap: 5px;
+  }
+
+  .payment-contact-item {
+    min-height: 35px;
+
+    padding: 6px 4px;
+  }
+
+  .payment-contact-item strong {
+    font-size: 8px;
+  }
+
+}
+/* ============================================================
+   END — ACCHASOLUTION PROMOTE THEME
+   ============================================================ */

@@ -5,8 +5,31 @@
     <p>Discover {{ filteredProperties.length }} verified luxury projects listed across top premium locations</p>
   </div>
 
-  <div class="horizontal-cards-pipeline">
-    
+  <!-- ============================================================
+     ⏳ PROPERTY LOADING
+     ============================================================ -->
+
+<div
+  class="no-properties-message property-loading-message"
+  *ngIf="isLoading"
+>
+  <div class="no-properties-icon">
+    <i class="bi bi-hourglass-split"></i>
+  </div>
+
+  <h3>Please Wait...</h3>
+
+  <p>
+    Properties are loading. This will only take a moment.
+  </p>
+</div>
+
+<div
+  class="horizontal-cards-pipeline"
+  *ngIf="!isLoading"
+>
+
+
     <div class="luxury-horizontal-card" *ngFor="let item of filteredProperties"
          [routerLink]="['/property-details', item.id || item.uniqueId]">
       
@@ -60,15 +83,26 @@
 
         <div class="action-buttons-stack">
           <button class="btn-premium-action-contact" (click)="openContactModal(item.name || 'Premium Project', $event)">Contact Agent</button>
-          <button class="btn-subtle-action-details">View Details</button>
-        </div>
+<button
+type="button"
+  class="btn-subtle-action-details"
+  (click)="openPropertyDetails(item, $event)"
+>
+  View Details
+</button>
+
+</div>
       </div>
 
     </div>
   </div>
 
-  <div *ngIf="filteredProperties.length === 0" class="luxury-empty-state-card">
-    <span class="empty-monument-icon">🏰</span>
+<div
+  *ngIf="!isLoading && filteredProperties.length === 0"
+  class="luxury-empty-state-card"
+>
+
+<span class="empty-monument-icon">🏰</span>
     <h3>No verified assets listed currently</h3>
     <p>Please update your search filters from the master dashboard or console dashboard controls.</p>
   </div>
@@ -123,3 +157,4 @@
 
   </div>
 </div>
+

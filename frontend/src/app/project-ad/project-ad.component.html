@@ -171,38 +171,337 @@
     <a href="tel:+916299978048" class="support-link">📞 Call Our 24/7 Free Assistance Helpline: +91 6299978048</a>
   </div>
 
-  <!-- ===================================================== -->
-  <!-- 📱 SCANNER POPUP OVERLAY MODAL WINDOW                 -->
-  <!-- ===================================================== -->
-  <div class="qr-modal-overlay" *ngIf="showQRModal">
-    <div class="qr-modal-card">
-      <div class="qr-modal-header">
-        <h3>🇮🇳 Scan UPI QR to Publish Advertisement</h3>
-        <button class="close-btn" (click)="closeQRModal()">&times;</button>
-      </div>
-      
-      <div class="qr-modal-body">
-        <!-- Invoice Summary Frame Box (Left Column) -->
-        <div class="ad-summary">
-          <h4>Ad Specification Invoice</h4>
-          <p><strong>Project Title:</strong> {{ projectForm.value.projectName }}</p>
-          <p><strong>Builder Entity:</strong> {{ projectForm.value.builderName }}</p>
-          <p><strong>Location Focus:</strong> {{ projectForm.value.location }}</p>
-          <p><strong>Selected Tier:</strong> <span class="plan-badge">{{ currentSelectedPlan | uppercase }}</span></p>
-          <p class="final-price"><strong>Total Payable Amount:</strong> ₹{{ currentPlanPrice }}</p>
-        </div>
+  
+<!-- ===================================================== -->
+<!-- 📱 SCANNER POPUP OVERLAY MODAL WINDOW                 -->
+<!-- ===================================================== -->
 
-        <!-- Scanner Image Box Frame (Right Column) -->
-        <div class="qr-holder">
-          <img src="assets/images/my-payment-qr.png" alt="Company Payment Gateway QR Code" class="qr-img">
-          <p class="qr-tip">Scan using any authentic UPI App (GPay, PhonePe, Paytm, BHIM)</p>
-        </div>
-      </div>
+<div
+  class="qr-modal-overlay"
+  *ngIf="showQRModal"
+>
 
-      <div class="qr-modal-footer">
-        <p class="warning-text">⚠️ <strong>Crucial Action Required:</strong> After finalizing payment transaction inside your mobile application, take a screenshot of your receipt confirmation and share it right over to our verification endpoint desk at <strong>6299978048</strong> for instant validation clearance approval.</p>
-        <button class="confirm-btn" (click)="submitWithQRCode()">I Have Paid Successfully</button>
-      </div>
+  <div class="qr-modal-card">
+
+    <!-- HEADER -->
+
+    <div class="qr-modal-header">
+
+      <h3>
+        🇮🇳 Scan UPI QR to Publish Advertisement
+      </h3>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeQRModal()"
+      >
+        &times;
+      </button>
+
     </div>
+
+
+    <!-- BODY -->
+
+    <div class="qr-modal-body">
+
+      <!-- =================================================
+           INVOICE SUMMARY
+           ================================================= -->
+
+      <div class="ad-summary">
+
+        <h4>
+          Ad Specification Invoice
+        </h4>
+
+        <p>
+          <strong>Project Title:</strong>
+          {{ projectForm.value.projectName }}
+        </p>
+
+        <p>
+          <strong>Builder Entity:</strong>
+          {{ projectForm.value.builderName }}
+        </p>
+
+        <p>
+          <strong>Location Focus:</strong>
+          {{ projectForm.value.location }}
+        </p>
+
+        <p>
+          <strong>Selected Tier:</strong>
+
+          <span class="plan-badge">
+            {{ currentSelectedPlan | uppercase }}
+          </span>
+
+        </p>
+
+        <p class="final-price">
+
+          <strong>
+            Total Payable Amount:
+          </strong>
+
+          ₹{{ currentPlanPrice }}
+
+        </p>
+
+      </div>
+
+
+      <!-- =================================================
+           QR SCANNER
+           ================================================= -->
+
+      <div class="qr-holder">
+
+        <div class="qr-scanner-title">
+
+          <span>
+            SCAN & PAY
+          </span>
+
+          <strong>
+            UPI Payment
+          </strong>
+
+        </div>
+
+
+        <div class="qr-image-frame">
+
+          <img
+            src="images/QR-code-tanu.jpeg"
+            alt="AcchaSolution UPI Payment QR Code"
+            class="qr-img"
+          >
+
+        </div>
+
+
+        <p class="qr-tip">
+
+          Scan this QR using Google Pay,
+          PhonePe, Paytm or BHIM
+
+        </p>
+
+
+        <!-- PAYMENT CONTACT DETAILS -->
+
+        <div class="payment-contact-details">
+
+          <div class="payment-contact-item">
+
+            <strong>
+              6299978048
+            </strong>
+
+          </div>
+
+
+          <div class="payment-contact-item">
+
+            <strong>
+              tanujabanglore&#64;ybl
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         FOOTER
+         ================================================= -->
+
+    <div class="qr-modal-footer">
+
+      <p class="warning-text">
+
+        ⚠️
+        <strong>
+          Crucial Action Required:
+        </strong>
+
+        After finalizing payment transaction inside your
+        mobile application, take a screenshot of your
+        receipt confirmation and share it with our
+        verification team at
+
+        <strong>
+          6299978048
+        </strong>
+
+        for payment verification and promotion activation.
+
+      </p>
+
+
+      <!-- <button
+        type="button"
+        class="confirm-btn"
+        (click)="submitWithQRCode()"
+      >
+
+        I Have Paid Successfully
+
+      </button> -->
+
+    </div>
+
   </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- ✅ PAYMENT SUCCESS POPUP                              -->
+<!-- ===================================================== -->
+
+<div
+  class="payment-success-overlay"
+  *ngIf="showPaymentSuccessModal"
+>
+
+  <div class="payment-success-card">
+
+    <!-- SUCCESS ICON -->
+
+    <div class="success-icon-wrap">
+
+      <div class="success-check">
+        ✓
+      </div>
+
+    </div>
+
+
+    <!-- LABEL -->
+
+    <span class="success-label">
+      PAYMENT SUBMITTED
+    </span>
+
+
+    <!-- TITLE -->
+
+    <h2>
+      Payment Successful
+    </h2>
+
+
+    <!-- MAIN MESSAGE -->
+
+    <p class="success-main-message">
+
+      Your payment details and promotion request
+      have been successfully submitted.
+
+    </p>
+
+
+    <!-- PAYMENT DETAILS -->
+
+    <div class="success-details">
+
+      <div class="success-detail-row">
+
+        <span>
+          Project
+        </span>
+
+        <strong>
+          {{ projectForm.value.projectName }}
+        </strong>
+
+      </div>
+
+
+      <div class="success-detail-row">
+
+        <span>
+          Plan
+        </span>
+
+        <strong class="success-plan">
+          {{ currentSelectedPlan | uppercase }}
+        </strong>
+
+      </div>
+
+
+      <div class="success-detail-row">
+
+        <span>
+          Amount
+        </span>
+
+        <strong class="success-price">
+          ₹{{ currentPlanPrice }}
+        </strong>
+
+      </div>
+
+
+      <div class="success-detail-row">
+
+        <span>
+          Payment Mode
+        </span>
+
+        <strong>
+          UPI
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- VERIFICATION MESSAGE -->
+
+    <div class="success-note">
+
+      <i class="bi bi-shield-check"></i>
+
+      <span>
+
+        Your payment details have been received
+        successfully.
+
+        Please share your payment receipt on
+        <strong>6299978048</strong>
+        for verification and promotion activation.
+
+      </span>
+
+    </div>
+
+
+    <!-- CONTINUE BUTTON -->
+
+    <button
+      type="button"
+      class="success-ok-btn"
+      (click)="goToPropertyDetails()"
+    >
+
+      OK, Continue
+
+      <i class="bi bi-arrow-right"></i>
+
+    </button>
+
+  </div>
+
+</div>
 </div>

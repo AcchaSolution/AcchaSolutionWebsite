@@ -40,8 +40,10 @@ export class HomeComponent implements OnInit {
   hasSearched: boolean = false;
 
   isAiSearching: boolean = false;
+isLoadingProperties: boolean = true;
 
-
+curatedProperties: any[] = [];
+featuredProperties: any[] = [];
   // ============================================================
   // BUILDER SECTION
   // ============================================================
@@ -194,6 +196,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
+      this.isLoadingProperties = true;
+
     this.propService.getProperties().subscribe({
 
       next: (data: any[]) => {
@@ -211,6 +215,17 @@ export class HomeComponent implements OnInit {
         this.filteredProperties =
           [...this.allProperties];
 
+
+  // ============================================
+  // CURATED / FEATURED PROPERTY ORGANIZATION
+  // ============================================
+
+  this.organizeHomeProperties();
+
+  this.isLoadingProperties = false;
+
+
+
       },
 
       error: (err) => {
@@ -224,13 +239,116 @@ export class HomeComponent implements OnInit {
         this.properties = [];
         this.filteredProperties = [];
 
+          this.curatedProperties = [];
+  this.featuredProperties = [];
+
+
+  this.curatedProperties = [];
+  this.featuredProperties = [];
+
+  this.isLoadingProperties = false;
+
       }
 
     });
 
   }
 
+private organizeHomeProperties(): void {
 
+  const now = Date.now();
+
+  const fifteenDays =
+    15 * 24 * 60 * 60 * 1000;
+
+  const sortedProperties =
+    [...this.allProperties].sort(
+      (a: any, b: any) => {
+
+        const dateA = new Date(
+          a.createdAt ||
+          a.created_at ||
+          0
+        ).getTime();
+
+        const dateB = new Date(
+          b.createdAt ||
+          b.created_at ||
+          0
+        ).getTime();
+
+        return dateB - dateA;
+      }
+    );
+
+
+  // ============================================================
+  // CURATED = NEW PROPERTIES FOR 15 DAYS
+  // ============================================================
+
+  this.curatedProperties =
+    sortedProperties.filter(
+      (property: any) => {
+
+        const createdTime =
+          new Date(
+            property.createdAt ||
+            property.created_at ||
+            0
+          ).getTime();
+
+        if (!createdTime) {
+          return false;
+        }
+
+        return (
+          now - createdTime <
+          fifteenDays
+        );
+
+      }
+    );
+
+
+  // ============================================================
+  // FEATURED = AFTER 15 DAYS
+  // ============================================================
+
+  this.featuredProperties =
+    sortedProperties.filter(
+      (property: any) => {
+
+        const createdTime =
+          new Date(
+            property.createdAt ||
+            property.created_at ||
+            0
+          ).getTime();
+
+        if (!createdTime) {
+          return false;
+        }
+
+        return (
+          now - createdTime >=
+          fifteenDays
+        );
+
+      }
+    );
+
+
+  console.log(
+    '🌟 CURATED:',
+    this.curatedProperties
+  );
+
+  console.log(
+    '⭐ FEATURED:',
+    this.featuredProperties
+  );
+
+}
   // ============================================================
   // TAB
   // ============================================================
@@ -1054,7 +1172,9 @@ searchProperties(): void {
 
   }
 
-
+openProperty(property: any): void {
+  this.viewDetails(property);
+}
   // ============================================================
 // PROPERTY DETAILS
 // ============================================================

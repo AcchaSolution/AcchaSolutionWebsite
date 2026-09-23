@@ -374,9 +374,6 @@
      4️⃣ CURATED / VERIFIED PROPERTY SECTION
      ============================================================ -->
 
-<!-- ============================================================
-     CURATED / VERIFIED PROPERTY SECTION
-     ============================================================ -->
 
 <section
   id="curated-properties"
@@ -633,23 +630,122 @@
   >
 
     <div class="no-properties-icon">
-      <i class="bi bi-house-door"></i>
-    </div>
-
-    <h3>
-      No Properties Available
-    </h3>
-
-    <p>
-      Verified properties will appear here once they are available.
-    </p>
-
-  </div>
+<i class="bi bi-hourglass-split"></i> 
+</div> 
+<h3> Please Wait... </h3> 
+<p> Properties are loading. This will only take a moment. </p>  </div>
 
 
 </section>
 
+<!-- ============================================================
+     ⭐ FEATURED PROPERTIES
+     ============================================================ -->
 
+<section class="home-featured-properties-section">
+
+  <div class="home-featured-properties-header">
+
+    <span class="home-featured-eyebrow">
+      FEATURED COLLECTION
+    </span>
+
+    <h2>
+      Featured Properties
+    </h2>
+
+    <p>
+      Explore properties that have been curated for quality,
+      location and long-term value.
+    </p>
+
+  </div>
+
+  <div class="home-featured-properties-grid">
+
+    <article
+      class="home-featured-property-card"
+      *ngFor="let property of featuredProperties"
+      (click)="openProperty(property)"
+    >
+
+      <div class="home-featured-property-image">
+
+        <img
+          [src]="property.images?.[0]"
+          [alt]="property.name || 'Featured Property'"
+          loading="lazy"
+        >
+
+        <span class="home-featured-badge">
+          Featured
+        </span>
+
+      </div>
+
+      <div class="home-featured-property-content">
+
+        <h3>
+          {{ property.name }}
+        </h3>
+
+        <p class="home-featured-location">
+          <i class="bi bi-geo-alt-fill"></i>
+          {{ property.location }}
+        </p>
+
+        <div class="home-featured-property-meta">
+
+          <span *ngIf="property.bedrooms">
+            <i class="bi bi-door-open"></i>
+            {{ property.bedrooms }} Beds
+          </span>
+
+          <span *ngIf="property.area">
+            <i class="bi bi-bounding-box"></i>
+            {{ property.area }}
+          </span>
+
+        </div>
+
+        <div class="home-featured-property-footer">
+
+          <strong>
+            {{ property.price }}
+          </strong>
+
+          <span>
+            View Details
+            <i class="bi bi-arrow-right"></i>
+          </span>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+  <div
+    class="home-featured-empty"
+    *ngIf="featuredProperties?.length === 0"
+  >
+
+    <i class="bi bi-stars"></i>
+
+    <h3>
+      Featured Properties Coming Soon
+    </h3>
+
+    <p>
+      More properties will appear here as they move from our
+      curated collection.
+    </p>
+
+  </div>
+
+</section>
 <!-- ============================================================
      5️⃣ FINAL PROPERTY CTA
      ============================================================ -->
@@ -681,4 +777,7 @@
   </div>
 
 </section>
-</div>  `
+
+
+
+</div> 

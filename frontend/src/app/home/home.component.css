@@ -3161,7 +3161,8 @@ background:
   border-radius: 6px;
 
   background:
-    #fdf8f5;
+    #730d0d;
+
 
   color: #715048;
 
@@ -3394,179 +3395,860 @@ background:
 
 }
 
+/* ============================================================
+   ⭐ ACCHASOLUTION — FEATURED PROPERTIES
+   PREMIUM EDITORIAL REAL ESTATE
+   ============================================================ */
 
-/* ==========================================================================
-   33. FINAL CTA
-   ========================================================================== */
+.home-featured-properties-section {
+  position: relative;
+  width: 100%;
+  padding: 90px 6% 100px;
+  background:
+    linear-gradient(
+      135deg,
+      #fffaf5 0%,
+      #f7eee6 45%,
+      #eee1d6 100%
+    );
+  overflow: hidden;
+}
 
-.home-property-cta-section {
+
+/* ============================================================
+   SOFT BACKGROUND DETAILS
+   ============================================================ */
+
+.home-featured-properties-section::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  top: -180px;
+  right: -120px;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  filter: blur(5px);
+  pointer-events: none;
+}
+
+.home-featured-properties-section::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  bottom: -150px;
+  left: -100px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.home-featured-properties-header {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.home-featured-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 17px;
+
+  border: 1px solid rgba(170, 45, 45, 0.22);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.68);
+
+  color: #a52f2f;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+
+  margin-bottom: 16px;
+
+  backdrop-filter: blur(10px);
+}
+
+.home-featured-properties-header h2 {
+  margin: 0;
+
+  color: #302522;
+
+  font-family: "DM Serif Display", Georgia, serif;
+
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.8px;
+}
+
+.home-featured-properties-header p {
+  max-width: 650px;
+  margin: 18px auto 0;
+
+  color: #6d625d;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+
+/* ============================================================
+   GRID
+   ============================================================ */
+
+.home-featured-properties-grid {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1380px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+
+/* ============================================================
+   PROPERTY CARD
+   ============================================================ */
+
+.home-featured-property-card {
+  position: relative;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid rgba(120, 80, 60, 0.10);
+
+  border-radius: 22px;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 12px 35px rgba(80, 55, 45, 0.08);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.home-featured-property-card:hover {
+  transform: translateY(-8px);
+
+  border-color: rgba(165, 47, 47, 0.22);
+
+  box-shadow:
+    0 24px 55px rgba(80, 55, 45, 0.15);
+}
+
+
+/* ============================================================
+   PROPERTY IMAGE
+   ============================================================ */
+
+.home-featured-property-image {
   position: relative;
 
   width: 100%;
-
-  padding: 95px 5%;
+  height: 245px;
 
   overflow: hidden;
+
+  background: #eee5dc;
+}
+
+.home-featured-property-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.55s ease;
+}
+
+.home-featured-property-card:hover
+.home-featured-property-image img {
+  transform: scale(1.06);
+}
+
+
+/* ============================================================
+   IMAGE OVERLAY
+   ============================================================ */
+
+.home-featured-property-image::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.02) 45%,
+      rgba(0, 0, 0, 0.42) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   FEATURED BADGE
+   ============================================================ */
+
+.home-featured-badge {
+  position: absolute;
+
+  top: 16px;
+  left: 16px;
+
+  z-index: 3;
+
+  display: inline-flex;
+  align-items: center;
+
+  padding: 7px 13px;
+
+  border-radius: 999px;
+
+  background: #a52f2f;
+
+  color: #ffffff;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+
+  box-shadow:
+    0 7px 18px rgba(165, 47, 47, 0.25);
+}
+
+
+/* ============================================================
+   CARD CONTENT
+   ============================================================ */
+
+.home-featured-property-content {
+  padding: 22px 22px 20px;
+}
+
+.home-featured-property-content h3 {
+  margin: 0 0 10px;
+
+  color: #302522;
+
+  font-family: "DM Serif Display", Georgia, serif;
+
+  font-size: 24px;
+  font-weight: 400;
+
+  line-height: 1.2;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   LOCATION
+   ============================================================ */
+
+.home-featured-location {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin: 0 0 18px;
+
+  color: #756a64;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.home-featured-location i {
+  color: #a52f2f;
+
+  font-size: 14px;
+}
+
+
+/* ============================================================
+   META
+   ============================================================ */
+
+.home-featured-property-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+}
+
+.home-featured-property-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 7px 10px;
+
+  border-radius: 9px;
+
+  background: #f7eee7;
+
+  color: #635852;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.home-featured-property-meta i {
+  color: #a52f2f;
+
+  font-size: 12px;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.home-featured-property-footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding-top: 17px;
+
+  border-top: 1px solid rgba(80, 55, 45, 0.09);
+}
+
+.home-featured-property-footer strong {
+  color: #302522;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.home-featured-property-footer span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #a52f2f;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  transition: gap 0.25s ease;
+}
+
+.home-featured-property-card:hover
+.home-featured-property-footer span {
+  gap: 10px;
+}
+
+.home-featured-property-footer span i {
+  font-size: 13px;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.home-featured-empty {
+  position: relative;
+  z-index: 2;
+
+  max-width: 650px;
+
+  margin: 10px auto 0;
+
+  padding: 48px 25px;
+
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.72);
+
+  border: 1px dashed rgba(165, 47, 47, 0.25);
+
+  border-radius: 22px;
+}
+
+.home-featured-empty > i {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 58px;
+  height: 58px;
+
+  margin-bottom: 15px;
+
+  border-radius: 50%;
+
+  background: #f7eee7;
+
+  color: #a52f2f;
+
+  font-size: 25px;
+}
+
+.home-featured-empty h3 {
+  margin: 0 0 8px;
+
+  color: #302522;
+
+  font-family: "DM Serif Display", Georgia, serif;
+
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.home-featured-empty p {
+  margin: 0;
+
+  color: #766b65;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .home-featured-properties-section {
+    padding: 75px 4% 85px;
+  }
+
+  .home-featured-properties-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 650px) {
+
+  .home-featured-properties-section {
+    padding: 65px 18px 75px;
+  }
+
+  .home-featured-properties-header {
+    margin-bottom: 35px;
+  }
+
+  .home-featured-properties-header h2 {
+    font-size: 38px;
+  }
+
+  .home-featured-properties-header p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .home-featured-properties-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .home-featured-property-image {
+    height: 230px;
+  }
+
+  .home-featured-property-content {
+    padding: 20px;
+  }
+
+  .home-featured-property-content h3 {
+    font-size: 22px;
+  }
+
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 400px) {
+
+  .home-featured-properties-section {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .home-featured-properties-header h2 {
+    font-size: 33px;
+  }
+
+  .home-featured-property-image {
+    height: 210px;
+  }
+
+  .home-featured-property-footer strong {
+    font-size: 15px;
+  }
+
+}
+
+/* ============================================================
+  33. ACCHASOLUTION REALTY
+   FINAL PROPERTY CTA — PREMIUM WARM RED THEME
+   NO CIRCLES
+   ============================================================ */
+
+.home-property-cta-section {
+  position: relative;
+  overflow: hidden;
+
+  margin: 80px 0 30px;
+  padding: 90px 24px;
 
   background:
     linear-gradient(
       135deg,
-      #273946 0%,
-      #344b5c 55%,
-      #263746 100%
+      #FFFDF9 0%,
+      #F8F1E8 35%,
+      #F1E5D6 68%,
+      #E9D8C5 100%
     );
 
-  color: #fff;
-
-  text-align: center;
+  border-radius: 30px;
 }
 
-.home-property-cta-section::before {
-  content: '';
 
-  position: absolute;
-
-  width: 500px;
-  height: 500px;
-
-  top: -290px;
-  right: -160px;
-
-  border:
-    1px solid rgba(255,255,255,0.12);
-
-  border-radius: 50%;
-
-  box-shadow:
-    0 0 0 75px rgba(255,255,255,0.025),
-    0 0 0 150px rgba(255,255,255,0.015);
-
-  pointer-events: none;
-}
-
-.home-property-cta-section::after {
-  content: '';
-
-  position: absolute;
-
-  width: 340px;
-  height: 340px;
-
-  bottom: -220px;
-  left: -100px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(182,120,75,0.20),
-      transparent 68%
-    );
-
-  pointer-events: none;
-}
+/* ============================================================
+   CTA CONTENT CARD
+   ============================================================ */
 
 .home-property-cta-content {
   position: relative;
   z-index: 2;
 
-  width: 100%;
-  max-width: 850px;
-
+  max-width: 900px;
   margin: 0 auto;
+
+  padding: 58px 45px;
+
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.72);
+
+  border: 1px solid rgba(165, 47, 47, 0.10);
+
+  border-radius: 30px;
+
+  box-shadow:
+    0 25px 60px rgba(92, 55, 35, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 
+/* ============================================================
+   LABEL
+   ============================================================ */
+
+.home-property-cta-label {
+  display: inline-block;
+
+  margin-bottom: 15px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+
+  color: #A52F2F;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   HEADING
+   ============================================================ */
+
 .home-property-cta-content h2 {
-  max-width: 800px;
+  margin: 0 auto 18px;
 
-  margin: 0 auto 16px;
+  max-width: 760px;
 
-  font-family:
-    'DM Serif Display',
-    Georgia,
-    serif;
+  font-family: "DM Serif Display", serif;
 
-  font-size:
-    clamp(2.7rem, 5vw, 4.7rem);
+  font-size: clamp(34px, 4vw, 52px);
+
+  line-height: 1.12;
 
   font-weight: 400;
 
-  line-height: 1;
-
-  letter-spacing: -1px;
+  color: #7B2525 !important;
 }
+
+
+/* ============================================================
+   DESCRIPTION
+   ============================================================ */
 
 .home-property-cta-content p {
-  max-width: 580px;
+  max-width: 650px;
 
-  margin: 0 auto 28px;
+  margin: 0 auto 32px;
 
-  color: rgba(255, 255, 255, 0.7);
+  font-family: "Manrope", sans-serif;
 
-  font-size: 21px;
+  font-size: 16px;
 
-  line-height: 1.8;
+  line-height: 1.75;
+
+  font-weight: 500;
+
+  color: #6F6258 !important;
 }
+
+
+/* ============================================================
+   BUTTON WRAPPER
+   ============================================================ */
 
 .home-property-cta-actions {
   display: flex;
 
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
-  gap: 9px;
-
-  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
+
+/* ============================================================
+   POST PROPERTY BUTTON
+   ============================================================ */
+
 .home-property-cta-btn {
-  position: relative;
-
-  min-height: 46px;
-
-  padding: 0 23px;
-
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
-  border:
-    1px solid #d7b58d;
+  gap: 10px;
 
-  border-radius: 6px;
+  min-height: 54px;
 
-  background: #d7b58d;
+  padding: 0 28px;
 
-  color: #263746 !important;
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #A52F2F,
+      #7B2525
+    );
+
+  color: #FFFFFF !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 14px;
+  font-weight: 800;
 
   text-decoration: none;
 
-  font-size: 8px;
+  box-shadow:
+    0 12px 25px rgba(123, 37, 37, 0.22);
 
-  font-weight: 800;
-
-  letter-spacing: 0.8px;
-
-  text-transform: uppercase;
-
-  transition: var(--home-transition);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
 }
+
+
+/* ============================================================
+   BUTTON HOVER
+   ============================================================ */
 
 .home-property-cta-btn:hover {
-  background: #e3b863;
+  color: #FFFFFF !important;
 
-  border-color: #fff;
+  background:
+    linear-gradient(
+      135deg,
+      #8F2929,
+      #681E1E
+    );
 
-  color: var(--home-navy) !important;
-
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 
   box-shadow:
-    0 14px 30px rgba(0,0,0,0.18);
+    0 17px 32px rgba(123, 37, 37, 0.30);
 }
 
+
+/* ============================================================
+   BUTTON ARROW
+   ============================================================ */
+
+.home-property-cta-btn i {
+  font-size: 16px;
+
+  transition:
+    transform 0.25s ease;
+}
+
+
+.home-property-cta-btn:hover i {
+  transform: translateX(4px);
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .home-property-cta-section {
+    margin: 60px 0 25px;
+
+    padding: 65px 18px;
+
+    border-radius: 24px;
+  }
+
+  .home-property-cta-content {
+    padding: 45px 25px;
+
+    border-radius: 24px;
+  }
+
+  .home-property-cta-content h2 {
+    font-size: 36px;
+  }
+
+  .home-property-cta-content p {
+    font-size: 15px;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+  .home-property-cta-section {
+    margin: 45px 0 20px;
+
+    padding: 50px 12px;
+
+    border-radius: 20px;
+  }
+
+  .home-property-cta-content {
+    padding: 38px 18px;
+
+    border-radius: 20px;
+  }
+
+  .home-property-cta-label {
+    font-size: 10px;
+
+    letter-spacing: 2px;
+  }
+
+  .home-property-cta-content h2 {
+    font-size: 30px;
+
+    line-height: 1.18;
+  }
+
+  .home-property-cta-content p {
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    margin-bottom: 26px;
+  }
+
+  .home-property-cta-btn {
+    width: 100%;
+
+    min-height: 52px;
+
+    padding: 0 20px;
+  }
+
+}
 
 /* ==========================================================================
    34. TABLET — 1100px
@@ -4108,36 +4790,7 @@ background:
 
     font-size: 7px;
   }
-
-
-  /* CTA */
-
-  .home-property-cta-section {
-    padding: 70px 14px;
-  }
-
-  .home-property-cta-badge {
-    font-size: 7px;
-
-    letter-spacing: 2.4px;
-  }
-
-  .home-property-cta-content h2 {
-    font-size: 2.65rem;
-  }
-
-  .home-property-cta-content p {
-    font-size: 9px;
-  }
-
-  .home-property-cta-btn {
-    width: 100%;
-
-    max-width: 280px;
-  }
 }
-
-
 /* ==========================================================================
    37. SMALL MOBILE — 480px
    ========================================================================== */
@@ -4899,12 +5552,13 @@ a:focus-visible {
   background:
     linear-gradient(
       135deg,
-      #E8DCCF 0%,
-      #F3E8DC 25%,
-      #D9C8B8 50%,
-      #F7EFE7 75%,
-      #D6C2AF 100%
-    );
+  #FFFDF9 0%,
+  #F8F1E8 25%,
+  #F1E5D6 50%,
+  #FAF5EE 75%,
+  #E8D8C5 100%
+
+  );
 
   background-attachment: fixed;
 }
@@ -5165,3 +5819,820 @@ a:focus-visible {
 /* ==========================================================================
    END — ACCHASOLUTION WESTERN HOME UI 2026
    ========================================================================== */
+   /* ============================================================
+   🔴 ACCHASOLUTION — COMPLETE RED & WHITE HOMEPAGE THEME
+   DO NOT DELETE EXISTING CSS
+   PASTE THIS AT THE VERY END
+   ============================================================ */
+
+:root {
+  --accha-red: #B71C1C;
+  --accha-red-light: #D32F2F;
+  --accha-red-dark: #8B0000;
+  --accha-red-deep: #5C0000;
+  --accha-red-black: #3D0000;
+
+  --accha-white: #FFFFFF;
+  --accha-gold: #D4AF37;
+}
+
+
+/* ============================================================
+   GLOBAL HOMEPAGE
+   ============================================================ */
+
+.accha-home,
+.home-page,
+.homepage,
+main {
+  color: #f5fdde;
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.accha-modern-hero {
+  background:
+    linear-gradient(
+      135deg,
+      #8B0000 0%,
+      #B71C1C 48%,
+      #8B0000 100%
+    ) !important;
+
+  color: #FFFFFF !important;
+}
+
+
+/* HERO STAR / COSMIC EFFECTS */
+
+.accha-modern-hero::before {
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.45) 1px,
+      transparent 1.6px
+    ),
+    radial-gradient(
+      circle,
+      rgba(212,175,55,.55) 1px,
+      transparent 1.8px
+    ) !important;
+
+  opacity: .45 !important;
+}
+
+
+/* ============================================================
+   HERO TEXT
+   ============================================================ */
+
+.accha-modern-hero h1,
+.accha-modern-hero h2,
+.accha-modern-hero h3,
+.accha-modern-hero p,
+.accha-modern-hero span,
+.accha-modern-hero label {
+  color: #6a2323 !important;
+}
+
+
+.hero-top-message h2 {
+  color: #7b2a2a !important;
+  font-weight: 800 !important;
+}
+
+.hero-top-message h2 span {
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+}
+
+.hero-top-message p {
+  color: rgba(132, 26, 26, 0.9) !important;
+}
+
+
+.hero-eyebrow {
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+}
+
+.eyebrow-dot,
+.eyebrow-line {
+  background: #D4AF37 !important;
+}
+
+.accha-hero-copy h1 {
+  color: #762a2a !important;
+  font-weight: 900 !important;
+}
+
+.accha-hero-copy h1 span,
+.accha-hero-copy h1 strong {
+  color: #711616 !important;
+}
+
+.hero-main-description {
+  color: rgba(255,255,255,.92) !important;
+  font-weight: 700 !important;
+}
+
+
+/* ============================================================
+   SEARCH TABS
+   ============================================================ */
+
+.hero-search-tabs button {
+  color: #6e2727 !important;
+  font-weight: 900 !important;
+}
+
+.hero-search-tabs button:hover {
+  background: rgba(255,255,255,.12) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255,255,255,.30) !important;
+}
+
+.hero-search-tabs button.active {
+  background: #f0a5a5 !important;
+  color: #B71C1C !important;
+  border-color: #FFFFFF !important;
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.20) !important;
+}
+
+
+/* ============================================================
+   SEARCH BOX
+   ============================================================ */
+
+.hero-search-main {
+  background: #FFFFFF !important;
+  border: 2px solid rgba(255,255,255,.50) !important;
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.25) !important;
+}
+
+.hero-city-select {
+  background: #FFFFFF !important;
+  color: #8B0000 !important;
+  font-weight: 900 !important;
+  border-right-color: #B71C1C !important;
+}
+
+.hero-search-input-wrap input {
+  color: #5C0000 !important;
+  font-weight: 700 !important;
+}
+
+.hero-search-input-wrap input::placeholder {
+  color: #8B6B6B !important;
+}
+
+.hero-search-icon {
+  color: #B71C1C !important;
+}
+
+.hero-search-button {
+  background: #B71C1C !important;
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+  box-shadow:
+    0 7px 18px rgba(183,28,28,.35) !important;
+}
+
+.hero-search-button:hover {
+  background: #5C0000 !important;
+}
+
+.hero-ai-note {
+  color: #6e1f1f !important;
+  font-weight: 800 !important;
+}
+
+.hero-ai-note span {
+  color: rgba(93, 21, 21, 0.85) !important;
+}
+
+.ai-spark {
+  color: #D4AF37 !important;
+}
+
+
+/* ============================================================
+   QUICK LINKS
+   ============================================================ */
+
+.quick-label {
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+}
+
+.hero-quick-links button {
+  background: rgba(255,255,255,.10) !important;
+  color: #864444 !important;
+  border-color: rgba(255,255,255,.35) !important;
+  font-weight: 800 !important;
+}
+
+.hero-quick-links button:hover {
+  background: #FFFFFF !important;
+  color: #B71C1C !important;
+  border-color: #FFFFFF !important;
+}
+
+
+/* ============================================================
+   HERO ORBITS
+   ============================================================ */
+
+.orbit-ring {
+  border-color: rgba(255,255,255,.35) !important;
+}
+
+.ring-2,
+.ring-4,
+.ring-6 {
+  border-color: rgba(212,175,55,.70) !important;
+}
+
+.sun-core {
+  background: #D4AF37 !important;
+
+  box-shadow:
+    0 0 18px rgba(212,175,55,.75),
+    0 0 40px rgba(212,175,55,.35) !important;
+}
+
+
+/* ============================================================
+   SERVICE FLOATING CARDS
+   ============================================================ */
+
+.service-floating-card {
+  background: rgba(92,0,0,.92) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255,255,255,.35) !important;
+  font-weight: 900 !important;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.25) !important;
+}
+
+
+/* ============================================================
+   BUILDING LABELS
+   ============================================================ */
+
+.architectural-label {
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+}
+
+.label-top span,
+.label-bottom span {
+  color: #D4AF37 !important;
+}
+
+
+/* ============================================================
+   BUILDING DATA CARD
+   ============================================================ */
+
+.building-data-card {
+  background: #5C0000 !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255,255,255,.30) !important;
+}
+
+.data-number {
+  color: #D4AF37 !important;
+}
+
+.building-data-card strong {
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+}
+
+.building-data-card small {
+  color: rgba(255,255,255,.80) !important;
+}
+
+
+/* ============================================================
+   PROJECT STRIP
+   ============================================================ */
+
+.hero-project-strip {
+  background:
+    linear-gradient(
+      135deg,
+      #5C0000,
+      #8B0000
+    ) !important;
+
+  color: #FFFFFF !important;
+  border-color: rgba(212,175,55,.60) !important;
+}
+
+.project-strip-icon {
+  background: #D4AF37 !important;
+  color: #5C0000 !important;
+}
+
+.project-strip-text strong,
+.project-strip-text span {
+  color: #FFFFFF !important;
+}
+
+.project-strip-button {
+  background: #FFFFFF !important;
+  color: #8B0000 !important;
+  font-weight: 900 !important;
+}
+
+.project-strip-button:hover {
+  background: #D4AF37 !important;
+  color: #5C0000 !important;
+}
+
+
+/* ============================================================
+   UPCOMING PROJECTS
+   ============================================================ */
+
+.upcoming-projects-section {
+  background:
+    linear-gradient(
+      180deg,
+      #B71C1C 0%,
+      #8B0000 100%
+    ) !important;
+
+  color: #FFFFFF !important;
+}
+
+.projects-section-title,
+.projects-section-description,
+.projects-section-subtitle {
+  color: #702f2f !important;
+}
+
+.projects-section-title {
+  font-weight: 900 !important;
+}
+
+.projects-section-description {
+  font-weight: 700 !important;
+}
+
+.projects-section-subtitle {
+  color: #D4AF37 !important;
+  font-weight: 900 !important;
+}
+
+
+/* ============================================================
+   PROJECT LOCATION TABS
+   ============================================================ */
+
+.project-location-tab {
+  background: rgba(255,255,255,.10) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255,255,255,.35) !important;
+  font-weight: 900 !important;
+}
+
+.project-location-tab:hover {
+  background: #FFFFFF !important;
+  color: #B71C1C !important;
+  border-color: #FFFFFF !important;
+}
+
+.project-location-tab.active {
+  background: #FFFFFF !important;
+  color: #B71C1C !important;
+  border-color: #FFFFFF !important;
+}
+
+
+/* ============================================================
+   BUILDER CARDS
+   ============================================================ */
+
+.builder-logo-card {
+  background: #8B0000 !important;
+  border-color: rgba(255,255,255,.30) !important;
+  color: #FFFFFF !important;
+}
+
+.builder-logo-card:hover {
+  background: #5C0000 !important;
+  border-color: #D4AF37 !important;
+}
+
+
+/* ============================================================
+   PROPERTY SECTION
+   ============================================================ */
+
+.properties-container {
+  background:
+    linear-gradient(
+      180deg,
+      #B71C1C 0%,
+      #8B0000 100%
+    ) !important;
+
+  color: #FFFFFF !important;
+}
+
+.property-section-heading h2,
+.property-section-heading p,
+.property-section-label {
+  color: #FFFFFF !important;
+}
+
+.property-section-heading h2 {
+  font-weight: 900 !important;
+}
+
+.property-section-heading em {
+  color: #D4AF37 !important;
+  font-style: normal;
+}
+
+
+/* ============================================================
+   VIEW ALL PROPERTIES
+   ============================================================ */
+
+.properties-view-all-btn {
+  background: #FFFFFF !important;
+  color: #B71C1C !important;
+  border-color: #FFFFFF !important;
+  font-weight: 900 !important;
+}
+
+.properties-view-all-btn:hover {
+  background: #D4AF37 !important;
+  color: #5C0000 !important;
+  border-color: #D4AF37 !important;
+}
+
+
+/* ============================================================
+   PROPERTY CARDS
+   ============================================================ */
+
+.property-card {
+  background:
+    linear-gradient(
+      180deg,
+      #8B0000 0%,
+      #5C0000 100%
+    ) !important;
+
+  border-color: rgba(255,255,255,.28) !important;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.25) !important;
+}
+
+.property-card:hover {
+  border-color: #D4AF37 !important;
+
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.35) !important;
+}
+
+
+/* PROPERTY CARD CONTENT */
+
+.property-card-content,
+.property-card-body,
+.property-card-details {
+  background: transparent !important;
+  color: #FFFFFF !important;
+}
+
+.property-card-title,
+.property-price,
+.property-card h3,
+.property-card h4,
+.property-card p,
+.property-card span,
+.property-card small,
+.property-card strong {
+  color: #FFFFFF !important;
+}
+
+.property-card-title,
+.property-price,
+.property-card h3 {
+  font-weight: 900 !important;
+}
+
+
+/* ============================================================
+   PROPERTY STATUS
+   ============================================================ */
+
+.property-status-badge {
+  background: #FFFFFF !important;
+  color: #B71C1C !important;
+  border-color: #FFFFFF !important;
+  font-weight: 900 !important;
+}
+
+
+/* ============================================================
+   PROPERTY ACTION BUTTONS
+   ============================================================ */
+
+.property-action-btn {
+  background: rgba(255,255,255,.10) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255,255,255,.45) !important;
+}
+
+.property-action-btn:hover {
+  background: #FFFFFF !important;
+  color: #B71C1C !important;
+  border-color: #FFFFFF !important;
+}
+
+
+/* ============================================================
+   PROPERTY LIST
+   ============================================================ */
+
+.magic-property-card {
+  background:
+    linear-gradient(
+      135deg,
+      #8B0000,
+      #5C0000
+    ) !important;
+
+  color: #FFFFFF !important;
+  border-color: rgba(255,255,255,.25) !important;
+}
+
+.magic-property-card h1,
+.magic-property-card h2,
+.magic-property-card h3,
+.magic-property-card h4,
+.magic-property-card p,
+.magic-property-card span,
+.magic-property-card strong,
+.magic-property-card small {
+  color: #FFFFFF !important;
+  font-weight: 700;
+}
+
+.listing-title {
+  font-weight: 900 !important;
+}
+
+.listing-builder {
+  color: #D4AF37 !important;
+  font-weight: 900 !important;
+}
+
+.listing-price strong {
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+}
+
+.price-label {
+  color: rgba(255,255,255,.75) !important;
+}
+
+.listing-location {
+  color: #FFFFFF !important;
+}
+
+.contact-owner-btn,
+.availability-btn {
+  background: #FFFFFF !important;
+  color: #B71C1C !important;
+  font-weight: 900 !important;
+  border-color: #FFFFFF !important;
+}
+
+.contact-owner-btn:hover,
+.availability-btn:hover {
+  background: #D4AF37 !important;
+  color: #5C0000 !important;
+}
+
+
+/* ============================================================
+   CTA
+   ============================================================ */
+
+.home-property-cta-section {
+  background:
+    linear-gradient(
+      135deg,
+      #5C0000 0%,
+      #8B0000 50%,
+      #3D0000 100%
+    ) !important;
+
+  color: #FFFFFF;
+}
+
+.home-property-cta-section h1,
+.home-property-cta-section h2,
+.home-property-cta-section h3,
+.home-property-cta-section p,
+.home-property-cta-section span {
+  color: #8b3030;
+  font-weight: 800 !important;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+footer,
+.site-footer,
+.home-footer,
+.accha-footer {
+  background:
+    linear-gradient(
+      180deg,
+      #5C0000 0%,
+      #300000 100%
+    ) !important;
+
+  color: #FFFFFF !important;
+}
+
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer p,
+footer span,
+footer a,
+.site-footer h1,
+.site-footer h2,
+.site-footer h3,
+.site-footer h4,
+.site-footer p,
+.site-footer span,
+.site-footer a,
+.accha-footer h1,
+.accha-footer h2,
+.accha-footer h3,
+.accha-footer h4,
+.accha-footer p,
+.accha-footer span,
+.accha-footer a {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+footer a:hover,
+.site-footer a:hover,
+.accha-footer a:hover {
+  color: #D4AF37 !important;
+}
+
+
+/* ============================================================
+   GLOBAL BUTTONS
+   ============================================================ */
+
+.homepage button,
+.accha-modern-hero button,
+.upcoming-projects-section button,
+.properties-container button {
+  font-weight: 900;
+}
+
+
+/* ============================================================
+   GOLD ACCENT
+   ============================================================ */
+
+.homepage .gold,
+.accha-modern-hero .gold {
+  color: #D4AF37 !important;
+}
+
+
+/* ============================================================
+   MOBILE — KEEP RED THEME
+   ============================================================ */
+
+@media (max-width: 680px) {
+
+  .accha-modern-hero {
+    background:
+      linear-gradient(
+        180deg,
+        #8B0000 0%,
+        #B71C1C 55%,
+        #5C0000 100%
+      ) !important;
+  }
+
+  .upcoming-projects-section,
+  .properties-container {
+    background:
+      linear-gradient(
+        180deg,
+        #B71C1C,
+        #8B0000
+      ) !important;
+  }
+
+  .property-card,
+  .magic-property-card {
+    background:
+      linear-gradient(
+        180deg,
+        #8B0000,
+        #5C0000
+      ) !important;
+  }
+
+}
+
+.no-properties-message {
+  width: 100%;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  margin: 20px 0;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(113, 80, 72, 0.10);
+  border-radius: 22px;
+  box-shadow: 0 12px 35px rgba(80, 55, 40, 0.07);
+}
+
+/* Loading Icon */
+.no-properties-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 17px;
+  border-radius: 50%;
+  background: #fff4e8;
+  color: #c99236;
+  font-size: 25px;
+  animation: propertyLoading 1.2s ease-in-out infinite;
+}
+
+/* Heading */
+.no-properties-message h3 {
+  margin: 0;
+  color: #3b302a;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+/* Description */
+.no-properties-message p {
+  max-width: 430px;
+  margin: 9px auto 0;
+  color: #756b64;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Loading Animation */
+@keyframes propertyLoading {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.65;
+  }
+}
+/* WHOLE WEBSITE BACKGROUND */
+
+
+

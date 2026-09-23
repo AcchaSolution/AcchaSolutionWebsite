@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -19,10 +21,14 @@ export class ProjectAdComponent implements OnInit {
   showQRModal: boolean = false;
   currentSelectedPlan: string = '';
   currentPlanPrice: number = 0;
+showPaymentSuccessModal: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+      private router: Router
+
   ) {}
 
   ngOnInit(): void {
@@ -106,35 +112,91 @@ export class ProjectAdComponent implements OnInit {
     this.showQRModal = false;
   }
 
-  // 🎯 FIX: Explicitly defined method to handle custom scanner modal submissions
-  submitWithQRCode(): void {
-    if (this.projectForm.invalid) {
-      alert('Your project parameters form state is invalid.');
-      return;
-    }
+// 🎯 FIX: Handle QR payment submission
+submitWithQRCode(): void {
 
-    const payload = {
-      ...this.projectForm.value,
-      amenities: this.selectedAmenities,
-      chosenPlan: this.currentSelectedPlan
-    };
-
-    console.log('Posting validated form package over to API channel:', payload);
-
-    // Forwarding structural tracking details straight onto node entry routing module
-this.http.post('https://api.acchasolution.com/api/payments/qr-submission', payload)
-      .subscribe({
-        next: (res: any) => {
-          alert('Your structural details have been registered into system logs successfully. Please ensure you wire payment confirmation receipt screenshot directly to 6299978048 for rapid ad display deployment validation.');
-          this.showQRModal = false;
-          this.projectForm.reset();
-          this.selectedAmenities = [];
-          this.selectedFiles = [];
-        },
-        error: (err) => {
-          console.error('Submission transaction connection error:', err);
-          alert('Network transaction logging failure. Ensure your backend server running on port 5000 is fully listening.');
-        }
-      });
+  if (this.projectForm.invalid) {
+    alert('Your project parameters form state is invalid.');
+    return;
   }
+
+  const payload = {
+    ...this.projectForm.value,
+    amenities: this.selectedAmenities,
+    chosenPlan: this.currentSelectedPlan
+  };
+
+  console.log(
+    'Posting validated form package over to API channel:',
+    payload
+  );
+
+  // Forward payment submission details to backend
+  this.http
+    .post(
+      'https://api.acchasolution.com/api/payments/qr-submission',
+      payload
+    )
+    .subscribe({
+
+      next: (res: any) => {
+
+        console.log(
+          '✅ Payment submission successful:',
+          res
+        );
+
+        /*
+         * Close QR scanner popup
+         */
+        this.showQRModal = false;
+
+        /*
+         * Open modern payment success popup
+         */
+        this.showPaymentSuccessModal = true;
+
+        /*
+         * IMPORTANT:
+         * Do NOT reset the form here.
+         *
+         * Success popup still needs:
+         * projectName
+         * currentSelectedPlan
+         * currentPlanPrice
+         */
+
+      },
+
+      error: (err) => {
+
+        console.error(
+          '❌ Submission transaction connection error:',
+          err
+        );
+
+        alert(
+          'Network transaction logging failure. Please try again.'
+        );
+
+      }
+
+    });
+}
+
+
+
+goToPropertyDetails(): void {
+
+  this.showPaymentSuccessModal = false;
+
+  console.log(
+    '➡️ Payment successful. Navigating to property details.'
+  );
+
+  alert(
+    'Payment submitted successfully. Your promotion request has been received for verification.'
+  );
+
+}
 }
