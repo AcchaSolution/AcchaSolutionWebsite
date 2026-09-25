@@ -223,6 +223,8 @@
             (change)="onLocationSelect()"
           >
 
+          <option value="" disabled selected>Select Location</option>
+
   <option value="All Cities">
     All Cities
   </option>
@@ -316,6 +318,8 @@
           </label>
 
           <select formControlName="bhk">
+              <option value="" disabled selected>Select bhk</option>
+
 
             <option value="1 BHK">
               1 BHK
@@ -471,6 +475,7 @@
           </label>
 
           <select formControlName="facing">
+  <option value="" disabled selected>Select facing</option>
 
             <option value="East Facing">
               East Facing
@@ -550,7 +555,10 @@
             Possession Status
           </label>
 
+
           <select formControlName="possession">
+
+<option value="" disabled selected>Select status</option>
 
             <option value="Ready to Move">
               Ready to Move
@@ -1138,9 +1146,9 @@
 
     <div class="card shadow-sm side-card sticky-top">
 
-      <h4 class="card-title">
+      <!-- <h4 class="card-title">
         Publish
-      </h4>
+      </h4> -->
 
 
       <div class="btn-stack">
@@ -1170,6 +1178,7 @@
         formControlName="type"
         class="side-select mb-3"
       >
+  <option value="" disabled selected>Select Property</option>
 
         <option value="Rent">
           Rent
@@ -1202,7 +1211,7 @@
           (click)="onCategoryChange(cat.name)"
         >
 
-          {{ cat.name }}
+  {{ cat.name }} <span class="required-star">*</span>
 
           <span class="plus-icon">
             {{ cat.checked ? '✓' : '+' }}

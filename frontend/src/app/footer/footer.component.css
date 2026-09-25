@@ -1,50 +1,71 @@
 /* =========================================================
-   👑 ACCHASOLUTION — PREMIUM FOOTER 2026
-   CHOCOLATE / CREAM / GOLD
+   👑 ACCHASOLUTION — PREMIUM RED + WHITE FOOTER 2026
+   WHITE BACKGROUND / RED BRAND THEME
+   NO BLACK / BROWN / GOLD
 ========================================================= */
 
 .footer-section {
     position: relative;
     overflow: hidden;
-    background:
-        radial-gradient(circle at 15% 10%, rgba(223,166,81,.10), transparent 30%),
-        radial-gradient(circle at 85% 80%, rgba(124,74,42,.16), transparent 35%),
-        linear-gradient(135deg, #715048 0%, #3b2923 52%, #87706e 100%);
-    color: #fff;
+
+    background: #FFFFFF !important;
+
+    color: #B71C1C !important;
+
     padding: 70px 0 0;
+
+    border-top: 3px solid #B71C1C;
+
+    box-shadow:
+        0 -8px 30px rgba(183, 28, 28, 0.08);
 }
 
-/* Decorative glow */
+
+/* =========================================================
+   DECORATIVE RED GLOW
+========================================================= */
 
 .footer-section::before {
     content: "";
+
     position: absolute;
+
     width: 380px;
     height: 380px;
+
     top: -190px;
     right: -140px;
+
     border-radius: 50%;
+
     background: radial-gradient(
         circle,
-        rgba(223,166,81,.13),
+        rgba(183, 28, 28, 0.08),
         transparent 70%
     );
+
     pointer-events: none;
 }
 
 .footer-section::after {
     content: "";
+
     position: absolute;
+
     width: 280px;
     height: 280px;
+
     bottom: -160px;
     left: -120px;
+
     border-radius: 50%;
+
     background: radial-gradient(
         circle,
-        rgba(223,166,81,.08),
+        rgba(211, 47, 47, 0.06),
         transparent 70%
     );
+
     pointer-events: none;
 }
 
@@ -60,15 +81,28 @@
 
 .footer-logo img {
     width: 220px;
+
     max-width: 100%;
+
+    height: auto;
+
     margin-bottom: 22px;
 }
 
+
+/* =========================================================
+   ABOUT TEXT
+========================================================= */
+
 .footer-about {
-    color: #ded4cc;
+    color: #B71C1C !important;
+
     line-height: 1.8;
+
     font-size: 15px;
+
     margin-bottom: 26px;
+
     max-width: 440px;
 }
 
@@ -79,31 +113,55 @@
 
 .social-icons {
     display: flex;
+
     gap: 12px;
+
     flex-wrap: wrap;
 }
 
 .social-icons a {
     width: 43px;
     height: 43px;
-    border: 1px solid rgba(223,166,81,.38);
+
+    border: 1px solid #B71C1C !important;
+
     border-radius: 50%;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
-    color: #dfa651;
-    background: rgba(255,255,255,.035);
+
+    color: #B71C1C !important;
+
+    background: #FFFFFF !important;
+
     text-decoration: none;
+
     transition: all .3s ease;
+
     font-size: 17px;
 }
 
+.social-icons a i {
+    color: #B71C1C !important;
+}
+
 .social-icons a:hover {
-    background: #dfa651;
-    color: #241815;
-    border-color: #dfa651;
+    background: #B71C1C !important;
+
+    color: #FFFFFF !important;
+
+    border-color: #B71C1C !important;
+
     transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(223,166,81,.18);
+
+    box-shadow:
+        0 8px 20px rgba(183, 28, 28, 0.20);
+}
+
+.social-icons a:hover i {
+    color: #FFFFFF !important;
 }
 
 
@@ -112,23 +170,35 @@
 ========================================================= */
 
 .footer-section h4 {
-    color: #fff;
+    color: #B71C1C !important;
+
     margin-bottom: 27px;
+
     font-size: 19px;
+
     font-weight: 700;
+
     position: relative;
+
     letter-spacing: .2px;
 }
 
 .footer-section h4::after {
     content: "";
+
     position: absolute;
+
     left: 0;
+
     bottom: -10px;
+
     width: 38px;
-    height: 2px;
+
+    height: 3px;
+
     border-radius: 10px;
-    background: #dfa651;
+
+    background: #B71C1C !important;
 }
 
 
@@ -138,23 +208,31 @@
 
 .footer-section ul {
     list-style: none;
+
     padding: 0;
+
     margin: 0;
 }
 
 .footer-section ul li {
     margin-bottom: 13px;
+
+    color: #B71C1C !important;
 }
 
 .footer-section ul li a {
-    color: #d7cdc5;
+    color: #B71C1C !important;
+
     text-decoration: none;
+
     transition: all .25s ease;
+
     font-size: 14px;
 }
 
 .footer-section ul li a:hover {
-    color: #dfa651;
+    color: #8E0000 !important;
+
     padding-left: 6px;
 }
 
@@ -165,18 +243,37 @@
 
 .contact-list li {
     display: flex;
+
     align-items: flex-start;
+
     gap: 11px;
+
     margin-bottom: 16px;
-    color: #dcd2ca;
+
+    color: #B71C1C !important;
+
     font-size: 14px;
+
     line-height: 1.55;
+}
+
+.contact-list li a {
+    color: #B71C1C !important;
+
+    text-decoration: none;
+}
+
+.contact-list li a:hover {
+    color: #8E0000 !important;
 }
 
 .contact-list i {
     flex-shrink: 0;
-    color: #dfa651;
+
+    color: #B71C1C !important;
+
     font-size: 17px;
+
     margin-top: 2px;
 }
 
@@ -187,42 +284,68 @@
 
 .newsletter {
     margin-top: 22px;
+
     display: flex;
+
     width: 100%;
 }
 
 .newsletter input {
     flex: 1;
+
     height: 50px;
-    border: 1px solid rgba(223,166,81,.28);
+
+    border: 1px solid rgba(183, 28, 28, 0.25);
+
     border-right: none;
+
     border-radius: 10px 0 0 10px;
-    background: rgba(255,255,255,.045);
-    color: #fff;
+
+    background: #FFFFFF !important;
+
+    color: #B71C1C !important;
+
     padding: 0 14px;
+
     outline: none;
 }
 
 .newsletter input::placeholder {
-    color: #aaa09a;
+    color: #D32F2F !important;
+
+    opacity: .65;
 }
 
 .newsletter input:focus {
-    border-color: #dfa651;
+    border-color: #B71C1C !important;
+
+    background: #FFF8F8 !important;
 }
 
 .newsletter button {
     width: 68px;
+
     border: none;
+
     border-radius: 0 10px 10px 0;
-    background: #dfa651;
-    color: #241815;
+
+    background: #B71C1C !important;
+
+    color: #FFFFFF !important;
+
     font-size: 19px;
+
     transition: all .3s ease;
 }
 
+.newsletter button i {
+    color: #FFFFFF !important;
+}
+
 .newsletter button:hover {
-    background: #f0bd67;
+    background: #8E0000 !important;
+
+    color: #FFFFFF !important;
 }
 
 
@@ -231,47 +354,98 @@
 ========================================================= */
 
 .feature-box {
-    border: 1px solid rgba(223,166,81,.24);
+    border: 1px solid rgba(183, 28, 28, 0.18);
+
     border-radius: 18px;
+
     margin-top: 40px;
+
     overflow: hidden;
-    background: rgba(255,255,255,.035);
-    backdrop-filter: blur(8px);
+
+    background: #FFFFFF !important;
 }
 
 .feature-item {
     display: flex;
+
     align-items: center;
+
     gap: 17px;
+
     padding: 28px 22px;
-    border-right: 1px solid rgba(255,255,255,.08);
+
+    border-right: 1px solid rgba(183, 28, 28, 0.14);
+
+    color: #B71C1C !important;
 }
+
+.feature-item:last-child {
+    border-right: none;
+}
+
+
+/* =========================================================
+   FEATURE ICON
+========================================================= */
 
 .feature-icon {
     width: 62px;
     height: 62px;
+
     flex-shrink: 0;
+
     border-radius: 50%;
-    background: linear-gradient(145deg, #dfa651, #c98a31);
+
+    background: linear-gradient(
+        145deg,
+        #B71C1C,
+        #D32F2F
+    ) !important;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
-    color: #241815;
+
+    color: #FFFFFF !important;
+
     font-size: 25px;
-    box-shadow: 0 8px 20px rgba(223,166,81,.15);
+
+    box-shadow:
+        0 8px 20px rgba(183, 28, 28, 0.18);
 }
+
+.feature-icon i {
+    color: #FFFFFF !important;
+}
+
+
+/* =========================================================
+   FEATURE HEADINGS
+========================================================= */
 
 .feature-item h5 {
     margin: 0;
-    color: #fff;
+
+    color: #B71C1C !important;
+
     font-size: 17px;
+
     font-weight: 700;
 }
 
+
+/* =========================================================
+   FEATURE DESCRIPTION
+========================================================= */
+
 .feature-item p {
     margin: 5px 0 0;
-    color: #cfc4bc;
+
+    color: #D32F2F !important;
+
     font-size: 14px;
+
     line-height: 1.5;
 }
 
@@ -282,82 +456,80 @@
 
 .footer-bottom {
     margin-top: 55px;
+
     padding: 23px 0;
-    border-top: 1px solid rgba(255,255,255,.09);
+
+    border-top: 1px solid rgba(183, 28, 28, 0.14);
+
+    background: #FFFFFF !important;
 }
 
 .footer-bottom p {
     margin: 0;
-    color: #bdb2aa;
+
+    color: #B71C1C !important;
+
     font-size: 13px;
+
     line-height: 1.6;
 }
 
+.footer-bottom strong {
+    color: #8E0000 !important;
+}
+
 .footer-bottom a {
-    color: #dfa651;
+    color: #B71C1C !important;
+
     text-decoration: none;
+
     margin: 0 8px;
+
     transition: .3s;
 }
 
 .footer-bottom a:hover {
-    color: #fff;
+    color: #8E0000 !important;
+
+    text-decoration: underline;
 }
 
 .footer-bottom span {
-    color: #6f625a;
+    color: #D32F2F !important;
 }
 
 
 /* =========================================================
-   WHATSAPP FLOATING BUTTON
+   FORCE FOOTER RED
+   REMOVE OLD DARK / BROWN / GOLD COLORS
 ========================================================= */
 
-.floating-whatsapp {
-    position: fixed;
-    right: 22px;
-    bottom: 22px;
-
-    width: 60px;
-    height: 60px;
-
-    background: #25D366;
-    color: #fff;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-decoration: none;
-    font-size: 30px;
-
-    z-index: 99999;
-
-    box-shadow:
-        0 8px 22px rgba(0,0,0,.24);
-
-    animation: whatsappPulse 2s infinite;
-    transition: transform .25s ease;
+.footer-section,
+.footer-section p,
+.footer-section h4,
+.footer-section h5,
+.footer-section li,
+.footer-section span {
+    color: #B71C1C !important;
 }
 
-.floating-whatsapp:hover {
-    transform: scale(1.08);
+.footer-section a {
+    color: #B71C1C !important;
 }
 
-@keyframes whatsappPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(37,211,102,.65);
-    }
+.footer-section i {
+    color: #B71C1C !important;
+}
 
-    70% {
-        box-shadow: 0 0 0 13px rgba(37,211,102,0);
-    }
 
-    100% {
-        box-shadow: 0 0 0 0 rgba(37,211,102,0);
-    }
+/* =========================================================
+   KEEP WHITE ICONS ON RED ELEMENTS
+========================================================= */
+
+.social-icons a:hover i,
+.newsletter button i,
+.feature-icon i {
+    color: #FFFFFF !important;
 }
 
 
@@ -377,7 +549,13 @@
 
     .feature-item {
         border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,.08);
+
+        border-bottom:
+            1px solid rgba(183, 28, 28, 0.14);
+    }
+
+    .feature-item:last-child {
+        border-bottom: none;
     }
 
     .footer-bottom {
@@ -387,7 +565,7 @@
 
 
 /* =========================================================
-   MOBILE — PREMIUM REDESIGN
+   MOBILE
 ========================================================= */
 
 @media (max-width: 768px) {
@@ -395,32 +573,28 @@
     .footer-section {
         padding: 48px 18px 0;
 
-        background:
-            radial-gradient(
-                circle at 90% 5%,
-                rgba(223,166,81,.16),
-                transparent 28%
-            ),
-            linear-gradient(
-                160deg,
-                #2b1d18 0%,
-                #4a3329 48%,
-                #5a4135 100%
-            );
+        background: #FFFFFF !important;
     }
 
     .footer-section::before {
         width: 230px;
+
         height: 230px;
+
         top: -120px;
+
         right: -100px;
+
         opacity: .7;
     }
 
     .footer-section::after {
         width: 180px;
+
         height: 180px;
+
         bottom: -100px;
+
         left: -90px;
     }
 
@@ -433,6 +607,7 @@
 
     .footer-logo img {
         width: 175px;
+
         margin-bottom: 18px;
     }
 
@@ -441,12 +616,16 @@
 
     .footer-about {
         max-width: 330px;
+
         margin: 0 auto 20px;
+
         text-align: center;
 
         font-size: 13px;
+
         line-height: 1.75;
-        color: #e0d5cc;
+
+        color: #B71C1C !important;
     }
 
 
@@ -454,13 +633,17 @@
 
     .social-icons {
         justify-content: center;
+
         gap: 9px;
+
         margin-bottom: 30px;
     }
 
     .social-icons a {
         width: 39px;
+
         height: 39px;
+
         font-size: 15px;
     }
 
@@ -469,17 +652,22 @@
 
     .footer-section h4 {
         margin-top: 28px;
+
         margin-bottom: 21px;
 
         font-size: 16px;
+
         text-align: center;
     }
 
     .footer-section h4::after {
         left: 50%;
+
         transform: translateX(-50%);
+
         width: 32px;
-        height: 2px;
+
+        height: 3px;
     }
 
 
@@ -502,14 +690,17 @@
 
     .contact-list {
         max-width: 300px;
+
         margin: 0 auto !important;
     }
 
     .contact-list li {
         justify-content: center;
+
         text-align: left;
 
         gap: 9px;
+
         margin-bottom: 13px;
 
         font-size: 12.5px;
@@ -524,16 +715,21 @@
 
     .newsletter {
         max-width: 330px;
+
         margin: 20px auto 0;
+
         flex-direction: column;
+
         gap: 9px;
     }
 
     .newsletter input {
         width: 100%;
+
         height: 46px;
 
-        border: 1px solid rgba(223,166,81,.35);
+        border: 1px solid rgba(183, 28, 28, 0.25);
+
         border-radius: 10px;
 
         font-size: 13px;
@@ -541,7 +737,9 @@
 
     .newsletter button {
         width: 100%;
+
         height: 44px;
+
         border-radius: 10px;
 
         font-size: 16px;
@@ -552,14 +750,21 @@
 
     .feature-box {
         margin-top: 32px;
+
         border-radius: 16px;
+
+        background: #FFFFFF !important;
     }
 
     .feature-item {
         padding: 20px 16px;
+
         gap: 13px;
+
         border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,.08);
+
+        border-bottom:
+            1px solid rgba(183, 28, 28, 0.14);
     }
 
     .feature-item:last-child {
@@ -568,7 +773,9 @@
 
     .feature-icon {
         width: 48px;
+
         height: 48px;
+
         font-size: 20px;
     }
 
@@ -578,6 +785,7 @@
 
     .feature-item p {
         font-size: 11px;
+
         line-height: 1.45;
     }
 
@@ -586,12 +794,17 @@
 
     .footer-bottom {
         margin-top: 35px;
+
         padding: 18px 0 20px;
+
         text-align: center;
+
+        background: #FFFFFF !important;
     }
 
     .footer-bottom p {
         font-size: 11px;
+
         line-height: 1.8;
     }
 
@@ -604,9 +817,13 @@
 
     .floating-whatsapp {
         width: 52px;
+
         height: 52px;
+
         right: 15px;
+
         bottom: 15px;
+
         font-size: 25px;
     }
 }
@@ -628,6 +845,7 @@
 
     .footer-about {
         font-size: 12px;
+
         max-width: 300px;
     }
 
@@ -637,7 +855,9 @@
 
     .social-icons a {
         width: 37px;
+
         height: 37px;
+
         font-size: 14px;
     }
 
@@ -663,7 +883,9 @@
 
     .feature-icon {
         width: 44px;
+
         height: 44px;
+
         font-size: 18px;
     }
 
@@ -681,9 +903,13 @@
 
     .floating-whatsapp {
         width: 49px;
+
         height: 49px;
+
         right: 12px;
+
         bottom: 12px;
+
         font-size: 23px;
     }
 }
@@ -697,6 +923,7 @@
 
     .footer-section {
         padding-left: 12px;
+
         padding-right: 12px;
     }
 
@@ -710,7 +937,9 @@
 
     .social-icons a {
         width: 35px;
+
         height: 35px;
+
         font-size: 13px;
     }
 
@@ -720,7 +949,9 @@
 
     .feature-icon {
         width: 40px;
+
         height: 40px;
+
         font-size: 16px;
     }
 
@@ -732,3 +963,114 @@
         font-size: 9px;
     }
 }
+
+
+/* =========================================================
+   WHATSAPP — KEEP ORIGINAL BRAND COLOR
+========================================================= */
+
+.floating-whatsapp {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    width: 60px;
+    height: 60px;
+
+    background: #25D366 !important;
+
+    color: #FFFFFF !important;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    font-size: 30px;
+
+    z-index: 99999;
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, .24);
+
+    animation: whatsappPulse 2s infinite;
+
+    transition: transform .25s ease;
+}
+
+.floating-whatsapp i {
+    color: #FFFFFF !important;
+}
+
+.floating-whatsapp:hover {
+    transform: scale(1.08);
+}
+
+
+@keyframes whatsappPulse {
+
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(37, 211, 102, .65);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 13px rgba(37, 211, 102, 0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+
+
+/* =========================================================
+   FOOTER — ALL TEXT BOLD + RED HOVER
+========================================================= */
+
+/* Footer text bold */
+.footer-section a,
+.footer-section h4,
+.footer-section h5,
+.footer-section p,
+.footer-section li,
+.footer-section span {
+    font-weight: 700 !important;
+}
+
+/* Footer links hover */
+.footer-section a:hover {
+    background: #B71C1C !important;
+    color: #FFFFFF !important;
+}
+
+/* Footer list links — proper hover area */
+.footer-section ul li a {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 5px;
+    color: #B71C1C !important;
+    transition: all .25s ease;
+}
+
+.footer-section ul li a:hover {
+    background: #B71C1C !important;
+    color: #FFFFFF !important;
+    padding-left: 8px;
+}
+
+/* Hover ke andar icons bhi white */
+.footer-section a:hover i {
+    color: #FFFFFF !important;
+}
+/* =========================================================
+   END — PREMIUM WHITE + RED FOOTER
+========================================================= */

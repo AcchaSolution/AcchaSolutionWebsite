@@ -335,7 +335,7 @@ export class AddPropertyFormComponent
 
     {
       name: 'Commercial',
-      checked: true
+      checked: false
     }
 
   ];
@@ -457,7 +457,7 @@ export class AddPropertyFormComponent
           ]
         ],
 
-        possession: ['Ready to Move'],
+        possession: [''],
 
         rating: ['5'],
 
@@ -465,7 +465,7 @@ export class AddPropertyFormComponent
 
         longitude: [77.7500],
 
-        location: ['All Cities']
+        location: ['']
 
       });
 

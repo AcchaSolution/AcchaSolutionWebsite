@@ -1919,4 +1919,1034 @@ body.mobile-menu-active {
   }
 }
 
+/* =========================================================
+   ACCHASOLUTION — RED + WHITE NAVBAR OVERRIDE
+   Build Once → Change Everywhere
+========================================================= */
 
+/* ================= HEADER ================= */
+
+.accha-solution-header {
+  background: rgba(255, 255, 255, 0.98) !important;
+
+  border-top: 3px solid #B71C1C !important;
+
+  border-bottom:
+    1px solid rgba(183, 28, 28, 0.16) !important;
+
+  box-shadow:
+    0 6px 25px rgba(120, 0, 0, 0.12) !important;
+}
+
+
+/* ================= NAV LINKS ================= */
+
+.nav-base-link {
+  color: #2B2B2B !important;
+}
+
+
+.nav-base-link:hover {
+  color: #B71C1C !important;
+}
+
+
+.nav-base-link::after {
+  background:
+    linear-gradient(
+      90deg,
+      #8E0000,
+      #D32F2F
+    ) !important;
+}
+
+
+/* ================= DROPDOWN ARROW ================= */
+
+.arrow-indicator {
+  color: #B71C1C !important;
+}
+
+
+/* ================= MEGA DROPDOWN ================= */
+
+.magic-mega-dropdown-panel {
+  background:
+    linear-gradient(
+      145deg,
+      #FFFFFF 0%,
+      #FFF8F8 100%
+    ) !important;
+
+  border-color:
+    rgba(183, 28, 28, 0.16) !important;
+
+  border-top:
+    3px solid #B71C1C !important;
+
+  box-shadow:
+    0 22px 55px rgba(120, 0, 0, 0.16) !important;
+}
+
+
+.column-group-title {
+  color: #B71C1C !important;
+}
+
+
+.logo-blue-text,
+.logo-red-text,
+.logo-gold-text,
+.logo-green-text {
+  color: #B71C1C !important;
+}
+
+
+.mega-link-item {
+  color: #444444 !important;
+}
+
+
+.mega-link-item:hover {
+  background:
+    linear-gradient(
+      90deg,
+      #FFF0F0,
+      #FFFFFF
+    ) !important;
+
+  color: #B71C1C !important;
+}
+
+
+.view-all-cta {
+  color: #B71C1C !important;
+}
+
+
+.highlight-royal-gold {
+  color: #B71C1C !important;
+}
+
+
+/* ================= LOGIN ================= */
+
+.nav-login-btn {
+  border-color:
+    rgba(183, 28, 28, 0.25) !important;
+
+  background: #FFFFFF !important;
+
+  color: #333333 !important;
+}
+
+
+.nav-login-btn:hover {
+  background: #B71C1C !important;
+
+  border-color: #B71C1C !important;
+
+  color: #FFFFFF !important;
+
+  box-shadow:
+    0 7px 18px rgba(183, 28, 28, 0.22) !important;
+}
+
+
+.login-icon {
+  background:
+    linear-gradient(
+      135deg,
+      #B71C1C,
+      #D32F2F
+    ) !important;
+
+  color: #FFFFFF !important;
+}
+
+
+/* ================= PROFILE ================= */
+
+.profile-user-btn {
+  color: #333333 !important;
+}
+
+
+.profile-user-btn:hover {
+  background:
+    rgba(253, 236, 236, 0.95) !important;
+}
+
+
+.profile-circle {
+  background:
+    linear-gradient(
+      135deg,
+      #B71C1C,
+      #D32F2F
+    ) !important;
+
+  color: #FFFFFF !important;
+
+  border-color: #FFFFFF !important;
+}
+
+
+.profile-user-info strong {
+  color: #333333 !important;
+}
+
+
+.profile-user-info span {
+  color: #777777 !important;
+}
+
+
+.profile-arrow {
+  color: #B71C1C !important;
+}
+
+
+/* ================= USER DROPDOWN ================= */
+
+.user-dropdown-menu {
+  background:
+    linear-gradient(
+      145deg,
+      #FFFFFF,
+      #FFF8F8
+    ) !important;
+
+  border-color:
+    rgba(183, 28, 28, 0.20) !important;
+
+  box-shadow:
+    0 18px 45px rgba(120, 0, 0, 0.18) !important;
+}
+
+
+.profile-dropdown-header strong {
+  color: #333333 !important;
+}
+
+
+.profile-dropdown-header span {
+  color: #777777 !important;
+}
+
+
+.dropdown-divider {
+  background: #F1DADA !important;
+}
+
+
+.user-dropdown-menu a {
+  color: #444444 !important;
+}
+
+
+.user-dropdown-menu a:hover {
+  background: #FDECEC !important;
+
+  color: #B71C1C !important;
+}
+
+
+.user-dropdown-menu button {
+  color: #B71C1C !important;
+}
+
+
+.user-dropdown-menu button:hover {
+  background: #FDECEC !important;
+}
+
+
+/* ================= POST PROPERTY ================= */
+
+.btn-navbar-post-property {
+  background:
+    linear-gradient(
+      135deg,
+      #B71C1C,
+      #D32F2F
+    ) !important;
+
+  color: #FFFFFF !important;
+
+  box-shadow:
+    0 6px 17px rgba(183, 28, 28, 0.25) !important;
+}
+
+
+.btn-navbar-post-property:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #8E0000,
+      #B71C1C
+    ) !important;
+
+  box-shadow:
+    0 9px 23px rgba(183, 28, 28, 0.32) !important;
+}
+
+
+.badge-free-tag {
+  background: #FFFFFF !important;
+
+  color: #B71C1C !important;
+}
+
+
+/* ================= MOBILE MENU BUTTON ================= */
+
+.mobile-menu-button {
+  border-color:
+    rgba(183, 28, 28, 0.25) !important;
+
+  background: #FFFFFF !important;
+}
+
+
+.mobile-menu-button:hover {
+  background: #FFF5F5 !important;
+
+  border-color: #B71C1C !important;
+}
+
+
+.mobile-menu-button span {
+  background: #B71C1C !important;
+}
+
+
+.mobile-menu-button.menu-open span {
+  background: #8E0000 !important;
+}
+
+
+/* ================= MOBILE NAVIGATION ================= */
+
+.mobile-navigation {
+  background:
+    linear-gradient(
+      145deg,
+      #FFFFFF 0%,
+      #FFF8F8 55%,
+      #FDECEC 100%
+    ) !important;
+
+  border-top:
+    2px solid #B71C1C !important;
+
+  box-shadow:
+    0 20px 45px rgba(120, 0, 0, 0.22) !important;
+}
+
+
+/* ================= MOBILE LINKS ================= */
+
+.mobile-nav-link {
+  background:
+    rgba(255, 255, 255, 0.90) !important;
+
+  color: #333333 !important;
+
+  border-color:
+    rgba(183, 28, 28, 0.10) !important;
+}
+
+
+.mobile-nav-link:hover,
+.mobile-nav-link:active,
+.mobile-active-link {
+  background: #FDECEC !important;
+
+  border-color:
+    rgba(183, 28, 28, 0.30) !important;
+
+  color: #B71C1C !important;
+}
+
+
+.mobile-nav-link > span {
+  color: #B71C1C !important;
+}
+
+
+/* ================= MOBILE ACCORDION ================= */
+
+.mobile-accordion-button {
+  background:
+    rgba(255, 255, 255, 0.92) !important;
+
+  color: #333333 !important;
+
+  border-color:
+    rgba(183, 28, 28, 0.10) !important;
+}
+
+
+.mobile-accordion-button:hover,
+.mobile-accordion-button.mobile-accordion-open {
+  background: #FDECEC !important;
+
+  border-color:
+    rgba(183, 28, 28, 0.30) !important;
+}
+
+
+.mobile-menu-arrow {
+  background: #FDECEC !important;
+
+  color: #B71C1C !important;
+}
+
+
+/* ================= MOBILE ACCORDION CONTENT ================= */
+
+.mobile-accordion-content {
+  background: #FFF8F8 !important;
+
+  border-color:
+    rgba(183, 28, 28, 0.20) !important;
+}
+
+
+.mobile-submenu-heading {
+  color: #B71C1C !important;
+}
+
+
+.mobile-accordion-content > a {
+  background:
+    rgba(255, 255, 255, 0.82) !important;
+
+  color: #444444 !important;
+}
+
+
+.mobile-accordion-content > a:hover,
+.mobile-accordion-content > a:active {
+  background: #FFFFFF !important;
+
+  color: #B71C1C !important;
+
+  border-color:
+    rgba(183, 28, 28, 0.22) !important;
+}
+
+
+/* ================= MOBILE CTA ================= */
+
+.mobile-accordion-content > a.mobile-submenu-cta {
+  background:
+    linear-gradient(
+      135deg,
+      #B71C1C,
+      #D32F2F
+    ) !important;
+
+  color: #FFFFFF !important;
+}
+
+
+.mobile-accordion-content > a.mobile-submenu-cta:hover,
+.mobile-accordion-content > a.mobile-submenu-cta:active {
+  background: #8E0000 !important;
+
+  color: #FFFFFF !important;
+}
+
+
+/* ================= MOBILE DIVIDER ================= */
+
+.mobile-menu-divider {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(183, 28, 28, 0.55),
+      transparent
+    ) !important;
+}
+
+
+/* ================= MOBILE POST PROPERTY ================= */
+
+.mobile-post-property {
+  background:
+    linear-gradient(
+      135deg,
+      #B71C1C,
+      #D32F2F
+    ) !important;
+
+  color: #FFFFFF !important;
+
+  box-shadow:
+    0 7px 19px rgba(183, 28, 28, 0.25) !important;
+}
+
+
+.mobile-post-property span {
+  background: #FFFFFF !important;
+
+  color: #B71C1C !important;
+}
+
+
+/* ================= MOBILE LOGIN ================= */
+
+.mobile-login-link {
+  color: #B71C1C !important;
+}
+
+
+.mobile-login-link:hover {
+  color: #8E0000 !important;
+}
+
+
+/* =========================================================
+   ACCHASOLUTION — WHITE NAVBAR + RED THEME
+   NAVBAR BACKGROUND = WHITE
+   NAVBAR TEXT = RED
+   NO BLACK / DARK TEXT
+========================================================= */
+
+
+/* =========================================================
+   1. MAIN NAVBAR
+========================================================= */
+
+.accha-solution-header {
+  background: #FFFFFF !important;
+
+  border-top: 3px solid #B71C1C !important;
+  border-bottom: 1px solid rgba(183, 28, 28, 0.18) !important;
+
+  box-shadow:
+    0 6px 25px rgba(183, 28, 28, 0.12) !important;
+}
+
+
+/* =========================================================
+   2. MAIN NAV LINKS
+========================================================= */
+
+.nav-base-link {
+  color: #B71C1C !important;
+}
+
+.nav-base-link:hover,
+.nav-base-link:focus {
+  color: #8E0000 !important;
+}
+
+.nav-base-link::after {
+  background: linear-gradient(
+    90deg,
+    #8E0000,
+    #D32F2F
+  ) !important;
+}
+
+.arrow-indicator {
+  color: #B71C1C !important;
+}
+
+
+/* =========================================================
+   3. DROPDOWN / MEGA MENU
+========================================================= */
+
+.magic-mega-dropdown-panel {
+  background: #FFFFFF !important;
+
+  border-color: rgba(183, 28, 28, 0.18) !important;
+
+  border-top: 3px solid #B71C1C !important;
+
+  box-shadow:
+    0 22px 55px rgba(183, 28, 28, 0.16) !important;
+}
+
+.column-group-title {
+  color: #B71C1C !important;
+}
+
+.mega-link-item {
+  color: #B71C1C !important;
+}
+
+.mega-link-item:hover,
+.mega-link-item:focus {
+  background: #FDECEC !important;
+  color: #8E0000 !important;
+}
+
+.view-all-cta {
+  color: #B71C1C !important;
+}
+
+.highlight-royal-gold {
+  color: #B71C1C !important;
+}
+
+.logo-blue-text,
+.logo-red-text,
+.logo-gold-text,
+.logo-green-text {
+  color: #B71C1C !important;
+}
+
+
+/* =========================================================
+   4. DROPDOWN ARROW
+========================================================= */
+
+.dropdown-caret-arrow {
+  border-bottom-color: #FFFFFF !important;
+}
+
+
+/* =========================================================
+   5. LOGIN BUTTON
+========================================================= */
+
+.nav-login-btn {
+  background: #FFFFFF !important;
+
+  border: 1px solid #B71C1C !important;
+
+  color: #B71C1C !important;
+}
+
+.nav-login-btn:hover,
+.nav-login-btn:focus {
+  background: #B71C1C !important;
+
+  border-color: #B71C1C !important;
+
+  color: #FFFFFF !important;
+
+  box-shadow:
+    0 7px 18px rgba(183, 28, 28, 0.22) !important;
+}
+
+.login-icon {
+  background: #B71C1C !important;
+  color: #FFFFFF !important;
+}
+
+
+/* =========================================================
+   6. PROFILE
+========================================================= */
+
+.profile-user-btn {
+  color: #B71C1C !important;
+}
+
+.profile-user-btn:hover,
+.profile-user-btn:focus {
+  background: #FDECEC !important;
+}
+
+.profile-circle {
+  background: linear-gradient(
+    135deg,
+    #B71C1C,
+    #D32F2F
+  ) !important;
+
+  color: #FFFFFF !important;
+
+  border-color: #FFFFFF !important;
+}
+
+.profile-user-info strong {
+  color: #B71C1C !important;
+}
+
+.profile-user-info span {
+  color: #D32F2F !important;
+}
+
+.profile-arrow {
+  color: #B71C1C !important;
+}
+
+
+/* =========================================================
+   7. USER DROPDOWN
+========================================================= */
+
+.user-dropdown-menu {
+  background: #FFFFFF !important;
+
+  border-color: rgba(183, 28, 28, 0.20) !important;
+
+  box-shadow:
+    0 18px 45px rgba(183, 28, 28, 0.18) !important;
+}
+
+.profile-dropdown-header strong {
+  color: #B71C1C !important;
+}
+
+.profile-dropdown-header span {
+  color: #D32F2F !important;
+}
+
+.dropdown-divider {
+  background: #F1DADA !important;
+}
+
+.user-dropdown-menu a {
+  color: #B71C1C !important;
+}
+
+.user-dropdown-menu a:hover,
+.user-dropdown-menu a:focus {
+  background: #FDECEC !important;
+  color: #8E0000 !important;
+}
+
+.user-dropdown-menu button {
+  color: #B71C1C !important;
+}
+
+.user-dropdown-menu button:hover,
+.user-dropdown-menu button:focus {
+  background: #FDECEC !important;
+  color: #8E0000 !important;
+}
+
+
+/* =========================================================
+   8. POST PROPERTY
+========================================================= */
+
+.btn-navbar-post-property {
+  background: linear-gradient(
+    135deg,
+    #B71C1C,
+    #D32F2F
+  ) !important;
+
+  color: #FFFFFF !important;
+
+  border: 1px solid #B71C1C !important;
+
+  box-shadow:
+    0 6px 17px rgba(183, 28, 28, 0.25) !important;
+}
+
+.btn-navbar-post-property:hover,
+.btn-navbar-post-property:focus {
+  background: linear-gradient(
+    135deg,
+    #8E0000,
+    #B71C1C
+  ) !important;
+
+  color: #FFFFFF !important;
+
+  box-shadow:
+    0 9px 23px rgba(183, 28, 28, 0.32) !important;
+}
+
+.badge-free-tag {
+  background: #FFFFFF !important;
+  color: #B71C1C !important;
+}
+
+
+/* =========================================================
+   9. MOBILE MENU BUTTON
+========================================================= */
+
+.mobile-menu-button {
+  background: #FFFFFF !important;
+
+  border-color: #B71C1C !important;
+}
+
+.mobile-menu-button:hover,
+.mobile-menu-button:focus {
+  background: #FDECEC !important;
+
+  border-color: #B71C1C !important;
+}
+
+.mobile-menu-button span {
+  background: #B71C1C !important;
+}
+
+.mobile-menu-button.menu-open {
+  background: #B71C1C !important;
+}
+
+.mobile-menu-button.menu-open span {
+  background: #FFFFFF !important;
+}
+
+
+/* =========================================================
+   10. MOBILE NAVIGATION
+========================================================= */
+
+.mobile-navigation {
+  background: #FFFFFF !important;
+
+  border-top: 2px solid #B71C1C !important;
+
+  box-shadow:
+    0 20px 45px rgba(183, 28, 28, 0.20) !important;
+}
+
+
+/* =========================================================
+   11. MOBILE LINKS
+========================================================= */
+
+.mobile-nav-link {
+  background: #FFFFFF !important;
+
+  color: #B71C1C !important;
+
+  border-color: rgba(183, 28, 28, 0.14) !important;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:active,
+.mobile-nav-link:focus,
+.mobile-active-link {
+  background: #FDECEC !important;
+
+  border-color: rgba(183, 28, 28, 0.32) !important;
+
+  color: #8E0000 !important;
+}
+
+.mobile-nav-link > span {
+  color: #B71C1C !important;
+}
+
+
+/* =========================================================
+   12. MOBILE ACCORDION
+========================================================= */
+
+.mobile-accordion-button {
+  background: #FFFFFF !important;
+
+  color: #B71C1C !important;
+
+  border-color: rgba(183, 28, 28, 0.14) !important;
+}
+
+.mobile-accordion-button:hover,
+.mobile-accordion-button:focus,
+.mobile-accordion-button.mobile-accordion-open {
+  background: #FDECEC !important;
+
+  border-color: rgba(183, 28, 28, 0.32) !important;
+
+  color: #8E0000 !important;
+}
+
+.mobile-menu-number {
+  color: #B71C1C !important;
+}
+
+.mobile-menu-title {
+  color: #B71C1C !important;
+}
+
+.mobile-menu-arrow {
+  background: #B71C1C !important;
+
+  color: #FFFFFF !important;
+}
+
+
+/* =========================================================
+   13. MOBILE ACCORDION CONTENT
+========================================================= */
+
+.mobile-accordion-content {
+  background: #FFF8F8 !important;
+
+  border-color: rgba(183, 28, 28, 0.20) !important;
+}
+
+.mobile-submenu-heading {
+  color: #B71C1C !important;
+}
+
+.mobile-accordion-content > a {
+  background: #FFFFFF !important;
+
+  color: #B71C1C !important;
+
+  border-color: rgba(183, 28, 28, 0.10) !important;
+}
+
+.mobile-accordion-content > a:hover,
+.mobile-accordion-content > a:active,
+.mobile-accordion-content > a:focus {
+  background: #FDECEC !important;
+
+  color: #8E0000 !important;
+
+  border-color: rgba(183, 28, 28, 0.25) !important;
+}
+
+
+/* =========================================================
+   14. MOBILE SUBMENU CTA
+========================================================= */
+
+.mobile-accordion-content > a.mobile-submenu-cta {
+  background: linear-gradient(
+    135deg,
+    #B71C1C,
+    #D32F2F
+  ) !important;
+
+  color: #FFFFFF !important;
+
+  border-color: #B71C1C !important;
+}
+
+.mobile-accordion-content > a.mobile-submenu-cta:hover,
+.mobile-accordion-content > a.mobile-submenu-cta:active,
+.mobile-accordion-content > a.mobile-submenu-cta:focus {
+  background: #8E0000 !important;
+
+  color: #FFFFFF !important;
+}
+
+
+/* =========================================================
+   15. MOBILE DIVIDER
+========================================================= */
+
+.mobile-menu-divider {
+  background: linear-gradient(
+    90deg,
+    rgba(183, 28, 28, 0.60),
+    transparent
+  ) !important;
+}
+
+
+/* =========================================================
+   16. MOBILE POST PROPERTY
+========================================================= */
+
+.mobile-post-property {
+  background: linear-gradient(
+    135deg,
+    #B71C1C,
+    #D32F2F
+  ) !important;
+
+  color: #FFFFFF !important;
+
+  border: 1px solid #B71C1C !important;
+
+  box-shadow:
+    0 7px 19px rgba(183, 28, 28, 0.25) !important;
+}
+
+.mobile-post-property:hover,
+.mobile-post-property:focus {
+  background: #8E0000 !important;
+
+  color: #FFFFFF !important;
+}
+
+.mobile-post-property span {
+  background: #FFFFFF !important;
+
+  color: #B71C1C !important;
+}
+
+
+/* =========================================================
+   17. MOBILE LOGIN
+========================================================= */
+
+.mobile-login-link {
+  color: #B71C1C !important;
+
+  border-color: rgba(183, 28, 28, 0.25) !important;
+}
+
+.mobile-login-link:hover,
+.mobile-login-link:focus {
+  background: #FDECEC !important;
+
+  color: #8E0000 !important;
+}
+
+
+/* =========================================================
+   18. FORCE NAVBAR TEXT RED
+   NO BLACK / DARK TEXT
+========================================================= */
+
+.accha-solution-header .navbar-master-container {
+  color: #B71C1C !important;
+}
+
+.accha-solution-header .navbar-links-pipeline {
+  color: #B71C1C !important;
+}
+
+.accha-solution-header .navbar-right-actions {
+  color: #B71C1C !important;
+}
+
+.accha-solution-header .navbar-links-pipeline a {
+  color: #B71C1C !important;
+}
+
+.accha-solution-header .navbar-links-pipeline button {
+  color: #B71C1C !important;
+}
+
+
+/* =========================================================
+   19. DROPDOWN BUTTONS
+========================================================= */
+
+.nav-dropdown-wrapper > button,
+.nav-dropdown-wrapper > .nav-base-link {
+  color: #B71C1C !important;
+}
+
+.nav-dropdown-wrapper > button:hover,
+.nav-dropdown-wrapper > button:focus {
+  color: #8E0000 !important;
+}
+
+
+/* =========================================================
+   20. FOCUS
+========================================================= */
+
+.accha-solution-header a:focus-visible,
+.accha-solution-header button:focus-visible {
+  outline: 2px solid #B71C1C !important;
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   END — WHITE NAVBAR + RED THEME
+========================================================= */

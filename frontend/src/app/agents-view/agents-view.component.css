@@ -1,14 +1,55 @@
 /* =========================================================
+   ACCHASOLUTION — AGENTS VIEW
+   RED + WHITE / MODERN WESTERN / PROPTECH
+   Build Once → Change Everywhere
+========================================================= */
+
+:host {
+  display: block;
+
+  --accha-red: #b71c1c;
+  --accha-deep-red: #8e0000;
+  --accha-bright-red: #d32f2f;
+  --accha-light-red: #fdecec;
+  --accha-soft-red: #fff7f7;
+
+  --accha-white: #ffffff;
+  --accha-black: #181818;
+  --accha-text: #292929;
+  --accha-muted: #777777;
+
+  --accha-border: #eadada;
+}
+
+
+/* =========================================================
    AGENTS GRID
 ========================================================= */
 
 .agents-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 26px;
-  padding: 30px 36px;
   width: 100%;
   box-sizing: border-box;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(340px, 1fr));
+
+  gap: 28px;
+
+  padding: 35px 4% 60px;
+
+  background:
+    radial-gradient(
+      circle at 5% 5%,
+      rgba(183, 28, 28, .08),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #fff8f8 100%
+    );
 }
 
 
@@ -19,27 +60,87 @@
 .agent-card {
   position: relative;
 
+  box-sizing: border-box;
+
+  padding: 30px 28px;
+
   background: #ffffff;
 
-  border: 1px solid #e0c580;
-  border-radius: 20px;
+  border: 1px solid var(--accha-border);
 
-  padding: 28px 30px;
+  border-radius: 22px;
 
   text-align: center;
 
-  box-sizing: border-box;
-
-  transition: all 0.3s ease;
-
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.agent-card:hover {
-  transform: translateY(-6px);
+  overflow: hidden;
 
   box-shadow:
-    0 15px 30px rgba(212, 175, 55, 0.18);
+    0 8px 25px rgba(70, 0, 0, .07);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    border-color .3s ease;
+}
+
+
+/* top red line */
+
+.agent-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--accha-deep-red),
+      var(--accha-red),
+      var(--accha-bright-red)
+    );
+}
+
+
+/* decorative background */
+
+.agent-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  right: -80px;
+  bottom: -80px;
+
+  border-radius: 50%;
+
+  background: var(--accha-light-red);
+
+  pointer-events: none;
+
+  transition: transform .35s ease;
+}
+
+
+.agent-card:hover {
+  transform: translateY(-8px);
+
+  border-color: #dfbaba;
+
+  box-shadow:
+    0 20px 45px rgba(90, 0, 0, .13);
+}
+
+.agent-card:hover::after {
+  transform: scale(1.35);
 }
 
 
@@ -50,27 +151,39 @@
 .role-badge {
   position: absolute;
 
-  top: 12px;
-  right: 12px;
+  top: 16px;
+  right: 16px;
 
-  padding: 5px 9px;
+  z-index: 5;
 
-  border-radius: 6px;
+  padding: 6px 11px;
 
-  font-size: 11px;
-  font-weight: 700;
+  border-radius: 50px;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: .5px;
+
+  line-height: 1;
 
   color: #ffffff;
 
-  line-height: 1;
+  box-shadow:
+    0 5px 15px rgba(0,0,0,.12);
 }
+
 
 .role-agent {
-  background: #007bff;
+  background: var(--accha-red);
 }
 
+
 .role-owner {
-  background: #28a745;
+  background: var(--accha-deep-red);
 }
 
 
@@ -79,33 +192,84 @@
 ========================================================= */
 
 .avatar-circle {
-  width: 100px;
-  height: 100px;
+  position: relative;
+  z-index: 2;
 
-  margin: 0 auto 16px;
+  width: 108px;
+  height: 108px;
 
-  border-radius: 50%;
+  margin: 8px auto 18px;
 
-  border: 3px solid #d4af37;
-
-  overflow: hidden;
-
-  padding: 5px;
+  padding: 4px;
 
   box-sizing: border-box;
 
+  border-radius: 50%;
+
   background: #ffffff;
+
+  border: 3px solid var(--accha-red);
+
+  box-shadow:
+    0 8px 25px rgba(183, 28, 28, .18);
+
+  overflow: hidden;
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
 }
+
+
+.agent-card:hover .avatar-circle {
+  transform: translateY(-5px) scale(1.04);
+
+  box-shadow:
+    0 14px 30px rgba(183, 28, 28, .25);
+}
+
 
 .avatar-circle img {
   width: 100%;
   height: 100%;
 
+  display: block;
+
   border-radius: 50%;
 
   object-fit: cover;
+}
 
-  display: block;
+
+/* =========================================================
+   INITIAL AVATAR
+========================================================= */
+
+.initial-avatar {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accha-light-red),
+      #ffffff
+    );
+
+  color: var(--accha-red);
+
+  font-size: 34px;
+
+  font-weight: 800;
+
+  user-select: none;
 }
 
 
@@ -114,23 +278,42 @@
 ========================================================= */
 
 .agent-card h3 {
-  margin: 8px 0 16px;
+  position: relative;
+  z-index: 2;
 
-  font-size: 28px;
+  margin: 8px 0 17px;
 
-  font-weight: 500;
+  color: var(--accha-text);
 
-  color: #222;
+  font-size: 25px;
+
+  font-weight: 800;
 
   line-height: 1.2;
+
+  letter-spacing: -.4px;
 }
 
+
 .agent-card h3 span {
-  color: #d4af37;
+  color: var(--accha-red);
 
-  font-size: 20px;
+  font-size: 17px;
 
-  margin-left: 4px;
+  margin-left: 5px;
+}
+
+
+/* =========================================================
+   VERIFIED BADGE
+========================================================= */
+
+.verified-badge {
+  color: var(--accha-red);
+
+  font-size: 16px;
+
+  margin-left: 5px;
 }
 
 
@@ -139,76 +322,121 @@
 ========================================================= */
 
 .stats {
+  position: relative;
+  z-index: 2;
+
   display: flex;
 
+  align-items: stretch;
   justify-content: space-between;
-  align-items: center;
 
-  padding: 18px 10px;
+  margin: 0 0 20px;
 
-  margin: 0 0 18px;
+  padding: 16px 8px;
 
-  border-top: 1px solid #eeeeee;
+  background: var(--accha-soft-red);
 
-  box-sizing: border-box;
+  border: 1px solid #f0dcdc;
+
+  border-radius: 15px;
 }
+
 
 .stats > div {
   flex: 1;
 
   text-align: center;
+
+  padding: 0 8px;
+
+  border-right: 1px solid #ead4d4;
 }
+
+
+.stats > div:last-child {
+  border-right: none;
+}
+
 
 .stats strong {
-  display: inline-block;
+  display: block;
 
-  font-size: 18px;
+  margin-bottom: 4px;
 
-  font-weight: 600;
+  color: var(--accha-red);
 
-  color: #222;
+  font-size: 19px;
+
+  font-weight: 800;
 }
+
 
 .stats small {
-  font-size: 14px;
+  color: var(--accha-muted);
 
-  color: #444;
-}
-
-
-/* =========================================================
-   REVIEW BUTTON
-========================================================= */
-
-.btn-view {
-  width: 100%;
-
-  padding: 13px 18px;
-
-  border: none;
-
-  border-radius: 50px;
-
-  background: #1a1a1a;
-
-  color: #d4af37;
-
-  font-size: 15px;
+  font-size: 12px;
 
   font-weight: 700;
 
   text-transform: uppercase;
 
-  cursor: pointer;
-
-  transition: all 0.25s ease;
+  letter-spacing: .5px;
 }
 
+
+/* =========================================================
+   VIEW / REVIEW BUTTON
+========================================================= */
+
+.btn-view {
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+
+  min-height: 48px;
+
+  padding: 13px 20px;
+
+  border: 2px solid var(--accha-red);
+
+  border-radius: 12px;
+
+  background: var(--accha-red);
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: .7px;
+
+  cursor: pointer;
+
+  transition:
+    background .25s ease,
+    color .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+
 .btn-view:hover {
-  background: #000000;
+  background: #ffffff;
 
-  color: #f1c84b;
+  color: var(--accha-red);
 
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(183, 28, 28, .20);
+}
+
+
+.btn-view:active {
   transform: translateY(-1px);
 }
 
@@ -229,12 +457,14 @@
 
   box-sizing: border-box;
 
-  background: rgba(0, 0, 0, 0.68);
-
   display: flex;
 
   align-items: center;
   justify-content: center;
+
+  background: rgba(30, 0, 0, .72);
+
+  backdrop-filter: blur(6px);
 
   z-index: 99999;
 
@@ -249,26 +479,53 @@
 .agent-detail-modal {
   position: relative;
 
-  width: min(620px, 95vw);
+  width: min(650px, 95vw);
 
   max-height: 90vh;
 
-  padding: 32px;
+  padding: 35px;
 
   box-sizing: border-box;
 
   background: #ffffff;
 
-  border-radius: 22px;
+  border: 1px solid #edd1d1;
+
+  border-radius: 24px;
 
   box-shadow:
-    0 25px 70px rgba(0, 0, 0, 0.35);
+    0 30px 80px rgba(0, 0, 0, .35);
 
   overflow-y: auto;
 
   text-align: center;
 
-  animation: agentModalIn 0.25s ease;
+  animation: agentModalIn .28s ease;
+}
+
+
+/* =========================================================
+   MODAL TOP ACCENT
+========================================================= */
+
+.agent-detail-modal::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--accha-deep-red),
+      var(--accha-red),
+      var(--accha-bright-red)
+    );
 }
 
 
@@ -285,7 +542,7 @@
 }
 
 .agent-detail-modal::-webkit-scrollbar-thumb {
-  background: #b49a55;
+  background: var(--accha-red);
 
   border-radius: 20px;
 }
@@ -298,21 +555,21 @@
 .modal-close {
   position: absolute;
 
-  top: 12px;
-  right: 14px;
+  top: 14px;
+  right: 15px;
 
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
 
-  border: none;
+  border: 1px solid #f0d8d8;
 
   border-radius: 50%;
 
-  background: transparent;
+  background: #ffffff;
 
-  color: #222;
+  color: var(--accha-red);
 
-  font-size: 30px;
+  font-size: 25px;
 
   line-height: 1;
 
@@ -320,11 +577,19 @@
 
   z-index: 10;
 
-  transition: 0.2s ease;
+  transition:
+    all .2s ease;
 }
 
+
 .modal-close:hover {
-  background: #f5f1e9;
+  background: var(--accha-red);
+
+  color: #ffffff;
+
+  border-color: var(--accha-red);
+
+  transform: rotate(90deg);
 }
 
 
@@ -333,16 +598,20 @@
 ========================================================= */
 
 .modal-avatar {
-  width: 105px;
-  height: 105px;
+  width: 110px;
+  height: 110px;
 
-  margin: 0 auto 16px;
+  margin: 5px auto 18px;
+
+  padding: 4px;
+
+  box-sizing: border-box;
 
   border-radius: 50%;
 
-  border: 3px solid #b18a32;
+  border: 3px solid var(--accha-red);
 
-  background: #f5f1e9;
+  background: var(--accha-light-red);
 
   overflow: hidden;
 
@@ -350,9 +619,8 @@
 
   align-items: center;
   justify-content: center;
-
-  box-sizing: border-box;
 }
+
 
 .modal-avatar img {
   width: 100%;
@@ -361,6 +629,35 @@
   object-fit: cover;
 
   display: block;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================================
+   MODAL INITIAL AVATAR
+========================================================= */
+
+.modal-initial-avatar {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--accha-light-red);
+
+  color: var(--accha-red);
+
+  font-size: 38px;
+
+  font-weight: 800;
+
+  user-select: none;
 }
 
 
@@ -369,37 +666,37 @@
 ========================================================= */
 
 .agent-detail-modal h2 {
-  margin: 5px 0 6px;
+  margin: 5px 0 7px;
+
+  color: var(--accha-text);
 
   font-size: 29px;
 
-  font-weight: 600;
-
-  color: #222;
+  font-weight: 800;
 
   line-height: 1.2;
 }
 
 
 /* =========================================================
-   VERIFIED
+   MODAL VERIFIED
 ========================================================= */
 
 .modal-verified {
   display: block;
 
-  margin: 6px 0 24px;
+  margin: 7px 0 25px;
 
-  color: #222;
+  color: var(--accha-red);
 
-  font-size: 16px;
+  font-size: 15px;
 
-  font-weight: 600;
+  font-weight: 800;
 }
 
 
 /* =========================================================
-   DETAILS GRID
+   MODAL DETAILS GRID
 ========================================================= */
 
 .modal-details {
@@ -407,7 +704,8 @@
 
   display: grid;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
 
   gap: 14px;
 
@@ -418,43 +716,58 @@
 
 
 /* =========================================================
-   INFORMATION CARD
+   MODAL INFORMATION CARD
 ========================================================= */
 
 .modal-info {
   min-width: 0;
 
-  padding: 15px;
+  padding: 16px;
 
   box-sizing: border-box;
 
-  background: #f7f4ef;
+  background: var(--accha-soft-red);
 
-  border-radius: 13px;
+  border: 1px solid #f0dddd;
+
+  border-radius: 14px;
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease;
 }
+
+
+.modal-info:hover {
+  transform: translateY(-3px);
+
+  border-color: #dfb8b8;
+}
+
 
 .modal-info strong {
   display: block;
 
   margin-bottom: 6px;
 
-  font-size: 16px;
+  color: var(--accha-red);
 
-  font-weight: 700;
+  font-size: 14px;
 
-  color: #222;
+  font-weight: 800;
 }
+
 
 .modal-info p {
   margin: 0;
 
-  font-size: 15px;
+  color: #333333;
 
-  color: #333;
+  font-size: 14px;
+
+  line-height: 1.45;
 
   overflow-wrap: anywhere;
-
-  line-height: 1.4;
 }
 
 
@@ -472,21 +785,21 @@
   justify-content: center;
 }
 
+
 .properties-count-card p {
   margin: 0;
 
-  font-size: 20px;
+  color: var(--accha-red);
 
-  font-weight: 700;
+  font-size: 21px;
 
-  color: #222;
+  font-weight: 800;
 }
 
 
 /* =========================================================
-   IMPORTANT:
-   PROPERTY LINKS MUST TAKE FULL WIDTH
-   ========================================================= */
+   PROPERTY LINKS
+========================================================= */
 
 .agent-property-links {
   grid-column: 1 / -1;
@@ -495,11 +808,13 @@
 
   margin-top: 2px;
 
-  padding: 18px;
+  padding: 19px;
 
   box-sizing: border-box;
 
-  background: #f7f4ef;
+  background: var(--accha-soft-red);
+
+  border: 1px solid #f0dddd;
 
   border-radius: 15px;
 }
@@ -512,11 +827,11 @@
 .agent-property-links h4 {
   margin: 0 0 13px;
 
+  color: var(--accha-text);
+
   font-size: 16px;
 
-  font-weight: 600;
-
-  color: #333;
+  font-weight: 800;
 
   line-height: 1.35;
 }
@@ -531,6 +846,7 @@
 
   margin-bottom: 9px;
 }
+
 
 .property-link:last-child {
   margin-bottom: 0;
@@ -551,7 +867,6 @@
   display: flex;
 
   align-items: center;
-
   justify-content: space-between;
 
   gap: 15px;
@@ -560,23 +875,34 @@
 
   background: #ffffff;
 
+  border: 1px solid #eadada;
+
   border-radius: 10px;
 
-  color: #222;
+  color: var(--accha-text);
 
   text-decoration: none;
 
-  font-size: 15px;
+  font-size: 14px;
 
-  font-weight: 600;
+  font-weight: 700;
 
-  transition: all 0.2s ease;
+  transition:
+    all .2s ease;
 }
 
-.property-link a:hover {
-  background: #eee8dc;
 
-  transform: translateX(3px);
+.property-link a:hover {
+  background: var(--accha-red);
+
+  color: #ffffff;
+
+  border-color: var(--accha-red);
+
+  transform: translateX(4px);
+
+  box-shadow:
+    0 7px 18px rgba(183, 28, 28, .16);
 }
 
 
@@ -602,9 +928,16 @@
 .property-arrow {
   flex-shrink: 0;
 
+  color: var(--accha-red);
+
   font-size: 21px;
 
-  color: #9b7426;
+  transition: color .2s ease;
+}
+
+
+.property-link a:hover .property-arrow {
+  color: #ffffff;
 }
 
 
@@ -625,11 +958,13 @@
 
   text-align: center;
 
-  background: #f7f4ef;
+  background: var(--accha-soft-red);
+
+  border: 1px solid #f0dddd;
 
   border-radius: 12px;
 
-  color: #777;
+  color: var(--accha-muted);
 
   font-size: 14px;
 }
@@ -644,29 +979,38 @@
 
   margin: 22px auto 0;
 
-  min-width: 105px;
+  min-width: 110px;
 
   padding: 12px 28px;
 
-  border: none;
+  border: 2px solid var(--accha-red);
 
   border-radius: 11px;
 
-  background: #f0f0f0;
+  background: var(--accha-red);
 
-  color: #111;
+  color: #ffffff;
 
-  font-size: 16px;
+  font-size: 15px;
 
-  font-weight: 600;
+  font-weight: 800;
 
   cursor: pointer;
 
-  transition: all 0.2s ease;
+  transition:
+    all .2s ease;
 }
 
+
 .modal-ok-btn:hover {
-  background: #e1e1e1;
+  background: #ffffff;
+
+  color: var(--accha-red);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(183, 28, 28, .16);
 }
 
 
@@ -681,7 +1025,7 @@
 
     transform:
       translateY(20px)
-      scale(0.96);
+      scale(.96);
   }
 
   to {
@@ -704,7 +1048,8 @@
   .agents-grid {
     grid-template-columns: 1fr;
 
-    padding: 25px 20px;
+    padding:
+      28px 22px 50px;
   }
 
 }
@@ -721,39 +1066,71 @@
 
     gap: 18px;
 
-    padding: 20px 12px;
+    padding:
+      20px 12px 40px;
   }
+
 
   .agent-card {
-    padding: 25px 20px;
+    padding: 27px 20px;
+
+    border-radius: 19px;
   }
 
+
   .agent-card h3 {
-    font-size: 24px;
+    font-size: 23px;
   }
+
+
+  .avatar-circle {
+    width: 95px;
+    height: 95px;
+  }
+
+
+  .stats {
+    padding: 14px 5px;
+  }
+
+
+  .stats strong {
+    font-size: 17px;
+  }
+
+
+  .stats small {
+    font-size: 10px;
+  }
+
 
   .agent-modal-overlay {
     padding: 10px;
   }
+
 
   .agent-detail-modal {
     width: 100%;
 
     max-height: 92vh;
 
-    padding: 30px 18px 22px;
+    padding:
+      30px 18px 22px;
 
-    border-radius: 19px;
+    border-radius: 20px;
   }
+
 
   .modal-avatar {
     width: 90px;
     height: 90px;
   }
 
+
   .agent-detail-modal h2 {
     font-size: 24px;
   }
+
 
   .modal-details {
     grid-template-columns: 1fr;
@@ -761,10 +1138,6 @@
     gap: 12px;
   }
 
-  /*
-    Mobile mein bhi property list
-    full width rahegi
-  */
 
   .agent-property-links,
   .no-agent-properties {
@@ -780,166 +1153,32 @@
 
 @media (max-width: 400px) {
 
-  .agent-card {
-    padding: 23px 16px;
+  .agents-grid {
+    padding-left: 8px;
+    padding-right: 8px;
   }
+
+
+  .agent-card {
+    padding:
+      24px 15px;
+  }
+
 
   .avatar-circle {
-    width: 90px;
-    height: 90px;
+    width: 88px;
+    height: 88px;
   }
+
 
   .agent-card h3 {
-    font-size: 22px;
+    font-size: 21px;
   }
+
 
   .stats {
-    padding: 15px 5px;
+    padding:
+      13px 2px;
   }
 
-}
-
-/* =====================================================
-   AGENT AVATAR
-===================================================== */
-
-.avatar-circle {
-  width: 100px;
-  height: 100px;
-
-  margin: 0 auto 15px;
-
-  border-radius: 50%;
-
-  border: 3px solid #d4af37;
-
-  overflow: hidden;
-
-  background: linear-gradient(
-    135deg,
-    #f7f1df,
-    #ead7a0
-  );
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-sizing: border-box;
-}
-
-
-/* Actual Image */
-
-.avatar-circle img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  display: block;
-}
-
-
-/* =====================================================
-   INITIAL AVATAR
-===================================================== */
-
-.initial-avatar {
-
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  font-size: 32px;
-
-  font-weight: 700;
-
-  color: #5a4210;
-
-  text-transform: none;
-
-  user-select: none;
-}
-
-
-/* =====================================================
-   VERIFIED
-===================================================== */
-
-.verified-badge {
-  color: #d4af37;
-
-  font-size: 17px;
-
-  margin-left: 5px;
-}
-
-
-/* =====================================================
-   MODAL AVATAR
-===================================================== */
-
-.modal-avatar {
-
-  width: 105px;
-  height: 105px;
-
-  margin: 0 auto 18px;
-
-  border-radius: 50%;
-
-  overflow: hidden;
-
-  border: 3px solid #b18a32;
-
-  background: linear-gradient(
-    135deg,
-    #f7f1df,
-    #ead7a0
-  );
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-}
-
-
-.modal-avatar img {
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  display: block;
-}
-
-
-/* =====================================================
-   MODAL INITIALS
-===================================================== */
-
-.modal-initial-avatar {
-
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  font-size: 36px;
-
-  font-weight: 700;
-
-  color: #5a4210;
-
-  user-select: none;
 }

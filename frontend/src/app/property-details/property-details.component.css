@@ -1875,3 +1875,799 @@
     opacity: 0.65;
   }
 }
+
+ /* =========================================================
+    ACCHASOLUTION PROPERTY DETAILS
+    RED + WHITE MODERN THEME
+    BUILD ONCE → CHANGE EVERYWHERE
+ ========================================================= */
+
+ :host {
+   --pd-red: #b71c1c;
+   --pd-deep-red: #8e0000;
+   --pd-bright-red: #d32f2f;
+   --pd-light-red: #fdecec;
+   --pd-soft-red: #fff7f7;
+   --pd-white: #ffffff;
+   --pd-text: #5b0f0f;
+   --pd-muted: #755858;
+   --pd-border: #efd1d1;
+ }
+
+ .details-page-wrapper {
+   background:
+     linear-gradient(
+       180deg,
+       var(--pd-red) 0,
+       var(--pd-red) 260px,
+       #fff 260px,
+       #fff 100%
+     );
+
+   padding-bottom: 80px;
+ }
+
+ /* HERO */
+
+ .luxury-hero {
+   height: 500px;
+   border-bottom: 4px solid var(--pd-red);
+ }
+
+ .luxury-hero::after {
+   background:
+     linear-gradient(
+       to bottom,
+       rgba(91, 15, 15, .05) 0%,
+       rgba(91, 15, 15, .18) 45%,
+       rgba(91, 15, 15, .82) 100%
+     );
+ }
+
+ .hero-overlay-title h1 {
+   font-family: "Manrope", Arial, sans-serif;
+   font-size: 42px;
+   font-weight: 800;
+ }
+
+ .id-badge-details {
+   background: var(--pd-red);
+   color: var(--pd-white);
+   border: 1px solid rgba(255,255,255,.35);
+ }
+
+ .hero-direct-link {
+   background: var(--pd-white);
+   border: 1px solid var(--pd-white);
+   color: var(--pd-deep-red);
+ }
+
+ .hero-direct-link:hover {
+   background: var(--pd-deep-red);
+   border-color: var(--pd-deep-red);
+   color: var(--pd-white);
+ }
+
+
+ /* =========================================================
+    DETAIL CONTENT
+ ========================================================= */
+
+ .details-content-container {
+   position: relative;
+   z-index: 5;
+   max-width: 1100px;
+   margin: 40px auto 0;
+ }
+
+ .detail-section {
+   background: var(--pd-white);
+   border: 1px solid var(--pd-border);
+   border-radius: 14px;
+   padding: 28px;
+   margin-bottom: 22px;
+
+   box-shadow:
+     0 8px 28px rgba(91,15,15,.07);
+ }
+
+ .detail-section h2 {
+   font-family: "Manrope", Arial, sans-serif;
+   font-size: 20px;
+   font-weight: 800;
+   color: var(--pd-text);
+ }
+
+ .detail-section h2::after {
+   width: 48px;
+   height: 3px;
+   background: var(--pd-red);
+ }
+
+
+ /* =========================================================
+    CORE TABLE
+ ========================================================= */
+
+ .premium-details-table tr {
+   border-bottom: 1px solid #f3dddd;
+ }
+
+ .premium-details-table td {
+   color: var(--pd-text);
+ }
+
+ .premium-details-table td strong {
+   color: var(--pd-red);
+ }
+
+
+ /* =========================================================
+    AMENITIES
+ ========================================================= */
+
+ .luxury-pill {
+   background: var(--pd-soft-red);
+   border: 1px solid var(--pd-border);
+   color: var(--pd-text);
+ }
+
+ .luxury-pill:hover {
+   background: var(--pd-red);
+   color: var(--pd-white);
+   border-color: var(--pd-red);
+ }
+
+
+ /* =========================================================
+    LOCATION
+ ========================================================= */
+
+ .status-text {
+   color: var(--pd-text);
+ }
+
+ .geo-specs {
+   background: var(--pd-soft-red);
+   border-left: 4px solid var(--pd-red);
+   color: var(--pd-text);
+ }
+
+
+ /* =========================================================
+    GALLERY
+ ========================================================= */
+
+ .active-slide-box {
+   background: var(--pd-deep-red);
+ }
+
+ .nav-arrow {
+   background: rgba(91,15,15,.78);
+ }
+
+ .nav-arrow:hover {
+   background: var(--pd-red);
+   color: var(--pd-white);
+ }
+
+ .mini-thumb-card:hover,
+ .mini-thumb-card.active-thumb {
+   border-color: var(--pd-red);
+ }
+
+
+ /* =========================================================
+    AGENT
+ ========================================================= */
+
+ .listed-agent-card {
+   background: var(--pd-soft-red);
+   border: 1px solid var(--pd-border);
+ }
+
+ .agent-avatar {
+   background:
+     linear-gradient(
+       135deg,
+       var(--pd-deep-red),
+       var(--pd-red)
+     );
+ }
+
+ .agent-info h3 {
+   color: var(--pd-text);
+ }
+
+ .agent-info p {
+   color: var(--pd-muted);
+ }
+
+ .verified-agent {
+   background: var(--pd-light-red);
+   color: var(--pd-red);
+ }
+
+
+ /* =========================================================
+    RATING
+ ========================================================= */
+
+ .score-badge-box {
+   background:
+     linear-gradient(
+       145deg,
+       var(--pd-deep-red),
+       var(--pd-red)
+     );
+ }
+
+ .big-score-number {
+   color: var(--pd-white);
+ }
+
+ .stars-row-gold {
+   color: #ffffff;
+ }
+
+ .param-name,
+ .param-numeric {
+   color: var(--pd-text);
+ }
+
+ .progress-fill-gold {
+   background:
+     linear-gradient(
+       to right,
+       var(--pd-deep-red),
+       var(--pd-red),
+       var(--pd-bright-red)
+     );
+ }
+
+
+ /* =========================================================
+    LOADING
+ ========================================================= */
+
+ .property-loading-message {
+   background: var(--pd-white);
+   border: 1px solid var(--pd-border);
+ }
+
+ .property-loading-message .no-properties-icon {
+   background: var(--pd-light-red);
+   border-color: var(--pd-border);
+ }
+
+ .property-loading-message .no-properties-icon i,
+ .property-loading-message h3 {
+   color: var(--pd-red);
+ }
+
+ .property-loading-message p {
+   color: var(--pd-muted);
+ }
+
+/* =========================================================
+   ACCHASOLUTION PROPERTY DETAILS
+   WHITE PAGE + RED BOXES
+   BUILD ONCE → CHANGE EVERYWHERE
+   ========================================================= */
+
+:host {
+  --pd-red: #b71c1c;
+  --pd-deep-red: #8e0000;
+  --pd-bright-red: #d32f2f;
+  --pd-light-red: #fdecec;
+  --pd-white: #ffffff;
+  --pd-text: #ffffff;
+  --pd-border: #d32f2f;
+}
+
+
+/* =========================================================
+   FULL PAGE BACKGROUND
+   ========================================================= */
+
+.details-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+
+  background: #ffffff !important;
+
+  padding-bottom: 80px;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.luxury-hero {
+  border-bottom: 5px solid var(--pd-red);
+}
+
+.luxury-hero::after {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(91, 15, 15, 0.20) 45%,
+      rgba(91, 15, 15, 0.85) 100%
+    ) !important;
+}
+
+
+/* =========================================================
+   HERO TEXT
+   ========================================================= */
+
+.hero-overlay-title h1 {
+  color: #ffffff !important;
+  font-family: "Manrope", Arial, sans-serif;
+  font-weight: 800;
+}
+
+.id-badge-details {
+  background: var(--pd-red) !important;
+  color: #ffffff !important;
+  border-color: var(--pd-red) !important;
+}
+
+.hero-direct-link {
+  background: #ffffff !important;
+  color: var(--pd-deep-red) !important;
+  border-color: #ffffff !important;
+}
+
+.hero-direct-link:hover {
+  background: var(--pd-deep-red) !important;
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   CONTENT CONTAINER
+   ========================================================= */
+
+.details-content-container {
+  max-width: 1100px;
+  margin: 40px auto 0;
+}
+
+
+/* =========================================================
+   ALL MAIN BOXES = RED
+   ========================================================= */
+
+.detail-section {
+  width: 100%;
+
+  background: var(--pd-red) !important;
+
+  border: 1px solid var(--pd-bright-red) !important;
+
+  border-radius: 16px;
+
+  padding: 28px;
+
+  margin-bottom: 22px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 10px 30px rgba(183, 28, 28, 0.20) !important;
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+   ========================================================= */
+
+.detail-section h2 {
+  color: #ffffff !important;
+
+  font-family: "Manrope", Arial, sans-serif;
+
+  font-size: 20px;
+
+  font-weight: 800;
+}
+
+.detail-section h2::after {
+  background: #ffffff !important;
+}
+
+
+/* =========================================================
+   OVERVIEW / DESCRIPTION
+   ========================================================= */
+
+.rich-text-content {
+  color: #ffffff !important;
+
+  font-family:
+    "Manrope",
+    Arial,
+    sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.65;
+}
+
+.rich-text-content p,
+.rich-text-content li {
+  color: #ffffff !important;
+
+  font-size: 14px;
+
+  line-height: 1.65;
+}
+
+.rich-text-content h1,
+.rich-text-content h2,
+.rich-text-content h3,
+.rich-text-content h4 {
+  color: #ffffff !important;
+}
+
+.rich-text-content h3 {
+  border-left-color: #ffffff !important;
+}
+
+.rich-text-content h3::before {
+  background: #ffffff !important;
+}
+
+.rich-text-content strong,
+.rich-text-content b {
+  color: #ffffff !important;
+}
+
+.rich-text-content ul li::before {
+  color: #ffffff !important;
+}
+
+.rich-text-content a {
+  color: #ffffff !important;
+  text-decoration-color: rgba(255,255,255,.65);
+}
+
+.rich-text-content a:hover {
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   DESCRIPTION BLOCKQUOTE
+   ========================================================= */
+
+.rich-text-content blockquote {
+  background: rgba(255,255,255,.10) !important;
+
+  border-left-color: #ffffff !important;
+
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   DESCRIPTION TABLE
+   ========================================================= */
+
+.rich-text-content table {
+  border-color: rgba(255,255,255,.35) !important;
+}
+
+.rich-text-content th,
+.rich-text-content td {
+  color: #ffffff !important;
+
+  border-bottom-color: rgba(255,255,255,.25) !important;
+}
+
+.rich-text-content th {
+  background: rgba(255,255,255,.12) !important;
+}
+
+
+/* =========================================================
+   CORE SPECIFICATIONS
+   ========================================================= */
+
+.premium-details-table tr {
+  border-bottom-color: rgba(255,255,255,.25) !important;
+}
+
+.premium-details-table td {
+  color: #ffffff !important;
+}
+
+.premium-details-table td strong {
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   AMENITIES
+   ========================================================= */
+
+.luxury-pill {
+  background: #ffffff !important;
+
+  border: 1px solid #ffffff !important;
+
+  color: var(--pd-red) !important;
+}
+
+.luxury-pill:hover {
+  background: var(--pd-deep-red) !important;
+
+  color: #ffffff !important;
+
+  border-color: #ffffff !important;
+}
+
+
+/* =========================================================
+   LOCATION
+   ========================================================= */
+
+.status-text {
+  color: #ffffff !important;
+}
+
+.geo-specs {
+  background: rgba(255,255,255,.10) !important;
+
+  border-left-color: #ffffff !important;
+
+  color: #ffffff !important;
+}
+
+.geo-specs strong {
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+
+.active-slide-box {
+  background: var(--pd-deep-red) !important;
+}
+
+.nav-arrow {
+  background: rgba(255,255,255,.18) !important;
+
+  color: #ffffff !important;
+}
+
+.nav-arrow:hover {
+  background: #ffffff !important;
+
+  color: var(--pd-red) !important;
+}
+
+.mini-thumb-card:hover,
+.mini-thumb-card.active-thumb {
+  border-color: var(--pd-red) !important;
+}
+
+
+/* =========================================================
+   AGENT CARD
+   ========================================================= */
+
+.listed-agent-card {
+  background: rgba(255,255,255,.10) !important;
+
+  border: 1px solid rgba(255,255,255,.30) !important;
+}
+
+.agent-avatar {
+  background: #ffffff !important;
+
+  color: var(--pd-red) !important;
+}
+
+.agent-info h3,
+.agent-info p {
+  color: #ffffff !important;
+}
+
+.verified-agent {
+  background: #ffffff !important;
+
+  color: var(--pd-red) !important;
+}
+
+
+/* =========================================================
+   AGENT BUTTONS
+   ========================================================= */
+
+.agent-call-btn,
+.agent-whatsapp-btn {
+  background: #ffffff !important;
+
+  color: var(--pd-red) !important;
+}
+
+.agent-call-btn:hover,
+.agent-whatsapp-btn:hover {
+  background: var(--pd-deep-red) !important;
+
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   RATINGS
+   ========================================================= */
+
+.score-badge-box {
+  background: #8e0000 !important;
+
+  box-shadow:
+    0 10px 25px rgba(91,15,15,.20) !important;
+}
+
+.big-score-number,
+.stars-row-gold {
+  color: #ffffff !important;
+}
+
+.total-reviews-count {
+  color: #ffe5e5 !important;
+}
+
+.param-name,
+.param-numeric {
+  color: #ffffff !important;
+}
+
+.progress-track-bar {
+  background: rgba(255,255,255,.25) !important;
+}
+
+.progress-fill-gold {
+  background: #ffffff !important;
+}
+
+
+/* =========================================================
+   PRICE ANALYSIS
+   ========================================================= */
+
+.analysis-meter-wrapper {
+  color: #ffffff;
+}
+
+.meter-bar-line {
+  background: rgba(255,255,255,.30) !important;
+}
+
+.meter-pointer {
+  border-color: var(--pd-deep-red) !important;
+
+  background: #ffffff !important;
+}
+
+.label-box {
+  background: #ffffff !important;
+
+  border-color: #ffffff !important;
+
+  color: var(--pd-red) !important;
+}
+
+.label-box.active-status {
+  background: #ffffff !important;
+
+  color: var(--pd-red) !important;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.property-loading-message {
+  background: var(--pd-red) !important;
+
+  border-color: var(--pd-bright-red) !important;
+}
+
+.property-loading-message .no-properties-icon {
+  background: #ffffff !important;
+
+  border-color: #ffffff !important;
+}
+
+.property-loading-message .no-properties-icon i,
+.property-loading-message h3,
+.property-loading-message p {
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   OLD PERMALINK — RED/WHITE
+   ========================================================= */
+
+.property-direct-link-section {
+  background: #ffffff !important;
+
+  border-bottom-color: var(--pd-red) !important;
+}
+
+.direct-link-label {
+  color: var(--pd-red) !important;
+}
+
+.direct-link-text p {
+  color: var(--pd-red) !important;
+}
+
+.permalink-input {
+  background: #ffffff !important;
+
+  border-color: var(--pd-red) !important;
+
+  color: var(--pd-red) !important;
+}
+
+.permalink-copy-btn {
+  background: var(--pd-red) !important;
+
+  color: #ffffff !important;
+}
+
+.permalink-copy-btn:hover {
+  background: var(--pd-deep-red) !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .details-page-wrapper {
+    background: #ffffff !important;
+    padding-bottom: 40px;
+  }
+
+  .detail-section {
+    background: var(--pd-red) !important;
+    padding: 22px;
+  }
+
+  .detail-section h2 {
+    font-size: 18px;
+  }
+
+  .rich-text-content,
+  .rich-text-content p,
+  .rich-text-content li {
+    font-size: 13.5px;
+  }
+}
+
+
+/* PLEASE WAIT ICON — RED */
+.property-loading-message .no-properties-icon i {
+  color: #b71c1c !important;
+  animation: propertyHourglass 1.4s ease-in-out infinite;
+}
+
+/* Icon ka white box same rahega */
+.property-loading-message .no-properties-icon {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+}

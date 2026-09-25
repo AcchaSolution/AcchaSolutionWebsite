@@ -222,10 +222,62 @@ export class AgentsViewComponent implements OnInit {
       next: (properties: any[]) => {
 
         this.agentProperties =
-          properties.filter(
-            (property: any) =>
-              property.postedById === agentId
-          );
+          properties
+            .filter(
+              (property: any) =>
+                property.postedById === agentId
+            )
+            .map(
+              (property: any) => {
+
+                /*
+                 * Property ID ko remove nahi kar rahe.
+                 * Existing functionality ke liye id available rahegi.
+                 *
+                 * Lekin ab property name/permalink bhi
+                 * directly available rahega.
+                 */
+
+                const propertyName =
+                  property.name ||
+                  property.title ||
+                  property.propertyName ||
+                  'Property';
+
+                const propertyPermalink =
+                  property.permalink ||
+                  this.createPropertySlug(propertyName);
+
+                return {
+
+                  ...property,
+
+                  // Original ID preserved
+                  propertyId:
+                    property._id ||
+                    property.id ||
+                    property.propertyId ||
+                    '',
+
+                  // Property ka display name
+                  propertyName:
+
+                    propertyName,
+
+                  // SEO-friendly property URL/slug
+                  propertyPermalink:
+
+                    propertyPermalink,
+
+                  // HTML me directly use karne ke liye
+                  propertyRoute:
+
+                    propertyPermalink
+
+                };
+
+              }
+            );
 
         console.log(
           'AGENT SELECTED:',
@@ -251,6 +303,26 @@ export class AgentsViewComponent implements OnInit {
       }
 
     });
+
+  }
+
+  // =====================================================
+  // CREATE PROPERTY SLUG
+  // =====================================================
+
+  createPropertySlug(name: string): string {
+
+    if (!name) {
+      return '';
+    }
+
+    return name
+      .toString()
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
 
   }
 
@@ -282,22 +354,27 @@ export class AgentsViewComponent implements OnInit {
 
   }
 
+  // =====================================================
+  // GET INITIALS
+  // =====================================================
 
   getInitials(name: string): string {
 
-  if (!name) {
-    return 'A';
+    if (!name) {
+      return 'A';
+    }
+
+    const cleanName = name.trim();
+
+    if (cleanName.length === 1) {
+      return cleanName.toUpperCase();
+    }
+
+    return (
+      cleanName.charAt(0).toUpperCase() +
+      cleanName.charAt(1).toLowerCase()
+    );
+
   }
 
-  const cleanName = name.trim();
-
-  if (cleanName.length === 1) {
-    return cleanName.toUpperCase();
-  }
-
-  return (
-    cleanName.charAt(0).toUpperCase() +
-    cleanName.charAt(1).toLowerCase()
-  );
-}
 }

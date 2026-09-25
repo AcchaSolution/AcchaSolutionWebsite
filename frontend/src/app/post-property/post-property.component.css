@@ -1,164 +1,1620 @@
+/* ============================================================
+   ACCHASOLUTION — POST PROPERTY
+   MODERN WESTERN PROPTECH / REAL ESTATE STYLE
+   RED + WHITE
+   ============================================================ */
+
+
+/* ============================================================
+   01. GLOBAL PAGE
+   ============================================================ */
+
 :host {
   display: block;
   min-height: 100vh;
-  /* Cream & Sand Gradient Background */
-background: linear-gradient(135deg, #e6d5b8 50%, #f9e7d2 50%) !important;
-font-family: 'Poppins', sans-serif;
+
+  font-family: 'Poppins', sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 8% 15%,
+      rgba(255, 255, 255, 0.12) 0,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(255, 255, 255, 0.08) 0,
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #8E0000 0%,
+      #B71C1C 48%,
+      #D32F2F 100%
+    ) !important;
+
+  color: #FFFFFF;
 }
+
+
+/* ============================================================
+   02. MAIN LAYOUT
+   ============================================================ */
 
 .landing-page-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 120px;
-  padding: 40px 10%;
+  position: relative;
+
   min-height: 100vh;
+  width: 100%;
+
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 470px;
+
+  align-items: center;
+
+  gap: 90px;
+
+  padding: 80px 8%;
+
+  overflow: hidden;
+
+  background: transparent !important;
 }
 
-.info-side { flex: 1; max-width: 600px; }
 
-/* Luxurious Playfair Font for Headings */
+/* ============================================================
+   03. BACKGROUND DECORATIVE CIRCLE
+   ============================================================ */
+
+.landing-page-container::before {
+  content: '';
+
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+
+  right: -180px;
+  top: -180px;
+
+  pointer-events: none;
+}
+
+
+.landing-page-container::after {
+  content: '';
+
+  position: absolute;
+
+  width: 320px;
+  height: 320px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  left: -180px;
+  bottom: -130px;
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   04. LEFT CONTENT
+   ============================================================ */
+
+.info-side {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  max-width: 680px;
+
+  color: #FFFFFF;
+}
+
+
+/* ============================================================
+   05. MODERN EYEBROW
+   ============================================================ */
+
+.info-side::before {
+  content: 'POST YOUR PROPERTY';
+
+  display: inline-flex;
+
+  align-items: center;
+
+  margin-bottom: 24px;
+
+  padding: 8px 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  border-radius: 100px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: #FFFFFF;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  backdrop-filter: blur(8px);
+}
+
+
+/* ============================================================
+   06. MAIN HEADING
+   ============================================================ */
+
 .info-side h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  line-height: 1.1;
-  color: #3E2723; /* Deep Rich Chocolate */
-  margin-bottom: 25px;
-  letter-spacing: -0.5px;
+  margin: 0 0 28px;
+
+  max-width: 680px;
+
+  font-family: 'Poppins', sans-serif;
+
+  font-size: clamp(2.6rem, 4.4vw, 4.6rem);
+
+  line-height: 1.02;
+
+  letter-spacing: -2.5px;
+
+  font-weight: 800;
+
+  color: #FFFFFF !important;
 }
 
-.info-side ul { 
-  list-style: none; 
-  padding: 0; 
-  color: #5D4037; /* Chocolate Muted Text */
-  font-size: 1rem; 
+
+/* ============================================================
+   07. FEATURE LIST
+   ============================================================ */
+
+.info-side ul {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  list-style: none;
+
+  margin: 0 0 35px;
+
+  padding: 0;
+
+  color: #FFFFFF !important;
+
+  font-size: 0.98rem;
+
+  font-weight: 500;
 }
 
-.info-side ul li { margin-bottom: 15px; }
 
-.hero-img { 
-  width: 120%; 
-  max-width: 1400px; 
-  margin-top: -40px; 
-  border-radius: 20px; 
+.info-side ul li {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 0;
+
+  color: #FFFFFF !important;
+
+  line-height: 1.5;
 }
+
+
+/* ============================================================
+   08. HERO IMAGE
+   ============================================================ */
+
+.hero-img {
+  display: block;
+
+  width: min(100%, 620px);
+
+  height: auto;
+
+  margin-top: 25px;
+
+  border-radius: 24px;
+
+  object-fit: cover;
+
+  filter:
+    drop-shadow(0 25px 35px rgba(60, 0, 0, 0.25));
+
+  transition:
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+
+.hero-img:hover {
+  transform: translateY(-5px);
+
+  filter:
+    drop-shadow(0 30px 45px rgba(60, 0, 0, 0.32));
+}
+
+
+/* ============================================================
+   09. FORM CARD — FLOATING WESTERN STYLE
+   ============================================================ */
 
 .form-card {
-  flex: 0 0 500px;
-  background: linear-gradient(135deg, #bcaa85 0%, #f9e7d2 100%) !important;
-  padding: 60px;
-  border-radius: 40px;
-  box-shadow: 0 30px 60px rgba(62, 39, 35, 0.1);
-  border: 1px solid #D7CCC8;
+  position: relative;
+
+  z-index: 5;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 38px;
+
+  background: rgba(255, 255, 255, 0.97) !important;
+
+  color: #8E0000;
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: 30px;
+
+  box-shadow:
+    0 35px 90px rgba(65, 0, 0, 0.30),
+    0 8px 30px rgba(65, 0, 0, 0.12);
+
+  backdrop-filter: blur(18px);
+
+  overflow: hidden;
 }
 
-/* Chocolate Labels */
-.input-group label { 
-  display: block; 
-  margin-bottom: 12px; 
-  color: #5D4037; 
-  font-weight: 600;
+
+/* Top red accent */
+
+.form-card::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #8E0000,
+      #B71C1C,
+      #D32F2F
+    );
+}
+
+
+/* ============================================================
+   10. FORM HEADING
+   ============================================================ */
+
+.form-card h2 {
+  margin: 0 0 8px !important;
+
+  color: #8E0000 !important;
+
+  font-size: 1.75rem;
+
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  letter-spacing: -0.7px;
+}
+
+
+.form-card > p {
+  margin: 0 0 28px !important;
+
+  color: #777777 !important;
+
+  font-size: 0.88rem;
+
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   11. INPUT GROUP
+   ============================================================ */
+
+.input-group {
+  margin-bottom: 18px;
+
+  width: 100%;
+}
+
+
+.input-group label {
+  display: block;
+
+  margin: 0 0 8px;
+
+  color: #8E0000 !important;
+
+  font-size: 0.70rem;
+
+  font-weight: 800;
+
+  letter-spacing: 1.1px;
+
   text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  margin-top: 10px;
 }
 
-input, select {
+
+/* ============================================================
+   12. INPUTS
+   ============================================================ */
+
+input,
+select {
+  display: block;
+
   width: 100%;
-  padding: 20px;
-  border: 2px solid #EFEBE9;
-  border-radius: 20px;
-  font-size: 16px;
-  background: #FDFBF9;
-  color: #3E2723;
-  margin-bottom: 10px;
+
+  box-sizing: border-box;
+
+  min-height: 54px;
+
+  padding: 14px 16px;
+
+  background: #FFFFFF !important;
+
+  color: #3A1717 !important;
+
+  border: 1.5px solid #E8C5C5;
+
+  border-radius: 14px;
+
+  outline: none;
+
+  font-family: 'Poppins', sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
 }
 
-/* Rich Chocolate Button */
+
+input::placeholder {
+  color: #A0A0A0;
+
+  opacity: 1;
+}
+
+
+input:hover,
+select:hover {
+  border-color: #D32F2F;
+}
+
+
+input:focus,
+select:focus {
+  border-color: #B71C1C;
+
+  box-shadow:
+    0 0 0 4px rgba(183, 28, 28, 0.08);
+
+  transform: translateY(-1px);
+}
+
+
+select option {
+  background: #FFFFFF;
+
+  color: #3A1717;
+}
+
+
+/* ============================================================
+   13. START POSTING BUTTON
+   ============================================================ */
+
 .btn-start {
-  width: 100%;
-  padding: 22px;
-    background: linear-gradient(135deg, #5D4037 20%, #c9a491 50%) !important;
+  position: relative;
 
-  color: #f7ecec;
+  width: 100%;
+
+  min-height: 56px;
+
+  margin-top: 10px;
+
+  padding: 15px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8E0000,
+      #B71C1C 55%,
+      #D32F2F
+    ) !important;
+
+  color: #FFFFFF !important;
+
   border: none;
-  border-radius: 20px;
-  font-size: 1.1rem;
-  font-weight: 600;
+
+  border-radius: 14px;
+
+  font-family: 'Poppins', sans-serif;
+
+  font-size: 0.95rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+
   cursor: pointer;
-  transition: all 0.4s ease;
-  margin-top: 30px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 12px 25px rgba(142, 0, 0, 0.20);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
+
+
+.btn-start::after {
+  content: '→';
+
+  margin-left: 9px;
+
+  font-size: 1.1rem;
+
+  transition: transform 0.25s ease;
+}
+
 
 .btn-start:hover {
-  background: #f5c8c0; /* Darker Chocolate on Hover */
-  transform: translateY(-7px);
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 18px 32px rgba(142, 0, 0, 0.30);
 }
 
-@media (max-width: 768px) {
-  .landing-page-container { flex-direction: column; gap: 40px; padding: 20px; }
-  .form-card { flex: 0 0 100%; width: 100%; }
+
+.btn-start:hover::after {
+  transform: translateX(5px);
 }
 
-/* Modal Overlay: Background ko blur aur dark karein */
+
+.btn-start:active {
+  transform: translateY(0);
+}
+
+
+.btn-start:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* ============================================================
+   14. OTP MODAL OVERLAY
+   ============================================================ */
+
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Dark tint */
-  backdrop-filter: blur(5px); /* Professional blur effect */
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+
   display: flex;
+
   justify-content: center;
   align-items: center;
+
+  padding: 20px;
+
+  background:
+    rgba(55, 0, 0, 0.72) !important;
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+
   z-index: 9999;
 }
 
-/* Modal Card: White neat card */
+
+/* ============================================================
+   15. OTP CARD
+   ============================================================ */
+
 .modal-content {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 20px;
-  width: 380px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  position: relative;
+
+  width: 100%;
+
+  max-width: 410px;
+
+  box-sizing: border-box;
+
+  padding: 36px;
+
+  background: #FFFFFF !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  border-radius: 26px;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.35);
+
   text-align: center;
+
   display: flex;
+
   flex-direction: column;
-  gap: 15px;
+
+  gap: 14px;
+
+  animation: acchaModalIn 0.28s ease-out;
 }
+
+
+@keyframes acchaModalIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(15px)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* ============================================================
+   16. OTP HEADING
+   ============================================================ */
 
 .modal-content h2 {
-  color: #5D4037; /* Brown text */
-  margin-bottom: 10px;
+  margin: 0;
+
+  color: #8E0000 !important;
+
+  font-size: 1.65rem;
+
+  font-weight: 800;
+
+  letter-spacing: -0.5px;
 }
 
-/* OTP Input Style */
+
+.modal-content p {
+  margin: 0;
+
+  color: #777777 !important;
+
+  font-size: 0.88rem;
+
+  line-height: 1.5;
+}
+
+
+.modal-content strong {
+  color: #B71C1C !important;
+
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   17. OTP INPUT
+   ============================================================ */
+
 .otp-input {
   width: 100%;
-  padding: 15px;
-  font-size: 1.2rem;
-  text-align: center;
-  border: 2px solid #D7CCC8;
-  border-radius: 12px;
-  letter-spacing: 8px; /* Letters ke beech space */
+
+  box-sizing: border-box;
+
+  min-height: 58px;
+
+  padding: 12px 15px;
+
+  margin-top: 5px;
+
+  background: #FFFFFF !important;
+
+  color: #8E0000 !important;
+
+  border: 1.5px solid #E8C5C5;
+
+  border-radius: 14px;
+
   outline: none;
+
+  text-align: center;
+
+  font-family: 'Poppins', sans-serif;
+
+  font-size: 1.4rem;
+
+  font-weight: 700;
+
+  letter-spacing: 8px;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-/* Verify Button Style */
-.btn-start {
-  background: #5D4037;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
+
+.otp-input:focus {
+  border-color: #B71C1C;
+
+  box-shadow:
+    0 0 0 4px rgba(183, 28, 28, 0.08);
 }
 
-/* Cancel Button */
+
+/* ============================================================
+   18. TIMER
+   ============================================================ */
+
+.timer-section {
+  min-height: 25px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+
+.timer-section p {
+  color: #888888 !important;
+
+  font-size: 0.82rem;
+}
+
+
+/* ============================================================
+   19. CANCEL BUTTON
+   ============================================================ */
+
 .btn-cancel {
-  background: transparent;
-  color: #8D6E63;
-  border: none;
+  width: 100%;
+
+  min-height: 48px;
+
+  padding: 12px 18px;
+
+  background: #FFFFFF !important;
+
+  color: #B71C1C !important;
+
+  border: 1.5px solid #B71C1C;
+
+  border-radius: 13px;
+
+  font-family: 'Poppins', sans-serif;
+
+  font-size: 0.88rem;
+
+  font-weight: 700;
+
   cursor: pointer;
-  font-size: 0.9rem;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease;
+}
+
+
+.btn-cancel:hover {
+  background: #B71C1C !important;
+
+  color: #FFFFFF !important;
+
+  transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   20. RESEND BUTTON
+   ============================================================ */
+
+.timer-section .btn-cancel {
+  width: auto;
+
+  min-height: auto;
+
+  padding: 7px 14px;
+
+  background: transparent !important;
+
+  color: #B71C1C !important;
+
+  border: none;
+}
+
+
+.timer-section .btn-cancel:hover {
+  background: #FDECEC !important;
+
+  color: #8E0000 !important;
+
+  transform: none;
+}
+
+
+/* ============================================================
+   21. TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .landing-page-container {
+    grid-template-columns:
+      minmax(0, 1fr)
+      410px;
+
+    gap: 45px;
+
+    padding: 60px 5%;
+  }
+
+
+  .info-side h1 {
+    font-size: clamp(2.4rem, 5vw, 3.5rem);
+  }
+
+
+  .form-card {
+    padding: 32px;
+  }
+}
+
+
+/* ============================================================
+   22. MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .landing-page-container {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 38px;
+
+    min-height: auto;
+
+    padding: 55px 20px 45px;
+  }
+
+
+  .info-side {
+    max-width: 100%;
+
+    text-align: center;
+  }
+
+
+  .info-side::before {
+    margin-bottom: 18px;
+  }
+
+
+  .info-side h1 {
+    max-width: 600px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: clamp(2rem, 8vw, 3rem);
+
+    line-height: 1.08;
+
+    letter-spacing: -1.3px;
+  }
+
+
+  .info-side ul {
+    display: inline-flex;
+
+    text-align: left;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 0.88rem;
+  }
+
+
+  .hero-img {
+    width: 100%;
+
+    max-width: 560px;
+
+    margin: 18px auto 0;
+
+    border-radius: 20px;
+  }
+
+
+  .form-card {
+    width: 100%;
+
+    max-width: 520px;
+
+    margin: 0 auto;
+
+    padding: 30px 24px;
+
+    border-radius: 24px;
+  }
+}
+
+
+/* ============================================================
+   23. SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+  .landing-page-container {
+    gap: 30px;
+
+    padding:
+      42px
+      15px
+      35px;
+  }
+
+
+  .info-side::before {
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    padding: 7px 11px;
+  }
+
+
+  .info-side h1 {
+    font-size: 1.85rem;
+
+    letter-spacing: -0.8px;
+
+    margin-bottom: 20px;
+  }
+
+
+  .info-side ul {
+    width: 100%;
+
+    font-size: 0.82rem;
+
+    gap: 9px;
+  }
+
+
+  .info-side ul li {
+    gap: 7px;
+  }
+
+
+  .hero-img {
+    margin-top: 12px;
+
+    border-radius: 16px;
+  }
+
+
+  .form-card {
+    padding: 27px 18px;
+
+    border-radius: 20px;
+  }
+
+
+  .form-card h2 {
+    font-size: 1.4rem;
+  }
+
+
+  .form-card > p {
+    font-size: 0.82rem;
+
+    margin-bottom: 22px !important;
+  }
+
+
+  input,
+  select {
+    min-height: 51px;
+
+    padding: 13px;
+
+    font-size: 13px;
+
+    border-radius: 12px;
+  }
+
+
+  .btn-start {
+    min-height: 53px;
+
+    border-radius: 12px;
+  }
+
+
+  .modal-overlay {
+    padding: 15px;
+  }
+
+
+  .modal-content {
+    padding: 28px 19px;
+
+    border-radius: 21px;
+  }
+
+
+  .modal-content h2 {
+    font-size: 1.4rem;
+  }
+
+
+  .otp-input {
+    min-height: 54px;
+
+    font-size: 1.2rem;
+
+    letter-spacing: 6px;
+  }
+}
+
+
+/* ============================================================
+   24. EXTRA SMALL DEVICES
+   ============================================================ */
+
+@media (max-width: 360px) {
+
+  .landing-page-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+
+  .info-side h1 {
+    font-size: 1.6rem;
+  }
+
+
+  .form-card {
+    padding: 23px 15px;
+  }
+
+
+  .otp-input {
+    letter-spacing: 4px;
+  }
+}
+
+
+/* ============================================================
+   25. ACCESSIBILITY
+   ============================================================ */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.65);
+
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+   26. OVERFLOW PROTECTION
+   ============================================================ */
+
+.landing-page-container,
+.form-card,
+.modal-content {
+  overflow-wrap: anywhere;
+}
+
+
+/* ============================================================
+   END — ACCHASOLUTION MODERN POST PROPERTY
+   ============================================================ */
+
+/* ============================================================
+   POST PROPERTY — NEW LEFT SIDE ONLY
+   RIGHT FORM CARD REMAINS UNCHANGED
+   ============================================================ */
+
+
+/* ============================================================
+   01. LEFT SIDE CONTAINER
+   ============================================================ */
+
+.info-side {
+  position: relative;
+
+  max-width: 650px;
+
+  padding: 20px 0 30px;
+
+  color: #FFFFFF !important;
+}
+
+
+/* ============================================================
+   02. MODERN TOP LABEL
+   ============================================================ */
+
+.info-side::before {
+  content: 'ACCHASOLUTION  /  PROPERTY LISTING';
+
+  display: inline-block;
+
+  margin-bottom: 22px;
+
+  padding: 7px 14px;
+
+  border-left: 3px solid #FFFFFF;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: #FFFFFF;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   03. BIG EDITORIAL HEADING
+   ============================================================ */
+
+.info-side h1 {
+  position: relative;
+
+  margin: 0 0 30px;
+
+  max-width: 650px;
+
+  font-family: 'Poppins', sans-serif;
+
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+
+  line-height: 0.98;
+
+  font-weight: 800;
+
+  letter-spacing: -3px;
+
+  color: #FFFFFF !important;
+
+  text-transform: none;
+}
+
+
+/* Highlight first visual line */
+
+.info-side h1::after {
+  content: '';
+
+  display: block;
+
+  width: 85px;
+  height: 5px;
+
+  margin-top: 25px;
+
+  background: #FFFFFF;
+
+  border-radius: 10px;
+}
+
+
+/* ============================================================
+   04. BENEFIT LIST — MODERN CARDS
+   ============================================================ */
+
+.info-side ul {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  width: 100%;
+
+  margin: 0 0 30px;
+
+  padding: 0;
+
+  list-style: none;
+
+  color: #FFFFFF !important;
+}
+
+
+/* ============================================================
+   05. EACH BENEFIT
+   ============================================================ */
+
+.info-side ul li {
+  position: relative;
+
+  min-height: 90px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: flex-end;
+
+  padding: 17px 14px;
+
+  margin: 0 !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  color: #FFFFFF !important;
+
+  font-size: 12px;
+
+  line-height: 1.35;
+
+  font-weight: 600;
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+/* Number / visual marker */
+
+.info-side ul li::before {
+  content: '✓';
+
+  position: absolute;
+
+  top: 13px;
+  left: 14px;
+
+  width: 23px;
+  height: 23px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #FFFFFF;
+
+  color: #B71C1C;
+
+  font-size: 11px;
+
+  font-weight: 900;
+}
+
+
+/* Hover */
+
+.info-side ul li:hover {
+  transform: translateY(-5px);
+
+  background: rgba(255, 255, 255, 0.14);
+
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+
+/* ============================================================
+   06. HERO IMAGE — LARGE EDITORIAL VISUAL
+   ============================================================ */
+
+.hero-img {
+  position: relative;
+
+  display: block;
+
+  width: 92%;
+
+  max-width: 590px;
+
+  height: auto;
+
+  margin: 28px 0 0 20px;
+
+  border-radius: 24px;
+
+  object-fit: cover;
+
+  border: 8px solid rgba(255, 255, 255, 0.10);
+
+  box-shadow:
+    25px 25px 0 rgba(255, 255, 255, 0.08),
+    0 30px 60px rgba(50, 0, 0, 0.30);
+
+  transform: rotate(-1.5deg);
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+
+/* Image hover */
+
+.hero-img:hover {
+  transform:
+    rotate(0deg)
+    translateY(-7px);
+
+  box-shadow:
+    18px 18px 0 rgba(255, 255, 255, 0.10),
+    0 35px 70px rgba(50, 0, 0, 0.35);
+}
+
+
+/* ============================================================
+   07. DECORATIVE LINE
+   ============================================================ */
+
+.info-side {
+  isolation: isolate;
+}
+
+
+.info-side::after {
+  content: 'SELL  •  RENT  •  LEASE';
+
+  position: absolute;
+
+  right: -25px;
+  bottom: 5px;
+
+  color: rgba(255, 255, 255, 0.25);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  transform: rotate(-90deg);
+
+  transform-origin: right bottom;
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   08. TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .info-side {
+    max-width: 560px;
+  }
+
+
+  .info-side h1 {
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+
+    letter-spacing: -2px;
+  }
+
+
+  .info-side ul {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 8px;
+  }
+
+
+  .info-side ul li {
+    min-height: 85px;
+
+    padding: 15px 11px;
+
+    font-size: 11px;
+  }
+
+
+  .hero-img {
+    width: 90%;
+
+    margin-left: 12px;
+  }
+}
+
+
+/* ============================================================
+   09. MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .info-side {
+    width: 100%;
+
+    max-width: 100%;
+
+    padding: 5px 0 10px;
+
+    text-align: left;
+  }
+
+
+  .info-side::before {
+    margin-bottom: 18px;
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+  }
+
+
+  .info-side h1 {
+    max-width: 600px;
+
+    font-size: clamp(2rem, 9vw, 3rem);
+
+    line-height: 1.02;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 25px;
+  }
+
+
+  .info-side h1::after {
+    width: 65px;
+
+    height: 4px;
+
+    margin-top: 18px;
+  }
+
+
+  .info-side ul {
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+
+    margin-bottom: 25px;
+  }
+
+
+  .info-side ul li {
+    min-height: 60px;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding:
+      14px
+      14px
+      14px
+      50px;
+
+    font-size: 12px;
+  }
+
+
+  .info-side ul li::before {
+    top: 50%;
+
+    left: 15px;
+
+    transform: translateY(-50%);
+  }
+
+
+  .hero-img {
+    width: 94%;
+
+    max-width: 550px;
+
+    margin: 20px auto 0;
+
+    transform: rotate(-1deg);
+
+    border-radius: 20px;
+
+    border-width: 6px;
+
+    box-shadow:
+      12px 12px 0 rgba(255, 255, 255, 0.08),
+      0 25px 45px rgba(50, 0, 0, 0.28);
+  }
+
+
+  .info-side::after {
+    display: none;
+  }
+}
+
+
+/* ============================================================
+   10. SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+  .info-side::before {
+    padding: 6px 10px;
+
+    font-size: 8px;
+  }
+
+
+  .info-side h1 {
+    font-size: 1.9rem;
+
+    letter-spacing: -1px;
+  }
+
+
+  .info-side ul li {
+    min-height: 56px;
+
+    font-size: 11px;
+
+    border-radius: 13px;
+  }
+
+
+  .hero-img {
+    width: 92%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    border-radius: 17px;
+
+    box-shadow:
+      9px 9px 0 rgba(255, 255, 255, 0.08),
+      0 20px 40px rgba(50, 0, 0, 0.28);
+  }
+}
+
+
+/* ============================================================
+   END — LEFT SIDE MODERN DESIGN
+   ============================================================ */
+
+/* ============================================================
+   POST PROPERTY — FINAL SIZE & POSITION ADJUSTMENT
+   ============================================================ */
+
+
+/* 01. LEFT HEADING — SMALLER */
+
+.info-side h1 {
+  font-size: clamp(2.2rem, 3.5vw, 3.4rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -1.5px !important;
+  margin-bottom: 24px !important;
+}
+
+
+/* 02. RIGHT FORM — MOVE SLIGHTLY UP */
+
+.form-card {
+  transform: translateY(-35px);
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .info-side h1 {
+    font-size: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .form-card {
+    transform: translateY(-25px);
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .info-side h1 {
+    font-size: clamp(1.9rem, 7vw, 2.6rem) !important;
+    line-height: 1.08 !important;
+  }
+
+  .form-card {
+    transform: translateY(0);
+  }
 }

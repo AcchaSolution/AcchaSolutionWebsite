@@ -249,13 +249,14 @@
           *ngFor="let property of agentProperties"
         >
 
-          <a
-            [routerLink]="[
-              '/property-details',
-              property.id || property.uniqueId
-            ]"
-            (click)="closeAgentDetails()"
-          >
+<a
+  [routerLink]="[
+    '/properties',
+    property.permalink || createPropertySlug(property.name)
+  ]"
+  (click)="closeAgentDetails()"
+>
+
 
             <span class="property-name">
               {{ property.name || 'View Property' }}

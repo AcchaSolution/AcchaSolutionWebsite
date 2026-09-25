@@ -1,69 +1,110 @@
-<div class="login-wrapper">
+<div class="auth-page">
 
-  <div class="login-card">
+  <!-- =====================================================
+       LOGIN SCREEN
+       Completely separate design
+  ====================================================== -->
 
-    <!-- =====================================================
-         LEFT SIDE - ONLY LOGIN
-    ====================================================== -->
+  <section
+    class="login-screen"
+    *ngIf="activeTab === 'login'"
+  >
 
-    <div
-      class="card-left"
-      *ngIf="activeTab === 'login'"
-    >
+    <!-- TOP BRAND -->
+    <header class="auth-brand">
 
-      <div class="overlay-text">
 
-        <h2>
-          EXPLORE.<br>
-          LEARN. GROW.
-        </h2>
+      <div class="brand-copy">
+        <strong>AcchaSolution</strong>
+        <span>REAL ESTATE • PROPTECH</span>
+      </div>
+
+    </header>
+
+
+    <!-- LOGIN MAIN -->
+    <div class="login-main">
+
+      <!-- LEFT EDITORIAL AREA -->
+
+      <div class="login-intro">
+
+        <span class="eyebrow">
+           MEMBER ACCESS
+        </span>
+
+        <h1>
+          Your property
+          <br>
+          journey
+          <span>starts here.</span>
+        </h1>
 
         <p>
-          Join the elite network of real estate professionals.
+          Access your AcchaSolution account and manage
+          your property journey from one trusted platform.
         </p>
+
+
+        <div class="intro-line"></div>
+
+
+        <div class="intro-meta">
+
+          <div>
+            <strong>01</strong>
+            <span>Verified<br>Properties</span>
+          </div>
+
+          <div>
+            <strong>02</strong>
+            <span>Trusted<br>Professionals</span>
+          </div>
+
+          <div>
+            <strong>03</strong>
+            <span>Smart<br>Property Tools</span>
+          </div>
+
+        </div>
 
       </div>
 
-    </div>
 
+      <!-- LOGIN FORM AREA -->
 
-    <!-- =====================================================
-         RIGHT SIDE
-    ====================================================== -->
+      <div class="login-access">
 
-    <div class="card-right">
+        <div class="access-heading">
 
+          <!-- <span class="section-number">
+            01
+          </span> -->
 
-      <!-- ===================================================
-           LOGIN
-      ==================================================== -->
+          <div>
+            <h2>
+              Welcome back
+            </h2>
 
-      <div *ngIf="activeTab === 'login'">
-
-        <div class="header">
-
-          <h1>
-            Welcome Back
-          </h1>
-
-          <p>
-            Enter your details to login
-          </p>
+            <p>
+              Sign in to continue.
+            </p>
+          </div>
 
         </div>
 
 
         <form
+          class="login-form"
           (ngSubmit)="onLoginSubmit()"
         >
 
-
           <!-- EMAIL -->
 
-          <div class="form-group">
+          <div class="field">
 
             <label>
-              Email
+              EMAIL ADDRESS
             </label>
 
             <input
@@ -72,6 +113,7 @@
               name="loginEmail"
               required
               autocomplete="email"
+              placeholder="you@example.com"
             >
 
           </div>
@@ -79,10 +121,10 @@
 
           <!-- PASSWORD -->
 
-          <div class="form-group">
+          <div class="field">
 
             <label>
-              Password
+              PASSWORD
             </label>
 
             <input
@@ -91,223 +133,547 @@
               name="loginPass"
               required
               autocomplete="current-password"
+              placeholder="Enter your password"
             >
 
           </div>
 
 
-          <!-- LOGIN BUTTON -->
+          <!-- LOGIN -->
 
           <button
             type="submit"
-            class="btn-login"
+            class="login-action"
           >
-            Login
+
+            <span>
+              SIGN IN
+            </span>
+
+            <span class="action-arrow">
+              →
+            </span>
+
           </button>
 
 
-          <!-- =================================================
-               GOOGLE LOGIN
-          ================================================== -->
-<div class="google-login-section">
+          <!-- GOOGLE -->
 
-  <div class="google-divider">
+          <div class="google-area">
 
-    <span></span>
+            <div class="google-label">
+              <span></span>
+              <small>OR CONTINUE WITH</small>
+              <span></span>
+            </div>
 
-    <small>
-      OR
-    </small>
+            <div
+              id="google-btn"
+              class="google-btn-container">
+            </div>
 
-    <span></span>
+          </div>
 
-  </div>
 
-  <!-- Google official button will render here -->
-  <div
-    id="google-btn"
-    class="google-btn-container">
-  </div>
+          <!-- REGISTER -->
 
-</div>
+          <div class="switch-account">
 
-          <!-- =================================================
-               REGISTER
-          ================================================== -->
+            <span>
+              New to AcchaSolution?
+            </span>
 
-          <div
-            class="auth-footer"
-            style="text-align: center; margin-top: 20px;"
-          >
+            <button
+              type="button"
+              (click)="toggleAuthMode()"
+              class="switch-link"
+            >
+              Create account
+              <span>↗</span>
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+
+    <!-- LOGIN FOOTER -->
+
+    
+  </section>
+
+
+
+  <!-- =====================================================
+       REGISTRATION SCREEN
+       Completely different visual design
+  ====================================================== -->
+
+  <section
+    class="register-screen"
+    *ngIf="activeTab === 'signup'"
+  >
+
+    <!-- REGISTRATION TOP BAR -->
+
+    <header class="register-header">
+
+      <div class="register-brand">
+
+        <div class="register-logo">
+          AS
+        </div>
+
+        <div>
+          <!-- <strong>
+            AcchaSolution
+          </strong> -->
+
+          <small>
+            PROPERTY PLATFORM
+          </small>
+        </div>
+
+      </div>
+
+
+      <div class="register-step">
+
+        <span class="step-active">
+          CREATE PROFILE
+        </span>
+
+        <span>
+          /
+        </span>
+
+        <span>
+          GET STARTED
+        </span>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="back-login"
+        (click)="toggleAuthMode()"
+      >
+        Already registered?
+        <strong>Sign in</strong>
+        →
+      </button>
+
+    </header>
+
+
+    <!-- REGISTRATION BODY -->
+
+    <div class="register-body">
+
+
+      <!-- LEFT PROPERTY STATEMENT -->
+
+      <aside class="register-aside">
+
+        <!-- <div class="aside-label">
+          ACCHASOLUTION / 01
+        </div> -->
+
+
+        <div class="architectural-shape">
+
+          <div class="shape-number">
+            01
+          </div>
+
+          <div class="shape-text">
+            PROPERTY
+            <br>
+            <strong>STARTS</strong>
+            <br>
+            HERE.
+          </div>
+
+        </div>
+
+
+        <h1>
+          Build your
+          <br>
+          <span>property profile.</span>
+        </h1>
+
+
+        <p>
+          Whether you own property or represent clients,
+          create your professional profile and start
+          connecting with the AcchaSolution property network.
+        </p>
+
+
+        <div class="aside-benefits">
+
+          <div class="benefit-item">
+
+            <span class="benefit-index">
+              01
+            </span>
+
+            <div>
+              <strong>
+                Reach property seekers
+              </strong>
+
+              <small>
+                Connect with genuine buyers and tenants.
+              </small>
+            </div>
+
+          </div>
+
+
+          <div class="benefit-item">
+
+            <span class="benefit-index">
+              02
+            </span>
+
+            <div>
+              <strong>
+                Professional presence
+              </strong>
+
+              <small>
+                Build your trusted property profile.
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="benefit-item">
+
+            <span class="benefit-index">
+              03
+            </span>
+
+            <div>
+              <strong>
+                Smart property tools
+              </strong>
+
+              <small>
+                Access AcchaSolution's digital ecosystem.
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+
+
+      <!-- REGISTRATION FORM -->
+
+      <main class="register-content">
+
+        <form
+          #signupForm="ngForm"
+          (ngSubmit)="onSignUpSubmit()"
+          class="registration-form"
+        >
+
+
+          <!-- FORM HEADING -->
+
+          <div class="registration-title">
+
+            <span>
+              CREATE YOUR ACCOUNT
+            </span>
+
+            <h2>
+              Let's get you started.
+            </h2>
 
             <p>
+              Tell us a little about yourself.
+            </p>
 
-              Don't have an account?
+          </div>
 
-              <span
-                (click)="toggleAuthMode()"
-                class="auth-toggle-link"
-              >
-                Register Now
+
+
+          <!-- USER TYPE -->
+
+          <div class="profile-type-section">
+
+            <div class="field-heading">
+
+              <span>
+                01
               </span>
 
-            </p>
+              <label>
+                I AM A
+              </label>
+
+            </div>
+
+
+            <div class="profile-options">
+
+              <button
+                type="button"
+                class="profile-option"
+                [class.active]="selectedUser === 'Owner'"
+                (click)="selectedUser = 'Owner'"
+              >
+
+                <span class="profile-icon">
+                  O
+                </span>
+
+                <span class="profile-text">
+                  <strong>
+                    Property Owner
+                  </strong>
+
+                  <small>
+                    I own property
+                  </small>
+                </span>
+
+                <span class="profile-check">
+                  ✓
+                </span>
+
+              </button>
+
+
+              <button
+                type="button"
+                class="profile-option"
+                [class.active]="selectedUser === 'Agent'"
+                (click)="selectedUser = 'Agent'"
+              >
+
+                <span class="profile-icon">
+                  A
+                </span>
+
+                <span class="profile-text">
+                  <strong>
+                    Real Estate Agent
+                  </strong>
+
+                  <small>
+                    I represent clients
+                  </small>
+                </span>
+
+                <span class="profile-check">
+                  ✓
+                </span>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- PERSONAL INFORMATION -->
+
+          <div class="details-section">
+
+            <div class="field-heading">
+
+              <span>
+                02
+              </span>
+
+              <label>
+                PERSONAL INFORMATION
+              </label>
+
+            </div>
+
+
+            <div class="registration-grid">
+
+
+              <!-- NAME -->
+
+              <div class="register-field full-field">
+
+                <label>
+                  FULL NAME
+                </label>
+
+                <input
+                  type="text"
+                  placeholder="Your full name"
+                  [(ngModel)]="signUpData.name"
+                  name="name"
+                  required
+                >
+
+              </div>
+
+
+              <!-- EMAIL -->
+
+              <div class="register-field">
+
+                <label>
+                  EMAIL ADDRESS
+                </label>
+
+                <input
+                  type="email"
+                  placeholder="you@example.com"
+                  [(ngModel)]="signUpData.email"
+                  name="email"
+                  required
+                >
+
+              </div>
+
+
+              <!-- PHONE -->
+
+              <div class="register-field">
+
+                <label>
+                  PHONE NUMBER
+                </label>
+
+                <input
+                  type="tel"
+                  placeholder="+91 XXXXX XXXXX"
+                  [(ngModel)]="signUpData.phone"
+                  name="phone"
+                  required
+                >
+
+              </div>
+
+
+              <!-- PASSWORD -->
+
+              <div class="register-field">
+
+                <label>
+                  PASSWORD
+                </label>
+
+                <input
+                  type="password"
+                  placeholder="Create password"
+                  [(ngModel)]="signUpData.password"
+                  name="password"
+                  required
+                >
+
+              </div>
+
+
+              <!-- EXPERIENCE -->
+
+              <div class="register-field">
+
+                <label>
+                  EXPERIENCE
+                  <span>(OPTIONAL)</span>
+                </label>
+
+                <input
+                  type="number"
+                  placeholder="Years of experience"
+                  [(ngModel)]="signUpData.experience"
+                  name="exp"
+                >
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- BOTTOM ACTION -->
+
+          <div class="registration-action">
+
+            <div class="action-note">
+
+              <span class="secure-symbol">
+                ✓
+              </span>
+
+              <span>
+                Your information is securely handled.
+              </span>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="create-account-btn"
+              [disabled]="signupForm.invalid"
+            >
+
+              <span>
+                CREATE ACCOUNT
+              </span>
+
+              <span>
+                →
+              </span>
+
+            </button>
 
           </div>
 
 
         </form>
 
-      </div>
-
-
-      <!-- ===================================================
-           SIGNUP
-      ==================================================== -->
-
-      <form
-        *ngIf="activeTab === 'signup'"
-        #signupForm="ngForm"
-        (ngSubmit)="onSignUpSubmit()"
-      >
-
-        <div class="content-wrapper">
-
-
-          <!-- =================================================
-               LEFT SECTION
-          ================================================== -->
-
-          <div class="left-section">
-
-            <img
-              src="images/login image.png"
-              alt="House"
-              class="house-img"
-            >
-
-            <h2>
-              Post your property Ad to sell or rent online for
-              <span>Free!</span>
-            </h2>
-
-            <ul class="features">
-
-              <li>
-                ✅ Get Access to 4 Lakh+ Buyers
-              </li>
-
-              <li>
-                ✅ Sell Faster with Premium Service
-              </li>
-
-            </ul>
-
-          </div>
-
-
-          <!-- =================================================
-               SIGNUP FORM
-          ================================================== -->
-
-          <div class="form-card">
-
-            <h2>
-              Let's get you started
-            </h2>
-
-            <p>
-              You are:
-            </p>
-
-
-            <!-- USER TYPE -->
-
-            <div class="selection-group">
-
-              <button
-                type="button"
-                [class.active]="selectedUser === 'Owner'"
-                (click)="selectedUser = 'Owner'"
-              >
-                Owner
-              </button>
-
-              <button
-                type="button"
-                [class.active]="selectedUser === 'Agent'"
-                (click)="selectedUser = 'Agent'"
-              >
-                Agent
-              </button>
-
-            </div>
-
-
-            <!-- INPUTS -->
-
-            <div class="input-stack">
-
-              <input
-                type="text"
-                placeholder="Full Name"
-                [(ngModel)]="signUpData.name"
-                name="name"
-                required
-              >
-
-              <input
-                type="email"
-                placeholder="Email Address"
-                [(ngModel)]="signUpData.email"
-                name="email"
-                required
-              >
-
-              <input
-                type="password"
-                placeholder="Password"
-                [(ngModel)]="signUpData.password"
-                name="password"
-                required
-              >
-
-              <input
-                type="number"
-                placeholder="Experience (Years)"
-                [(ngModel)]="signUpData.experience"
-                name="exp"
-              >
-
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                [(ngModel)]="signUpData.phone"
-                name="phone"
-                required
-              >
-
-            </div>
-
-
-            <!-- SIGNUP BUTTON -->
-
-            <button
-              type="submit"
-              class="submit-btn"
-              [disabled]="signupForm.invalid"
-            >
-              START NOW
-            </button>
-
-          </div>
-
-        </div>
-
-      </form>
+      </main>
 
     </div>
 
-  </div>
+
+    <!-- REGISTRATION FOOTER -->
+
+    <!-- <footer class="register-footer">
+
+      <span>
+        ACCHASOLUTION
+      </span>
+
+      <span>
+        BUY • SELL • RENT • LEASE • INVEST • PROMOTE
+      </span>
+
+      <span>
+        BENGALURU
+      </span>
+
+    </footer> -->
+
+  </section>
 
 </div>
