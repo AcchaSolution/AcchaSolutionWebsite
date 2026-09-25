@@ -2,7 +2,8 @@
    ACCHASOLUTION — PREMIUM WESTERN MODERN HOMEPAGE
    RED + WHITE ARCHITECTURAL UI
    CLEAN / COMPACT / RESPONSIVE
-
+   SOLAR ORBIT — DESKTOP + TABLET + MOBILE
+   ============================================================ */
 
 
 /* ============================================================
@@ -79,7 +80,7 @@
       var(--red-900) 100%
     );
 
-  overflow: hidden;
+  overflow-x: hidden;
   isolation: isolate;
 }
 
@@ -128,15 +129,10 @@ html {
    ============================================================ */
 
 .accha-modern-hero {
+
   position: relative;
 
   min-height: 790px;
-
-  /*
-    NAVBAR → HERO TITLE GAP
-    Previously: 88px
-    Now: 58px
-  */
 
   padding:
     38px
@@ -175,6 +171,7 @@ html {
    ============================================================ */
 
 .accha-modern-hero::before {
+
   content: "";
 
   position: absolute;
@@ -203,8 +200,8 @@ html {
   pointer-events: none;
 }
 
-
 .accha-modern-hero::after {
+
   content: "";
 
   position: absolute;
@@ -226,7 +223,6 @@ html {
   pointer-events: none;
 }
 
-
 @keyframes heroLightMove {
 
   0% {
@@ -241,7 +237,6 @@ html {
       scale(1.18);
   }
 }
-
 
 @keyframes cinematicSweep {
 
@@ -260,6 +255,7 @@ html {
    ============================================================ */
 
 .hero-architecture-grid {
+
   position: absolute;
   inset: 0;
 
@@ -293,7 +289,6 @@ html {
     gridDrift 22s linear infinite;
 }
 
-
 @keyframes gridDrift {
 
   from {
@@ -313,6 +308,7 @@ html {
    ============================================================ */
 
 .accha-hero-inner {
+
   position: relative;
   z-index: 5;
 
@@ -337,19 +333,20 @@ html {
    ============================================================ */
 
 .accha-hero-copy {
+
   max-width: 760px;
+
   position: relative;
   top: -55px;
-
 
   animation:
     heroCopyIn 0.95s var(--ease) both;
 }
 
-
 @keyframes heroCopyIn {
 
   from {
+
     opacity: 0;
 
     transform:
@@ -357,6 +354,7 @@ html {
   }
 
   to {
+
     opacity: 1;
 
     transform:
@@ -367,26 +365,14 @@ html {
 
 /* ============================================================
    08. HERO TITLE
-   FIND YOUR PLACE. FIND YOUR JOY.
-   DESKTOP SMALLER
    ============================================================ */
 
 .accha-hero-copy h1 {
-
-  /*
-    TOP GAP CONTROL
-    Title ka navbar se distance mainly
-    .accha-modern-hero padding-top se control hota hai.
-  */
 
   margin:
     0 0 16px;
 
   max-width: 760px;
-
-  /*
-    Previous large size ko reduce kiya.
-  */
 
   font-size:
     clamp(2.65rem, 4.5vw, 5rem);
@@ -403,7 +389,6 @@ html {
   color:
     var(--white);
 }
-
 
 .accha-hero-copy h1 span {
 
@@ -425,7 +410,6 @@ html {
   animation:
     titleShine 6s ease-in-out infinite;
 }
-
 
 @keyframes titleShine {
 
@@ -469,7 +453,6 @@ html {
 
 /* ============================================================
    10. SEARCH PANEL
-   WHITE
    ============================================================ */
 
 .hero-search-panel {
@@ -501,7 +484,6 @@ html {
     box-shadow var(--transition);
 }
 
-
 .hero-search-panel:hover {
 
   border-color:
@@ -514,10 +496,10 @@ html {
     0 30px 75px rgba(20, 0, 0, 0.34);
 }
 
-
 @keyframes panelFloatIn {
 
   from {
+
     opacity: 0;
 
     transform:
@@ -526,6 +508,7 @@ html {
   }
 
   to {
+
     opacity: 1;
 
     transform:
@@ -537,7 +520,6 @@ html {
 
 /* ============================================================
    11. SEARCH TABS
-   RED + WHITE
    ============================================================ */
 
 .hero-search-tabs {
@@ -555,7 +537,6 @@ html {
   background:
     #fff5f5;
 }
-
 
 .hero-search-tabs button {
 
@@ -595,7 +576,6 @@ html {
     box-shadow var(--transition);
 }
 
-
 .hero-search-tabs button:hover {
 
   color:
@@ -607,7 +587,6 @@ html {
   transform:
     translateY(-1px);
 }
-
 
 .hero-search-tabs button.active {
 
@@ -642,7 +621,6 @@ html {
 
   min-height: 62px;
 }
-
 
 .hero-city-select,
 .hero-search-input-wrap,
@@ -684,7 +662,6 @@ html {
     box-shadow var(--transition);
 }
 
-
 .hero-city-select:hover,
 .hero-city-select:focus {
 
@@ -698,13 +675,10 @@ html {
     0 0 0 3px rgba(139, 0, 0, 0.06);
 }
 
-
 .hero-city-select option {
 
   color: #222;
-
-  background:
-    #ffffff;
+  background: #ffffff;
 }
 
 
@@ -731,7 +705,6 @@ html {
     box-shadow var(--transition);
 }
 
-
 .hero-search-input-wrap:focus-within {
 
   border-color:
@@ -743,7 +716,6 @@ html {
   box-shadow:
     0 0 0 3px rgba(139, 0, 0, 0.06);
 }
-
 
 .hero-search-icon {
 
@@ -761,7 +733,6 @@ html {
   font-size:
     1.45rem;
 }
-
 
 .hero-search-input-wrap input {
 
@@ -788,7 +759,6 @@ html {
     0.98rem;
 }
 
-
 .hero-search-input-wrap input::placeholder {
 
   color:
@@ -798,7 +768,6 @@ html {
 
 /* ============================================================
    15. SEARCH BUTTON
-   RED + WHITE
    ============================================================ */
 
 .hero-search-button {
@@ -831,7 +800,6 @@ html {
     background var(--transition);
 }
 
-
 .hero-search-button::before {
 
   content: "";
@@ -859,13 +827,9 @@ html {
     left 0.7s ease;
 }
 
-
 .hero-search-button:hover::before {
-
-  left:
-    140%;
+  left: 140%;
 }
-
 
 .hero-search-button:hover {
 
@@ -879,14 +843,12 @@ html {
     0 16px 32px rgba(139, 0, 0, 0.30);
 }
 
-
 .hero-search-button:active {
 
   transform:
     translateY(-1px)
     scale(0.98);
 }
-
 
 .hero-search-arrow {
 
@@ -898,7 +860,6 @@ html {
   transition:
     transform var(--transition);
 }
-
 
 .hero-search-button:hover
 .hero-search-arrow {
@@ -935,7 +896,6 @@ html {
     1.5;
 }
 
-
 .ai-spark {
 
   display: inline-grid;
@@ -952,11 +912,11 @@ html {
     sparkPulse 2s ease-in-out infinite;
 }
 
-
 @keyframes sparkPulse {
 
   0%,
   100% {
+
     transform:
       scale(1)
       rotate(0deg);
@@ -966,6 +926,7 @@ html {
   }
 
   50% {
+
     transform:
       scale(1.25)
       rotate(18deg);
@@ -978,7 +939,6 @@ html {
 
 /* ============================================================
    17. QUICK LINKS
-   RED BUTTONS + WHITE TEXT
    ============================================================ */
 
 .hero-quick-links {
@@ -994,7 +954,6 @@ html {
   margin-top:
     17px;
 }
-
 
 .quick-label {
 
@@ -1016,7 +975,6 @@ html {
   letter-spacing:
     0.14em;
 }
-
 
 .hero-quick-links button {
 
@@ -1052,7 +1010,6 @@ html {
     box-shadow var(--transition);
 }
 
-
 .hero-quick-links button:hover {
 
   color:
@@ -1071,33 +1028,41 @@ html {
     0 8px 18px rgba(139, 0, 0, 0.25);
 }
 
-/* /* ============================================================
-   18. SOLAR SYSTEM — CENTER + SLIGHTLY UP + LARGER
+
+/* ============================================================
+   18. SOLAR SYSTEM
+   DESKTOP + TABLET + MOBILE
    ============================================================ */
 
 .textbook-solar-system {
+
   position: absolute;
 
-  /* THODA BADA */
   width: 700px;
   height: 700px;
 
-  /* CENTER + THODA UP */
   left: 50%;
-  right: auto;
   top: 40%;
-  transform: translate(-50%, -50%);
 
-  z-index: 1;
+  transform:
+    translate(-50%, -50%);
+
+  z-index: 2;
+
   pointer-events: none;
+
   opacity: 1;
+
+  overflow: visible;
 }
 
+
 /* ============================================================
-   15. SUN — START
+   19. SUN
    ============================================================ */
 
 .sun-core {
+
   position: absolute;
 
   width: 58px;
@@ -1106,7 +1071,8 @@ html {
   left: 50%;
   top: 50%;
 
-  transform: translate(-50%, -50%);
+  transform:
+    translate(-50%, -50%);
 
   border-radius: 50%;
 
@@ -1128,46 +1094,48 @@ html {
 
   z-index: 20;
 
-  animation: sunPulse 3.5s ease-in-out infinite;
+  animation:
+    sunPulse 3.5s ease-in-out infinite;
 }
 
 @keyframes sunPulse {
+
   0%,
   100% {
-    transform: translate(-50%, -50%) scale(1);
+    transform:
+      translate(-50%, -50%)
+      scale(1);
   }
 
   50% {
-    transform: translate(-50%, -50%) scale(1.08);
+    transform:
+      translate(-50%, -50%)
+      scale(1.08);
   }
 }
 
 
 /* ============================================================
-   16. ORBIT RINGS — START
+   20. ORBIT RINGS
    ============================================================ */
 
-/*
-   IMPORTANT:
-   Orbit rings do NOT rotate.
-   Only individual planets move.
-*/
-
 .orbit-ring {
+
   position: absolute;
 
   left: 50%;
   top: 50%;
 
-  transform: translate(-50%, -50%);
+  transform:
+    translate(-50%, -50%);
 
   border-radius: 50%;
 
-  border: 2px solid rgba(255, 255, 255, 0.22);
-  /* border-color:3px solid rgba(255, 255, 255, 0.22); */
+  border:
+    2px solid rgba(255, 255, 255, 0.22);
 
-
-  background: transparent;
+  background:
+    transparent;
 
   box-shadow:
     inset 0 0 18px rgba(255, 255, 255, 0.025),
@@ -1216,11 +1184,13 @@ html {
   height: 588px;
 }
 
+
 /* ============================================================
-   17. PLANETS — 3D BASE — START
+   21. PLANETS
    ============================================================ */
 
 .planet {
+
   position: absolute;
 
   left: 50%;
@@ -1230,24 +1200,25 @@ html {
 
   border-radius: 50%;
 
-  box-sizing: border-box;
-
   z-index: 10;
 
-  will-change: transform;
+  will-change:
+    transform;
 
-  /*
-     Planet starts from orbit radius
-     and travels independently.
-  */
-  animation-name: planetOrbit;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  animation-name:
+    planetOrbit;
+
+  animation-timing-function:
+    linear;
+
+  animation-iteration-count:
+    infinite;
 }
 
 @keyframes planetOrbit {
 
   from {
+
     transform:
       translate(-50%, -50%)
       rotate(0deg)
@@ -1255,6 +1226,7 @@ html {
   }
 
   to {
+
     transform:
       translate(-50%, -50%)
       rotate(360deg)
@@ -1264,10 +1236,11 @@ html {
 
 
 /* ============================================================
-   18. MERCURY — 3D ROCKY — START
+   22. MERCURY
    ============================================================ */
 
 .p-mercury {
+
   --orbit-radius: 55px;
 
   width: 15px;
@@ -1288,11 +1261,15 @@ html {
     inset -4px -4px 6px rgba(0, 0, 0, 0.55),
     0 0 8px rgba(230, 230, 230, 0.75);
 
-  animation-duration: 8s;
-  animation-delay: -1s;
+  animation-duration:
+    8s;
+
+  animation-delay:
+    -1s;
 }
 
 .p-mercury::before {
+
   content: "";
 
   position: absolute;
@@ -1305,7 +1282,8 @@ html {
 
   border-radius: 50%;
 
-  background: rgba(45, 45, 45, 0.58);
+  background:
+    rgba(45, 45, 45, 0.58);
 
   box-shadow:
     6px -3px 0 -1px rgba(40, 40, 40, 0.48),
@@ -1313,6 +1291,7 @@ html {
 }
 
 .p-mercury::after {
+
   content: "";
 
   position: absolute;
@@ -1327,12 +1306,12 @@ html {
 }
 
 
-
 /* ============================================================
-   19. VENUS — 3D GOLDEN — START
+   23. VENUS
    ============================================================ */
 
 .p-venus {
+
   --orbit-radius: 82px;
 
   width: 20px;
@@ -1353,12 +1332,18 @@ html {
     inset -4px -5px 7px rgba(100, 45, 10, 0.48),
     0 0 12px rgba(255, 193, 70, 0.8);
 
-  animation-duration: 12s;
-  animation-direction: reverse;
-  animation-delay: -4s;
+  animation-duration:
+    12s;
+
+  animation-direction:
+    reverse;
+
+  animation-delay:
+    -4s;
 }
 
 .p-venus::before {
+
   content: "";
 
   position: absolute;
@@ -1371,15 +1356,18 @@ html {
 
   border-radius: 50%;
 
-  background: rgba(255, 238, 170, 0.55);
+  background:
+    rgba(255, 238, 170, 0.55);
 
-  transform: rotate(-17deg);
+  transform:
+    rotate(-17deg);
 
   box-shadow:
     0 4px 0 rgba(194, 126, 43, 0.28);
 }
 
 .p-venus::after {
+
   content: "";
 
   position: absolute;
@@ -1395,10 +1383,11 @@ html {
 
 
 /* ============================================================
-   20. EARTH — 3D BLUE/GREEN — START
+   24. EARTH
    ============================================================ */
 
 .p-earth {
+
   --orbit-radius: 112px;
 
   width: 25px;
@@ -1420,11 +1409,15 @@ html {
     0 0 12px rgba(45, 190, 255, 0.95),
     0 0 26px rgba(20, 120, 240, 0.45);
 
-  animation-duration: 16s;
-  animation-delay: -7s;
+  animation-duration:
+    16s;
+
+  animation-delay:
+    -7s;
 }
 
 .p-earth::before {
+
   content: "";
 
   position: absolute;
@@ -1435,9 +1428,11 @@ html {
   left: 4px;
   top: 5px;
 
-  border-radius: 60% 40% 55% 45%;
+  border-radius:
+    60% 40% 55% 45%;
 
-  background: #4caf50;
+  background:
+    #4caf50;
 
   box-shadow:
     7px 5px 0 -1px #65b85a,
@@ -1445,6 +1440,7 @@ html {
 }
 
 .p-earth::after {
+
   content: "";
 
   position: absolute;
@@ -1457,9 +1453,11 @@ html {
 
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.60);
+  background:
+    rgba(255, 255, 255, 0.60);
 
-  transform: rotate(-16deg);
+  transform:
+    rotate(-16deg);
 
   box-shadow:
     2px -7px 0 -1px rgba(255, 255, 255, 0.28);
@@ -1467,10 +1465,11 @@ html {
 
 
 /* ============================================================
-   21. MARS — 3D RED ROCKY — START
+   25. MARS
    ============================================================ */
 
 .p-mars {
+
   --orbit-radius: 142px;
 
   width: 19px;
@@ -1491,12 +1490,18 @@ html {
     inset -4px -4px 6px rgba(65, 10, 5, 0.55),
     0 0 10px rgba(255, 75, 50, 0.82);
 
-  animation-duration: 20s;
-  animation-direction: reverse;
-  animation-delay: -9s;
+  animation-duration:
+    20s;
+
+  animation-direction:
+    reverse;
+
+  animation-delay:
+    -9s;
 }
 
 .p-mars::before {
+
   content: "";
 
   position: absolute;
@@ -1509,7 +1514,8 @@ html {
 
   border-radius: 50%;
 
-  background: rgba(70, 15, 10, 0.42);
+  background:
+    rgba(70, 15, 10, 0.42);
 
   box-shadow:
     7px -4px 0 -1px rgba(80, 20, 10, 0.38),
@@ -1517,6 +1523,7 @@ html {
 }
 
 .p-mars::after {
+
   content: "";
 
   position: absolute;
@@ -1530,11 +1537,13 @@ html {
     inset -3px -3px 5px rgba(60, 5, 5, 0.45);
 }
 
+
 /* ============================================================
-   21. MARS — 3D RED ROCKY — END
+   26. JUPITER
    ============================================================ */
 
 .p-jupiter {
+
   --orbit-radius: 175px;
 
   width: 40px;
@@ -1560,11 +1569,15 @@ html {
     inset -7px -8px 12px rgba(70, 30, 10, 0.48),
     0 0 15px rgba(230, 185, 135, 0.70);
 
-  animation-duration: 28s;
-  animation-delay: -12s;
+  animation-duration:
+    28s;
+
+  animation-delay:
+    -12s;
 }
 
 .p-jupiter::before {
+
   content: "";
 
   position: absolute;
@@ -1590,6 +1603,7 @@ html {
 }
 
 .p-jupiter::after {
+
   content: "";
 
   position: absolute;
@@ -1603,11 +1617,13 @@ html {
     inset -7px -7px 12px rgba(50, 20, 5, 0.42);
 }
 
+
 /* ============================================================
-   23. SATURN — 3D GOLD + RINGS — START
+   27. SATURN
    ============================================================ */
 
 .p-saturn {
+
   --orbit-radius: 212px;
 
   width: 34px;
@@ -1628,13 +1644,18 @@ html {
     inset -6px -6px 9px rgba(90, 45, 5, 0.50),
     0 0 15px rgba(255, 215, 110, 0.82);
 
-  animation-duration: 36s;
-  animation-direction: reverse;
-  animation-delay: -16s;
+  animation-duration:
+    36s;
+
+  animation-direction:
+    reverse;
+
+  animation-delay:
+    -16s;
 }
 
-/* Outer Saturn ring */
 .p-saturn::before {
+
   content: "";
 
   position: absolute;
@@ -1659,8 +1680,8 @@ html {
     inset 0 0 3px rgba(90, 50, 10, 0.35);
 }
 
-/* Inner Saturn ring */
 .p-saturn::after {
+
   content: "";
 
   position: absolute;
@@ -1681,11 +1702,13 @@ html {
     1px solid rgba(255, 245, 195, 0.90);
 }
 
+
 /* ============================================================
-   24. URANUS — 3D ICE BLUE — START
+   28. URANUS
    ============================================================ */
 
 .p-uranus {
+
   --orbit-radius: 252px;
 
   width: 27px;
@@ -1706,11 +1729,15 @@ html {
     inset -5px -5px 8px rgba(5, 70, 85, 0.48),
     0 0 14px rgba(90, 235, 240, 0.82);
 
-  animation-duration: 46s;
-  animation-delay: -20s;
+  animation-duration:
+    46s;
+
+  animation-delay:
+    -20s;
 }
 
 .p-uranus::before {
+
   content: "";
 
   position: absolute;
@@ -1723,12 +1750,15 @@ html {
 
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.34);
+  background:
+    rgba(255, 255, 255, 0.34);
 
-  transform: rotate(-10deg);
+  transform:
+    rotate(-10deg);
 }
 
 .p-uranus::after {
+
   content: "";
 
   position: absolute;
@@ -1742,11 +1772,13 @@ html {
     inset -3px -3px 5px rgba(0, 60, 80, 0.35);
 }
 
+
 /* ============================================================
-   25. NEPTUNE — 3D DEEP BLUE — START
+   29. NEPTUNE
    ============================================================ */
 
 .p-neptune {
+
   --orbit-radius: 294px;
 
   width: 28px;
@@ -1768,12 +1800,18 @@ html {
     0 0 15px rgba(55, 150, 255, 0.90),
     0 0 28px rgba(25, 90, 230, 0.40);
 
-  animation-duration: 58s;
-  animation-direction: reverse;
-  animation-delay: -28s;
+  animation-duration:
+    58s;
+
+  animation-direction:
+    reverse;
+
+  animation-delay:
+    -28s;
 }
 
 .p-neptune::before {
+
   content: "";
 
   position: absolute;
@@ -1786,12 +1824,15 @@ html {
 
   border-radius: 50%;
 
-  background: rgba(190, 235, 255, 0.30);
+  background:
+    rgba(190, 235, 255, 0.30);
 
-  transform: rotate(-12deg);
+  transform:
+    rotate(-12deg);
 }
 
 .p-neptune::after {
+
   content: "";
 
   position: absolute;
@@ -1805,11 +1846,13 @@ html {
     inset -4px -4px 6px rgba(0, 15, 70, 0.45);
 }
 
+
 /* ============================================================
-   26. SOLAR SYSTEM ATMOSPHERE / DEPTH — START
+   30. SOLAR SYSTEM ATMOSPHERE
    ============================================================ */
 
 .textbook-solar-system::before {
+
   content: "";
 
   position: absolute;
@@ -1834,6 +1877,7 @@ html {
 }
 
 .textbook-solar-system::after {
+
   content: "";
 
   position: absolute;
@@ -1859,15 +1903,2339 @@ html {
 }
 
 
+/* ============================================================
+   31. ARCHITECTURAL BUILDING
+   ============================================================ */
+
+.accha-hero-visual {
+
+  position:
+    relative;
+
+  min-height:
+    560px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  animation:
+    heroVisualIn 1.05s 0.18s var(--ease) both;
+}
+
+@keyframes heroVisualIn {
+
+  from {
+
+    opacity:
+      0;
+
+    transform:
+      translate3d(45px, 30px, 0)
+      scale(0.94);
+  }
+
+  to {
+
+    opacity:
+      1;
+
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+}
+
+.architectural-building {
+
+  position:
+    relative;
+
+  width:
+    min(100%, 580px);
+
+  aspect-ratio:
+    1;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+}
+
+.building-glow {
+
+  position:
+    absolute;
+
+  width:
+    68%;
+
+  aspect-ratio:
+    1;
+
+  border-radius:
+    50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.14),
+      transparent 65%
+    );
+
+  filter:
+    blur(10px);
+
+  animation:
+    buildingGlow 5s ease-in-out infinite;
+}
+
+@keyframes buildingGlow {
+
+  0%,
+  100% {
+
+    transform:
+      scale(0.95);
+
+    opacity:
+      0.6;
+  }
+
+  50% {
+
+    transform:
+      scale(1.08);
+
+    opacity:
+      1;
+  }
+}
+
+.building-blueprint {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  overflow:
+    visible;
+
+  filter:
+    drop-shadow(
+      0 0 18px rgba(255, 255, 255, 0.10)
+    );
+}
+
+.building-blueprint line,
+.building-blueprint path,
+.building-blueprint rect {
+
+  fill:
+    none;
+
+  stroke:
+    rgba(255, 255, 255, 0.82);
+
+  stroke-width:
+    2;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+}
+
+.building-blueprint .building-main-outline {
+
+  stroke-width:
+    3;
+
+  stroke:
+    rgba(255, 255, 255, 0.96);
+
+  stroke-dasharray:
+    1800;
+
+  stroke-dashoffset:
+    1800;
+
+  animation:
+    blueprintDraw 3s 0.4s var(--ease) forwards;
+}
+
+.building-blueprint .building-detail {
+
+  stroke:
+    rgba(255, 255, 255, 0.52);
+
+  stroke-width:
+    1.5;
+
+  stroke-dasharray:
+    900;
+
+  stroke-dashoffset:
+    900;
+
+  animation:
+    blueprintDraw 4s 0.7s var(--ease) forwards;
+}
+
+.building-blueprint .building-windows rect {
+
+  fill:
+    rgba(255, 255, 255, 0.025);
+
+  stroke:
+    rgba(255, 255, 255, 0.62);
+
+  stroke-width:
+    1.5;
+
+  transition:
+    fill var(--transition);
+}
+
+.building-blueprint .building-windows rect:hover {
+
+  fill:
+    rgba(255, 255, 255, 0.16);
+}
+
+.building-blueprint .building-door {
+
+  stroke:
+    rgba(255, 255, 255, 0.9);
+
+  stroke-width:
+    2.5;
+}
+
+@keyframes blueprintDraw {
+
+  to {
+
+    stroke-dashoffset:
+      0;
+  }
+}
+
+
+/* ============================================================
+   32. FLOATING SERVICE BADGES
+   ============================================================ */
+
+.service-floating-card {
+
+  position:
+    absolute;
+
+  z-index:
+    8;
+
+  padding:
+    10px 14px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.24);
+
+  border-radius:
+    999px;
+
+  color:
+    var(--white);
+
+  background:
+    rgba(82, 0, 0, 0.55);
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.25);
+
+  font-size:
+    0.76rem;
+
+  font-weight:
+    700;
+
+  white-space:
+    nowrap;
+
+  animation:
+    serviceFloat 4.5s ease-in-out infinite;
+
+  transition:
+    border-color var(--transition),
+    background var(--transition),
+    transform var(--transition);
+}
+
+.service-floating-card:hover {
+
+  animation-play-state:
+    paused;
+
+  background:
+    rgba(255, 255, 255, 0.13);
+
+  border-color:
+    rgba(255, 255, 255, 0.4);
+
+  transform:
+    translateY(-6px)
+    scale(1.03);
+}
+
+@keyframes serviceFloat {
+
+  0%,
+  100% {
+
+    transform:
+      translateY(0);
+  }
+
+  50% {
+
+    transform:
+      translateY(-9px);
+  }
+}
+
+.badge-cleaning {
+
+  left:
+    2%;
+
+  top:
+    25%;
+
+  animation-delay:
+    0s;
+}
+
+.badge-painting {
+
+  right:
+    1%;
+
+  top:
+    46%;
+
+  animation-delay:
+    1s;
+}
+
+.badge-ekhata {
+
+  left:
+    10%;
+
+  bottom:
+    19%;
+
+  animation-delay:
+    2s;
+}
+
+.badge-property-management {
+
+  right:
+    8%;
+
+  top:
+    18%;
+
+  animation-delay:
+    3s;
+}
+
+.badge-post-property {
+
+  right:
+    12%;
+
+  bottom:
+    15%;
+
+  animation-delay:
+    4s;
+}
+
+
+/* ============================================================
+   33. PROJECT STRIP
+   ============================================================ */
+
+.hero-project-strip {
+
+  position:
+    relative;
+
+  z-index:
+    10;
+
+  width:
+    min(1440px, 100%);
+
+  margin:
+    24px auto 0;
+
+  padding:
+    14px 18px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    auto minmax(0, 1fr) auto;
+
+  align-items:
+    center;
+
+  gap:
+    15px;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.13);
+
+  border-radius:
+    18px;
+
+  background:
+    var(--white);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.18);
+
+  animation:
+    stripIn 0.9s 0.5s var(--ease) both;
+}
+
+@keyframes stripIn {
+
+  from {
+
+    opacity:
+      0;
+
+    transform:
+      translateY(25px);
+  }
+
+  to {
+
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+.project-strip-icon {
+
+  width:
+    42px;
+
+  height:
+    42px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    13px;
+
+  color:
+    var(--white);
+
+  background:
+    var(--red-main);
+
+  font-size:
+    1.5rem;
+
+  font-weight:
+    300;
+
+  box-shadow:
+    0 8px 20px rgba(139, 0, 0, 0.20);
+}
+
+.project-strip-text {
+
+  min-width:
+    0;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    3px;
+}
+
+.project-strip-text strong {
+
+  color:
+    var(--red-dark);
+
+  font-size:
+    0.9rem;
+
+  letter-spacing:
+    0.01em;
+}
+
+.project-strip-text span {
+
+  color:
+    #765858;
+
+  font-size:
+    0.75rem;
+
+  line-height:
+    1.45;
+}
+
+.project-strip-button {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    8px;
+
+  min-height:
+    42px;
+
+  padding:
+    0 17px;
+
+  border:
+    1px solid var(--red-main);
+
+  border-radius:
+    11px;
+
+  color:
+    var(--white);
+
+  background:
+    var(--red-main);
+
+  font-size:
+    0.77rem;
+
+  font-weight:
+    800;
+
+  white-space:
+    nowrap;
+
+  box-shadow:
+    0 8px 20px rgba(139, 0, 0, 0.20);
+
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.project-strip-button:hover {
+
+  transform:
+    translateY(-3px);
+
+  background:
+    var(--red-600);
+
+  box-shadow:
+    0 12px 25px rgba(139, 0, 0, 0.30);
+}
+
+.project-strip-button span {
+
+  color:
+    inherit;
+
+  transition:
+    transform var(--transition);
+}
+
+.project-strip-button:hover span {
+
+  transform:
+    translate(3px, -2px);
+}
+
+
+/* ============================================================
+   34. COMMON SECTION
+   ============================================================ */
+
+.upcoming-projects-section,
+.curated-properties-section,
+.home-featured-properties-section,
+.home-property-cta-section {
+
+  position:
+    relative;
+
+  padding:
+    75px
+    clamp(24px, 5vw, 80px);
+
+  overflow:
+    hidden;
+}
+
+.upcoming-projects-section::before,
+.curated-properties-section::before,
+.home-featured-properties-section::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  width:
+    500px;
+
+  height:
+    500px;
+
+  border-radius:
+    50%;
+
+  right:
+    -260px;
+
+  top:
+    -260px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.07),
+      transparent 68%
+    );
+
+  pointer-events:
+    none;
+}
+
+
+/* ============================================================
+   35. SECTION HEADERS
+   ============================================================ */
+
+.projects-section-header,
+.properties-section-header,
+.home-featured-properties-header {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  max-width:
+    800px;
+
+  margin:
+    0 auto 28px;
+
+  text-align:
+    center;
+}
+
+.projects-section-title,
+.properties-section-title,
+.home-featured-properties-header h2 {
+
+  margin:
+    0 0 10px;
+
+  color:
+    var(--white);
+
+  font-size:
+    clamp(2rem, 3.5vw, 3.4rem);
+
+  line-height:
+    1.02;
+
+  letter-spacing:
+    -0.045em;
+
+  font-weight:
+    800;
+}
+
+.projects-section-description,
+.properties-section-description,
+.home-featured-properties-header p {
+
+  margin:
+    0;
+
+  color:
+    rgba(255, 255, 255, 0.62);
+
+  font-size:
+    0.94rem;
+
+  line-height:
+    1.6;
+}
+
+.home-featured-eyebrow {
+
+  display:
+    inline-block;
+
+  margin-bottom:
+    10px;
+
+  color:
+    rgba(255, 255, 255, 0.52);
+
+  font-size:
+    0.7rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.2em;
+}
+
+
+/* ============================================================
+   36. PROJECT LOCATION TABS
+   ============================================================ */
+
+.project-location-tabs {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    8px;
+
+  margin-bottom:
+    25px;
+}
+
+.project-location-tab {
+
+  min-height:
+    38px;
+
+  padding:
+    0 16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.7);
+
+  border-radius:
+    999px;
+
+  color:
+    var(--red-dark);
+
+  background:
+    var(--white);
+
+  font-size:
+    0.75rem;
+
+  font-weight:
+    750;
+
+  box-shadow:
+    0 5px 14px rgba(0, 0, 0, 0.10);
+
+  transition:
+    all var(--transition);
+}
+
+.project-location-tab:hover {
+
+  color:
+    var(--white);
+
+  border-color:
+    var(--red-main);
+
+  background:
+    var(--red-main);
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 9px 20px rgba(139, 0, 0, 0.22);
+}
+
+.project-location-tab.active {
+
+  color:
+    var(--red-main);
+
+  background:
+    var(--white);
+
+  border-color:
+    var(--white);
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+
+/* ============================================================
+   37. BUILDER GRID
+   ============================================================ */
+
+.builders-grid {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  width:
+    min(1250px, 100%);
+
+  margin:
+    0 auto;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap:
+    13px;
+}
+
+.builder-logo-card {
+
+  position:
+    relative;
+
+  min-height:
+    130px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    10px;
+
+  padding:
+    16px;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.13);
+
+  border-radius:
+    18px;
+
+  background:
+    var(--white);
+
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.builder-logo-card::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  top:
+    16px;
+
+  bottom:
+    16px;
+
+  width:
+    4px;
+
+  border-radius:
+    0 5px 5px 0;
+
+  background:
+    var(--red-main);
+
+  opacity:
+    0.8;
+}
+
+.builder-logo-card:hover {
+
+  transform:
+    translateY(-7px);
+
+  border-color:
+    rgba(139, 0, 0, 0.28);
+
+  box-shadow:
+    0 20px 38px rgba(0, 0, 0, 0.18);
+}
+
+.builder-logo-wrapper {
+
+  width:
+    90px;
+
+  height:
+    58px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+}
+
+.builder-logo-image {
+
+  max-width:
+    100%;
+
+  max-height:
+    100%;
+
+  object-fit:
+    contain;
+
+  opacity:
+    0.95;
+
+  transition:
+    transform var(--transition),
+    opacity var(--transition);
+}
+
+.builder-logo-card:hover
+.builder-logo-image {
+
+  opacity:
+    1;
+
+  transform:
+    scale(1.07);
+
+  filter:
+    drop-shadow(
+      0 5px 10px rgba(139, 0, 0, 0.10)
+    );
+}
+
+.builder-logo-fallback {
+
+  width:
+    50px;
+
+  height:
+    50px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    15px;
+
+  color:
+    var(--white);
+
+  background:
+    var(--red-main);
+
+  font-size:
+    1.3rem;
+
+  font-weight:
+    900;
+}
+
+.builder-name {
+
+  max-width:
+    100%;
+
+  color:
+    var(--red-dark);
+
+  font-size:
+    0.76rem;
+
+  font-weight:
+    750;
+
+  text-align:
+    center;
+
+  white-space:
+    nowrap;
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+}
+
+
+/* ============================================================
+   38. CURATED PROPERTIES
+   ============================================================ */
+
+.curated-properties-section {
+
+  background:
+    linear-gradient(
+      160deg,
+      #650000,
+      #8b0000 50%,
+      #4c0000
+    );
+}
+
+.property-cards-grid {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  width:
+    min(1400px, 100%);
+
+  margin:
+    0 auto;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap:
+    15px;
+}
+
+
+/* ============================================================
+   39. PROPERTY CARDS
+   ============================================================ */
+
+.property-card {
+
+  position:
+    relative;
+
+  min-width:
+    0;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.14);
+
+  border-radius:
+    17px;
+
+  background:
+    var(--white);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.16);
+
+  cursor:
+    pointer;
+
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.property-card:hover {
+
+  transform:
+    translateY(-7px);
+
+  border-color:
+    rgba(139, 0, 0, 0.30);
+
+  box-shadow:
+    0 22px 45px rgba(0, 0, 0, 0.25);
+}
+
+.property-card-image-wrapper {
+
+  position:
+    relative;
+
+  height:
+    190px;
+
+  overflow:
+    hidden;
+
+  background:
+    #f5eeee;
+}
+
+.property-card-image {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  object-fit:
+    cover;
+
+  transition:
+    transform 0.8s var(--ease),
+    filter 0.8s var(--ease);
+}
+
+.property-card:hover
+.property-card-image {
+
+  transform:
+    scale(1.06);
+
+  filter:
+    saturate(1.05)
+    contrast(1.02);
+}
+
+.property-card-image-wrapper::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 45%,
+      rgba(30, 0, 0, 0.48)
+    );
+
+  pointer-events:
+    none;
+}
+
+.property-status-badge,
+.property-verified-badge {
+
+  position:
+    absolute;
+
+  z-index:
+    3;
+
+  top:
+    10px;
+
+  padding:
+    6px 9px;
+
+  border-radius:
+    999px;
+
+  font-size:
+    0.61rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.05em;
+
+  text-transform:
+    uppercase;
+}
+
+.property-status-badge {
+
+  left:
+    10px;
+
+  color:
+    var(--white);
+
+  background:
+    var(--red-main);
+}
+
+.property-verified-badge {
+
+  right:
+    10px;
+
+  color:
+    var(--red-dark);
+
+  background:
+    var(--white);
+
+  border:
+    1px solid rgba(139, 0, 0, 0.12);
+
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.10);
+}
+
+.property-verified-badge i {
+
+  margin-right:
+    3px;
+}
+
+.property-card-content {
+
+  padding:
+    14px;
+}
+
+.property-card-title {
+
+  margin:
+    0 0 7px;
+
+  color:
+    var(--red-dark);
+
+  font-size:
+    0.96rem;
+
+  line-height:
+    1.25;
+
+  font-weight:
+    800;
+
+  display:
+    -webkit-box;
+
+  -webkit-line-clamp:
+    2;
+
+  -webkit-box-orient:
+    vertical;
+
+  overflow:
+    hidden;
+}
+
+.property-card-location {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    5px;
+
+  margin-bottom:
+    7px;
+
+  color:
+    #765858;
+
+  font-size:
+    0.72rem;
+}
+
+.property-card-location i {
+
+  color:
+    var(--red-main);
+}
+
+.property-price {
+
+  margin-bottom:
+    9px;
+
+  color:
+    var(--red-main);
+
+  font-size:
+    1.08rem;
+
+  font-weight:
+    850;
+
+  letter-spacing:
+    -0.02em;
+}
+
+.property-card-meta {
+
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    5px;
+
+  margin-bottom:
+    11px;
+}
+
+.property-card-meta span {
+
+  padding:
+    4px 7px;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.10);
+
+  border-radius:
+    6px;
+
+  color:
+    var(--red-dark);
+
+  background:
+    #fff7f7;
+
+  font-size:
+    0.63rem;
+
+  font-weight:
+    650;
+}
+
+.property-card-actions {
+
+  display:
+    flex;
+
+  gap:
+    6px;
+
+  padding-top:
+    10px;
+
+  border-top:
+    1px solid rgba(139, 0, 0, 0.10);
+}
+
+.property-action-btn {
+
+  width:
+    34px;
+
+  height:
+    34px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.14);
+
+  border-radius:
+    9px;
+
+  color:
+    var(--red-dark);
+
+  background:
+    var(--white);
+
+  transition:
+    transform var(--transition),
+    color var(--transition),
+    background var(--transition),
+    border-color var(--transition);
+}
+
+.property-action-btn:hover {
+
+  color:
+    var(--white);
+
+  background:
+    var(--red-main);
+
+  border-color:
+    var(--red-main);
+
+  transform:
+    translateY(-3px);
+}
+
+.property-action-btn.whatsapp-action:hover {
+
+  color:
+    #ffffff;
+
+  background:
+    #168c45;
+
+  border-color:
+    #168c45;
+}
+
+
+/* ============================================================
+   40. VIEW ALL
+   ============================================================ */
+
+.properties-view-all-wrapper {
+
+  position:
+    relative;
+
+  z-index:
+    3;
+
+  width:
+    min(1400px, 100%);
+
+  margin:
+    0 auto 18px;
+
+  display:
+    flex;
+
+  justify-content:
+    flex-end;
+}
+
+.properties-view-all-btn {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  min-height:
+    40px;
+
+  padding:
+    0 15px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.85);
+
+  border-radius:
+    999px;
+
+  color:
+    var(--red-dark);
+
+  background:
+    var(--white);
+
+  font-size:
+    0.74rem;
+
+  font-weight:
+    800;
+
+  box-shadow:
+    0 7px 18px rgba(0, 0, 0, 0.14);
+
+  transition:
+    all var(--transition);
+}
+
+.properties-view-all-btn:hover {
+
+  color:
+    var(--white);
+
+  background:
+    var(--red-main);
+
+  border-color:
+    var(--red-main);
+
+  transform:
+    translateY(-2px);
+}
+
+
+/* ============================================================
+   41. EMPTY CURATED STATE
+   ============================================================ */
+
+.no-properties-message {
+
+  width:
+    min(600px, 100%);
+
+  margin:
+    35px auto 0;
+
+  padding:
+    38px 25px;
+
+  text-align:
+    center;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.12);
+
+  border-radius:
+    18px;
+
+  background:
+    var(--white);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.14);
+}
+
+.no-properties-icon {
+
+  width:
+    54px;
+
+  height:
+    54px;
+
+  margin:
+    0 auto 13px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    50%;
+
+  color:
+    var(--white);
+
+  background:
+    var(--red-main);
+
+  animation:
+    hourglassFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes hourglassFloat {
+
+  0%,
+  100% {
+
+    transform:
+      translateY(0);
+  }
+
+  50% {
+
+    transform:
+      translateY(-6px);
+  }
+}
+
+.no-properties-message h3 {
+
+  margin:
+    0 0 7px;
+
+  color:
+    var(--red-dark);
+
+  font-size:
+    1.15rem;
+}
+
+.no-properties-message p {
+
+  margin:
+    0;
+
+  color:
+    #765858;
+
+  font-size:
+    0.82rem;
+}
+
+
+/* ============================================================
+   42. FEATURED PROPERTIES
+   ============================================================ */
+
+.home-featured-properties-section {
+
+  background:
+    linear-gradient(
+      135deg,
+      #500000,
+      #790000 50%,
+      #3f0000
+    );
+}
+
+.home-featured-properties-grid {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  width:
+    min(1400px, 100%);
+
+  margin:
+    0 auto;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap:
+    16px;
+}
+
+.home-featured-property-card {
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.14);
+
+  border-radius:
+    18px;
+
+  background:
+    var(--white);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.16);
+
+  cursor:
+    pointer;
+
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.home-featured-property-card:hover {
+
+  transform:
+    translateY(-7px);
+
+  border-color:
+    rgba(139, 0, 0, 0.28);
+
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.25);
+}
+
+.home-featured-property-image {
+
+  position:
+    relative;
+
+  height:
+    210px;
+
+  overflow:
+    hidden;
+}
+
+.home-featured-property-image img {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  object-fit:
+    cover;
+
+  transition:
+    transform 0.8s var(--ease);
+}
+
+.home-featured-property-card:hover
+.home-featured-property-image img {
+
+  transform:
+    scale(1.06);
+}
+
+.home-featured-property-image::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 45%,
+      rgba(25, 0, 0, 0.45)
+    );
+}
+
+.home-featured-badge {
+
+  position:
+    absolute;
+
+  z-index:
+    2;
+
+  left:
+    12px;
+
+  top:
+    12px;
+
+  padding:
+    6px 9px;
+
+  border-radius:
+    999px;
+
+  color:
+    var(--white);
+
+  background:
+    var(--red-main);
+
+  font-size:
+    0.63rem;
+
+  font-weight:
+    900;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.07em;
+}
+
+.home-featured-property-content {
+
+  padding:
+    16px;
+}
+
+.home-featured-property-content h3 {
+
+  margin:
+    0 0 7px;
+
+  color:
+    var(--red-dark);
+
+  font-size:
+    1rem;
+
+  line-height:
+    1.3;
+}
+
+.home-featured-location {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    6px;
+
+  margin:
+    0 0 11px;
+
+  color:
+    #765858;
+
+  font-size:
+    0.73rem;
+}
+
+.home-featured-location i {
+
+  color:
+    var(--red-main);
+}
+
+.home-featured-property-meta {
+
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    6px;
+
+  margin-bottom:
+    13px;
+}
+
+.home-featured-property-meta span {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    5px;
+
+  padding:
+    5px 8px;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.09);
+
+  border-radius:
+    7px;
+
+  color:
+    var(--red-dark);
+
+  background:
+    #fff7f7;
+
+  font-size:
+    0.67rem;
+}
+
+.home-featured-property-footer {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    10px;
+
+  padding-top:
+    12px;
+
+  border-top:
+    1px solid rgba(139, 0, 0, 0.10);
+}
+
+.home-featured-property-footer strong {
+
+  color:
+    var(--red-main);
+
+  font-size:
+    1rem;
+}
+
+.home-featured-property-footer span {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    5px;
+
+  color:
+    var(--red-dark);
+
+  font-size:
+    0.7rem;
+
+  font-weight:
+    750;
+
+  transition:
+    color var(--transition);
+}
+
+.home-featured-property-card:hover
+.home-featured-property-footer span {
+
+  color:
+    var(--red-600);
+}
+
+.home-featured-property-footer i {
+
+  transition:
+    transform var(--transition);
+}
+
+.home-featured-property-card:hover
+.home-featured-property-footer i {
+
+  transform:
+    translateX(4px);
+}
+
+
+/* ============================================================
+   43. FEATURED EMPTY
+   ============================================================ */
+
+.home-featured-empty {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  width:
+    min(650px, 100%);
+
+  margin:
+    25px auto 0;
+
+  padding:
+    42px 25px;
+
+  text-align:
+    center;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.13);
+
+  border-radius:
+    20px;
+
+  background:
+    var(--white);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.15);
+}
+
+.home-featured-empty i {
+
+  color:
+    var(--red-main);
+
+  font-size:
+    2rem;
+}
+
+.home-featured-empty h3 {
+
+  margin:
+    13px 0 7px;
+
+  color:
+    var(--red-dark);
+}
+
+.home-featured-empty p {
+
+  margin:
+    0;
+
+  color:
+    #765858;
+
+  font-size:
+    0.83rem;
+}
+
+
+/* ============================================================
+   44. FINAL CTA
+   ============================================================ */
+
+.home-property-cta-section {
+
+  min-height:
+    300px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  padding:
+    65px 24px;
+
+  text-align:
+    center;
+
+  background:
+    var(--white);
+}
+
+.home-property-cta-section::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  width:
+    430px;
+
+  height:
+    430px;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.08);
+
+  border-radius:
+    50%;
+
+  animation:
+    ctaRing 15s linear infinite;
+}
+
+@keyframes ctaRing {
+
+  from {
+
+    transform:
+      rotate(0deg)
+      scale(1);
+  }
+
+  to {
+
+    transform:
+      rotate(360deg)
+      scale(1.05);
+  }
+}
+
+.home-property-cta-content {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  width:
+    min(800px, 100%);
+
+  padding:
+    38px 35px;
+
+  border:
+    1px solid rgba(139, 0, 0, 0.12);
+
+  border-radius:
+    24px;
+
+  background:
+    #fffafa;
+
+  box-shadow:
+    0 20px 50px rgba(80, 0, 0, 0.12);
+}
+
+.home-property-cta-content h2 {
+
+  margin:
+    0 0 11px;
+
+  color:
+    var(--red-dark);
+
+  font-size:
+    clamp(1.9rem, 3.5vw, 3.2rem);
+
+  line-height:
+    1.05;
+
+  letter-spacing:
+    -0.04em;
+}
+
+.home-property-cta-content p {
+
+  margin:
+    0 0 22px;
+
+  color:
+    #765858;
+
+  line-height:
+    1.6;
+}
+
+.home-property-cta-actions {
+
+  display:
+    flex;
+
+  justify-content:
+    center;
+}
+
+.home-property-cta-btn {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  min-height:
+    48px;
+
+  padding:
+    0 24px;
+
+  border:
+    1px solid var(--red-main);
+
+  border-radius:
+    12px;
+
+  color:
+    var(--white);
+
+  background:
+    var(--red-main);
+
+  font-size:
+    0.8rem;
+
+  font-weight:
+    850;
+
+  box-shadow:
+    0 12px 28px rgba(139, 0, 0, 0.22);
+
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.home-property-cta-btn:hover {
+
+  transform:
+    translateY(-4px);
+
+  background:
+    var(--red-600);
+
+  box-shadow:
+    0 20px 40px rgba(139, 0, 0, 0.28);
+}
+
+
+/* ============================================================
+   45. LARGE DESKTOP
+   ============================================================ */
+
+@media (min-width: 1500px) {
+
+  .accha-modern-hero {
+    min-height:
+      850px;
+  }
+
+  .accha-hero-copy h1 {
+    font-size:
+      5rem;
+  }
+
+  .builders-grid {
+    grid-template-columns:
+      repeat(6, minmax(0, 1fr));
+  }
+}
+
+
+/* ============================================================
+   46. TABLET / SMALL LAPTOP
+   ============================================================ */
+
 @media (max-width: 1200px) {
 
+  .accha-modern-hero {
+
+    min-height:
+      auto;
+
+    padding-top:
+      58px;
+  }
+
+  .accha-hero-inner {
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(340px, 0.75fr);
+
+    gap:
+      35px;
+  }
+
+  .accha-hero-copy h1 {
+
+    font-size:
+      clamp(2.6rem, 5vw, 4.4rem);
+  }
+
+  /* SOLAR */
+
   .textbook-solar-system {
-    width: 500px;
-    height: 500px;
 
-    right: -90px;
+    width:
+      540px;
 
-    opacity: 0.90;
+    height:
+      540px;
+
+    left:
+      50%;
+
+    top:
+      50%;
+
+    transform:
+      translate(-50%, -50%);
+
+    opacity:
+      0.34;
   }
 
   .ring-1 {
@@ -1941,2517 +4309,18 @@ html {
   .p-neptune {
     --orbit-radius: 229px;
   }
-}
-
-
-@media (max-width: 900px) {
-
-  .textbook-solar-system {
-    display: none;
-  }
-}
-
-
-
-@media (prefers-reduced-motion: reduce) {
-
-  .sun-core,
-  .planet {
-    animation: none !important;
-  }
-}
-
-
-/* ============================================================
-   21. ARCHITECTURAL BUILDING
-   ============================================================ */
-
-.accha-hero-visual {
-
-  position:
-    relative;
-
-  min-height:
-    560px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  animation:
-    heroVisualIn 1.05s 0.18s var(--ease) both;
-}
-
-
-@keyframes heroVisualIn {
-
-  from {
-
-    opacity:
-      0;
-
-    transform:
-      translate3d(45px, 30px, 0)
-      scale(0.94);
-  }
-
-  to {
-
-    opacity:
-      1;
-
-    transform:
-      translate3d(0, 0, 0)
-      scale(1);
-  }
-}
-
-
-.architectural-building {
-
-  position:
-    relative;
-
-  width:
-    min(100%, 580px);
-
-  aspect-ratio:
-    1;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-}
-
-
-.building-glow {
-
-  position:
-    absolute;
-
-  width:
-    68%;
-
-  aspect-ratio:
-    1;
-
-  border-radius:
-    50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.14),
-      transparent 65%
-    );
-
-  filter:
-    blur(10px);
-
-  animation:
-    buildingGlow 5s ease-in-out infinite;
-}
-
-
-@keyframes buildingGlow {
-
-  0%,
-  100% {
-
-    transform:
-      scale(0.95);
-
-    opacity:
-      0.6;
-  }
-
-  50% {
-
-    transform:
-      scale(1.08);
-
-    opacity:
-      1;
-  }
-}
-
-
-.building-blueprint {
-
-  position:
-    relative;
-
-  z-index:
-    2;
-
-  width:
-    100%;
-
-  height:
-    100%;
-
-  overflow:
-    visible;
-
-  filter:
-    drop-shadow(
-      0 0 18px rgba(255, 255, 255, 0.10)
-    );
-}
-
-
-.building-blueprint line,
-.building-blueprint path,
-.building-blueprint rect {
-
-  fill:
-    none;
-
-  stroke:
-    rgba(255, 255, 255, 0.82);
-
-  stroke-width:
-    2;
-
-  stroke-linecap:
-    round;
-
-  stroke-linejoin:
-    round;
-}
-
-
-.building-blueprint .building-main-outline {
-
-  stroke-width:
-    3;
-
-  stroke:
-    rgba(255, 255, 255, 0.96);
-
-  stroke-dasharray:
-    1800;
-
-  stroke-dashoffset:
-    1800;
-
-  animation:
-    blueprintDraw 3s 0.4s var(--ease) forwards;
-}
-
-
-.building-blueprint .building-detail {
-
-  stroke:
-    rgba(255, 255, 255, 0.52);
-
-  stroke-width:
-    1.5;
-
-  stroke-dasharray:
-    900;
-
-  stroke-dashoffset:
-    900;
-
-  animation:
-    blueprintDraw 4s 0.7s var(--ease) forwards;
-}
-
-
-.building-blueprint .building-windows rect {
-
-  fill:
-    rgba(255, 255, 255, 0.025);
-
-  stroke:
-    rgba(255, 255, 255, 0.62);
-
-  stroke-width:
-    1.5;
-
-  transition:
-    fill var(--transition);
-}
-
-
-.building-blueprint .building-windows rect:hover {
-
-  fill:
-    rgba(255, 255, 255, 0.16);
-}
-
-
-.building-blueprint .building-door {
-
-  stroke:
-    rgba(255, 255, 255, 0.9);
-
-  stroke-width:
-    2.5;
-}
-
-
-@keyframes blueprintDraw {
-
-  to {
-
-    stroke-dashoffset:
-      0;
-  }
-}
-
-
-/* ============================================================
-   23. FLOATING SERVICE BADGES
-   ============================================================ */
-
-.service-floating-card {
-
-  position:
-    absolute;
-
-  z-index:
-    8;
-
-  padding:
-    10px 14px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.24);
-
-  border-radius:
-    999px;
-
-  color:
-    var(--white);
-
-  background:
-    rgba(82, 0, 0, 0.55);
-
-  backdrop-filter:
-    blur(12px);
-
-  -webkit-backdrop-filter:
-    blur(12px);
-
-  box-shadow:
-    0 12px 28px rgba(0, 0, 0, 0.25);
-
-  font-size:
-    0.76rem;
-
-  font-weight:
-    700;
-
-  white-space:
-    nowrap;
-
-  animation:
-    serviceFloat 4.5s ease-in-out infinite;
-
-  transition:
-    border-color var(--transition),
-    background var(--transition),
-    transform var(--transition);
-}
-
-
-.service-floating-card:hover {
-
-  animation-play-state:
-    paused;
-
-  background:
-    rgba(255, 255, 255, 0.13);
-
-  border-color:
-    rgba(255, 255, 255, 0.4);
-
-  transform:
-    translateY(-6px)
-    scale(1.03);
-}
-
-
-@keyframes serviceFloat {
-
-  0%,
-  100% {
-
-    transform:
-      translateY(0);
-  }
-
-  50% {
-
-    transform:
-      translateY(-9px);
-  }
-}
-
-
-.badge-cleaning {
-
-  left:
-    2%;
-
-  top:
-    25%;
-
-  animation-delay:
-    0s;
-}
-
-
-.badge-painting {
-
-  right:
-    1%;
-
-  top:
-    46%;
-
-  animation-delay:
-    1s;
-}
-
-
-.badge-ekhata {
-
-  left:
-    10%;
-
-  bottom:
-    19%;
-
-  animation-delay:
-    2s;
-}
-
-/* ============================================================
-   NEW FLOATING SERVICE BADGES
-   ============================================================ */
-
-.badge-property-management {
-
-  right:
-    8%;
-
-  top:
-    18%;
-
-  animation-delay:
-    3s;
-}
-
-
-.badge-post-property {
-
-  right:
-    12%;
-
-  bottom:
-    15%;
-
-  animation-delay:
-    4s;
-}
-
-/* ============================================================
-   24. PROJECT STRIP
-   WHITE
-   ============================================================ */
-
-.hero-project-strip {
-
-  position:
-    relative;
-
-  z-index:
-    10;
-
-  width:
-    min(1440px, 100%);
-
-  margin:
-    24px auto 0;
-
-  padding:
-    14px 18px;
-
-  display:
-    grid;
-
-  grid-template-columns:
-    auto minmax(0, 1fr) auto;
-
-  align-items:
-    center;
-
-  gap:
-    15px;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.13);
-
-  border-radius:
-    18px;
-
-  background:
-    var(--white);
-
-  box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.18);
-
-  animation:
-    stripIn 0.9s 0.5s var(--ease) both;
-}
-
-
-@keyframes stripIn {
-
-  from {
-
-    opacity:
-      0;
-
-    transform:
-      translateY(25px);
-  }
-
-  to {
-
-    opacity:
-      1;
-
-    transform:
-      translateY(0);
-  }
-}
-
-
-.project-strip-icon {
-
-  width:
-    42px;
-
-  height:
-    42px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border-radius:
-    13px;
-
-  color:
-    var(--white);
-
-  background:
-    var(--red-main);
-
-  font-size:
-    1.5rem;
-
-  font-weight:
-    300;
-
-  box-shadow:
-    0 8px 20px rgba(139, 0, 0, 0.20);
-}
-
-
-.project-strip-text {
-
-  min-width:
-    0;
-
-  display:
-    flex;
-
-  flex-direction:
-    column;
-
-  gap:
-    3px;
-}
-
-
-.project-strip-text strong {
-
-  color:
-    var(--red-dark);
-
-  font-size:
-    0.9rem;
-
-  letter-spacing:
-    0.01em;
-}
-
-
-.project-strip-text span {
-
-  color:
-    #765858;
-
-  font-size:
-    0.75rem;
-
-  line-height:
-    1.45;
-}
-
-
-.project-strip-button {
-
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  gap:
-    8px;
-
-  min-height:
-    42px;
-
-  padding:
-    0 17px;
-
-  border:
-    1px solid var(--red-main);
-
-  border-radius:
-    11px;
-
-  color:
-    var(--white);
-
-  background:
-    var(--red-main);
-
-  font-size:
-    0.77rem;
-
-  font-weight:
-    800;
-
-  white-space:
-    nowrap;
-
-  box-shadow:
-    0 8px 20px rgba(139, 0, 0, 0.20);
-
-  transition:
-    transform var(--transition),
-    box-shadow var(--transition),
-    background var(--transition);
-}
-
-
-.project-strip-button:hover {
-
-  transform:
-    translateY(-3px);
-
-  background:
-    var(--red-600);
-
-  box-shadow:
-    0 12px 25px rgba(139, 0, 0, 0.30);
-}
-
-
-.project-strip-button span {
-
-  color:
-    inherit;
-
-  transition:
-    transform var(--transition);
-}
-
-
-.project-strip-button:hover span {
-
-  transform:
-    translate(3px, -2px);
-}
-
-
-/* ============================================================
-   25. COMMON SECTION
-   ============================================================ */
-
-.upcoming-projects-section,
-.curated-properties-section,
-.home-featured-properties-section,
-.home-property-cta-section {
-
-  position:
-    relative;
-
-  padding:
-    75px
-    clamp(24px, 5vw, 80px);
-
-  overflow:
-    hidden;
-}
-
-
-.upcoming-projects-section::before,
-.curated-properties-section::before,
-.home-featured-properties-section::before {
-
-  content:
-    "";
-
-  position:
-    absolute;
-
-  width:
-    500px;
-
-  height:
-    500px;
-
-  border-radius:
-    50%;
-
-  right:
-    -260px;
-
-  top:
-    -260px;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.07),
-      transparent 68%
-    );
-
-  pointer-events:
-    none;
-}
-
-
-/* ============================================================
-   26. SECTION HEADERS
-   ============================================================ */
-
-.projects-section-header,
-.properties-section-header,
-.home-featured-properties-header {
-
-  position:
-    relative;
-
-  z-index:
-    2;
-
-  max-width:
-    800px;
-
-  margin:
-    0 auto 28px;
-
-  text-align:
-    center;
-}
-
-
-.projects-section-title,
-.properties-section-title,
-.home-featured-properties-header h2 {
-
-  margin:
-    0 0 10px;
-
-  color:
-    var(--white);
-
-  font-size:
-    clamp(2rem, 3.5vw, 3.4rem);
-
-  line-height:
-    1.02;
-
-  letter-spacing:
-    -0.045em;
-
-  font-weight:
-    800;
-}
-
-
-.projects-section-description,
-.properties-section-description,
-.home-featured-properties-header p {
-
-  margin:
-    0;
-
-  color:
-    rgba(255, 255, 255, 0.62);
-
-  font-size:
-    0.94rem;
-
-  line-height:
-    1.6;
-}
-
-
-.home-featured-eyebrow {
-
-  display:
-    inline-block;
-
-  margin-bottom:
-    10px;
-
-  color:
-    rgba(255, 255, 255, 0.52);
-
-  font-size:
-    0.7rem;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.2em;
-}
-
-
-/* ============================================================
-   27. PROJECT LOCATION TABS
-   ============================================================ */
-
-.project-location-tabs {
-
-  position:
-    relative;
-
-  z-index:
-    2;
-
-  display:
-    flex;
-
-  justify-content:
-    center;
-
-  flex-wrap:
-    wrap;
-
-  gap:
-    8px;
-
-  margin-bottom:
-    25px;
-}
-
-
-.project-location-tab {
-
-  min-height:
-    38px;
-
-  padding:
-    0 16px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.7);
-
-  border-radius:
-    999px;
-
-  color:
-    var(--red-dark);
-
-  background:
-    var(--white);
-
-  font-size:
-    0.75rem;
-
-  font-weight:
-    750;
-
-  box-shadow:
-    0 5px 14px rgba(0, 0, 0, 0.10);
-
-  transition:
-    all var(--transition);
-}
-
-
-.project-location-tab:hover {
-
-  color:
-    var(--white);
-
-  border-color:
-    var(--red-main);
-
-  background:
-    var(--red-main);
-
-  transform:
-    translateY(-2px);
-
-  box-shadow:
-    0 9px 20px rgba(139, 0, 0, 0.22);
-}
-
-
-.project-location-tab.active {
-
-  color:
-    var(--red-main);
-
-  background:
-    var(--white);
-
-  border-color:
-    var(--white);
-
-  box-shadow:
-    0 8px 22px rgba(0, 0, 0, 0.16);
-}
-
-
-/* ============================================================
-   28. BUILDER GRID
-   ============================================================ */
-
-.builders-grid {
-
-  position:
-    relative;
-
-  z-index:
-    2;
-
-  width:
-    min(1250px, 100%);
-
-  margin:
-    0 auto;
-
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(5, minmax(0, 1fr));
-
-  gap:
-    13px;
-}
-
-
-/* ============================================================
-   29. BUILDER CARDS
-   ============================================================ */
-
-.builder-logo-card {
-
-  position:
-    relative;
-
-  min-height:
-    130px;
-
-  display:
-    flex;
-
-  flex-direction:
-    column;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  gap:
-    10px;
-
-  padding:
-    16px;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.13);
-
-  border-radius:
-    18px;
-
-  background:
-    var(--white);
-
-  box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.12);
-
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
-}
-
-
-.builder-logo-card::before {
-
-  content:
-    "";
-
-  position:
-    absolute;
-
-  left:
-    0;
-
-  top:
-    16px;
-
-  bottom:
-    16px;
-
-  width:
-    4px;
-
-  border-radius:
-    0 5px 5px 0;
-
-  background:
-    var(--red-main);
-
-  opacity:
-    0.8;
-}
-
-
-.builder-logo-card:hover {
-
-  transform:
-    translateY(-7px);
-
-  border-color:
-    rgba(139, 0, 0, 0.28);
-
-  box-shadow:
-    0 20px 38px rgba(0, 0, 0, 0.18);
-}
-
-
-.builder-logo-wrapper {
-
-  width:
-    90px;
-
-  height:
-    58px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-}
-
-
-.builder-logo-image {
-
-  max-width:
-    100%;
-
-  max-height:
-    100%;
-
-  object-fit:
-    contain;
-
-  filter:
-    none;
-
-  opacity:
-    0.95;
-
-  transition:
-    transform var(--transition),
-    opacity var(--transition);
-}
-
-
-.builder-logo-card:hover
-.builder-logo-image {
-
-  opacity:
-    1;
-
-  transform:
-    scale(1.07);
-
-  filter:
-    drop-shadow(
-      0 5px 10px rgba(139, 0, 0, 0.10)
-    );
-}
-
-
-.builder-logo-fallback {
-
-  width:
-    50px;
-
-  height:
-    50px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border-radius:
-    15px;
-
-  color:
-    var(--white);
-
-  background:
-    var(--red-main);
-
-  font-size:
-    1.3rem;
-
-  font-weight:
-    900;
-}
-
-
-.builder-name {
-
-  max-width:
-    100%;
-
-  color:
-    var(--red-dark);
-
-  font-size:
-    0.76rem;
-
-  font-weight:
-    750;
-
-  text-align:
-    center;
-
-  white-space:
-    nowrap;
-
-  overflow:
-    hidden;
-
-  text-overflow:
-    ellipsis;
-}
-
-
-/* ============================================================
-   30. CURATED PROPERTIES
-   ============================================================ */
-
-.curated-properties-section {
-
-  background:
-    linear-gradient(
-      160deg,
-      #650000,
-      #8b0000 50%,
-      #4c0000
-    );
-}
-
-
-.property-cards-grid {
-
-  position:
-    relative;
-
-  z-index:
-    2;
-
-  width:
-    min(1400px, 100%);
-
-  margin:
-    0 auto;
-
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
-
-  gap:
-    15px;
-}
-
-
-/* ============================================================
-   31. PROPERTY CARDS
-   WHITE + COMPACT
-   ============================================================ */
-
-.property-card {
-
-  position:
-    relative;
-
-  min-width:
-    0;
-
-  overflow:
-    hidden;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.14);
-
-  border-radius:
-    17px;
-
-  background:
-    var(--white);
-
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.16);
-
-  cursor:
-    pointer;
-
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
-}
-
-
-.property-card:hover {
-
-  transform:
-    translateY(-7px);
-
-  border-color:
-    rgba(139, 0, 0, 0.30);
-
-  box-shadow:
-    0 22px 45px rgba(0, 0, 0, 0.25);
-}
-
-
-.property-card-image-wrapper {
-
-  position:
-    relative;
-
-  height:
-    190px;
-
-  overflow:
-    hidden;
-
-  background:
-    #f5eeee;
-}
-
-
-.property-card-image {
-
-  width:
-    100%;
-
-  height:
-    100%;
-
-  display:
-    block;
-
-  object-fit:
-    cover;
-
-  transition:
-    transform 0.8s var(--ease),
-    filter 0.8s var(--ease);
-}
-
-
-.property-card:hover
-.property-card-image {
-
-  transform:
-    scale(1.06);
-
-  filter:
-    saturate(1.05)
-    contrast(1.02);
-}
-
-
-.property-card-image-wrapper::after {
-
-  content:
-    "";
-
-  position:
-    absolute;
-
-  inset:
-    0;
-
-  background:
-    linear-gradient(
-      to bottom,
-      transparent 45%,
-      rgba(30, 0, 0, 0.48)
-    );
-
-  pointer-events:
-    none;
-}
-
-
-.property-status-badge,
-.property-verified-badge {
-
-  position:
-    absolute;
-
-  z-index:
-    3;
-
-  top:
-    10px;
-
-  padding:
-    6px 9px;
-
-  border-radius:
-    999px;
-
-  font-size:
-    0.61rem;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.05em;
-
-  text-transform:
-    uppercase;
-}
-
-
-.property-status-badge {
-
-  left:
-    10px;
-
-  color:
-    var(--white);
-
-  background:
-    var(--red-main);
-}
-
-
-.property-verified-badge {
-
-  right:
-    10px;
-
-  color:
-    var(--red-dark);
-
-  background:
-    var(--white);
-
-  border:
-    1px solid rgba(139, 0, 0, 0.12);
-
-  box-shadow:
-    0 5px 12px rgba(0, 0, 0, 0.10);
-}
-
-
-.property-verified-badge i {
-
-  margin-right:
-    3px;
-}
-
-
-/* ============================================================
-   32. PROPERTY CONTENT
-   ============================================================ */
-
-.property-card-content {
-
-  padding:
-    14px;
-}
-
-
-.property-card-title {
-
-  margin:
-    0 0 7px;
-
-  color:
-    var(--red-dark);
-
-  font-size:
-    0.96rem;
-
-  line-height:
-    1.25;
-
-  font-weight:
-    800;
-
-  display:
-    -webkit-box;
-
-  -webkit-line-clamp:
-    2;
-
-  -webkit-box-orient:
-    vertical;
-
-  overflow:
-    hidden;
-}
-
-
-.property-card-location {
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    5px;
-
-  margin-bottom:
-    7px;
-
-  color:
-    #765858;
-
-  font-size:
-    0.72rem;
-}
-
-
-.property-card-location i {
-
-  color:
-    var(--red-main);
-}
-
-
-.property-price {
-
-  margin-bottom:
-    9px;
-
-  color:
-    var(--red-main);
-
-  font-size:
-    1.08rem;
-
-  font-weight:
-    850;
-
-  letter-spacing:
-    -0.02em;
-}
-
-
-.property-card-meta {
-
-  display:
-    flex;
-
-  flex-wrap:
-    wrap;
-
-  gap:
-    5px;
-
-  margin-bottom:
-    11px;
-}
-
-
-.property-card-meta span {
-
-  padding:
-    4px 7px;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.10);
-
-  border-radius:
-    6px;
-
-  color:
-    var(--red-dark);
-
-  background:
-    #fff7f7;
-
-  font-size:
-    0.63rem;
-
-  font-weight:
-    650;
-}
-
-
-/* ============================================================
-   33. PROPERTY ACTIONS
-   ============================================================ */
-
-.property-card-actions {
-
-  display:
-    flex;
-
-  gap:
-    6px;
-
-  padding-top:
-    10px;
-
-  border-top:
-    1px solid rgba(139, 0, 0, 0.10);
-}
-
-
-.property-action-btn {
-
-  width:
-    34px;
-
-  height:
-    34px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.14);
-
-  border-radius:
-    9px;
-
-  color:
-    var(--red-dark);
-
-  background:
-    var(--white);
-
-  transition:
-    transform var(--transition),
-    color var(--transition),
-    background var(--transition),
-    border-color var(--transition);
-}
-
-
-.property-action-btn:hover {
-
-  color:
-    var(--white);
-
-  background:
-    var(--red-main);
-
-  border-color:
-    var(--red-main);
-
-  transform:
-    translateY(-3px);
-}
-
-
-.property-action-btn.whatsapp-action:hover {
-
-  color:
-    #ffffff;
-
-  background:
-    #168c45;
-
-  border-color:
-    #168c45;
-}
-
-
-/* ============================================================
-   34. VIEW ALL
-   ============================================================ */
-
-.properties-view-all-wrapper {
-
-  position:
-    relative;
-
-  z-index:
-    3;
-
-  width:
-    min(1400px, 100%);
-
-  margin:
-    0 auto 18px;
-
-  display:
-    flex;
-
-  justify-content:
-    flex-end;
-}
-
-
-.properties-view-all-btn {
-
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  gap:
-    10px;
-
-  min-height:
-    40px;
-
-  padding:
-    0 15px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.85);
-
-  border-radius:
-    999px;
-
-  color:
-    var(--red-dark);
-
-  background:
-    var(--white);
-
-  font-size:
-    0.74rem;
-
-  font-weight:
-    800;
-
-  box-shadow:
-    0 7px 18px rgba(0, 0, 0, 0.14);
-
-  transition:
-    all var(--transition);
-}
-
-
-.properties-view-all-btn:hover {
-
-  color:
-    var(--white);
-
-  background:
-    var(--red-main);
-
-  border-color:
-    var(--red-main);
-
-  transform:
-    translateY(-2px);
-}
-
-
-/* ============================================================
-   35. EMPTY CURATED STATE
-   ============================================================ */
-
-.no-properties-message {
-
-  width:
-    min(600px, 100%);
-
-  margin:
-    35px auto 0;
-
-  padding:
-    38px 25px;
-
-  text-align:
-    center;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.12);
-
-  border-radius:
-    18px;
-
-  background:
-    var(--white);
-
-  box-shadow:
-    0 15px 35px rgba(0, 0, 0, 0.14);
-}
-
-
-.no-properties-icon {
-
-  width:
-    54px;
-
-  height:
-    54px;
-
-  margin:
-    0 auto 13px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  border-radius:
-    50%;
-
-  color:
-    var(--white);
-
-  background:
-    var(--red-main);
-
-  animation:
-    hourglassFloat 2.5s ease-in-out infinite;
-}
-
-
-@keyframes hourglassFloat {
-
-  0%,
-  100% {
-
-    transform:
-      translateY(0);
-  }
-
-  50% {
-
-    transform:
-      translateY(-6px);
-  }
-}
-
-
-.no-properties-message h3 {
-
-  margin:
-    0 0 7px;
-
-  color:
-    var(--red-dark);
-
-  font-size:
-    1.15rem;
-}
-
-
-.no-properties-message p {
-
-  margin:
-    0;
-
-  color:
-    #765858;
-
-  font-size:
-    0.82rem;
-}
-
-
-/* ============================================================
-   36. FEATURED PROPERTIES
-   ============================================================ */
-
-.home-featured-properties-section {
-
-  background:
-    linear-gradient(
-      135deg,
-      #500000,
-      #790000 50%,
-      #3f0000
-    );
-}
-
-
-.home-featured-properties-grid {
-
-  position:
-    relative;
-
-  z-index:
-    2;
-
-  width:
-    min(1400px, 100%);
-
-  margin:
-    0 auto;
-
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
-  gap:
-    16px;
-}
-
-
-/* ============================================================
-   37. FEATURED CARDS
-   WHITE + COMPACT
-   ============================================================ */
-
-.home-featured-property-card {
-
-  overflow:
-    hidden;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.14);
-
-  border-radius:
-    18px;
-
-  background:
-    var(--white);
-
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.16);
-
-  cursor:
-    pointer;
-
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
-}
-
-
-.home-featured-property-card:hover {
-
-  transform:
-    translateY(-7px);
-
-  border-color:
-    rgba(139, 0, 0, 0.28);
-
-  box-shadow:
-    0 24px 50px rgba(0, 0, 0, 0.25);
-}
-
-
-.home-featured-property-image {
-
-  position:
-    relative;
-
-  height:
-    210px;
-
-  overflow:
-    hidden;
-}
-
-
-.home-featured-property-image img {
-
-  width:
-    100%;
-
-  height:
-    100%;
-
-  display:
-    block;
-
-  object-fit:
-    cover;
-
-  transition:
-    transform 0.8s var(--ease);
-}
-
-
-.home-featured-property-card:hover
-.home-featured-property-image img {
-
-  transform:
-    scale(1.06);
-}
-
-
-.home-featured-property-image::after {
-
-  content:
-    "";
-
-  position:
-    absolute;
-
-  inset:
-    0;
-
-  background:
-    linear-gradient(
-      to bottom,
-      transparent 45%,
-      rgba(25, 0, 0, 0.45)
-    );
-}
-
-
-.home-featured-badge {
-
-  position:
-    absolute;
-
-  z-index:
-    2;
-
-  left:
-    12px;
-
-  top:
-    12px;
-
-  padding:
-    6px 9px;
-
-  border-radius:
-    999px;
-
-  color:
-    var(--white);
-
-  background:
-    var(--red-main);
-
-  font-size:
-    0.63rem;
-
-  font-weight:
-    900;
-
-  text-transform:
-    uppercase;
-
-  letter-spacing:
-    0.07em;
-}
-
-
-.home-featured-property-content {
-
-  padding:
-    16px;
-}
-
-
-.home-featured-property-content h3 {
-
-  margin:
-    0 0 7px;
-
-  color:
-    var(--red-dark);
-
-  font-size:
-    1rem;
-
-  line-height:
-    1.3;
-}
-
-
-.home-featured-location {
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    6px;
-
-  margin:
-    0 0 11px;
-
-  color:
-    #765858;
-
-  font-size:
-    0.73rem;
-}
-
-
-.home-featured-location i {
-
-  color:
-    var(--red-main);
-}
-
-
-.home-featured-property-meta {
-
-  display:
-    flex;
-
-  flex-wrap:
-    wrap;
-
-  gap:
-    6px;
-
-  margin-bottom:
-    13px;
-}
-
-
-.home-featured-property-meta span {
-
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  gap:
-    5px;
-
-  padding:
-    5px 8px;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.09);
-
-  border-radius:
-    7px;
-
-  color:
-    var(--red-dark);
-
-  background:
-    #fff7f7;
-
-  font-size:
-    0.67rem;
-}
-
-
-.home-featured-property-footer {
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    space-between;
-
-  gap:
-    10px;
-
-  padding-top:
-    12px;
-
-  border-top:
-    1px solid rgba(139, 0, 0, 0.10);
-}
-
-
-.home-featured-property-footer strong {
-
-  color:
-    var(--red-main);
-
-  font-size:
-    1rem;
-}
-
-
-.home-featured-property-footer span {
-
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  gap:
-    5px;
-
-  color:
-    var(--red-dark);
-
-  font-size:
-    0.7rem;
-
-  font-weight:
-    750;
-
-  transition:
-    color var(--transition);
-}
-
-
-.home-featured-property-card:hover
-.home-featured-property-footer span {
-
-  color:
-    var(--red-600);
-}
-
-
-.home-featured-property-footer i {
-
-  transition:
-    transform var(--transition);
-}
-
-
-.home-featured-property-card:hover
-.home-featured-property-footer i {
-
-  transform:
-    translateX(4px);
-}
-
-
-/* ============================================================
-   38. FEATURED EMPTY
-   ============================================================ */
-
-.home-featured-empty {
-
-  position:
-    relative;
-
-  z-index:
-    2;
-
-  width:
-    min(650px, 100%);
-
-  margin:
-    25px auto 0;
-
-  padding:
-    42px 25px;
-
-  text-align:
-    center;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.13);
-
-  border-radius:
-    20px;
-
-  background:
-    var(--white);
-
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.15);
-}
-
-
-.home-featured-empty i {
-
-  color:
-    var(--red-main);
-
-  font-size:
-    2rem;
-}
-
-
-.home-featured-empty h3 {
-
-  margin:
-    13px 0 7px;
-
-  color:
-    var(--red-dark);
-}
-
-
-.home-featured-empty p {
-
-  margin:
-    0;
-
-  color:
-    #765858;
-
-  font-size:
-    0.83rem;
-}
-
-
-/* ============================================================
-   39. FINAL CTA
-   WHITE SECTION
-   ============================================================ */
-
-.home-property-cta-section {
-
-  min-height:
-    300px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  padding:
-    65px 24px;
-
-  text-align:
-    center;
-
-  background:
-    var(--white);
-}
-
-
-.home-property-cta-section::before {
-
-  content:
-    "";
-
-  position:
-    absolute;
-
-  width:
-    430px;
-
-  height:
-    430px;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.08);
-
-  border-radius:
-    50%;
-
-  animation:
-    ctaRing 15s linear infinite;
-}
-
-
-@keyframes ctaRing {
-
-  from {
-
-    transform:
-      rotate(0deg)
-      scale(1);
-  }
-
-  to {
-
-    transform:
-      rotate(360deg)
-      scale(1.05);
-  }
-}
-
-
-.home-property-cta-content {
-
-  position:
-    relative;
-
-  z-index:
-    2;
-
-  width:
-    min(800px, 100%);
-
-  padding:
-    38px 35px;
-
-  border:
-    1px solid rgba(139, 0, 0, 0.12);
-
-  border-radius:
-    24px;
-
-  background:
-    #fffafa;
-
-  box-shadow:
-    0 20px 50px rgba(80, 0, 0, 0.12);
-}
-
-
-.home-property-cta-content h2 {
-
-  margin:
-    0 0 11px;
-
-  color:
-    var(--red-dark);
-
-  font-size:
-    clamp(1.9rem, 3.5vw, 3.2rem);
-
-  line-height:
-    1.05;
-
-  letter-spacing:
-    -0.04em;
-}
-
-
-.home-property-cta-content p {
-
-  margin:
-    0 0 22px;
-
-  color:
-    #765858;
-
-  line-height:
-    1.6;
-}
-
-
-.home-property-cta-actions {
-
-  display:
-    flex;
-
-  justify-content:
-    center;
-}
-
-
-.home-property-cta-btn {
-
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  min-height:
-    48px;
-
-  padding:
-    0 24px;
-
-  border:
-    1px solid var(--red-main);
-
-  border-radius:
-    12px;
-
-  color:
-    var(--white);
-
-  background:
-    var(--red-main);
-
-  font-size:
-    0.8rem;
-
-  font-weight:
-    850;
-
-  box-shadow:
-    0 12px 28px rgba(139, 0, 0, 0.22);
-
-  transition:
-    transform var(--transition),
-    box-shadow var(--transition),
-    background var(--transition);
-}
-
-
-.home-property-cta-btn:hover {
-
-  transform:
-    translateY(-4px);
-
-  background:
-    var(--red-600);
-
-  box-shadow:
-    0 20px 40px rgba(139, 0, 0, 0.28);
-}
-
-
-/* ============================================================
-   40. LARGE DESKTOP
-   ============================================================ */
-
-@media (min-width: 1500px) {
-
-  .accha-modern-hero {
-    min-height:
-      850px;
-  }
-
-  .accha-hero-copy h1 {
-    font-size:
-      5rem;
-  }
 
   .builders-grid {
-    grid-template-columns:
-      repeat(6, minmax(0, 1fr));
-  }
-}
-
-
-/* ============================================================
-   41. TABLET / SMALL LAPTOP
-   ============================================================ */
-
-@media (max-width: 1200px) {
-
-  .accha-modern-hero {
-
-    min-height:
-      auto;
-
-    /*
-      Navbar → title gap
-      also reduced here.
-    */
-
-    padding-top:
-      58px;
-  }
-
-
-  .accha-hero-inner {
-
-    grid-template-columns:
-      minmax(0, 1fr)
-      minmax(340px, 0.75fr);
-
-    gap:
-      35px;
-  }
-
-
-  .accha-hero-copy h1 {
-
-    font-size:
-      clamp(2.6rem, 5vw, 4.4rem);
-  }
-
-  /*
-    SOLAR SYSTEM CENTER
-  */
-
-  .textbook-solar-system {
-
-    width:
-      540px;
-
-    height:
-      540px;
-
-    left:
-      50%;
-
-    right:
-      auto;
-
-    top:
-      50%;
-
-    transform:
-      translate(-50%, -50%);
-
-    opacity:
-      0.28;
-  }
-
-
-  .builders-grid {
-
     grid-template-columns:
       repeat(4, minmax(0, 1fr));
   }
 
-
   .property-cards-grid {
-
     grid-template-columns:
       repeat(3, minmax(0, 1fr));
   }
 
-
   .home-featured-properties-grid {
-
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
   }
@@ -4459,7 +4328,7 @@ html {
 
 
 /* ============================================================
-   42. TABLET
+   47. TABLET
    ============================================================ */
 
 @media (max-width: 900px) {
@@ -4470,7 +4339,6 @@ html {
       70px 24px 28px;
   }
 
-
   .accha-hero-inner {
 
     grid-template-columns:
@@ -4480,7 +4348,6 @@ html {
       center;
   }
 
-
   .accha-hero-copy {
 
     max-width:
@@ -4488,8 +4355,10 @@ html {
 
     margin:
       0 auto;
-  }
 
+    top:
+      0;
+  }
 
   .hero-main-description {
 
@@ -4500,26 +4369,30 @@ html {
       auto;
   }
 
-
   .hero-quick-links {
 
     justify-content:
       center;
   }
 
-
   .accha-hero-visual {
 
     min-height:
       430px;
+
+    position:
+      relative;
   }
 
-
   /*
-    CENTER SOLAR SYSTEM
+     SOLAR REMAINS VISIBLE
+     CENTERED BEHIND VISUAL
   */
 
   .textbook-solar-system {
+
+    display:
+      block;
 
     width:
       470px;
@@ -4530,19 +4403,18 @@ html {
     left:
       50%;
 
-    right:
-      auto;
-
     top:
-      60%;
+      56%;
 
     transform:
       translate(-50%, -50%);
 
     opacity:
-      0.20;
-  }
+      0.28;
 
+    z-index:
+      1;
+  }
 
   .hero-project-strip {
 
@@ -4553,13 +4425,11 @@ html {
       15px;
   }
 
-
   .project-strip-button {
 
     grid-column:
       1 / -1;
   }
-
 
   .builders-grid {
 
@@ -4567,13 +4437,11 @@ html {
       repeat(3, minmax(0, 1fr));
   }
 
-
   .property-cards-grid {
 
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
   }
-
 
   .upcoming-projects-section,
   .curated-properties-section,
@@ -4586,22 +4454,85 @@ html {
 
 
 /* ============================================================
-   43. MOBILE
+   48. MOBILE
+   IMPORTANT:
+   SOLAR SYSTEM IS NOT HIDDEN
    ============================================================ */
 
 @media (max-width: 650px) {
 
+  .accha-home-page {
+
+    width:
+      100%;
+
+    max-width:
+      100%;
+
+    overflow-x:
+      hidden;
+  }
+
   .accha-modern-hero {
+
+    width:
+      100%;
+
+    min-height:
+      auto;
 
     padding:
       65px 15px 20px;
+
+    overflow:
+      hidden;
   }
 
+  /* HERO INNER */
 
-  /*
-    MOBILE TITLE AS-IS
-    Abhi intentionally change nahi kiya.
-  */
+  .accha-hero-inner {
+
+    position:
+      relative;
+
+    width:
+      100%;
+
+    display:
+      flex;
+
+    flex-direction:
+      column;
+
+    gap:
+      0;
+  }
+
+  /* HERO COPY */
+
+  .accha-hero-copy {
+
+    position:
+      relative;
+
+    top:
+      0 !important;
+
+    width:
+      100%;
+
+    max-width:
+      100%;
+
+    padding:
+      20px 4px 0;
+
+    text-align:
+      center;
+
+    z-index:
+      20;
+  }
 
   .accha-hero-copy h1 {
 
@@ -4611,7 +4542,6 @@ html {
     letter-spacing:
       -0.065em;
   }
-
 
   .hero-main-description {
 
@@ -4623,7 +4553,234 @@ html {
   }
 
 
+  /* ========================================================
+     SOLAR — MOBILE VISIBLE
+     ======================================================== */
+
+  .textbook-solar-system {
+
+    display:
+      block !important;
+
+    position:
+      absolute;
+
+    width:
+      330px;
+
+    height:
+      330px;
+
+    left:
+      50%;
+
+    top:
+      74%;
+
+    transform:
+      translate(-50%, -50%);
+
+    opacity:
+      0.85;
+
+    z-index:
+      1;
+
+    pointer-events:
+      none;
+
+    overflow:
+      visible;
+  }
+
+
+  /* MOBILE ORBIT RINGS */
+
+  .ring-1 {
+    width:
+      52px;
+
+    height:
+      52px;
+  }
+
+  .ring-2 {
+    width:
+      76px;
+
+    height:
+      76px;
+  }
+
+  .ring-3 {
+    width:
+      104px;
+
+    height:
+      104px;
+  }
+
+  .ring-4 {
+    width:
+      132px;
+
+    height:
+      132px;
+  }
+
+  .ring-5 {
+    width:
+      163px;
+
+    height:
+      163px;
+  }
+
+  .ring-6 {
+    width:
+      198px;
+
+    height:
+      198px;
+  }
+
+  .ring-7 {
+    width:
+      235px;
+
+    height:
+      235px;
+  }
+
+  .ring-8 {
+    width:
+      274px;
+
+    height:
+      274px;
+  }
+
+
+  /* MOBILE PLANET RADII */
+
+  .p-mercury {
+    --orbit-radius:
+      26px;
+
+    width:
+      8px;
+
+    height:
+      8px;
+  }
+
+  .p-venus {
+    --orbit-radius:
+      38px;
+
+    width:
+      11px;
+
+    height:
+      11px;
+  }
+
+  .p-earth {
+    --orbit-radius:
+      52px;
+
+    width:
+      14px;
+
+    height:
+      14px;
+  }
+
+  .p-mars {
+    --orbit-radius:
+      66px;
+
+    width:
+      11px;
+
+    height:
+      11px;
+  }
+
+  .p-jupiter {
+    --orbit-radius:
+      82px;
+
+    width:
+      22px;
+
+    height:
+      22px;
+  }
+
+  .p-saturn {
+    --orbit-radius:
+      99px;
+
+    width:
+      19px;
+
+    height:
+      19px;
+  }
+
+  .p-uranus {
+    --orbit-radius:
+      118px;
+
+    width:
+      15px;
+
+    height:
+      15px;
+  }
+
+  .p-neptune {
+    --orbit-radius:
+      137px;
+
+    width:
+      16px;
+
+    height:
+      16px;
+  }
+
+
+  /* MOBILE SUN */
+
+  .sun-core {
+
+    width:
+      32px;
+
+    height:
+      32px;
+  }
+
+
+  /* ========================================================
+     SEARCH
+     ======================================================== */
+
   .hero-search-panel {
+
+    position:
+      relative;
+
+    width:
+      calc(100% - 10px);
+
+    max-width:
+      100%;
+
+    margin:
+      16px auto 0;
 
     padding:
       7px;
@@ -4631,27 +4788,57 @@ html {
     border-radius:
       18px;
 
-background: rgba(255, 255, 255, 0.96);
-box-shadow:
-  0 12px 35px rgba(0, 0, 0, 0.18),
-  0 0 0 1px rgba(255, 255, 255, 0.65);
+    background:
+      rgba(255, 255, 255, 0.96);
+
+    box-shadow:
+      0 12px 35px rgba(0, 0, 0, 0.18),
+      0 0 0 1px rgba(255, 255, 255, 0.65);
+
+    z-index:
+      30;
   }
 
+  .hero-search-tabs {
+
+    width:
+      100%;
+
+    display:
+      flex;
+
+    gap:
+      4px;
+  }
 
   .hero-search-tabs button {
+
+    flex:
+      1;
+
+    min-width:
+      0;
 
     min-height:
       38px;
 
     padding:
-      0 8px;
+      10px 5px;
 
     font-size:
       0.67rem;
+
+    letter-spacing:
+      0.08em;
   }
 
-
   .hero-search-main {
+
+    width:
+      100%;
+
+    display:
+      grid;
 
     grid-template-columns:
       1fr;
@@ -4660,6 +4847,20 @@ box-shadow:
       7px;
   }
 
+  .hero-search-city,
+  .hero-city-select,
+  .hero-search-input-wrap,
+  .hero-search-button {
+
+    width:
+      100%;
+
+    min-width:
+      0;
+
+    box-sizing:
+      border-box;
+  }
 
   .hero-city-select {
 
@@ -4667,50 +4868,115 @@ box-shadow:
       48px;
   }
 
+  .hero-search-input-wrap {
+
+    min-height:
+      52px;
+
+    background:
+      rgba(255, 255, 255, 0.98);
+
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.16),
+      0 0 0 1px rgba(255, 255, 255, 0.75);
+  }
 
   .hero-search-input-wrap input {
 
+    width:
+      100%;
+
+    min-width:
+      0;
+
     height:
       52px;
-  }
 
+    font-size:
+      0.88rem;
+  }
 
   .hero-search-button {
 
+    width:
+      100%;
+
     min-height:
       50px;
+
+    justify-content:
+      center;
   }
 
 
+  /* ========================================================
+     AI NOTE
+     ======================================================== */
+
   .hero-ai-note {
+
+    width:
+      100%;
 
     justify-content:
       center;
 
-    font-size:
-      0.7rem;
-
     text-align:
       center;
+
+    padding:
+      7px 4px 0;
+
+    font-size:
+      0.70rem;
   }
 
+
+  /* ========================================================
+     QUICK LINKS
+     ======================================================== */
 
   .hero-quick-links {
 
+    position:
+      relative;
+
+    width:
+      100%;
+
+    justify-content:
+      center;
+
+    flex-wrap:
+      wrap;
+
     gap:
       6px;
-  }
 
+    margin-top:
+      10px;
+
+    padding:
+      0 10px;
+
+    z-index:
+      20;
+  }
 
   .quick-label {
 
     width:
       100%;
 
+    margin-right:
+      0;
+
     margin-bottom:
       2px;
-  }
 
+    text-align:
+      center;
+  }
 
   .hero-quick-links button {
 
@@ -4718,26 +4984,61 @@ box-shadow:
       1;
 
     min-width:
-      0;
+      82px;
+
+    min-height:
+      34px;
+
+    padding:
+      7px 9px;
+
+    font-size:
+      0.72rem;
   }
 
+
+  /* ========================================================
+     HERO VISUAL
+     ======================================================== */
 
   .accha-hero-visual {
 
+    position:
+      relative;
+
     min-height:
       330px;
-  }
 
+    width:
+      100%;
+
+    margin-top:
+      10px;
+
+    overflow:
+      visible;
+
+    z-index:
+      3;
+  }
 
   .architectural-building {
 
     width:
-      390px;
+      min(390px, 100%);
 
     max-width:
       100%;
+
+    position:
+      relative;
+
+    z-index:
+      4;
   }
 
+
+  /* SERVICE BADGES */
 
   .service-floating-card {
 
@@ -4746,25 +5047,22 @@ box-shadow:
 
     font-size:
       0.63rem;
+
+    z-index:
+      10;
   }
 
-
   .badge-cleaning {
-
     left:
       0;
   }
 
-
   .badge-painting {
-
     right:
       0;
   }
 
-
   .badge-ekhata {
-
     left:
       5%;
 
@@ -4772,6 +5070,26 @@ box-shadow:
       12%;
   }
 
+  .badge-property-management {
+    right:
+      4%;
+
+    top:
+      15%;
+  }
+
+  .badge-post-property {
+    right:
+      7%;
+
+    bottom:
+      10%;
+  }
+
+
+  /* ========================================================
+     PROJECT STRIP
+     ======================================================== */
 
   .hero-project-strip {
 
@@ -4783,8 +5101,13 @@ box-shadow:
 
     background:
       var(--white);
-  }
 
+    grid-template-columns:
+      auto minmax(0, 1fr);
+
+    margin-top:
+      15px;
+  }
 
   .project-strip-icon {
 
@@ -4795,13 +5118,11 @@ box-shadow:
       35px;
   }
 
-
   .project-strip-text strong {
 
     font-size:
       0.76rem;
   }
-
 
   .project-strip-text span {
 
@@ -4809,8 +5130,13 @@ box-shadow:
       0.66rem;
   }
 
-
   .project-strip-button {
+
+    grid-column:
+      1 / -1;
+
+    width:
+      100%;
 
     min-height:
       40px;
@@ -4823,6 +5149,10 @@ box-shadow:
   }
 
 
+  /* ========================================================
+     COMMON SECTIONS
+     ======================================================== */
+
   .upcoming-projects-section,
   .curated-properties-section,
   .home-featured-properties-section {
@@ -4831,7 +5161,6 @@ box-shadow:
       55px 15px;
   }
 
-
   .projects-section-title,
   .properties-section-title,
   .home-featured-properties-header h2 {
@@ -4839,7 +5168,6 @@ box-shadow:
     font-size:
       clamp(2rem, 10vw, 3rem);
   }
-
 
   .projects-section-description,
   .properties-section-description,
@@ -4850,12 +5178,13 @@ box-shadow:
   }
 
 
+  /* LOCATION TABS */
+
   .project-location-tabs {
 
     gap:
       5px;
   }
-
 
   .project-location-tab {
 
@@ -4876,6 +5205,8 @@ box-shadow:
   }
 
 
+  /* BUILDERS */
+
   .builders-grid {
 
     grid-template-columns:
@@ -4884,7 +5215,6 @@ box-shadow:
     gap:
       9px;
   }
-
 
   .builder-logo-card {
 
@@ -4898,7 +5228,6 @@ box-shadow:
       var(--white);
   }
 
-
   .builder-logo-wrapper {
 
     width:
@@ -4908,13 +5237,14 @@ box-shadow:
       52px;
   }
 
-
   .builder-name {
 
     font-size:
       0.67rem;
   }
 
+
+  /* PROPERTY CARDS */
 
   .property-cards-grid {
 
@@ -4925,13 +5255,11 @@ box-shadow:
       12px;
   }
 
-
   .property-card-image-wrapper {
 
     height:
       205px;
   }
-
 
   .property-card-content {
 
@@ -4939,6 +5267,8 @@ box-shadow:
       13px;
   }
 
+
+  /* FEATURED */
 
   .home-featured-properties-grid {
 
@@ -4949,13 +5279,11 @@ box-shadow:
       12px;
   }
 
-
   .home-featured-property-image {
 
     height:
       210px;
   }
-
 
   .home-featured-property-content {
 
@@ -4963,6 +5291,8 @@ box-shadow:
       15px;
   }
 
+
+  /* CTA */
 
   .home-property-cta-section {
 
@@ -4976,7 +5306,6 @@ box-shadow:
       var(--white);
   }
 
-
   .home-property-cta-content {
 
     padding:
@@ -4989,7 +5318,6 @@ box-shadow:
       #fffafa;
   }
 
-
   .home-property-cta-content h2 {
 
     font-size:
@@ -4999,7 +5327,7 @@ box-shadow:
 
 
 /* ============================================================
-   44. VERY SMALL MOBILE
+   49. VERY SMALL MOBILE
    ============================================================ */
 
 @media (max-width: 390px) {
@@ -5013,16 +5341,14 @@ box-shadow:
       10px;
   }
 
-
   .hero-search-tabs button {
 
     font-size:
-      0.6rem;
+      0.60rem;
 
     letter-spacing:
       0.07em;
   }
-
 
   .hero-quick-links button {
 
@@ -5033,7 +5359,6 @@ box-shadow:
       0.68rem;
   }
 
-
   .service-floating-card {
 
     font-size:
@@ -5043,13 +5368,107 @@ box-shadow:
       7px 8px;
   }
 
+  .textbook-solar-system {
+
+    width:
+      290px;
+
+    height:
+      290px;
+
+    top:
+      68%;
+
+    opacity:
+      0.22;
+  }
+
+  .ring-1 {
+    width: 46px;
+    height: 46px;
+  }
+
+  .ring-2 {
+    width: 67px;
+    height: 67px;
+  }
+
+  .ring-3 {
+    width: 91px;
+    height: 91px;
+  }
+
+  .ring-4 {
+    width: 116px;
+    height: 116px;
+  }
+
+  .ring-5 {
+    width: 143px;
+    height: 143px;
+  }
+
+  .ring-6 {
+    width: 173px;
+    height: 173px;
+  }
+
+  .ring-7 {
+    width: 205px;
+    height: 205px;
+  }
+
+  .ring-8 {
+    width: 240px;
+    height: 240px;
+  }
+
+  .p-mercury {
+    --orbit-radius: 23px;
+  }
+
+  .p-venus {
+    --orbit-radius: 34px;
+  }
+
+  .p-earth {
+    --orbit-radius: 46px;
+  }
+
+  .p-mars {
+    --orbit-radius: 58px;
+  }
+
+  .p-jupiter {
+    --orbit-radius: 72px;
+  }
+
+  .p-saturn {
+    --orbit-radius: 87px;
+  }
+
+  .p-uranus {
+    --orbit-radius: 103px;
+  }
+
+  .p-neptune {
+    --orbit-radius: 120px;
+  }
+
+  .sun-core {
+
+    width:
+      29px;
+
+    height:
+      29px;
+  }
 
   .property-card-content {
 
     padding:
       12px;
   }
-
 
   .home-featured-property-content {
 
@@ -5060,7 +5479,7 @@ box-shadow:
 
 
 /* ============================================================
-   45. PERFORMANCE
+   50. PERFORMANCE
    ============================================================ */
 
 @media (max-width: 650px) {
@@ -5078,21 +5497,15 @@ box-shadow:
       none;
   }
 
-
   /*
-    Mobile par solar system hidden.
+     IMPORTANT:
+     Solar system intentionally NOT hidden on mobile.
   */
-
-  .textbook-solar-system {
-
-    display:
-      none;
-  }
 }
 
 
 /* ============================================================
-   46. REDUCED MOTION — ACCESSIBILITY
+   51. REDUCED MOTION — ACCESSIBILITY
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -5114,7 +5527,6 @@ box-shadow:
       0.01ms !important;
   }
 
-
   html {
 
     scroll-behavior:
@@ -5122,816 +5534,95 @@ box-shadow:
   }
 }
 
-/* =========================================================
-   ACCHASOLUTION — FINAL MOBILE VIEW
-   SOLAR + HOME DESIGN = ONE VISUAL
-   DESKTOP COMPLETELY UNCHANGED
-   ========================================================= */
 
-@media screen and (max-width: 900px) {
-
-  /* =====================================================
-     MOBILE PAGE
-     ===================================================== */
-
-  .accha-home-page {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  .accha-modern-hero {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-
-
-  /* =====================================================
-     HERO CONTENT
-     ===================================================== */
-
-  .accha-hero-inner {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-  }
-
-  .accha-hero-copy {
-    position: relative;
-    top: 0 !important;
-    width: 100%;
-    padding: 20px 14px 0;
-    box-sizing: border-box;
-    text-align: center;
-    z-index: 20;
-  }
-
-
-  /* =====================================================
-     SEARCH
-     ===================================================== */
-
-  .hero-search-panel {
-    position: relative;
-    width: calc(100% - 20px);
-    margin: 16px auto 0;
-    box-sizing: border-box;
-    z-index: 30;
-  }
-
-  .hero-search-tabs {
-    width: 100%;
-    display: flex;
-  }
-
-  .hero-search-tabs button {
-    flex: 1;
-    min-width: 0;
-    padding: 11px 5px;
-    font-size: .72rem;
-  }
-
-  .hero-search-row {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .hero-search-city,
-  .hero-search-input-wrap,
-  .hero-search-button {
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-  }
-
-  .hero-search-city select {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .hero-search-input-wrap {
-    background: rgba(255,255,255,.98);
-    box-shadow:
-      0 8px 24px rgba(0,0,0,.16),
-      0 0 0 1px rgba(255,255,255,.75);
-  }
-
-  .hero-search-input-wrap input {
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    font-size: .88rem;
-  }
-
-  .hero-search-button {
-    width: 100%;
-    min-height: 52px;
-    justify-content: center;
-  }
-
-
-  /* =====================================================
-     AI NOTE
-     ===================================================== */
-
-  .hero-ai-note {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    padding: 7px 4px 0;
-    box-sizing: border-box;
-    font-size: .72rem;
-  }
-
-
-  /* =====================================================
-     QUICK LINKS
-     ===================================================== */
-
-  .hero-quick-links {
-    position: relative;
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 10px;
-    padding: 0 10px;
-    box-sizing: border-box;
-    z-index: 20;
-  }
-
-  .quick-label {
-    width: 100%;
-    text-align: center;
-  }
-
-  .hero-quick-links button {
-    min-width: 82px;
-    padding: 7px 9px;
-    font-size: .72rem;
-  }
-
-
-  /* =====================================================
-     IMPORTANT:
-     SOLAR + HOME DESIGN KO EK HI AREA ME RAKHNA
-     
-     Search ke baad koi bada blank space nahi.
-     ===================================================== */
-
-  .textbook-solar-system {
-    position: absolute !important;
-
-    width: 245px !important;
-    height: 245px !important;
-
-    left: 50% !important;
-    right: auto !important;
-
-    /*
-      Solar search ke immediately neeche
-      hero ke andar rahega
-    */
-    top: 530px !important;
-
-    transform: translateX(-50%) !important;
-
-    margin: 0 !important;
-
-    z-index: 3 !important;
-
-    display: block !important;
-    visibility: visible !important;
-
-    opacity: 1 !important;
-
-    pointer-events: none !important;
-  }
-
-
-  /* =====================================================
-     ORBIT
-     ===================================================== */
-
-  .textbook-solar-system .orbit-ring {
-    display: block !important;
-    visibility: visible !important;
-
-    border-width: 2px !important;
-    border-color: rgba(255,255,255,.45) !important;
-
-    /*
-      Orbit static
-    */
-    animation: none !important;
-  }
-
-
-  /* =====================================================
-     SMALL SUN
-     ===================================================== */
-
-  .textbook-solar-system .sun-core {
-    width: 34px !important;
-    height: 34px !important;
-
-    display: block !important;
-    visibility: visible !important;
-  }
-
-
-  /* =====================================================
-     SMALL PLANETS
-     ===================================================== */
-
-  .textbook-solar-system .planet {
-    display: block !important;
-    visibility: visible !important;
-
-    box-shadow:
-      0 0 7px rgba(255,255,255,.20) !important;
-  }
-
-  .textbook-solar-system .p-mercury {
-    width: 4px !important;
-    height: 4px !important;
-  }
-
-  .textbook-solar-system .p-venus {
-    width: 5px !important;
-    height: 5px !important;
-  }
-
-  .textbook-solar-system .p-earth {
-    width: 7px !important;
-    height: 7px !important;
-  }
-
-  .textbook-solar-system .p-mars {
-    width: 5px !important;
-    height: 5px !important;
-  }
-
-  .textbook-solar-system .p-jupiter {
-    width: 10px !important;
-    height: 10px !important;
-  }
-
-  .textbook-solar-system .p-saturn {
-    width: 9px !important;
-    height: 9px !important;
-  }
-
-  .textbook-solar-system .p-uranus {
-    width: 6px !important;
-    height: 6px !important;
-  }
-
-  .textbook-solar-system .p-neptune {
-    width: 7px !important;
-    height: 7px !important;
-  }
-
-
-  /* =====================================================
-     HOME DESIGN
-     
-     Home design SOLAR RING KE UPAR
-     center me visible rahega.
-     ===================================================== */
-
-  .accha-hero-visual {
-    position: relative;
-
-    width: 100%;
-
-    /*
-      Solar ke area me building ko le aana
-    */
-    margin-top: 5px !important;
-
-    z-index: 8;
-  }
-
-  .hero-architecture-grid {
-    position: relative;
-    z-index: 8;
-  }
-
-  .architectural-building {
-    position: relative;
-
-    width: 82%;
-    max-width: 380px;
-
-    margin-left: auto;
-    margin-right: auto;
-
-    z-index: 9;
-  }
-
-
-  /* =====================================================
-     SERVICE BADGES
-     ===================================================== */
-
-  .hero-service-badges {
-    position: relative;
-    z-index: 12;
-
-    width: 100%;
-
-    display: flex;
-    flex-wrap: wrap;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    padding: 8px 10px;
-
-    box-sizing: border-box;
-  }
-
-
-  /* =====================================================
-     PROJECT STRIP
-     ===================================================== */
-
-  .hero-project-strip {
-    position: relative;
-    z-index: 15;
-
-    width: calc(100% - 20px);
-
-    margin: 12px auto 0;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    padding: 12px 10px;
-
-    box-sizing: border-box;
-    text-align: center;
-  }
-
-  .hero-project-strip button,
-  .hero-project-strip a {
-    position: static !important;
-    transform: none !important;
-
-    margin-left: auto;
-    margin-right: auto;
-
-    max-width: 220px;
-  }
-
-
-  /* =====================================================
-     COMMON SECTIONS
-     ===================================================== */
-
-  .accha-home-page section {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-
-  /* =====================================================
-     SECTION HEADINGS
-     ===================================================== */
-
-  .section-header,
-  .section-heading {
-    width: 100%;
-    padding-left: 12px;
-    padding-right: 12px;
-    box-sizing: border-box;
-    text-align: center;
-  }
-
-  .section-header h2,
-  .section-heading h2 {
-    line-height: 1.2;
-  }
-
-  .section-header p,
-  .section-heading p {
-    line-height: 1.45;
-  }
-
-
-  /* =====================================================
-     PROPERTY GRID
-     ===================================================== */
-
-  .property-grid,
-  .properties-grid,
-  .featured-property-grid,
-  .curated-property-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    box-sizing: border-box;
-  }
-
-
-  /* =====================================================
-     PROPERTY CARD
-     ===================================================== */
-
-  .property-card {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .property-card img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-  }
-
-
-  /* =====================================================
-     LOCATION TABS
-     ===================================================== */
-
-  .location-tabs {
-    width: 100%;
-    display: flex;
-
-    overflow-x: auto;
-
-    gap: 7px;
-
-    padding-left: 10px;
-    padding-right: 10px;
-
-    scrollbar-width: none;
-  }
-
-  .location-tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .location-tabs button {
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
-
-
-  /* =====================================================
-     BUILDER LOGOS
-     ===================================================== */
-
-  .builder-logos,
-  .builders-grid {
-    width: 100%;
-
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-
-    gap: 9px;
-
-    box-sizing: border-box;
-  }
-
-
-  /* =====================================================
-     CTA
-     ===================================================== */
-
-  .accha-cta,
-  .cta-section {
-    width: calc(100% - 20px);
-
-    margin-left: auto;
-    margin-right: auto;
-
-    box-sizing: border-box;
-
-    text-align: center;
-  }
-
-
-  /* =====================================================
-     FOOTER
-     ===================================================== */
-
-  .accha-home-page footer {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .footer-column {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-
-/* =========================================================
-   600px AND BELOW
-   ========================================================= */
-
-@media screen and (max-width: 600px) {
-
-  .textbook-solar-system {
-    width: 210px !important;
-    height: 210px !important;
-
-    top: 315px !important;
-  }
-
-  .architectural-building {
-    width: 78%;
-  }
-
-}
-
-
-/* =========================================================
-   400px AND BELOW
-   ========================================================= */
-
-@media screen and (max-width: 400px) {
-
-  .textbook-solar-system {
-    width: 180px !important;
-    height: 180px !important;
-
-    top: 305px !important;
-  }
-
-  .architectural-building {
-    width: 74%;
-  }
-
-}
-
-
-/* =========================================================
-   PREVENT HORIZONTAL SCROLL
-   ========================================================= */
-
-@media screen and (max-width: 900px) {
-
-  html,
-  body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-}
-
-
-/* ==========================================
-   MOBILE — SOLAR POSITION + SIZE
-   ========================================== */
-
-@media screen and (max-width: 900px) {
-
-  .textbook-solar-system {
-    position: absolute !important;
-
-    top: 0 !important;
-    left: 50% !important;
-
-    transform: translate(-50%, 0) !important;
-
-    margin-top: 920px !important;
-
-    width: 220px !important;
-    height: 220px !important;
-
-    z-index: 4 !important;
-  }
-
-}
-
-@media screen and (max-width: 600px) {
-
-  .textbook-solar-system {
-    margin-top: 90px !important;
-
-    width: 190px !important;
-    height: 190px !important;
-  }
-
-}
-
-@media screen and (max-width: 400px) {
-
-  .textbook-solar-system {
-    margin-top: 770px !important;
-
-    width: 165px !important;
-    height: 165px !important;
-  }
-
-}
-
-
-@media screen and (max-width: 900px) {
-  .textbook-solar-system {
-    position: absolute !important;
-    top: 0 !important;
-    left: 50% !important;
-    transform: translate(-50%, 0) !important;
-    margin-top: 900px !important;
-    z-index: 4 !important;
-  }
-}
-
-@media screen and (max-width: 900px) {
-
-  .textbook-solar-system .orbit-ring {
-    border-width: 1px !important;
-  }
-
-  .textbook-solar-system .ring-1 {
-  width: 90px !important;
-  height: 90px !important;
-
-}
-
-  .textbook-solar-system .ring-2 {
-    width: 150px !important;
-    height: 150px !important;
-  }
-
-  .textbook-solar-system .ring-3 {
-    width: 175px !important;
-    height: 175px !important;
-  }
-
-  .textbook-solar-system .ring-4 {
-    width: 205px !important;
-    height: 205px !important;
-  }
-
-  .textbook-solar-system .ring-5 {
-    width: 235px !important;
-    height: 235px !important;
-  }
-
-  .textbook-solar-system .ring-6 {
-    width: 265px !important;
-    height: 265px !important;
-  }
-
-  .textbook-solar-system .ring-7 {
-    width: 295px !important;
-    height: 295px !important;
-  }
-
-  .textbook-solar-system .ring-8 {
-    width: 325px !important;
-    height: 325px !important;
-  }
-}
-
-@media screen and (max-width: 900px) {
-
-  .textbook-solar-system .p-mercury {
-    width: 12px !important;
-    height: 12px !important;
-  }
-
-  .textbook-solar-system .p-venus {
-    width: 15px !important;
-    height: 15px !important;
-  }
-
-  .textbook-solar-system .p-earth {
-    width: 18px !important;
-    height: 18px !important;
-  }
-
-  .textbook-solar-system .p-mars {
-    width: 14px !important;
-    height: 14px !important;
-  }
-
-  .textbook-solar-system .p-jupiter {
-    width: 24px !important;
-    height: 24px !important;
-  }
-
-  .textbook-solar-system .p-saturn {
-    width: 22px !important;
-    height: 22px !important;
-  }
-
-  .textbook-solar-system .p-uranus {
-    width: 17px !important;
-    height: 17px !important;
-  }
-
-  .textbook-solar-system .p-neptune {
-    width: 18px !important;
-    height: 18px !important;
-  }
-
-}
-
-@media screen and (max-width: 900px) {
-
-  .service-floating-card {
-    font-size: 0.68rem !important;
-    padding: 7px 10px !important;
-    z-index: 12 !important;
-  }
-
-  /* Cleaning */
-  .badge-cleaning {
-    left: 2% !important;
-    top: 18% !important;
-    right: auto !important;
-    bottom: auto !important;
-  }
-
-  /* Painting */
-  .badge-painting {
-    right: 2% !important;
-    top: 30% !important;
-    left: auto !important;
-    bottom: auto !important;
-  }
-
-  /* E-Khata */
-  .badge-ekhata {
-    left: 2% !important;
-    bottom: 24% !important;
-    right: auto !important;
-    top: auto !important;
-  }
-
-  /* Property Management */
-  .badge-property-management {
-    right: 2% !important;
-    top: 56% !important;
-    left: auto !important;
-    bottom: auto !important;
-  }
-
-  /* Post Property */
-  .badge-post-property {
-    left: 50% !important;
-    right: auto !important;
-    bottom: 7% !important;
-    top: auto !important;
-    transform: translateX(-50%) !important;
-  }
-}
-
-
-@media screen and (max-width: 900px) {
-
-  /* BUY / RENT / COMMERCIAL TABS */
-  .hero-search-tabs {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 4px !important;
-    padding: 4px !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-  }
-
-  .hero-search-tabs button {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    padding: 9px 5px !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    font-size: 0.78rem !important;
-  }
-
-}
 /* ============================================================
-   END — ACCHASOLUTION HOMEPAGE CSS
+   MOBILE SOLAR ORBIT — EXTRA BOLD VISIBILITY
    ============================================================ */
+
+.textbook-solar-system {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+.textbook-solar-system .orbit-ring {
+  border: 3px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, 0.35),
+    inset 0 0 12px rgba(255, 255, 255, 0.08) !important;
+}
+
+.textbook-solar-system .planet {
+  opacity: 1 !important;
+  filter: saturate(1.3) contrast(1.25) brightness(1.05) !important;
+}
+
+.textbook-solar-system .sun-core {
+  opacity: 1 !important;
+  filter: saturate(1.2) contrast(1.2) !important;
+}
+
+
+
+/* ============================================================
+   MOBILE — ARCHITECTURAL HOUSE / BLUEPRINT BOLD
+   ============================================================ */
+
+@media (max-width: 650px) {
+
+  .architectural-building {
+    filter:
+      drop-shadow(0 0 10px rgba(255, 255, 255, 0.12))
+      drop-shadow(0 8px 18px rgba(35, 0, 0, 0.28));
+  }
+
+  .building-blueprint {
+    filter:
+      drop-shadow(0 0 8px rgba(255, 255, 255, 0.30))
+      drop-shadow(0 8px 20px rgba(35, 0, 0, 0.30));
+  }
+
+  .building-blueprint line,
+  .building-blueprint path,
+  .building-blueprint rect {
+    stroke:
+      rgba(255, 255, 255, 0.98) !important;
+
+    stroke-width:
+      2.8 !important;
+  }
+
+  .building-blueprint .building-main-outline {
+    stroke:
+      #ffffff !important;
+
+    stroke-width:
+      4 !important;
+  }
+
+  .building-blueprint .building-detail {
+    stroke:
+      rgba(255, 255, 255, 0.82) !important;
+
+    stroke-width:
+      2.2 !important;
+  }
+
+  .building-blueprint .building-windows rect {
+    fill:
+      rgba(255, 255, 255, 0.06) !important;
+
+    stroke:
+      rgba(255, 255, 255, 0.90) !important;
+
+    stroke-width:
+      2 !important;
+  }
+
+  .building-blueprint .building-door {
+    stroke:
+      #ffffff !important;
+
+    stroke-width:
+      3 !important;
+  }
+}
