@@ -82,12 +82,16 @@ export class ContactComponent {
     // ===================================================
     // SEND TO BACKEND
     // ===================================================
-    this.http
-      .post(
-        'http://localhost:5000/api/contact/enquiry',
-        enquiryData
-      )
-      .subscribe({
+  //  'https://api.acchasolution.com/api/properties'
+
+   
+this.http.post(
+  'http://localhost:5000/api/contact/enquiry',
+  enquiryData
+)
+
+
+.subscribe({
 
         next: (response) => {
 

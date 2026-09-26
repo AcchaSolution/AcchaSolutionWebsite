@@ -10,8 +10,8 @@ const router = express.Router();
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_APP_PASSWORD
+user: process.env.CONTACT_EMAIL_USER,
+pass: process.env.CONTACT_EMAIL_APP_PASSWORD
   }
 });
 
@@ -55,7 +55,7 @@ router.post('/enquiry', async (req, res) => {
     const mailOptions = {
 
       // Your company email
-      from: process.env.EMAIL_USER,
+      from: process.env.CONTACT_EMAIL_USER,
 
       // Fixed company recipient
       to: 'achasolution@gmail.com',
