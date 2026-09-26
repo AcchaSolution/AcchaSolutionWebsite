@@ -8,6 +8,8 @@ dotenv.config();
 
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
+
+const contactRoutes = require('./routes/contactRoutes');
 // ➕ 1. Import your newly written promotion endpoints file here
 const aiRoutes = require('./routes/aiRoutes'); // <-- AI Route Imported Safely
 const propertyRoutes =
@@ -78,6 +80,19 @@ console.log(
   'CLOUDINARY UPLOAD ROUTES MOUNTED'
 );
 
+
+// =====================================================
+// CONTACT ENQUIRY ROUTES
+// =====================================================
+
+app.use(
+  '/api/contact',
+  contactRoutes
+);
+
+console.log(
+  'CONTACT ENQUIRY ROUTES MOUNTED'
+);
 // =====================================================
 // TEST API
 // =====================================================

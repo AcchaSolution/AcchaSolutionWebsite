@@ -1,38 +1,383 @@
-<div class="property-page">
-  <div class="content-wrapper">
-    
-    <div class="left-section">
-      <img src="images/login image.png" alt="House" class="house-img">
-      <h2>Post your property Ad to sell or rent online for <span>Free!</span></h2>
-      <ul class="features">
-        <li>✅ Get Access to 4 Lakh+ Buyers</li>
-        <li>✅ Sell Faster with Premium Service</li>
-        <li>✅ Get Expert Advice on Market Trends and Insights</li>
-      </ul>
+<div class="contact-page">
+
+  <!-- HERO -->
+
+  <section class="contact-hero">
+    <div class="hero-content">
+      <span class="hero-eyebrow">ACCHASOLUTION</span>
+
+  <h1>
+    Let's Talk About<br>
+    <span>Your Property</span>
+  </h1>
+
+  <p>
+    Whether you want to buy, sell, rent, invest or promote a property,
+    tell us what you need and our team will connect with you.
+  </p>
+
+  <div class="hero-trust">
+    <span>✓ Property Assistance</span>
+    <span>✓ Personal Support</span>
+    <span>✓ Bengaluru & Beyond</span>
+  </div>
+</div>
+
+<div class="hero-visual">
+  <div class="visual-circle"></div>
+
+  <div class="floating-card card-one">
+    <span>PROPERTY</span>
+    <strong>BUY • SELL • RENT</strong>
+  </div>
+
+  <div class="floating-card card-two">
+    <span>QUICK RESPONSE</span>
+    <strong>Let's Connect</strong>
+  </div>
+
+  <div class="visual-number">01</div>
+</div>
+
+  </section>
+
+  <!-- QUICK CONTACT -->
+
+  <section class="quick-contact-section">
+
+<div class="section-heading">
+  <span>GET IN TOUCH</span>
+  <h2>Choose how you want to connect</h2>
+</div>
+
+<div class="quick-contact-grid">
+
+  <a
+    href="tel:+919999999999"
+    class="quick-contact-card call-card"
+  >
+    <div class="contact-icon">☎</div>
+    <div>
+      <small>CALL US</small>
+      <h3>Talk to Our Team</h3>
+      <p>Get direct property assistance</p>
+    </div>
+    <span class="contact-arrow">→</span>
+  </a>
+
+  <a
+    href="https://wa.me/919999999999"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="quick-contact-card whatsapp-card"
+  >
+    <div class="contact-icon">◉</div>
+    <div>
+      <small>WHATSAPP</small>
+      <h3>Chat With Us</h3>
+      <p>Send your requirement instantly</p>
+    </div>
+    <span class="contact-arrow">→</span>
+  </a>
+
+  <a
+    href="mailto:info@acchasolution.com"
+    class="quick-contact-card email-card"
+  >
+    <div class="contact-icon">✉</div>
+    <div>
+      <small>EMAIL</small>
+      <h3>Send an Email</h3>
+      <p>Share your detailed requirement</p>
+    </div>
+    <span class="contact-arrow">→</span>
+  </a>
+
+</div>
+
+  </section>
+
+  <!-- MAIN CONTACT AREA -->
+
+  <section class="contact-main">
+
+<!-- LEFT INFORMATION -->
+<div class="contact-info">
+
+  <span class="section-number">02 / CONTACT</span>
+
+  <h2>
+    Tell us what<br>
+    <span>you need.</span>
+  </h2>
+
+  <p class="contact-description">
+    Share a few details about your requirement. We will use the
+    information only to understand your request and connect with you.
+  </p>
+
+  <div class="info-list">
+
+    <div class="info-item">
+      <span class="info-number">01</span>
+      <div>
+        <strong>Property Search</strong>
+        <p>Buy, rent or invest in the right property.</p>
+      </div>
     </div>
 
-    <div class="form-card">
-  <h2>Let's get you started</h2>
-  
-  <p>You are:</p>
-  <div class="selection-group">
-    <!-- Owner/Agent selection: Sirf ek hi select hoga -->
-    <button 
-      [class.active]="selectedUser === 'Owner'" 
-      (click)="selectedUser = 'Owner'">Owner</button>
-    <button 
-      [class.active]="selectedUser === 'Agent'" 
-      (click)="selectedUser = 'Agent'">Agent</button>
+    <div class="info-item">
+      <span class="info-number">02</span>
+      <div>
+        <strong>Property Selling</strong>
+        <p>Get assistance for selling or renting your property.</p>
+      </div>
+    </div>
+
+    <div class="info-item">
+      <span class="info-number">03</span>
+      <div>
+        <strong>Property Services</strong>
+        <p>Consultation, promotion and property-related support.</p>
+      </div>
+    </div>
+
   </div>
 
-  <div class="input-stack">
-    <input type="text" placeholder="Full Name" [(ngModel)]="userData.name">
-    <input type="email" placeholder="Email Address" [(ngModel)]="userData.email">
-    <input type="password" placeholder="Password" [(ngModel)]="userData.password">
-    <input type="number" placeholder="Experience (Years)" [(ngModel)]="userData.experience">
-    <input type="tel" placeholder="Phone Number" [(ngModel)]="userData.phone">
-  </div>
-
-  <button class="submit-btn" (click)="onRegister()">START NOW</button>
 </div>
+
+
+<!-- FORM -->
+<div class="contact-form-panel">
+
+  <div class="form-top">
+    <div>
+      <span>ENQUIRY FORM</span>
+      <h3>Start a Conversation</h3>
+    </div>
+
+    <div class="form-step">03</div>
+  </div>
+
+
+  <!-- NAME + PHONE -->
+  <div class="form-row">
+
+    <div class="field">
+      <label>FULL NAME <b>*</b></label>
+      <input
+        type="text"
+        [(ngModel)]="userData.name"
+        placeholder="Enter your full name"
+      >
+    </div>
+
+    <div class="field">
+      <label>MOBILE NUMBER <b>*</b></label>
+      <input
+        type="tel"
+        [(ngModel)]="userData.phone"
+        placeholder="Enter mobile number"
+      >
+    </div>
+
+  </div>
+
+
+  <!-- EMAIL + CONTACT METHOD -->
+  <div class="form-row">
+
+    <div class="field">
+      <label>EMAIL ADDRESS</label>
+      <input
+        type="email"
+        [(ngModel)]="userData.email"
+        placeholder="you@example.com"
+      >
+    </div>
+
+    <div class="field">
+      <label>PREFERRED CONTACT</label>
+
+      <select [(ngModel)]="selectedUser">
+        <option value="Call">Call</option>
+        <option value="WhatsApp">WhatsApp</option>
+        <option value="Email">Email</option>
+      </select>
+    </div>
+
+  </div>
+
+
+  <!-- REQUIREMENT -->
+  <div class="field">
+    <label>HOW CAN WE HELP YOU? <b>*</b></label>
+
+    <div class="intent-grid">
+
+      <button
+        type="button"
+        [class.active]="selectedIntent === 'Buy Property'"
+        (click)="selectedIntent = 'Buy Property'"
+      >
+        <span>01</span>
+        Buy Property
+      </button>
+
+      <button
+        type="button"
+        [class.active]="selectedIntent === 'Rent / Lease'"
+        (click)="selectedIntent = 'Rent / Lease'"
+      >
+        <span>02</span>
+        Rent / Lease
+      </button>
+
+      <button
+        type="button"
+        [class.active]="selectedIntent === 'Sell Property'"
+        (click)="selectedIntent = 'Sell Property'"
+      >
+        <span>03</span>
+        Sell Property
+      </button>
+
+      <button
+        type="button"
+        [class.active]="selectedIntent === 'Commercial'"
+        (click)="selectedIntent = 'Commercial'"
+      >
+        <span>04</span>
+        Commercial
+      </button>
+
+      <button
+        type="button"
+        [class.active]="selectedIntent === 'Investment'"
+        (click)="selectedIntent = 'Investment'"
+      >
+        <span>05</span>
+        Investment
+      </button>
+
+      <button
+        type="button"
+        [class.active]="selectedIntent === 'Property Services'"
+        (click)="selectedIntent = 'Property Services'"
+      >
+        <span>06</span>
+        Property Services
+      </button>
+
+      <button
+        type="button"
+        [class.active]="selectedIntent === 'Builder / Developer'"
+        (click)="selectedIntent = 'Builder / Developer'"
+      >
+        <span>07</span>
+        Builder / Developer
+      </button>
+
+      <button
+        type="button"
+        [class.active]="selectedIntent === 'Agent / Broker'"
+        (click)="selectedIntent = 'Agent / Broker'"
+      >
+        <span>08</span>
+        Agent / Broker
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- LOCATION + PROPERTY TYPE -->
+  <div class="form-row">
+
+    <div class="field">
+      <label>PREFERRED LOCATION</label>
+      <input
+        type="text"
+        [(ngModel)]="userData.experience"
+        placeholder="Example: Whitefield, Bengaluru"
+      >
+    </div>
+
+    <div class="field">
+      <label>PROPERTY TYPE</label>
+
+      <select [(ngModel)]="userData.reraId">
+        <option value="">Select Property Type</option>
+        <option>Apartment</option>
+        <option>Villa</option>
+        <option>Independent House</option>
+        <option>Plot</option>
+        <option>Office</option>
+        <option>Retail / Shop</option>
+        <option>Warehouse / Industrial</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+  </div>
+
+
+  <!-- MESSAGE -->
+  <div class="field">
+    <label>YOUR MESSAGE <b>*</b></label>
+
+    <textarea
+      [(ngModel)]="userData.password"
+      rows="5"
+      placeholder="Tell us about your requirement, budget, location or property..."
+    ></textarea>
+  </div>
+
+
+  <!-- SUBMIT -->
+  <div class="form-bottom">
+
+    <div class="privacy-note">
+      <span>🔒</span>
+      <p>Your information is used only to respond to your enquiry.</p>
+    </div>
+
+    <button
+      type="button"
+      class="send-enquiry-btn"
+      (click)="onRegister()"
+    >
+      <span>SEND ENQUIRY</span>
+      <strong>→</strong>
+    </button>
+
+  </div>
+
+</div>
+
+  </section>
+
+  <!-- BOTTOM CONTACT STRIP -->
+
+  <section class="contact-bottom-strip">
+
+<div>
+  <span>NEED IMMEDIATE ASSISTANCE?</span>
+  <h2>Let's connect.</h2>
+</div>
+
+<div class="bottom-actions">
+  <a href="tel:+919999999999">CALL NOW</a>
+
+  <a
+    href="https://wa.me/919999999999"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    WHATSAPP
+  </a>
+</div>
+
+  </section>
+
 </div>

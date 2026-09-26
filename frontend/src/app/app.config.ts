@@ -158,6 +158,15 @@ import {
 
 
 // =========================================================
+// e-KHATA
+// =========================================================
+
+import {
+  EkhataComponent
+} from './pages/ekhata/ekhata.component';
+
+
+// =========================================================
 // GUARDS + ENVIRONMENT
 // =========================================================
 
@@ -230,260 +239,303 @@ export const appConfig: ApplicationConfig = {
     // =====================================================
 
     provideRouter(
-      
-  [
 
-              // HOME
+      [
 
-              {
-                  path: '',
-            component: HomeComponent
-           },
+        // ===================================================
+        // HOME
+        // ===================================================
 
-
-      {
-        path: 'home',
-        component: HomeComponent
-      },
+        {
+          path: '',
+          component: HomeComponent
+        },
 
 
-      // PROPERTY
-
-      {
-        path: 'property',
-        component: PropertyComponent
-      },
+        {
+          path: 'home',
+          component: HomeComponent
+        },
 
 
-      {
-        path: 'property/edit/:id',
-        component: PropertyComponent
-      },
+        // ===================================================
+        // PROPERTY
+        // ===================================================
+
+        {
+          path: 'property',
+          component: PropertyComponent
+        },
 
 
-      // PROPERTY DETAILS ⭐
-
-      {
-        path: 'property-details/:id',
-        component: PropertyDetailsComponent
-      },
+        {
+          path: 'property/edit/:id',
+          component: PropertyComponent
+        },
 
 
-      // PERMALINK DETAILS
+        // ===================================================
+        // PROPERTY DETAILS
+        // ===================================================
 
-      {
-        path: 'properties/:permalink',
-        component: PropertyDetailsComponent
-      },
+        {
+          path: 'property-details/:id',
+          component: PropertyDetailsComponent
+        },
 
 
-      // PROPERTY CATALOG
+        // ===================================================
+        // PERMALINK DETAILS
+        // ===================================================
 
-      {
-        path: 'properties/sale',
-        component: PropertiesCatalogComponent,
-        data: {
-          mode: 'Sale'
+        {
+          path: 'properties/:permalink',
+          component: PropertyDetailsComponent
+        },
+
+
+        // ===================================================
+        // PROPERTY CATALOG
+        // ===================================================
+
+        {
+          path: 'properties/sale',
+          component: PropertiesCatalogComponent,
+          data: {
+            mode: 'Sale'
+          }
+        },
+
+
+        {
+          path: 'properties/rent',
+          component: PropertiesCatalogComponent,
+          data: {
+            mode: 'Rent'
+          }
+        },
+
+
+        {
+          path: 'properties/commercial',
+          component: PropertiesCatalogComponent,
+          data: {
+            mode: 'Commercial'
+          }
+        },
+
+
+        // ===================================================
+        // AUTH
+        // ===================================================
+
+        {
+          path: 'login',
+          component: LoginComponent
+        },
+
+
+        {
+          path: 'dashboard',
+          component: DashboardComponent,
+          canActivate: [adminGuard]
+        },
+
+
+        {
+          path: 'admin-login',
+          component: AdminLoginComponent
+        },
+
+
+        // ===================================================
+        // POST PROPERTY
+        // ===================================================
+
+        {
+          path: 'post-property',
+          component: PostPropertyComponent
+        },
+
+
+        {
+          path: 'add-property-form',
+          component: AddPropertyFormComponent
+        },
+
+
+        {
+          path: 'my-properties',
+          loadComponent: () =>
+            import('./my-properties/my-properties.component')
+              .then(m => m.MyPropertiesComponent)
+        },
+
+
+        {
+          path: 'properties-catlog',
+          component: PropertiesCatalogComponent,
+          data: {
+            mode: 'All'
+          }
+        },
+
+
+        {
+          path: 'pending-approval',
+          component: PendingApprovalComponent
+        },
+
+
+        // ===================================================
+        // AGENTS
+        // ===================================================
+
+        {
+          path: 'agents-view',
+          component: AgentsViewComponent
+        },
+
+
+        {
+          path: 'agent-detail/:id',
+          component: AgentDetailComponent
+        },
+
+
+        // ===================================================
+        // PROJECTS
+        // ===================================================
+
+        {
+          path: 'sobha-projects',
+          component: SobhaProjectsComponent
+        },
+
+
+        {
+          path: 'project-details/:id',
+          component: ProjectDetailsComponent
+        },
+
+
+        {
+          path: 'project-ad',
+          component: ProjectAdComponent
+        },
+
+
+        // ===================================================
+        // OTHER
+        // ===================================================
+
+        {
+          path: 'contact',
+          component: ContactComponent
+        },
+
+
+        {
+          path: 'property-verification',
+          component: PropertyVerificationComponent
+        },
+
+
+        {
+          path: 'rental-agreement',
+          component: RentalAgreementComponent
+        },
+
+
+        // ===================================================
+        // CLEANING
+        // ===================================================
+
+        {
+          path: 'full-home-cleaning',
+          component: FullHomeCleaningComponent
+        },
+
+
+        {
+          path: 'kitchen-bathroom-cleaning',
+          component: KitchenBatroonCleaningComponent
+        },
+
+
+        {
+          path: 'sofa-carpet-claening',
+          component: SofaCarpetCleaningComponent
+        },
+
+
+        {
+          path: 'luxury-painting',
+          component: LuxuryPaintingComponent
+        },
+
+
+        {
+          path: 'weatherproofing',
+          component: WeatherproofingComponent
+        },
+
+
+        {
+          path: 'designer-walpaper',
+          component: DesignerWalpaperComponent
+        },
+
+
+        // ===================================================
+        // PORTFOLIO
+        // ===================================================
+
+        {
+          path: 'portfolio',
+          component: PortfolioComponent
+        },
+
+
+        // ===================================================
+        // e-KHATA
+        // ===================================================
+
+        {
+          path: 'ekhata',
+          component: EkhataComponent
+        },
+
+
+        // ===================================================
+        // FOOTER
+        // ===================================================
+
+        {
+          path: 'footer',
+          component: FooterComponent
+        },
+
+
+        // ===================================================
+        // FALLBACK
+        // ===================================================
+
+        {
+          path: '**',
+          redirectTo: ''
         }
-      },
+
+      ],
 
 
-      {
-        path: 'properties/rent',
-        component: PropertiesCatalogComponent,
-        data: {
-          mode: 'Rent'
-        }
-      },
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'top',
+        anchorScrolling: 'enabled'
+      })
 
+    )
 
-      {
-        path: 'properties/commercial',
-        component: PropertiesCatalogComponent,
-        data: {
-          mode: 'Commercial'
-        }
-      },
-
-
-      // AUTH
-
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-
-
-{
-  path: 'dashboard',
-  component: DashboardComponent,
-  canActivate: [adminGuard]
-},
-
-      {
-        path: 'admin-login',
-        component: AdminLoginComponent
-      },
-
-
-      // POST PROPERTY
-
-      {
-        path: 'post-property',
-        component: PostPropertyComponent
-      },
-
-
-      {
-        path: 'add-property-form',
-        component: AddPropertyFormComponent
-      },
-
-
-      {
-  path: 'my-properties',
-  loadComponent: () =>
-    import('./my-properties/my-properties.component')
-      .then(m => m.MyPropertiesComponent)
-},
-
-{
-  path: 'properties-catlog',
-  component: PropertiesCatalogComponent,
-  data: {
-    mode: 'All'
-  }
-},
-      {
-        path: 'pending-approval',
-        component: PendingApprovalComponent
-      },
-
-
-      // AGENTS
-
-      {
-        path: 'agents-view',
-        component: AgentsViewComponent
-      },
-
-
-      {
-        path: 'agent-detail/:id',
-        component: AgentDetailComponent
-      },
-
-
-      // PROJECTS
-
-      {
-        path: 'sobha-projects',
-        component: SobhaProjectsComponent
-      },
-
-
-      {
-        path: 'project-details/:id',
-        component: ProjectDetailsComponent
-      },
-
-
-      {
-        path: 'project-ad',
-        component: ProjectAdComponent
-      },
-
-
-      // OTHER
-
-      {
-        path: 'contact',
-        component: ContactComponent
-      },
-
-
-      {
-        path: 'property-verification',
-        component: PropertyVerificationComponent
-      },
-
-
-      {
-        path: 'rental-agreement',
-        component: RentalAgreementComponent
-      },
-
-
-      // CLEANING
-
-      {
-        path: 'full-home-cleaning',
-        component: FullHomeCleaningComponent
-      },
-
-
-      {
-        path: 'kitchen-bathroom-cleaning',
-        component: KitchenBatroonCleaningComponent
-      },
-
-
-      {
-        path: 'sofa-carpet-claening',
-        component: SofaCarpetCleaningComponent
-      },
-
-
-      {
-        path: 'luxury-painting',
-        component: LuxuryPaintingComponent
-      },
-
-
-      {
-        path: 'weatherproofing',
-        component: WeatherproofingComponent
-      },
-
-
-      {
-        path: 'designer-walpaper',
-        component: DesignerWalpaperComponent
-      },
-
-
-      // PORTFOLIO
-
-      {
-        path: 'portfolio',
-        component: PortfolioComponent
-      },
-
-
-      // FOOTER
-
-      {
-        path: 'footer',
-        component: FooterComponent
-      },
-
-
-      // FALLBACK
-
-      {
-        path: '**',
-        redirectTo: ''
-      }
-      
-
-    ],
-  
-  withInMemoryScrolling({
-    scrollPositionRestoration: 'top',
-    anchorScrolling: 'enabled'
-  })
-
-
-  )]
+  ]
 
 };

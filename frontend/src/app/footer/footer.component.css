@@ -1074,3 +1074,303 @@
 /* =========================================================
    END — PREMIUM WHITE + RED FOOTER
 ========================================================= */
+/* =========================================================
+   ACCHASOLUTION — e-KHATA PAGE FOUNDATION
+========================================================= */
+
+.ekhata-page {
+
+  min-height: calc(100vh - 80px);
+
+  padding: 90px 20px;
+
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(183, 28, 28, 0.08),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #fffafa,
+      #ffffff 55%,
+      #fff5f5
+    );
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+.ekhata-page-inner {
+
+  width: min(900px, 100%);
+
+  text-align: center;
+}
+
+
+/* EYEBROW */
+
+.ekhata-eyebrow {
+
+  display: inline-block;
+
+  margin-bottom: 16px;
+
+  color: #8E0000;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+
+/* TITLE */
+
+.ekhata-page h1 {
+
+  margin: 0 auto 20px;
+
+  max-width: 760px;
+
+  color: #B71C1C;
+
+  font-size: clamp(34px, 5vw, 60px);
+
+  font-weight: 800;
+
+  line-height: 1.08;
+}
+
+
+/* DESCRIPTION */
+
+.ekhata-page > .ekhata-page-inner > p {
+
+  max-width: 650px;
+
+  margin: 0 auto 40px;
+
+  color: #6f2020;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   FOUNDATION CARD
+========================================================= */
+
+.ekhata-coming-card {
+
+  max-width: 680px;
+
+  margin: 0 auto;
+
+  padding: 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  text-align: left;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid rgba(183, 28, 28, 0.16);
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 18px 45px rgba(183, 28, 28, 0.08);
+}
+
+
+.ekhata-coming-card > i {
+
+  width: 60px;
+
+  height: 60px;
+
+  flex: 0 0 60px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 17px;
+
+  background: #B71C1C;
+
+  color: #FFFFFF;
+
+  font-size: 25px;
+}
+
+
+.ekhata-coming-card h2 {
+
+  margin: 0 0 6px;
+
+  color: #B71C1C;
+
+  font-size: 22px;
+
+  font-weight: 800;
+}
+
+
+.ekhata-coming-card p {
+
+  margin: 0;
+
+  color: #7a3333;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .ekhata-page {
+
+    min-height: calc(100vh - 70px);
+
+    padding: 65px 18px;
+  }
+
+
+  .ekhata-eyebrow {
+
+    font-size: 8px;
+
+    letter-spacing: 1.4px;
+  }
+
+
+  .ekhata-page h1 {
+
+    font-size: clamp(30px, 9vw, 44px);
+
+    line-height: 1.12;
+  }
+
+
+  .ekhata-page > .ekhata-page-inner > p {
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    margin-bottom: 28px;
+  }
+
+
+  .ekhata-coming-card {
+
+    padding: 20px;
+
+    gap: 14px;
+
+    border-radius: 18px;
+  }
+
+
+  .ekhata-coming-card > i {
+
+    width: 48px;
+
+    height: 48px;
+
+    flex-basis: 48px;
+
+    border-radius: 14px;
+
+    font-size: 20px;
+  }
+
+
+  .ekhata-coming-card h2 {
+
+    font-size: 17px;
+  }
+
+
+  .ekhata-coming-card p {
+
+    font-size: 11px;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .ekhata-page {
+
+    padding: 50px 15px;
+  }
+
+
+  .ekhata-page h1 {
+
+    font-size: 30px;
+  }
+
+
+  .ekhata-page > .ekhata-page-inner > p {
+
+    font-size: 12px;
+  }
+
+
+  .ekhata-coming-card {
+
+    align-items: flex-start;
+
+    padding: 17px;
+
+    border-radius: 16px;
+  }
+
+
+  .ekhata-coming-card > i {
+
+    width: 42px;
+
+    height: 42px;
+
+    flex-basis: 42px;
+
+    font-size: 17px;
+  }
+
+
+  .ekhata-coming-card h2 {
+
+    font-size: 15px;
+  }
+
+
+  .ekhata-coming-card p {
+
+    font-size: 10px;
+  }
+}
