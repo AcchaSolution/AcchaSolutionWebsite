@@ -346,8 +346,15 @@
       type="button"
       class="send-enquiry-btn"
       (click)="onRegister()"
+        [disabled]="isSending"
+
     >
-      <span>SEND ENQUIRY</span>
+<span *ngIf="!isSending">SEND ENQUIRY</span> 
+<span *ngIf="isSending"> 
+  <i class="bi bi-arrow-repeat sending-spinner"></i>
+   SENDING... 
+  </span>
+  
       <strong>→</strong>
     </button>
 
