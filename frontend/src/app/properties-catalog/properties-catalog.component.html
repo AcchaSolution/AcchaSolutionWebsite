@@ -30,9 +30,15 @@
 >
 
 
-    <div class="luxury-horizontal-card" *ngFor="let item of filteredProperties"
-         [routerLink]="['/property-details', item.id || item.uniqueId]">
+    <!-- <div class="luxury-horizontal-card"
+     *ngFor="let item of filteredProperties"
+         [routerLink]="['/property-details', item.id || item.uniqueId]"> -->
       
+
+         <div class="luxury-horizontal-card"
+     *ngFor="let item of filteredProperties">
+
+     
       <div class="card-image-left-frame">
         <img [src]="item.gallery?.[0]?.url || 'assets/placeholder.jpg'" alt="AcchaSolution Premium Asset Preview">
         <span class="luxury-badge-tag">✨ Verified On Site</span>
@@ -70,9 +76,9 @@
           </div>
         </div>
 
-        <p class="property-brief-text">
+        <!-- <p class="property-brief-text">
           Exclusively designed premium residential layout by elite structural planners. Features world-class clubhouse, grand balcony layouts, and upscale amenities.
-        </p>
+        </p> -->
       </div>
 
       <div class="card-pricing-right-frame">

@@ -1,682 +1,489 @@
 /* ==========================================================================
-   🏰 ACCHASOLUTION LUXURY PREMIUM INTERFACE LAYOUT ENGINE
+   ACCHASOLUTION — PREMIUM PROPERTY CATALOG
+   RED + WHITE MODERN DESIGN SYSTEM
+   ========================================================================== */
+
+/* ==========================================================================
+   01. DESIGN VARIABLES
+   ========================================================================== */
+
+:host {
+
+  --accha-red: #b71c1c;
+
+  --accha-dark-red: #8e0000;
+
+  --accha-red-hover: #9f1515;
+
+  --accha-light-red: #ffffff;
+
+  --accha-soft-red: #ffffff;
+
+  --accha-white: #ffffff;
+
+  --accha-text: #c11f1f;
+
+  --accha-text-soft: #f5bac8;
+
+  --accha-muted: #7a7f85;
+
+  --accha-border: #ececec;
+
+  --accha-border-red: #e0b4b4;
+
+  --accha-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
+
+  --accha-shadow-hover: 0 14px 38px rgba(183, 28, 28, 0.13);
+
+  --accha-radius: 12px;
+
+  --accha-font: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+}
+
+:host {
+  display: block;
+  background: #b71c1c;
+  min-height: 100vh;
+}
+
+.catalog-rich-header h1,
+.catalog-rich-header p {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+
+/* ==========================================================================
+   02. MAIN CONTAINER
    ========================================================================== */
 
 .luxury-catalog-container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  width: 100%;
+  max-width: 1180px;
+  margin: 28px auto;
+  padding: 0 18px;
+  box-sizing: border-box;
+  font-family: var(--accha-font);
 }
 
+
+/* ==========================================================================
+   03. HEADER
+   ========================================================================== */
+
 .catalog-rich-header {
-  border-bottom: 2px solid #f3ece8;
-  padding-bottom: 24px;
-  margin-bottom: 35px;
+  position: relative;
+  padding: 0 0 15px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--accha-border);
+}
+
+.catalog-rich-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 72px;
+  height: 3px;
+  background: var(--accha-red);
+  border-radius: 10px;
 }
 
 .catalog-rich-header h1 {
-  color: #4a3e3d; /* Corporate Chocolate Bronze */
-  font-size: 32px;
+  margin: 0 0 5px;
+  color: var(--accha-white);
+  font-size: 28px;
+  line-height: 1.2;
   font-weight: 800;
-  margin: 0 0 6px 0;
   letter-spacing: -0.5px;
 }
 
 .catalog-rich-header p {
-  color: #665856;
-  font-size: 15px;
-  font-weight: 500;
   margin: 0;
+  color: var(--accha-text-soft);
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 500;
 }
 
-/* Row-wise stacked alignments flow setup */
+
+/* ==========================================================================
+   04. PROPERTY CARD PIPELINE
+   ========================================================================== */
+
 .horizontal-cards-pipeline {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 15px;
 }
 
+
 /* ==========================================================================
-   ⚡ LANDSCAPE HORIZONTAL WIDE MATRIX ENGINE (MAGICBRICKS PROFILE)
+   05. MAIN HORIZONTAL PROPERTY CARD
    ========================================================================== */
 
 .luxury-horizontal-card {
+  position: relative;
+
   display: flex;
-  background: #ffffff;
-  border: 1px solid #f3ece8;
-  border-radius: 14px;
-  box-shadow: 0 4px 20px rgba(74, 62, 61, 0.04);
+  align-items: stretch;
+
+  width: 100%;
+  min-height: 182px;
+
+  background: var(--accha-white);
+
+  border: 1px solid var(--accha-border);
+  border-radius: var(--accha-radius);
+
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+
+  box-shadow: var(--accha-shadow);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.luxury-horizontal-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accha-red);
+  z-index: 2;
 }
 
 .luxury-horizontal-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 35px rgba(74, 62, 61, 0.12);
-  border-color: #dcd1cc;
+  transform: translateY(-3px);
+  border-color: var(--accha-border-red);
+  box-shadow: var(--accha-shadow-hover);
 }
 
-/* Left Image Section Pipeline layout specs */
+
+/* ==========================================================================
+   06. LEFT IMAGE
+   ========================================================================== */
+
 .card-image-left-frame {
   position: relative;
-  width: 290px;
-  min-width: 290px;
-  height: 220px;
-  background-color: #fdf8f5;
+
+  width: 235px;
+  min-width: 235px;
+  height: 182px;
+
+  background: var(--accha-soft-red);
   overflow: hidden;
 }
 
 .card-image-left-frame img {
+  display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
-  transition: transform 0.4s ease;
+
+  transition: transform 0.45s ease;
 }
 
-.luxury-horizontal-card:hover .card-image-left-frame img {
-  transform: scale(1.05);
+.luxury-horizontal-card:hover
+.card-image-left-frame img {
+  transform: scale(1.045);
 }
+
+
+/* ==========================================================================
+   07. VERIFIED BADGE
+   ========================================================================== */
 
 .luxury-badge-tag {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  background: rgba(46, 204, 113, 0.95);
-  color: #ffffff;
-  font-size: 11px;
+  top: 10px;
+  left: 10px;
+
+  padding: 5px 9px;
+
+  background: rgba(183, 28, 28, 0.94);
+  color: var(--accha-white);
+
+  border-radius: 5px;
+
+  font-size: 9px;
+  line-height: 1;
   font-weight: 700;
+
   text-transform: uppercase;
-  padding: 5px 12px;
-  border-radius: 4px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.4px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+
+  z-index: 3;
 }
 
-/* Center Specifications Content Layout specs */
+
+/* ==========================================================================
+   08. CENTER CONTENT
+   ========================================================================== */
+
 .card-content-middle-frame {
   flex: 1;
-  padding: 24px;
+  min-width: 0;
+
+  padding: 17px 20px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
+
+/* ==========================================================================
+   09. PROPERTY TITLE
+   ========================================================================== */
+
 .card-title-row h3 {
-  margin: 0 0 6px 0;
-  color: #4a3e3d;
-  font-size: 21px;
-  font-weight: 700;
+  margin: 0 0 4px;
+
+  color: var(--accha-text);
+
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 750;
+
+  letter-spacing: -0.2px;
 }
 
 .location-marker {
   margin: 0;
-  font-size: 14px;
-  color: #665856;
+
+  color: var(--accha-text-soft);
+
+  font-size: 12px;
+  line-height: 1.4;
   font-weight: 600;
 }
 
-/* 🏢 PREMIUM COMPONENT SPECIFICATION GRID SECTION */
+
+/* ==========================================================================
+   10. PROPERTY SPECIFICATIONS
+   ========================================================================== */
+
 .luxury-specs-badge-grid {
   display: flex;
-  gap: 25px;
-  background: #fdf8f5; /* Light Soft Cream Ivory */
-  padding: 12px 20px;
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 10px 0;
+  padding: 9px 11px;
+
+  background: var(--accha-light-red);
+
+  border: 1px solid var(--accha-border-red);
   border-radius: 8px;
-  margin: 15px 0;
-  border: 1px solid rgba(243, 236, 232, 0.8);
 }
 
 .spec-icon-box {
+  flex: 1;
+
   display: flex;
   align-items: center;
-  gap: 12px;
+
+  gap: 7px;
+
+  min-width: 0;
 }
 
 .spec-emoji {
-  font-size: 24px;
+  flex-shrink: 0;
+  font-size: 19px;
 }
 
 .spec-meta {
+  min-width: 0;
+
   display: flex;
   flex-direction: column;
 }
 
 .spec-meta label {
-  font-size: 9px;
-  font-weight: 700;
-  color: #a49694;
+  margin: 0 0 2px;
+
+  color: var(--accha-muted);
+
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 800;
+
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 2px;
 }
 
 .spec-meta strong {
-  font-size: 14px;
-  font-weight: 700;
-  color: #4a3e3d;
-}
+  color: var(--accha-text);
 
-.property-brief-text {
-  margin: 0;
-  font-size: 13px;
-  color: #837472;
-  line-height: 1.5;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 750;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 580px;
 }
 
-/* Right Pricing Panel layout specs */
+
+/* ==========================================================================
+   11. PROPERTY DESCRIPTION
+   ========================================================================== */
+
+.property-brief-text {
+  max-width: 100%;
+
+  margin: 0;
+
+  color: var(--accha-muted);
+
+  font-size: 11px;
+  line-height: 1.45;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+}
+
+
+/* ==========================================================================
+   12. RIGHT PRICE PANEL
+   ========================================================================== */
+
 .card-pricing-right-frame {
-  width: 230px;
-  min-width: 230px;
-  border-left: 1px solid #f3ece8;
-  padding: 24px;
+  width: 195px;
+  min-width: 195px;
+
+  padding: 17px 15px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  background: rgba(253, 248, 245, 0.4);
+  align-items: stretch;
+
+  background: #fffafa;
+
+  border-left: 1px solid var(--accha-border);
+}
+
+.price-calculator-block {
+  text-align: center;
 }
 
 .premium-price-text {
   margin: 0;
-  color: #4a3e3d;
-  font-size: 26px;
-  font-weight: 800;
+
+  color: var(--accha-red);
+
+  font-size: 23px;
+  line-height: 1.2;
+  font-weight: 850;
+
   letter-spacing: -0.5px;
 }
 
 .price-per-sqft {
-  font-size: 12px;
-  color: #9c8e8c;
-  font-weight: 600;
-  margin-top: 4px;
   display: block;
+
+  margin-top: 3px;
+
+  color: var(--accha-muted);
+
+  font-size: 9px;
+  line-height: 1.3;
+  font-weight: 600;
 }
 
+
+/* ==========================================================================
+   13. ACTION BUTTONS
+   ========================================================================== */
+
 .action-buttons-stack {
+  width: 100%;
+
   display: flex;
   flex-direction: column;
-  gap: 12px;
+
+  gap: 7px;
+}
+
+.btn-premium-action-contact,
+.btn-subtle-action-details {
   width: 100%;
+  min-height: 34px;
+
+  padding: 7px 8px;
+
+  border-radius: 6px;
+
+  font-family: inherit;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 750;
+
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .btn-premium-action-contact {
-  background: #4a3e3d;
-  color: #ffffff;
-  border: none;
-  padding: 12px 0;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  width: 100%;
-  transition: background 0.2s;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+  color: var(--accha-white);
+  background: var(--accha-red);
+
+  border: 1px solid var(--accha-red);
+
+  box-shadow: 0 4px 10px rgba(183, 28, 28, 0.18);
 }
 
 .btn-premium-action-contact:hover {
-  background: #2b2221;
+  background: var(--accha-dark-red);
+  border-color: var(--accha-dark-red);
+  transform: translateY(-1px);
 }
 
 .btn-subtle-action-details {
-  background: transparent;
-  color: #4a3e3d;
-  border: 1px solid #4a3e3d;
-  padding: 11px 0;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  width: 100%;
-  transition: all 0.2s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+  color: var(--accha-red);
+  background: var(--accha-white);
+
+  border: 1px solid var(--accha-red);
 }
 
 .btn-subtle-action-details:hover {
-  background: #fdf8f5;
+  color: var(--accha-white);
+  background: var(--accha-red);
 }
+
 
 /* ==========================================================================
-   ⚡ GLASSMORPHIC BLUR LAYER POPUP FORMS MODALS
-   ========================================================================== */
-
-.luxury-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(43, 34, 33, 0.4);
-  backdrop-filter: blur(8px);
-  z-index: 100000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.luxury-modal-card {
-  background: #ffffff;
-  width: 450px;
-  max-width: 90%;
-  border-radius: 16px;
-  border: 1px solid #f3ece8;
-  box-shadow: 0 20px 50px rgba(74, 62, 61, 0.25);
-  padding: 30px;
-  animation: modalSlideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes modalSlideUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.modal-header-row {
-  position: relative;
-  border-bottom: 1px solid #f3ece8;
-  padding-bottom: 15px;
-  margin-bottom: 22px;
-}
-
-.modal-header-row h2 {
-  margin: 0 0 4px 0;
-  color: #4a3e3d;
-  font-size: 24px;
-  font-weight: 800;
-}
-
-.modal-header-row p {
-  margin: 0;
-  color: #9c8e8c;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.highlight-title {
-  color: #4a3e3d;
-  font-weight: 700;
-}
-
-.close-x-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: transparent;
-  border: none;
-  font-size: 30px;
-  color: #9c8e8c;
-  cursor: pointer;
-  line-height: 1;
-}
-
-.close-x-btn:hover {
-  color: #4a3e3d;
-}
-
-.modal-body-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.form-input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-input-group label {
-  font-size: 11px;
-  font-weight: 700;
-  color: #665856;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.form-input-group input,
-.form-input-group textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 12px 15px;
-  border: 1px solid #dcd1cc;
-  border-radius: 6px;
-  font-size: 14px;
-  color: #4a3e3d;
-  font-family: inherit;
-  background: #fdf8f5;
-  transition: all 0.2s ease;
-}
-
-.form-input-group input:focus,
-.form-input-group textarea:focus {
-  outline: none;
-  border-color: #4a3e3d;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(74, 62, 61, 0.08);
-}
-
-.phone-input-wrapper {
-  display: flex;
-  align-items: center;
-  border: 1px solid #dcd1cc;
-  border-radius: 6px;
-  background: #fdf8f5;
-  overflow: hidden;
-}
-
-.phone-input-wrapper input {
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-.country-code-addon {
-  padding: 0 14px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #665856;
-  border-right: 1px solid #dcd1cc;
-}
-
-.input-error {
-  border-color: #e74c3c !important;
-  background: #fdf2f2 !important;
-}
-
-.error-msg-tag {
-  color: #e74c3c;
-  font-size: 11px;
-  font-weight: 600;
-  margin-top: 2px;
-}
-
-.btn-submit-luxury-lead {
-  background: linear-gradient(135deg, #4a3e3d 0%, #362c2b 100%);
-  color: #ffffff;
-  border: none;
-  padding: 15px 0;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 10px;
-  box-shadow: 0 5px 15px rgba(74, 62, 61, 0.2);
-  transition: opacity 0.2s;
-}
-
-.btn-submit-luxury-lead:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.luxury-empty-state-card {
-  text-align: center;
-  padding: 80px 20px;
-  background: #fdf8f5;
-  border-radius: 12px;
-  border: 2px dashed #f3ece8;
-}
-
-.empty-monument-icon {
-  font-size: 50px;
-  display: block;
-  margin-bottom: 15px;
-}
-
-/* ==========================================================================
-   📱 ACCHASOLUTION CATALOG — MOBILE RESPONSIVE MASTER
-   ========================================================================== */
-
-@media (max-width: 900px) {
-
-  .luxury-catalog-container {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    margin: 25px auto;
-    padding: 0 15px;
-  }
-
-  .catalog-rich-header {
-    padding-bottom: 18px;
-    margin-bottom: 22px;
-  }
-
-  .catalog-rich-header h1 {
-    font-size: 28px;
-    line-height: 1.2;
-  }
-
-  .catalog-rich-header p {
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  .horizontal-cards-pipeline {
-    gap: 20px;
-  }
-
-  .luxury-horizontal-card {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  /* IMAGE */
-
-  .card-image-left-frame {
-    width: 100%;
-    min-width: 100%;
-    height: 240px;
-  }
-
-  /* CONTENT */
-
-  .card-content-middle-frame {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 20px;
-  }
-
-  .card-title-row h3 {
-    font-size: 20px;
-    line-height: 1.35;
-  }
-
-  .location-marker {
-    font-size: 13px;
-  }
-
-  .luxury-specs-badge-grid {
-    gap: 12px;
-    padding: 12px;
-    flex-wrap: wrap;
-  }
-
-  .spec-icon-box {
-    flex: 1 1 calc(33.333% - 12px);
-    min-width: 120px;
-  }
-
-  .property-brief-text {
-    max-width: 100%;
-    white-space: normal;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  /* PRICE + BUTTONS */
-
-  .card-pricing-right-frame {
-    width: 100%;
-    min-width: 100%;
-    box-sizing: border-box;
-
-    border-left: none;
-    border-top: 1px solid #f3ece8;
-
-    padding: 20px;
-
-    align-items: stretch;
-  }
-
-  .price-calculator-block {
-    text-align: left;
-    margin-bottom: 18px;
-  }
-
-  .premium-price-text {
-    font-size: 24px;
-  }
-
-  .action-buttons-stack {
-    width: 100%;
-    flex-direction: row;
-    gap: 10px;
-  }
-
-  .btn-premium-action-contact,
-  .btn-subtle-action-details {
-    flex: 1;
-  }
-
-}
-
-@media (max-width: 600px) {
-
-  .luxury-catalog-container {
-    margin: 18px auto;
-    padding: 0 12px;
-  }
-
-  .catalog-rich-header h1 {
-    font-size: 25px;
-  }
-
-  .catalog-rich-header p {
-    font-size: 13px;
-  }
-
-  .card-image-left-frame {
-    height: 210px;
-  }
-
-  .card-content-middle-frame {
-    padding: 17px;
-  }
-
-  .card-title-row h3 {
-    font-size: 18px;
-  }
-
-  .luxury-specs-badge-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 11px;
-  }
-
-  .spec-icon-box {
-    min-width: 0;
-    width: 100%;
-  }
-
-  .spec-emoji {
-    font-size: 20px;
-  }
-
-  .spec-meta label {
-    font-size: 8px;
-  }
-
-  .spec-meta strong {
-    font-size: 12px;
-  }
-
-  .property-brief-text {
-    font-size: 12px;
-  }
-
-  .card-pricing-right-frame {
-    padding: 17px;
-  }
-
-  .premium-price-text {
-    font-size: 22px;
-  }
-
-  .price-per-sqft {
-    font-size: 11px;
-  }
-
-  .action-buttons-stack {
-    flex-direction: column;
-  }
-
-  .btn-premium-action-contact,
-  .btn-subtle-action-details {
-    width: 100%;
-    min-height: 46px;
-  }
-
-  .luxury-badge-tag {
-    top: 12px;
-    left: 12px;
-    font-size: 9px;
-    padding: 5px 9px;
-  }
-
-}
-
-@media (max-width: 400px) {
-
-  .luxury-catalog-container {
-    padding: 0 10px;
-  }
-
-  .catalog-rich-header h1 {
-    font-size: 23px;
-  }
-
-  .card-image-left-frame {
-    height: 190px;
-  }
-
-  .card-title-row h3 {
-    font-size: 17px;
-  }
-
-  .luxury-specs-badge-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .spec-icon-box {
-    padding: 4px 0;
-  }
-
-  .card-pricing-right-frame {
-    padding: 15px;
-  }
-
-}
-
-/* ==========================================================================
-   ⏳ PROPERTY LOADING STATE
+   14. LOADING STATE
    ========================================================================== */
 
 .property-loading-message {
-  min-height: 300px;
-  margin: 10px 0 30px;
-  padding: 60px 20px;
+  min-height: 240px;
+
+  margin: 8px 0 20px;
+  padding: 45px 20px;
 
   display: flex;
   flex-direction: column;
@@ -688,62 +495,60 @@
   background: linear-gradient(
     135deg,
     #ffffff 0%,
-    #fdf8f5 55%,
-    #f7eee9 100%
+    #fff7f7 100%
   );
 
-  border: 1px solid #f3ece8;
-  border-radius: 14px;
+  border: 1px solid var(--accha-border-red);
+  border-radius: var(--accha-radius);
 
-  box-shadow:
-    0 8px 30px rgba(74, 62, 61, 0.05);
+  box-shadow: var(--accha-shadow);
 }
 
 .property-loading-message .no-properties-icon {
-  width: 62px;
-  height: 62px;
+  width: 54px;
+  height: 54px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 
-  background: #fdf8f5;
-  border: 1px solid #eaded8;
-  border-radius: 14px;
+  background: var(--accha-light-red);
+
+  border: 1px solid var(--accha-border-red);
+  border-radius: 12px;
 }
 
 .property-loading-message .no-properties-icon i {
-  font-size: 27px;
-  color: #4a3e3d;
+  color: var(--accha-red);
+  font-size: 24px;
 
   animation: propertyHourglass 1.4s ease-in-out infinite;
 }
 
 .property-loading-message h3 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 
-  color: #4a3e3d;
+  color: var(--accha-text);
 
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
 }
 
 .property-loading-message p {
   margin: 0;
 
-  color: #837472;
+  color: var(--accha-muted);
 
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 @keyframes propertyHourglass {
-
   0% {
     transform: rotate(0deg);
-    opacity: .65;
+    opacity: 0.65;
   }
 
   50% {
@@ -753,83 +558,568 @@
 
   100% {
     transform: rotate(360deg);
-    opacity: .65;
+    opacity: 0.65;
   }
-
 }
 
 
 /* ==========================================================================
-   📱 COMPACT MOBILE PROPERTY CARDS
+   15. EMPTY STATE
    ========================================================================== */
 
-@media (max-width: 600px) {
+.luxury-empty-state-card {
+  padding: 55px 20px;
 
-  .luxury-horizontal-card {
-    border-radius: 10px;
+  text-align: center;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #fff7f7
+  );
+
+  border: 1px dashed var(--accha-border-red);
+  border-radius: var(--accha-radius);
+
+  box-shadow: var(--accha-shadow);
+}
+
+.empty-monument-icon {
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 42px;
+}
+
+.luxury-empty-state-card h3 {
+  margin: 0 0 6px;
+
+  color: var(--accha-text);
+
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.luxury-empty-state-card p {
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  color: var(--accha-muted);
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* ==========================================================================
+   16. CONTACT MODAL OVERLAY
+   ========================================================================== */
+
+.luxury-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: rgba(25, 25, 25, 0.58);
+
+  backdrop-filter: blur(7px);
+
+  z-index: 100000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* ==========================================================================
+   17. CONTACT MODAL CARD
+   ========================================================================== */
+
+.luxury-modal-card {
+  width: 450px;
+  max-width: 100%;
+  max-height: 92vh;
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+
+  padding: 25px;
+
+  background: var(--accha-white);
+
+  border: 1px solid var(--accha-border-red);
+  border-radius: 14px;
+
+  box-shadow:
+    0 25px 65px rgba(0, 0, 0, 0.25);
+
+  animation: modalSlideUp 0.3s ease;
+}
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
   }
 
-  /* Smaller image */
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* ==========================================================================
+   18. MODAL HEADER
+   ========================================================================== */
+
+.modal-header-row {
+  position: relative;
+
+  padding-bottom: 13px;
+  margin-bottom: 18px;
+
+  border-bottom: 1px solid var(--accha-border);
+}
+
+.modal-header-row::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  bottom: -1px;
+
+  width: 55px;
+  height: 2px;
+
+  background: var(--accha-red);
+}
+
+.modal-header-row h2 {
+  margin: 0 35px 4px 0;
+
+  color: var(--accha-text);
+
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.modal-header-row p {
+  margin: 0;
+
+  color: var(--accha-muted);
+
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.highlight-title {
+  color: var(--accha-red);
+  font-weight: 750;
+}
+
+.close-x-btn {
+  position: absolute;
+
+  top: -5px;
+  right: 0;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  background: var(--accha-light-red);
+
+  border: 1px solid var(--accha-border-red);
+  border-radius: 50%;
+
+  color: var(--accha-red);
+
+  font-size: 23px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.close-x-btn:hover {
+  color: var(--accha-white);
+  background: var(--accha-red);
+}
+
+
+/* ==========================================================================
+   19. MODAL FORM
+   ========================================================================== */
+
+.modal-body-form {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.form-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-input-group label {
+  color: var(--accha-text);
+
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 750;
+
+  text-transform: uppercase;
+  letter-spacing: 0.45px;
+}
+
+.form-input-group input,
+.form-input-group textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  color: var(--accha-text);
+
+  background: #ffffff;
+
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.form-input-group textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+
+.form-input-group input::placeholder,
+.form-input-group textarea::placeholder {
+  color: #a1a5aa;
+}
+
+.form-input-group input:focus,
+.form-input-group textarea:focus {
+  outline: none;
+
+  background: #ffffff;
+
+  border-color: var(--accha-red);
+
+  box-shadow:
+    0 0 0 3px rgba(183, 28, 28, 0.08);
+}
+
+
+/* ==========================================================================
+   20. PHONE FIELD
+   ========================================================================== */
+
+.phone-input-wrapper {
+  display: flex;
+  align-items: center;
+
+  background: #ffffff;
+
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+
+  overflow: hidden;
+
+  transition: 0.2s ease;
+}
+
+.phone-input-wrapper:focus-within {
+  border-color: var(--accha-red);
+
+  box-shadow:
+    0 0 0 3px rgba(183, 28, 28, 0.08);
+}
+
+.country-code-addon {
+  flex-shrink: 0;
+
+  padding: 10px 11px;
+
+  color: var(--accha-red);
+
+  background: var(--accha-light-red);
+
+  border-right: 1px solid var(--accha-border-red);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.phone-input-wrapper input {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+
+/* ==========================================================================
+   21. FORM VALIDATION
+   ========================================================================== */
+
+.input-error {
+  border-color: #d32f2f !important;
+  background: #fff7f7 !important;
+}
+
+.error-msg-tag {
+  color: #d32f2f;
+
+  font-size: 10px;
+  line-height: 1.3;
+  font-weight: 650;
+}
+
+
+/* ==========================================================================
+   22. SUBMIT BUTTON
+   ========================================================================== */
+
+.btn-submit-luxury-lead {
+  width: 100%;
+
+  min-height: 43px;
+
+  margin-top: 5px;
+  padding: 10px 15px;
+
+  color: var(--accha-white);
+
+  background: linear-gradient(
+    135deg,
+    var(--accha-red),
+    var(--accha-dark-red)
+  );
+
+  border: none;
+  border-radius: 7px;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 16px rgba(183, 28, 28, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.btn-submit-luxury-lead:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 9px 20px rgba(183, 28, 28, 0.25);
+}
+
+.btn-submit-luxury-lead:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+
+/* ==========================================================================
+   23. TABLET
+   ========================================================================== */
+
+@media (max-width: 1000px) {
+
+  .luxury-catalog-container {
+    max-width: 960px;
+  }
+
   .card-image-left-frame {
-    height: 155px;
+    width: 210px;
+    min-width: 210px;
   }
 
-  /* Less content padding */
+  .card-pricing-right-frame {
+    width: 175px;
+    min-width: 175px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
   .card-content-middle-frame {
-    padding: 13px 14px;
+    padding: 15px;
   }
 
   .card-title-row h3 {
     font-size: 16px;
-    line-height: 1.3;
-    margin-bottom: 5px;
   }
 
-  .location-marker {
-    font-size: 11px;
-  }
-
-  /* Compact specs */
   .luxury-specs-badge-grid {
-    grid-template-columns: 1fr 1fr;
     gap: 7px;
-    padding: 8px;
-    margin: 10px 0;
-    border-radius: 7px;
-  }
-
-  .spec-icon-box {
-    gap: 7px;
-    padding: 2px 0;
   }
 
   .spec-emoji {
     font-size: 17px;
   }
 
-  .spec-meta label {
-    font-size: 7px;
-    letter-spacing: .3px;
-  }
-
   .spec-meta strong {
     font-size: 10px;
   }
+}
 
-  /* Smaller description */
-  .property-brief-text {
-    font-size: 11px;
-    line-height: 1.4;
-    -webkit-line-clamp: 2;
+
+/* ==========================================================================
+   24. MOBILE
+   ========================================================================== */
+
+@media (max-width: 700px) {
+
+  .luxury-catalog-container {
+    margin: 18px auto;
+    padding: 0 12px;
   }
 
-  /* Compact price section */
+  .catalog-rich-header {
+    margin-bottom: 15px;
+  }
+
+  .catalog-rich-header h1 {
+    font-size: 23px;
+  }
+
+  .catalog-rich-header p {
+    font-size: 12px;
+  }
+
+  .horizontal-cards-pipeline {
+    gap: 13px;
+  }
+
+  .luxury-horizontal-card {
+    display: flex;
+    flex-direction: column;
+
+    min-height: auto;
+
+    border-radius: 10px;
+  }
+
+  /* IMAGE */
+
+  .card-image-left-frame {
+    width: 100%;
+    min-width: 100%;
+    height: 175px;
+  }
+
+  /* CONTENT */
+
+  .card-content-middle-frame {
+    width: 100%;
+    padding: 13px;
+    box-sizing: border-box;
+  }
+
+  .card-title-row h3 {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .location-marker {
+    font-size: 11px;
+  }
+
+  /* SPECS */
+
+  .luxury-specs-badge-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 6px;
+
+    margin: 9px 0;
+    padding: 8px;
+  }
+
+  .spec-icon-box {
+    gap: 5px;
+  }
+
+  .spec-emoji {
+    font-size: 16px;
+  }
+
+  .spec-meta label {
+    font-size: 6px;
+  }
+
+  .spec-meta strong {
+    font-size: 9px;
+  }
+
+  .property-brief-text {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  /* PRICE */
+
   .card-pricing-right-frame {
-    padding: 12px 14px;
+    width: 100%;
+    min-width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 13px;
+
+    border-left: none;
+    border-top: 1px solid var(--accha-border);
+
+    align-items: stretch;
   }
 
   .price-calculator-block {
-    margin-bottom: 10px;
+    margin-bottom: 9px;
+    text-align: left;
   }
 
   .premium-price-text {
@@ -838,50 +1128,54 @@
 
   .price-per-sqft {
     font-size: 9px;
-    margin-top: 2px;
   }
 
-  /* Smaller buttons */
   .action-buttons-stack {
+    flex-direction: row;
     gap: 7px;
   }
 
   .btn-premium-action-contact,
   .btn-subtle-action-details {
-    min-height: 38px;
-    padding: 8px 5px;
-    font-size: 10px;
-    border-radius: 5px;
+    flex: 1;
+
+    min-height: 36px;
+
+    font-size: 9px;
   }
 
-  /* Smaller badge */
   .luxury-badge-tag {
     top: 9px;
     left: 9px;
+
     padding: 4px 7px;
+
     font-size: 8px;
   }
-
 }
 
 
 /* ==========================================================================
-   📱 EXTRA SMALL MOBILE
+   25. SMALL MOBILE
    ========================================================================== */
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
 
   .luxury-catalog-container {
     padding: 0 9px;
     margin: 15px auto;
   }
 
-  .horizontal-cards-pipeline {
-    gap: 14px;
+  .catalog-rich-header h1 {
+    font-size: 21px;
+  }
+
+  .catalog-rich-header p {
+    font-size: 11px;
   }
 
   .card-image-left-frame {
-    height: 140px;
+    height: 150px;
   }
 
   .card-content-middle-frame {
@@ -892,18 +1186,9 @@
     font-size: 15px;
   }
 
-  .location-marker {
-    font-size: 10px;
-  }
-
   .luxury-specs-badge-grid {
-    gap: 5px;
-    padding: 7px;
-    margin: 8px 0;
-  }
-
-  .spec-emoji {
-    font-size: 15px;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
   }
 
   .spec-meta strong {
@@ -922,10 +1207,136 @@
     font-size: 18px;
   }
 
+  .action-buttons-stack {
+    flex-direction: column;
+  }
+
   .btn-premium-action-contact,
   .btn-subtle-action-details {
-    min-height: 36px;
+    width: 100%;
+    min-height: 35px;
+  }
+}
+
+
+/* ==========================================================================
+   26. EXTRA SMALL DEVICES
+   ========================================================================== */
+
+@media (max-width: 360px) {
+
+  .luxury-catalog-container {
+    padding: 0 8px;
+  }
+
+  .card-image-left-frame {
+    height: 135px;
+  }
+
+  .card-title-row h3 {
+    font-size: 14px;
+  }
+
+  .location-marker {
+    font-size: 10px;
+  }
+
+  .luxury-specs-badge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .premium-price-text {
+    font-size: 17px;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .luxury-horizontal-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Property Image */
+  .card-image-left-frame {
+    width: 100%;
+    min-width: 100%;
+    height: 180px;
+  }
+
+  /* Property Details */
+  .card-content-middle-frame {
+    width: 100%;
+    padding: 12px 14px 6px;
+  }
+
+  /* 2 BHK / Area / Ready To Move - upper side */
+  .luxury-specs-badge-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+  }
+
+  .spec-icon-box {
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+  }
+
+  .spec-meta label {
     font-size: 9px;
+  }
+
+  .spec-meta strong {
+    font-size: 11px;
+  }
+
+  /* Description */
+  .property-brief-text {
+    font-size: 11px;
+    margin: 6px 0;
+  }
+
+  /* Price + Buttons */
+  .card-pricing-right-frame {
+    width: 100%;
+    min-width: 0;
+    border-left: none;
+    border-top: 1px solid var(--accha-border);
+    padding: 8px 14px 10px;
+  }
+
+  .price-calculator-block {
+    margin-bottom: 7px;
+  }
+
+  .premium-price-text {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .price-per-sqft {
+    font-size: 9px;
+  }
+
+  /* Both buttons small and at bottom */
+  .action-buttons-stack {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 7px;
+    width: 100%;
+  }
+
+  .btn-premium-action-contact,
+  .btn-subtle-action-details {
+    width: auto;
+    min-width: 100px;
+    padding: 7px 10px;
+    font-size: 11px;
+    line-height: 1.2;
   }
 
 }

@@ -226,6 +226,10 @@ exports.generatePropertyDescription = async (req, res) => {
         .map(value =>
           String(value).trim()
         )
+        .filter(
+          (value, index, array) =>
+            array.indexOf(value) === index
+        )
         .join(', ');
 
     } else if (
@@ -252,7 +256,7 @@ exports.generatePropertyDescription = async (req, res) => {
 
       generationConfig: {
         temperature: 0.4,
-        maxOutputTokens: 3000
+        maxOutputTokens: 1200
       }
     });
 
@@ -262,9 +266,12 @@ exports.generatePropertyDescription = async (req, res) => {
     // ============================================================
 
     const prompt = `
-You are a premium Indian real estate content writer and SEO specialist for AcchaSolution Realty.
 
-Create a polished, premium, trustworthy and SEO-friendly property listing using ONLY the factual property data provided below.
+You are a premium Indian real estate content writer and SEO specialist
+for AcchaSolution Realty.
+
+Create a polished, premium, trustworthy and SEO-friendly property
+listing using ONLY the factual property data provided below.
 
 ============================================================
 STRICT FACTUAL RULES
@@ -327,7 +334,8 @@ STRICT FACTUAL RULES
    "guaranteed appreciation",
    unless such wording is explicitly provided as factual information.
 
-14. Make the property sound premium through clear writing, structure and presentation rather than unsupported claims.
+14. Make the property sound premium through clear writing,
+    structure and presentation rather than unsupported claims.
 
 ============================================================
 PROPERTY DATA
@@ -405,17 +413,56 @@ OUTPUT FORMAT
 
 Return ONLY the final property listing.
 
-IMPORTANT FORMATTING RULES:
+IMPORTANT ANTI-REPETITION RULE:
 
-- Do NOT use Markdown heading syntax.
-- Do NOT use #, ##, ### or ####.
-- Do NOT create numbered headings such as 1., 2., 3.
-- Do NOT use repeated decorative symbols.
-- Do NOT repeat the property name multiple times unnecessarily.
-- Use clean plain-text section labels.
-- Use short paragraphs.
-- Use bullet points only where requested.
-- Keep spacing clean and professional.
+The same factual information MUST NOT be repeated across sections.
+
+Each important property fact should normally appear ONLY ONCE
+in the entire listing.
+
+For example:
+
+- If price is mentioned in PROPERTY OVERVIEW, do not mention
+  the same price again later.
+
+- If area and BHK are mentioned in PROPERTY OVERVIEW,
+  do not repeat them in INTERIOR & SPACE.
+
+- If location is already clearly mentioned,
+  do not repeat the same location unnecessarily.
+
+- If an amenity is listed in AMENITIES,
+  do not describe or list the same amenity again.
+
+- Do not repeat the property name unnecessarily.
+
+- Do not rewrite the same fact using different words.
+
+- Do not create sections that only repeat information
+  from previous sections.
+
+Every section should provide NEW information or useful context.
+
+If a section has nothing new to add, OMIT that section.
+
+Do NOT use Markdown heading syntax.
+
+Do NOT use #, ##, ### or ####.
+
+Do NOT create numbered headings such as 1., 2., 3.
+
+Do NOT use repeated decorative symbols.
+
+Use clean plain-text section labels.
+
+Use short paragraphs.
+
+Use bullet points only where useful.
+
+
+============================================================
+PROPERTY NAME
+============================================================
 
 Start exactly with:
 
@@ -429,84 +476,142 @@ FOR ${propertyPurpose === 'RENT'
     ? 'SALE'
     : 'PROPERTY'}
 
+Do not repeat the property name unnecessarily.
+
+
+============================================================
 PROPERTY OVERVIEW
+============================================================
 
-Write one strong, premium and natural paragraph describing the property using only the supplied facts.
+Write ONE concise premium paragraph.
 
-The overview should naturally include important available facts such as:
-property type, BHK, area, furnishing, bathrooms, location, price and possession.
+Introduce the property using the most important available facts.
 
-Do not force facts that are missing.
+You may naturally include:
+property type, BHK, area, furnishing, bathrooms,
+price and location.
 
+IMPORTANT:
+
+Do not try to include every field.
+
+Any fact used here should NOT be unnecessarily repeated
+in later sections.
+
+
+============================================================
 KEY PROPERTY HIGHLIGHTS
+============================================================
 
-Use short bullet points.
+Use short bullet points ONLY for important facts
+that were NOT already mentioned in PROPERTY OVERVIEW.
 
-Include only available factual information.
+For example:
 
-Example format:
-
-• Property Type: ...
-• Configuration: ...
-• Area: ...
-• Bathrooms: ...
-• Floor: ...
-• Furnishing: ...
 • Facing: ...
+• Property Floor: ...
+• Total Floors: ...
 • Possession: ...
+• Property Status: ...
 
-Do not create a bullet for missing information.
+Do NOT repeat information already mentioned above.
 
+If there are no new useful facts, omit this section.
+
+
+============================================================
 INTERIOR & SPACE
+============================================================
 
-Write one or two concise premium paragraphs.
+Write one concise paragraph.
 
-Describe the available space using only:
-area, BHK, bathrooms, floor, furnishing, facing and other supplied facts.
+Describe the available space naturally using only
+supplied facts.
+
+Do NOT repeat numerical information already mentioned.
+
+Do NOT repeat:
+area
+BHK
+bathrooms
+floor
+furnishing
+facing
 
 Do not invent interior features.
 
-AMENITIES
+If there is no new useful information, omit this section.
 
-List only the supplied amenities.
+
+============================================================
+AMENITIES
+============================================================
+
+Include this section ONLY when actual amenities are supplied.
+
+List each supplied amenity only once.
 
 Use short bullet points.
 
+Do not mention the same amenities anywhere else.
+
 If no amenities are supplied, omit this entire section.
 
+
+============================================================
 LOCATION
+============================================================
 
-Write a concise and professional location paragraph using only:
-locality, sub-locality, city, state, pincode, address and landmark when available.
+Write ONE concise location paragraph.
 
-Do not invent connectivity, nearby landmarks, travel times or infrastructure.
+Use only supplied:
+locality
+sub-locality
+city
+state
+pincode
+address
+landmark
 
-PROPERTY DETAILS
+Do NOT repeat location information unnecessarily.
 
-Present the important factual information clearly.
+Do NOT invent:
 
-Use short bullet points only.
+- nearby places
+- schools
+- colleges
+- hospitals
+- malls
+- metro stations
+- roads
+- distances
+- travel times
+- connectivity
 
-Include:
-Property Type
-Price
-Area
-BHK
-Bathrooms
-Property Floor
-Total Floors
-Furnishing
-Facing
-Possession
-Location
 
-Only include fields that contain useful information.
+============================================================
+ADDITIONAL PROPERTY DETAILS
+============================================================
 
+Include ONLY information that has not already appeared.
+
+Do NOT create another duplicate specification list.
+
+If all important facts have already been covered,
+omit this section completely.
+
+
+============================================================
 CONTACT & SITE VISIT
+============================================================
 
-Write one short professional closing paragraph inviting interested buyers or tenants to contact AcchaSolution for property details or a site visit.
+Write ONE short professional closing paragraph inviting
+interested buyers or tenants to contact AcchaSolution
+for property details or a site visit.
 
-Do not invent phone numbers, email addresses or contact details.
+Do not invent phone numbers, email addresses
+or contact details.
+
 
 ============================================================
 SEO OUTPUT
@@ -518,9 +623,11 @@ Create one natural and attractive SEO title.
 
 Maximum 60 characters.
 
-Use the actual property type, locality or city and RENT/SALE purpose when available.
+Use the actual property type, locality or city
+and RENT/SALE purpose when available.
 
 Do not use clickbait.
+
 
 META DESCRIPTION:
 
@@ -530,6 +637,7 @@ Maximum 160 characters.
 
 Use only supplied facts.
 
+
 SEO KEYWORDS:
 
 Provide 8–10 natural search keywords.
@@ -538,18 +646,19 @@ Every keyword must be based only on supplied property facts.
 
 Do not invent localities, amenities, builders or project names.
 
+
 ============================================================
 WRITING STYLE
 ============================================================
 
-The final content should feel like it was written by a premium real estate editorial team.
+The final content should feel like it was written by
+a premium real estate editorial team.
 
 Style:
 
 - Premium
 - Modern
 - Professional
-- Convincing
 - Natural
 - SEO-friendly
 - Human-readable
@@ -557,7 +666,6 @@ Style:
 - Concise
 - Factual
 - Elegant
-- Indian real estate website style
 
 Use varied sentence structure.
 
@@ -574,6 +682,7 @@ Do not make the content sound like an AI template.
 
 The description should feel unique for this particular property.
 
+
 ============================================================
 LENGTH
 ============================================================
@@ -582,36 +691,51 @@ Do NOT force a fixed word count.
 
 Prefer quality over length.
 
-For a property with rich factual information:
-approximately 500–750 words is acceptable.
+Normally aim for approximately 300–500 words
+when sufficient factual information is available.
 
-For a property with limited information:
-approximately 250–500 words is acceptable.
+If the property has limited information,
+keep the description shorter.
 
-Never add fictional information just to increase the word count.
+Never repeat facts just to increase length.
+
+Never invent information to make the description longer.
+
 
 ============================================================
-FINAL CHECK BEFORE RESPONSE
+FINAL ANTI-REPETITION CHECK
 ============================================================
 
-Before returning the final answer, verify:
+Before returning the final answer, internally check
+the COMPLETE listing.
 
-1. Property name is exact.
-2. RENT/SALE purpose is correct.
-3. Locality is correct.
-4. Price is unchanged.
-5. Area is unchanged.
-6. BHK is unchanged.
-7. Furnishing is unchanged.
-8. Amenities are factual.
-9. No invented nearby places.
-10. No invented distances.
-11. No invented investment claims.
-12. No repeated numbered headings.
-13. No Markdown # headings.
-14. SEO title is under 60 characters.
-15. Meta description is under 160 characters.
-16. Keywords contain only supplied facts.
+Remove unnecessary repeated:
+
+- Property name
+- Price
+- Area
+- BHK
+- Bathrooms
+- Location
+- Locality
+- City
+- Floor
+- Total floors
+- Furnishing
+- Facing
+- Possession
+- Property status
+- Amenities
+- Property type
+- Property purpose
+
+The same fact should normally appear only once.
+
+If a section only repeats previously stated information,
+REMOVE THAT SECTION.
+
+A shorter, informative and non-repetitive description
+is better than a long repetitive description.
 
 Return ONLY the final property listing.
 `;
