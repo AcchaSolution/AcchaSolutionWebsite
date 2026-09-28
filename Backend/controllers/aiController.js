@@ -242,22 +242,21 @@ exports.generatePropertyDescription = async (req, res) => {
     // ONLY SHORT CONTENT
     // ==========================================================
 
-    const model =
-      genAI.getGenerativeModel({
+const model =
+  genAI.getGenerativeModel({
 
-        model: 'gemini-3.6-flash',
+    model: 'gemini-2.5-flash',
 
-        generationConfig: {
+    generationConfig: {
 
-          temperature: 0.2,
+      temperature: 0.2,
 
-          maxOutputTokens: 700,
+      maxOutputTokens: 500,
 
-          responseMimeType:
-            'application/json'
-        }
-      });
-
+      responseMimeType:
+        'application/json'
+    }
+  });
 
     // ==========================================================
     // VERY SHORT PROMPT
@@ -311,8 +310,8 @@ ${finalAmenities.length ? finalAmenities.join(', ') : 'None'}
 Return ONLY this JSON:
 
 {
-  "overview": "one or two short complete sentences",
-  "highlights": ["short fact", "short fact", "short fact"]
+"overview": "one short complete sentence",
+"highlights": ["short fact", "short fact", "short fact"]
 }
 
 Do not write anything before or after the JSON.
@@ -324,6 +323,17 @@ Do not say "Let's check".
 Do not say "double-check".
 Do not say "omit".
 Do not output markdown.
+
+Overview must be under 180 characters.
+
+Highlights must contain maximum 3 short items.
+
+Do not repeat all property details in the overview.
+Do not include price, area, bathrooms, floor, furnishing, facing or amenities in the overview.
+Those details are already added by the backend.
+
+Return the smallest valid JSON possible.
+
 `;
 
 
