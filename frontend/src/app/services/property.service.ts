@@ -23,6 +23,8 @@ export class PropertyService {
   private readonly API_URL =
 'https://api.acchasolution.com/api/properties'
 
+// 'http://localhost:5000/api/ai/generate-description'
+
   // =========================================================
 // FAST PROPERTY CACHE
 // =========================================================

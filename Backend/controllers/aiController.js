@@ -2,7 +2,10 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const mongoose = require('mongoose');
 
-// Dynamic safe unwrap container block for cross-collection queries
+// ============================================================
+// PROPERTY MODEL
+// ============================================================
+
 let Property;
 
 try {
@@ -31,25 +34,24 @@ try {
 
 // ============================================================
 // 🟢 FEATURE 1: AI PROPERTY DESCRIPTION WRITER
+// FINAL STABLE VERSION
 // ============================================================
 
 exports.generatePropertyDescription = async (req, res) => {
   try {
 
-    // ============================================================
-    // 📦 RECEIVE ACTUAL PROPERTY DATA FROM FRONTEND
-    // ============================================================
+    // ==========================================================
+    // RECEIVE DATA
+    // ==========================================================
 
     const {
       name,
       propertyName,
       title,
 
-      // Possible property-type fields
       propertyType,
       category,
 
-      // Purpose / listing fields
       listingType,
       type,
       status,
@@ -78,728 +80,987 @@ exports.generatePropertyDescription = async (req, res) => {
     } = req.body;
 
 
-    // ============================================================
-    // 🏠 PROPERTY NAME
-    // ============================================================
+    // ==========================================================
+    // HELPERS
+    // ==========================================================
+
+    const clean = (value) => {
+      if (
+        value === undefined ||
+        value === null
+      ) {
+        return '';
+      }
+
+      return String(value).trim();
+    };
+
+
+    const arrayClean = (value) => {
+
+      if (!Array.isArray(value)) {
+        return [];
+      }
+
+      return value
+        .filter(item => clean(item))
+        .map(item => clean(item));
+    };
+
+
+    // ==========================================================
+    // PROPERTY NAME
+    // ==========================================================
 
     const finalPropertyName =
-      propertyName ||
-      name ||
-      title ||
+      clean(propertyName) ||
+      clean(name) ||
+      clean(title) ||
       'Property';
 
 
-    // ============================================================
-    // 🔄 PROPERTY PURPOSE
-    // IMPORTANT:
-    // Detect only RENT or SALE from supplied form values.
-    // ============================================================
+    // ==========================================================
+    // RENT / SALE DETECTION
+    // ==========================================================
 
-    const purposeSource = [
-      listingType,
-      type,
-      status
+    const purposeText = [
+      clean(listingType),
+      clean(type),
+      clean(status)
     ]
-      .filter(value =>
-        value !== undefined &&
-        value !== null &&
-        String(value).trim() !== ''
-      )
-      .map(value =>
-        String(value).trim().toLowerCase()
-      )
-      .join(' ');
+      .join(' ')
+      .toLowerCase();
 
-    let propertyPurpose = '';
+
+    let purpose = 'PROPERTY';
+
 
     if (
-      /\brent\b/.test(purposeSource) ||
-      /\brental\b/.test(purposeSource) ||
-      /\brenting\b/.test(purposeSource) ||
-      /\blease\b/.test(purposeSource) ||
-      /\bleasing\b/.test(purposeSource)
+      /\brent\b/.test(purposeText) ||
+      /\brental\b/.test(purposeText) ||
+      /\brenting\b/.test(purposeText) ||
+      /\blease\b/.test(purposeText)
     ) {
-      propertyPurpose = 'RENT';
+
+      purpose = 'RENT';
 
     } else if (
-      /\bsale\b/.test(purposeSource) ||
-      /\bsell\b/.test(purposeSource) ||
-      /\bselling\b/.test(purposeSource)
+      /\bsale\b/.test(purposeText) ||
+      /\bsell\b/.test(purposeText) ||
+      /\bselling\b/.test(purposeText)
     ) {
-      propertyPurpose = 'SALE';
 
-    } else {
-      propertyPurpose = 'PROPERTY';
+      purpose = 'SALE';
     }
 
 
-    // ============================================================
-    // 🏢 PROPERTY TYPE
-    // Do not confuse Rent/Sale with Property Type.
-    // ============================================================
+    // ==========================================================
+    // PROPERTY TYPE
+    // ==========================================================
 
     let finalPropertyType =
-      propertyType ||
-      category ||
-      '';
+      clean(propertyType) ||
+      clean(category);
 
-    if (!finalPropertyType && type) {
-      const typeText = String(type).trim();
 
-      if (
-        !/rent|rental|renting|sale|sell|selling|lease|leasing/i.test(
-          typeText
-        )
-      ) {
-        finalPropertyType = typeText;
-      }
+    if (
+      !finalPropertyType &&
+      clean(type) &&
+      !/rent|rental|sale|sell|lease/i.test(
+        clean(type)
+      )
+    ) {
+
+      finalPropertyType =
+        clean(type);
     }
+
 
     if (!finalPropertyType) {
-      finalPropertyType = 'Not specified';
+      finalPropertyType =
+        'Not specified';
     }
 
 
-    // ============================================================
-    // 📍 ACTUAL LOCATION
-    // Locality gets priority over generic/default location.
-    // ============================================================
-
-    const primaryLocation =
-      locality ||
-      subLocality ||
-      location ||
-      city ||
-      '';
+    // ==========================================================
+    // LOCATION
+    // ==========================================================
 
     const locationParts = [
-      primaryLocation,
-      city,
-      state,
-      pincode
+      clean(locality),
+      clean(subLocality),
+      clean(location),
+      clean(city),
+      clean(state),
+      clean(pincode)
     ]
-      .filter(value =>
-        value !== undefined &&
-        value !== null &&
-        String(value).trim() !== ''
-      )
-      .map(value =>
-        String(value).trim()
-      )
+      .filter(Boolean)
       .filter(
         (value, index, array) =>
           array.indexOf(value) === index
       );
 
+
     const completeLocation =
-      locationParts.length > 0
+      locationParts.length
         ? locationParts.join(', ')
         : 'Location not specified';
 
 
-    // ============================================================
-    // 💰 PRICE
-    // ============================================================
+    // ==========================================================
+    // PRICE
+    // ==========================================================
 
     const finalPrice =
-      price !== undefined &&
-      price !== null &&
-      String(price).trim() !== ''
-        ? price
-        : budget || 'Not specified';
+      clean(price) ||
+      clean(budget) ||
+      'Not specified';
 
 
-    // ============================================================
-    // 🛋️ AMENITIES
-    // ============================================================
+    // ==========================================================
+    // AMENITIES
+    // ==========================================================
 
-    let finalAmenities = '';
+    let finalAmenities = [];
+
 
     if (Array.isArray(amenities)) {
 
-      finalAmenities = amenities
-        .filter(value =>
-          value !== undefined &&
-          value !== null &&
-          String(value).trim() !== ''
-        )
-        .map(value =>
-          String(value).trim()
-        )
-        .filter(
-          (value, index, array) =>
-            array.indexOf(value) === index
-        )
-        .join(', ');
-
-    } else if (
-      amenities !== undefined &&
-      amenities !== null &&
-      String(amenities).trim() !== ''
-    ) {
-
       finalAmenities =
-        String(amenities).trim();
+        arrayClean(amenities);
+
+    } else if (clean(amenities)) {
+
+      finalAmenities = [
+        clean(amenities)
+      ];
     }
 
-    if (!finalAmenities) {
-      finalAmenities = 'Not specified';
-    }
+
+    // ==========================================================
+    // 🤖 GEMINI
+    // ONLY SHORT CONTENT
+    // ==========================================================
+
+    const model =
+      genAI.getGenerativeModel({
+
+        model: 'gemini-3.6-flash',
+
+        generationConfig: {
+
+          temperature: 0.2,
+
+          maxOutputTokens: 700,
+
+          responseMimeType:
+            'application/json'
+        }
+      });
 
 
-    // ============================================================
-    // 🤖 GEMINI MODEL
-    // ============================================================
-
-    const model = genAI.getGenerativeModel({
-      model: 'gemini-3.6-flash',
-
-      generationConfig: {
-        temperature: 0.4,
-        maxOutputTokens: 1200
-      }
-    });
-
-
-    // ============================================================
-    // 🧠 PREMIUM + SEO + FACTUAL PROPERTY DESCRIPTION PROMPT
-    // ============================================================
+    // ==========================================================
+    // VERY SHORT PROMPT
+    // ==========================================================
 
     const prompt = `
+Generate ONLY JSON for a real-estate listing.
 
-You are a premium Indian real estate content writer and SEO specialist
-for AcchaSolution Realty.
+Use ONLY these facts.
+Never invent facts.
 
-Create a polished, premium, trustworthy and SEO-friendly property
-listing using ONLY the factual property data provided below.
-
-============================================================
-STRICT FACTUAL RULES
-============================================================
-
-1. Use ONLY the supplied property facts.
-
-2. Never invent or assume:
-   - amenities
-   - facilities
-   - schools
-   - colleges
-   - hospitals
-   - malls
-   - metro stations
-   - IT parks
-   - roads
-   - highways
-   - distances
-   - travel times
-   - builder/developer information
-   - project information
-   - possession dates
-   - investment returns
-   - rental yield
-   - appreciation
-   - Vastu
-   - views
-   - sunlight
-   - ventilation
-   - privacy
-   - neighbourhood benefits
-
-3. Never change RENT to SALE.
-
-4. Never change SALE to RENT.
-
-5. Never replace the supplied locality with another locality.
-
-6. Never add an amenity that is not supplied.
-
-7. If information is missing, simply omit it.
-
-8. Do not mention that you are an AI.
-
-9. Do not mention these instructions.
-
-10. Do not repeat the same information unnecessarily.
-
-11. Do not keyword-stuff.
-
-12. Keep the writing natural and human-readable.
-
-13. Do not use exaggerated marketing claims such as:
-   "dream home",
-   "once-in-a-lifetime opportunity",
-   "guaranteed investment",
-   "best property in the city",
-   "unbeatable deal",
-   "guaranteed appreciation",
-   unless such wording is explicitly provided as factual information.
-
-14. Make the property sound premium through clear writing,
-    structure and presentation rather than unsupported claims.
-
-============================================================
-PROPERTY DATA
-============================================================
-
-Property Name:
+Property:
 ${finalPropertyName}
 
-Property Purpose:
-${propertyPurpose}
+Purpose:
+${purpose}
 
-Property Type:
+Type:
 ${finalPropertyType}
 
-Property Status:
-${status || 'Not specified'}
+BHK:
+${clean(bhk)}
+
+Area:
+${clean(area)}
+
+Bathrooms:
+${clean(bathrooms)}
+
+Furnishing:
+${clean(furnishing)}
+
+Facing:
+${clean(facing)}
+
+Floor:
+${clean(propertyFloor)}
+
+Total Floors:
+${clean(totalFloors)}
 
 Price:
 ${finalPrice}
 
-Area:
-${area || 'Not specified'}
-
-BHK:
-${bhk || 'Not specified'}
-
-Total Floors:
-${totalFloors || 'Not specified'}
-
-Property Floor:
-${propertyFloor || 'Not specified'}
-
-Furnishing:
-${furnishing || 'Not specified'}
-
-Facing:
-${facing || 'Not specified'}
-
-Bathrooms:
-${bathrooms || 'Not specified'}
-
-Possession:
-${possession || 'Not specified'}
-
 Location:
 ${completeLocation}
 
-Address:
-${address || 'Not specified'}
-
-City:
-${city || 'Not specified'}
-
-Locality:
-${locality || 'Not specified'}
-
-Sub Locality:
-${subLocality || 'Not specified'}
-
-Landmark:
-${landmark || 'Not specified'}
-
-State:
-${state || 'Not specified'}
-
-Pincode:
-${pincode || 'Not specified'}
-
 Amenities:
-${finalAmenities}
-
-============================================================
-OUTPUT FORMAT
-============================================================
-
-Return ONLY the final property listing.
-
-IMPORTANT ANTI-REPETITION RULE:
-
-The same factual information MUST NOT be repeated across sections.
-
-Each important property fact should normally appear ONLY ONCE
-in the entire listing.
-
-For example:
-
-- If price is mentioned in PROPERTY OVERVIEW, do not mention
-  the same price again later.
-
-- If area and BHK are mentioned in PROPERTY OVERVIEW,
-  do not repeat them in INTERIOR & SPACE.
-
-- If location is already clearly mentioned,
-  do not repeat the same location unnecessarily.
-
-- If an amenity is listed in AMENITIES,
-  do not describe or list the same amenity again.
-
-- Do not repeat the property name unnecessarily.
-
-- Do not rewrite the same fact using different words.
-
-- Do not create sections that only repeat information
-  from previous sections.
-
-Every section should provide NEW information or useful context.
-
-If a section has nothing new to add, OMIT that section.
-
-Do NOT use Markdown heading syntax.
-
-Do NOT use #, ##, ### or ####.
-
-Do NOT create numbered headings such as 1., 2., 3.
-
-Do NOT use repeated decorative symbols.
-
-Use clean plain-text section labels.
-
-Use short paragraphs.
-
-Use bullet points only where useful.
-
-
-============================================================
-PROPERTY NAME
-============================================================
-
-Start exactly with:
-
-${finalPropertyName}
-
-Then immediately write:
-
-FOR ${propertyPurpose === 'RENT'
-  ? 'RENT'
-  : propertyPurpose === 'SALE'
-    ? 'SALE'
-    : 'PROPERTY'}
-
-Do not repeat the property name unnecessarily.
-
-
-============================================================
-PROPERTY OVERVIEW
-============================================================
-
-Write ONE concise premium paragraph.
-
-Introduce the property using the most important available facts.
-
-You may naturally include:
-property type, BHK, area, furnishing, bathrooms,
-price and location.
-
-IMPORTANT:
-
-Do not try to include every field.
-
-Any fact used here should NOT be unnecessarily repeated
-in later sections.
-
-
-============================================================
-KEY PROPERTY HIGHLIGHTS
-============================================================
-
-Use short bullet points ONLY for important facts
-that were NOT already mentioned in PROPERTY OVERVIEW.
-
-For example:
-
-• Facing: ...
-• Property Floor: ...
-• Total Floors: ...
-• Possession: ...
-• Property Status: ...
-
-Do NOT repeat information already mentioned above.
-
-If there are no new useful facts, omit this section.
-
-
-============================================================
-INTERIOR & SPACE
-============================================================
-
-Write one concise paragraph.
-
-Describe the available space naturally using only
-supplied facts.
-
-Do NOT repeat numerical information already mentioned.
-
-Do NOT repeat:
-area
-BHK
-bathrooms
-floor
-furnishing
-facing
-
-Do not invent interior features.
-
-If there is no new useful information, omit this section.
-
-
-============================================================
-AMENITIES
-============================================================
-
-Include this section ONLY when actual amenities are supplied.
-
-List each supplied amenity only once.
-
-Use short bullet points.
-
-Do not mention the same amenities anywhere else.
-
-If no amenities are supplied, omit this entire section.
-
-
-============================================================
-LOCATION
-============================================================
-
-Write ONE concise location paragraph.
-
-Use only supplied:
-locality
-sub-locality
-city
-state
-pincode
-address
-landmark
-
-Do NOT repeat location information unnecessarily.
-
-Do NOT invent:
-
-- nearby places
-- schools
-- colleges
-- hospitals
-- malls
-- metro stations
-- roads
-- distances
-- travel times
-- connectivity
-
-
-============================================================
-ADDITIONAL PROPERTY DETAILS
-============================================================
-
-Include ONLY information that has not already appeared.
-
-Do NOT create another duplicate specification list.
-
-If all important facts have already been covered,
-omit this section completely.
-
-
-============================================================
-CONTACT & SITE VISIT
-============================================================
-
-Write ONE short professional closing paragraph inviting
-interested buyers or tenants to contact AcchaSolution
-for property details or a site visit.
-
-Do not invent phone numbers, email addresses
-or contact details.
-
-
-============================================================
-SEO OUTPUT
-============================================================
-
-SEO TITLE:
-
-Create one natural and attractive SEO title.
-
-Maximum 60 characters.
-
-Use the actual property type, locality or city
-and RENT/SALE purpose when available.
-
-Do not use clickbait.
-
-
-META DESCRIPTION:
-
-Create one natural SEO meta description.
-
-Maximum 160 characters.
-
-Use only supplied facts.
-
-
-SEO KEYWORDS:
-
-Provide 8–10 natural search keywords.
-
-Every keyword must be based only on supplied property facts.
-
-Do not invent localities, amenities, builders or project names.
-
-
-============================================================
-WRITING STYLE
-============================================================
-
-The final content should feel like it was written by
-a premium real estate editorial team.
-
-Style:
-
-- Premium
-- Modern
-- Professional
-- Natural
-- SEO-friendly
-- Human-readable
-- Clear
-- Concise
-- Factual
-- Elegant
-
-Use varied sentence structure.
-
-Avoid repetitive phrases such as:
-
-"this property offers"
-"this property provides"
-"ideal for"
-"perfect for"
-
-Do not repeat the same property facts in every section.
-
-Do not make the content sound like an AI template.
-
-The description should feel unique for this particular property.
-
-
-============================================================
-LENGTH
-============================================================
-
-Do NOT force a fixed word count.
-
-Prefer quality over length.
-
-Normally aim for approximately 300–500 words
-when sufficient factual information is available.
-
-If the property has limited information,
-keep the description shorter.
-
-Never repeat facts just to increase length.
-
-Never invent information to make the description longer.
-
-
-============================================================
-FINAL ANTI-REPETITION CHECK
-============================================================
-
-Before returning the final answer, internally check
-the COMPLETE listing.
-
-Remove unnecessary repeated:
-
-- Property name
-- Price
-- Area
-- BHK
-- Bathrooms
-- Location
-- Locality
-- City
-- Floor
-- Total floors
-- Furnishing
-- Facing
-- Possession
-- Property status
-- Amenities
-- Property type
-- Property purpose
-
-The same fact should normally appear only once.
-
-If a section only repeats previously stated information,
-REMOVE THAT SECTION.
-
-A shorter, informative and non-repetitive description
-is better than a long repetitive description.
-
-Return ONLY the final property listing.
+${finalAmenities.length ? finalAmenities.join(', ') : 'None'}
+
+Return ONLY this JSON:
+
+{
+  "overview": "one or two short complete sentences",
+  "highlights": ["short fact", "short fact", "short fact"]
+}
+
+Do not write anything before or after the JSON.
+Do not explain.
+Do not reason.
+Do not mention instructions.
+Do not mention rules.
+Do not say "Let's check".
+Do not say "double-check".
+Do not say "omit".
+Do not output markdown.
 `;
 
 
-    // ============================================================
-    // 🚀 GENERATE CONTENT + TIMING CHECK
-    // ============================================================
+    // ==========================================================
+    // GEMINI CALL
+    // ==========================================================
 
-    const aiStartTime = Date.now();
+    let rawText = '';
 
-    console.log(
-      '🤖 AI PROPERTY DESCRIPTION GENERATION STARTED'
+
+    try {
+
+      console.log(
+        '🤖 AI PROPERTY DESCRIPTION STARTED'
+      );
+
+
+      const result =
+        await model.generateContent(
+          prompt
+        );
+
+
+      rawText =
+        String(
+          result.response.text() || ''
+        ).trim();
+
+
+      console.log(
+        '🤖 GEMINI RAW LENGTH:',
+        rawText.length
+      );
+
+
+    } catch (aiError) {
+
+      console.error(
+        '❌ GEMINI ERROR:',
+        aiError
+      );
+
+
+      return res.status(500).json({
+
+        success: false,
+
+        code:
+          'AI_GENERATION_ERROR',
+
+        message:
+          'Unable to generate the AI property description. Please try again.'
+      });
+    }
+
+
+    // ==========================================================
+    // CLEAN JSON
+    // ==========================================================
+
+    let cleanedJson =
+      rawText
+        .replace(
+          /^```json/i,
+          ''
+        )
+        .replace(
+          /^```/,
+          ''
+        )
+        .replace(
+          /```$/,
+          ''
+        )
+        .trim();
+
+
+    const firstBrace =
+      cleanedJson.indexOf('{');
+
+
+    const lastBrace =
+      cleanedJson.lastIndexOf('}');
+
+
+    if (
+      firstBrace !== -1 &&
+      lastBrace !== -1
+    ) {
+
+      cleanedJson =
+        cleanedJson.substring(
+          firstBrace,
+          lastBrace + 1
+        );
+    }
+
+
+    // ==========================================================
+    // PARSE
+    // ==========================================================
+
+    let aiData;
+
+
+    try {
+
+      aiData =
+        JSON.parse(
+          cleanedJson
+        );
+
+    } catch (parseError) {
+
+      console.error(
+        '❌ INVALID GEMINI JSON:',
+        rawText
+      );
+
+
+      return res.status(502).json({
+
+        success: false,
+
+        code:
+          'AI_INVALID_RESPONSE',
+
+        message:
+          'AI returned an invalid response. Please try again.'
+      });
+    }
+
+
+    // ==========================================================
+    // EXTRACT AI CONTENT
+    // ==========================================================
+
+    const overview =
+      clean(
+        aiData?.overview
+      );
+
+
+    const highlights =
+      arrayClean(
+        aiData?.highlights
+      ).slice(0, 5);
+
+
+    // ==========================================================
+    // BLOCK REASONING / INSTRUCTION LEAK
+    // ==========================================================
+
+    const badAIText =
+      /let's check|double-check|rules|omit|reasoning|analysis|instruction|character count|output|final check|only supplied facts|i verified/i;
+
+
+    if (
+      badAIText.test(overview) ||
+      highlights.some(
+        item => badAIText.test(item)
+      )
+    ) {
+
+      console.error(
+        '❌ AI REASONING TEXT DETECTED:',
+        {
+          overview,
+          highlights
+        }
+      );
+
+
+      return res.status(502).json({
+
+        success: false,
+
+        code:
+          'AI_UNSAFE_OUTPUT',
+
+        message:
+          'AI returned an invalid description. Please try again.'
+      });
+    }
+
+
+    // ==========================================================
+    // OVERVIEW REQUIRED
+    // ==========================================================
+
+    if (!overview) {
+
+      return res.status(502).json({
+
+        success: false,
+
+        code:
+          'AI_EMPTY_RESPONSE',
+
+        message:
+          'AI could not create the property overview. Please try again.'
+      });
+    }
+
+
+    // ==========================================================
+    // PROPERTY DETAILS
+    // ==========================================================
+
+    const details = [];
+
+
+    if (
+      finalPropertyType !==
+      'Not specified'
+    ) {
+
+      details.push(
+        `Property Type: ${finalPropertyType}`
+      );
+    }
+
+
+    if (clean(bhk)) {
+
+      details.push(
+        `BHK: ${clean(bhk)}`
+      );
+    }
+
+
+    if (clean(area)) {
+
+      details.push(
+        `Area: ${clean(area)}`
+      );
+    }
+
+
+    if (
+      finalPrice !==
+      'Not specified'
+    ) {
+
+      details.push(
+        `Price: ${finalPrice}`
+      );
+    }
+
+
+    if (clean(bathrooms)) {
+
+      details.push(
+        `Bathrooms: ${clean(bathrooms)}`
+      );
+    }
+
+
+    if (clean(furnishing)) {
+
+      details.push(
+        `Furnishing: ${clean(furnishing)}`
+      );
+    }
+
+
+    if (clean(facing)) {
+
+      details.push(
+        `Facing: ${clean(facing)}`
+      );
+    }
+
+
+    if (clean(propertyFloor)) {
+
+      details.push(
+        `Property Floor: ${clean(propertyFloor)}`
+      );
+    }
+
+
+    if (clean(totalFloors)) {
+
+      details.push(
+        `Total Floors: ${clean(totalFloors)}`
+      );
+    }
+
+
+    if (clean(possession)) {
+
+      details.push(
+        `Possession: ${clean(possession)}`
+      );
+    }
+
+
+    // ==========================================================
+    // PURPOSE HEADING
+    // ==========================================================
+
+    const purposeHeading =
+      purpose === 'RENT'
+        ? 'FOR RENT'
+        : purpose === 'SALE'
+          ? 'FOR SALE'
+          : 'PROPERTY';
+
+
+    // ==========================================================
+    // COMPLETE DESCRIPTION
+    // ==========================================================
+
+    const sections = [];
+
+
+    sections.push(
+      finalPropertyName
     );
 
-    const result =
-      await model.generateContent(prompt);
 
-    const aiResponseTime =
-      Date.now() - aiStartTime;
-
-    console.log(
-      `⏱️ GEMINI RESPONSE TIME: ${aiResponseTime} ms`
-    );
-
-    const response =
-      await result.response;
-
-    const generatedText =
-      response.text();
-
-    console.log(
-      `📝 GENERATED TEXT LENGTH: ${generatedText.length} characters`
+    sections.push(
+      purposeHeading
     );
 
 
-    // ============================================================
-    // ✅ SEND TO FRONTEND
-    // ============================================================
+    sections.push(
+      `PROPERTY OVERVIEW\n\n${overview}`
+    );
+
+
+    // ==========================================================
+    // HIGHLIGHTS
+    // ==========================================================
+
+    if (highlights.length) {
+
+      sections.push(
+        `KEY PROPERTY HIGHLIGHTS\n\n${
+          highlights
+            .map(
+              item => `• ${item}`
+            )
+            .join('\n')
+        }`
+      );
+    }
+
+
+    // ==========================================================
+    // DETAILS
+    // ==========================================================
+
+    if (details.length) {
+
+      sections.push(
+        `PROPERTY DETAILS\n\n${
+          details
+            .map(
+              item => `• ${item}`
+            )
+            .join('\n')
+        }`
+      );
+    }
+
+
+    // ==========================================================
+    // AMENITIES
+    // ==========================================================
+
+    if (finalAmenities.length) {
+
+      sections.push(
+        `AMENITIES\n\n${
+          finalAmenities
+            .map(
+              item => `• ${item}`
+            )
+            .join('\n')
+        }`
+      );
+    }
+
+
+    // ==========================================================
+    // LOCATION
+    // ==========================================================
+
+    if (
+      completeLocation !==
+      'Location not specified'
+    ) {
+
+      sections.push(
+        `LOCATION\n\n${completeLocation}`
+      );
+    }
+
+
+    // ==========================================================
+    // CONTACT
+    // ==========================================================
+
+    sections.push(
+      `CONTACT & SITE VISIT\n\nFor more details or to schedule a site visit, contact AcchaSolution Realty.`
+    );
+
+
+    // ==========================================================
+    // SEO GENERATED FROM FACTS
+    // NO GEMINI
+    // ==========================================================
+
+    let seoTitle =
+      finalPropertyName;
+
+
+    if (clean(bhk)) {
+
+      seoTitle +=
+        ` | ${clean(bhk)} BHK`;
+    }
+
+
+    if (
+      purpose === 'RENT'
+    ) {
+
+      seoTitle +=
+        ' for Rent';
+
+    } else if (
+      purpose === 'SALE'
+    ) {
+
+      seoTitle +=
+        ' for Sale';
+    }
+
+
+    const seoLocation =
+      clean(locality) ||
+      clean(subLocality) ||
+      clean(city);
+
+
+    if (seoLocation) {
+
+      seoTitle +=
+        ` in ${seoLocation}`;
+    }
+
+
+    seoTitle =
+      seoTitle.substring(
+        0,
+        60
+      ).trim();
+
+
+    const metaParts = [];
+
+
+    if (clean(bhk)) {
+      metaParts.push(
+        `${clean(bhk)} BHK`
+      );
+    }
+
+
+    if (finalPropertyType !== 'Not specified') {
+      metaParts.push(
+        finalPropertyType
+      );
+    }
+
+
+    if (purpose === 'RENT') {
+      metaParts.push(
+        'for rent'
+      );
+    }
+
+
+    if (purpose === 'SALE') {
+      metaParts.push(
+        'for sale'
+      );
+    }
+
+
+    if (seoLocation) {
+      metaParts.push(
+        `in ${seoLocation}`
+      );
+    }
+
+
+    const metaDescription =
+      (
+        `${finalPropertyName} ${metaParts.join(' ')}. ` +
+        `Contact AcchaSolution Realty for property details and site visit.`
+      )
+        .substring(
+          0,
+          155
+        )
+        .trim();
+
+
+    // ==========================================================
+    // SEO KEYWORDS
+    // ==========================================================
+
+    const keywords = [];
+
+
+    if (clean(bhk)) {
+      keywords.push(
+        `${clean(bhk)} BHK`
+      );
+    }
+
+
+    if (finalPropertyType !== 'Not specified') {
+      keywords.push(
+        finalPropertyType
+      );
+    }
+
+
+    if (purpose === 'RENT') {
+      keywords.push(
+        'property for rent'
+      );
+    }
+
+
+    if (purpose === 'SALE') {
+      keywords.push(
+        'property for sale'
+      );
+    }
+
+
+    if (seoLocation) {
+      keywords.push(
+        seoLocation
+      );
+    }
+
+
+    if (clean(furnishing)) {
+      keywords.push(
+        clean(furnishing)
+      );
+    }
+
+
+    if (clean(bathrooms)) {
+      keywords.push(
+        `${clean(bathrooms)} bathrooms`
+      );
+    }
+
+
+    if (clean(area)) {
+      keywords.push(
+        `${clean(area)} area`
+      );
+    }
+
+
+    const uniqueKeywords =
+      [...new Set(keywords)]
+        .slice(0, 8);
+
+
+    // ==========================================================
+    // SEO SECTION
+    // ==========================================================
+
+    sections.push(
+      `SEO TITLE: ${seoTitle}`
+    );
+
+
+    sections.push(
+      `META DESCRIPTION: ${metaDescription}`
+    );
+
+
+    if (
+      uniqueKeywords.length
+    ) {
+
+      sections.push(
+        `SEO KEYWORDS: ${uniqueKeywords.join(', ')}`
+      );
+    }
+
+
+    // ==========================================================
+    // FINAL LISTING
+    // ==========================================================
+
+    const finalListing =
+      sections.join(
+        '\n\n'
+      );
+
+
+    // ==========================================================
+    // FINAL SAFETY
+    // ==========================================================
+
+    if (
+      badAIText.test(
+        finalListing
+      )
+    ) {
+
+      console.error(
+        '❌ FINAL LISTING CONTAINS INVALID AI TEXT'
+      );
+
+
+      return res.status(502).json({
+
+        success: false,
+
+        code:
+          'AI_UNSAFE_OUTPUT',
+
+        message:
+          'AI returned an invalid description. Please try again.'
+      });
+    }
+
+
+    // ==========================================================
+    // SUCCESS
+    // ==========================================================
+
+    console.log(
+      '✅ AI PROPERTY DESCRIPTION GENERATED'
+    );
+
+
+    console.log(
+      '📝 FINAL LENGTH:',
+      finalListing.length
+    );
+
+
+    console.log(
+      '📞 CONTACT INCLUDED:',
+      finalListing.includes(
+        'contact AcchaSolution Realty.'
+      )
+    );
+
 
     return res.status(200).json({
+
       success: true,
-      text: generatedText
+
+      text:
+        finalListing
+
     });
 
 
   } catch (error) {
 
     console.error(
-      'Advanced Description AI Engine Failed:',
+      '❌ PROPERTY DESCRIPTION ERROR:',
       error
     );
 
+
+    let message =
+      'Unable to generate the AI property description. Please try again.';
+
+
+    if (
+      error?.message &&
+      /API key|authentication|unauthorized/i.test(
+        error.message
+      )
+    ) {
+
+      message =
+        'AI service authentication problem hai. Please check the Gemini API key in backend.';
+
+    } else if (
+      error?.message &&
+      /quota|rate limit|resource exhausted/i.test(
+        error.message
+      )
+    ) {
+
+      message =
+        'AI service temporarily busy hai. Please thodi der baad try karein.';
+
+    } else if (
+      error?.message &&
+      /timeout|timed out|deadline/i.test(
+        error.message
+      )
+    ) {
+
+      message =
+        'AI response timeout ho gaya. Please Generate Description dobara try karein.';
+    }
+
+
     return res.status(500).json({
+
       success: false,
-      message:
-        'AI side se description generate nahi ho paya.'
+
+      code:
+        'AI_GENERATION_ERROR',
+
+      message
+
     });
   }
 };
 
 
+
 // ============================================================
 // 🟢 FEATURE 2: HOMEPAGE SMART AI SEARCH
+// IMPORTANT: UNCHANGED
 // ============================================================
 
 exports.smartSearchParser = async (req, res) => {
@@ -819,10 +1080,6 @@ exports.smartSearchParser = async (req, res) => {
       }
     });
 
-
-    // ============================================================
-    // 🧠 AI PROMPT
-    // ============================================================
 
     const prompt = `
 Analyze this real estate query and convert it into structured JSON
@@ -849,12 +1106,11 @@ Respond with pure JSON wrapper only.
 `;
 
 
-    // ============================================================
-    // 🤖 AI RESPONSE
-    // ============================================================
-
     const result =
-      await model.generateContent(prompt);
+      await model.generateContent(
+        prompt
+      );
+
 
     const filtersParsed =
       JSON.parse(
@@ -862,16 +1118,8 @@ Respond with pure JSON wrapper only.
       );
 
 
-    // ============================================================
-    // 🔎 DATABASE QUERY
-    // ============================================================
-
     let dbQuery = {};
 
-
-    // ============================================================
-    // 📍 1. LOCALITY FILTER
-    // ============================================================
 
     if (filtersParsed.locality) {
 
@@ -879,21 +1127,24 @@ Respond with pure JSON wrapper only.
 
         {
           locality: {
-            $regex: filtersParsed.locality,
+            $regex:
+              filtersParsed.locality,
             $options: 'i'
           }
         },
 
         {
           location: {
-            $regex: filtersParsed.locality,
+            $regex:
+              filtersParsed.locality,
             $options: 'i'
           }
         },
 
         {
           address: {
-            $regex: filtersParsed.locality,
+            $regex:
+              filtersParsed.locality,
             $options: 'i'
           }
         }
@@ -905,7 +1156,6 @@ Respond with pure JSON wrapper only.
       query.toLowerCase().includes('whitefield')
     ) {
 
-      // Direct fallback for Whitefield
       dbQuery.$or = [
 
         {
@@ -933,97 +1183,107 @@ Respond with pure JSON wrapper only.
     }
 
 
-    // ============================================================
-    // 🏢 2. BHK FILTER
-    // ============================================================
-
     if (filtersParsed.bhk) {
 
       dbQuery.bhk = {
-        $regex: String(filtersParsed.bhk),
+        $regex:
+          String(
+            filtersParsed.bhk
+          ),
         $options: 'i'
       };
 
     }
 
 
-    // ============================================================
-    // 🔄 3. PURPOSE / RENT / SALE
-    // ============================================================
-
     const currentMode =
-      tabContext || filtersParsed.purpose;
+      tabContext ||
+      filtersParsed.purpose;
+
 
     if (currentMode) {
 
-      dbQuery.$or = dbQuery.$or || [];
+      dbQuery.$or =
+        dbQuery.$or || [];
+
 
       dbQuery.$or.push({
+
         mode: {
-          $regex: currentMode,
+          $regex:
+            currentMode,
           $options: 'i'
         }
+
       });
 
+
       dbQuery.$or.push({
+
         purpose: {
-          $regex: currentMode,
+          $regex:
+            currentMode,
           $options: 'i'
         }
+
       });
 
+
       dbQuery.$or.push({
+
         type: {
-          $regex: currentMode,
+          $regex:
+            currentMode,
           $options: 'i'
         }
+
       });
 
     }
 
 
-    // ============================================================
-    // 🧾 DEBUG LOGS
-    // ============================================================
+    console.log(
+      "----------------------------------------"
+    );
 
-    console.log("----------------------------------------");
 
     console.log(
       "AI Parsed Filters:",
       filtersParsed
     );
 
+
     console.log(
       "Executing Final Mongoose Query Parameters:",
       JSON.stringify(dbQuery)
     );
 
-    console.log("----------------------------------------");
 
+    console.log(
+      "----------------------------------------"
+    );
 
-    // ============================================================
-    // 🔎 DATABASE SEARCH
-    // ============================================================
 
     const propertiesMatched =
-      await Property.find(dbQuery);
+      await Property.find(
+        dbQuery
+      );
+
 
     console.log(
       `Successfully found ${propertiesMatched.length} properties matching query.`
     );
 
 
-    // ============================================================
-    // 📦 RESPONSE
-    // ============================================================
-
     return res.status(200).json({
 
       success: true,
 
-      filtersApplied: filtersParsed,
+      filtersApplied:
+        filtersParsed,
 
-      data: propertiesMatched
+      data:
+        propertiesMatched
 
     });
 
@@ -1033,6 +1293,7 @@ Respond with pure JSON wrapper only.
       "AI Parser Logic Crashed:",
       error
     );
+
 
     return res.status(500).json({
 
