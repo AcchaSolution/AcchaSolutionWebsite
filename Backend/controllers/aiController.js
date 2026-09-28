@@ -337,57 +337,108 @@ Return the smallest valid JSON possible.
 `;
 
 
-    // ==========================================================
-    // GEMINI CALL
-    // ==========================================================
+// ==========================================================
+// GEMINI CALL WITH RETRY
+// ==========================================================
 
-    let rawText = '';
+let rawText = '';
 
+const sleep = (ms) =>
+  new Promise(resolve => setTimeout(resolve, ms));
 
-    try {
+const maxAttempts = 4;
 
-      console.log(
-        '🤖 AI PROPERTY DESCRIPTION STARTED'
+for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+
+  try {
+
+    console.log(
+      `🤖 AI PROPERTY DESCRIPTION ATTEMPT ${attempt}/${maxAttempts}`
+    );
+
+    const result =
+      await model.generateContent(
+        prompt
       );
 
+    rawText =
+      String(
+        result.response.text() || ''
+      ).trim();
 
-      const result =
-        await model.generateContent(
-          prompt
-        );
+    console.log(
+      '🤖 GEMINI RAW LENGTH:',
+      rawText.length
+    );
 
-
-      rawText =
-        String(
-          result.response.text() || ''
-        ).trim();
-
-
-      console.log(
-        '🤖 GEMINI RAW LENGTH:',
-        rawText.length
-      );
-
-
-    } catch (aiError) {
-
-      console.error(
-        '❌ GEMINI ERROR:',
-        aiError
-      );
-
-
-      return res.status(500).json({
-
-        success: false,
-
-        code:
-          'AI_GENERATION_ERROR',
-
-        message:
-          'Unable to generate the AI property description. Please try again.'
-      });
+    // Successful response
+    if (rawText) {
+      break;
     }
+
+    throw new Error(
+      'Gemini returned an empty response.'
+    );
+
+  } catch (aiError) {
+
+    const status =
+      aiError?.status ||
+      aiError?.response?.status;
+
+    console.error(
+      `❌ GEMINI ATTEMPT ${attempt} FAILED:`,
+      status || aiError?.message || aiError
+    );
+
+    // Retry only temporary server/busy errors
+    const retryable =
+      status === 429 ||
+      status === 500 ||
+      status === 502 ||
+      status === 503 ||
+      status === 504;
+
+    if (
+      retryable &&
+      attempt < maxAttempts
+    ) {
+
+      const delay =
+        attempt === 1
+          ? 2000
+          : attempt === 2
+            ? 5000
+            : 10000;
+
+      console.log(
+        `⏳ GEMINI RETRYING IN ${delay / 1000}s...`
+      );
+
+      await sleep(delay);
+
+      continue;
+    }
+
+    console.error(
+      '❌ GEMINI FINAL ERROR:',
+      aiError
+    );
+
+    return res.status(500).json({
+
+      success: false,
+
+      code:
+        'AI_GENERATION_ERROR',
+
+      message:
+        retryable
+          ? 'AI service is temporarily busy. Please try again in a moment.'
+          : 'Unable to generate the AI property description. Please try again.'
+    });
+  }
+}
 
 
     // ==========================================================
