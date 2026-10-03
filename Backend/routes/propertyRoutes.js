@@ -595,6 +595,11 @@ router.put('/:id', adminAuth, async (req, res) => {
 
     await property.save();
 
+console.log('UPDATED PROPERTY TIMESTAMPS:', {
+  createdAt: property.createdAt,
+  updatedAt: property.updatedAt
+});
+
 
     return res.status(200).json({
 
@@ -632,6 +637,142 @@ router.put('/:id', adminAuth, async (req, res) => {
   }
 
 });
+
+
+// =====================================================
+// INCREMENT PROPERTY VIEW COUNT
+// POST /api/properties/:id/view
+// Public route — Login required nahi
+// =====================================================
+
+router.post('/:id/view', async (req, res) => {
+
+  console.log(
+    '👁️ PROPERTY VIEW API HIT:',
+    req.params.id
+  );
+
+  try {
+
+    const requestedId =
+      String(
+        req.params.id || ''
+      ).trim();
+
+
+    if (!requestedId) {
+
+      return res.status(400).json({
+
+        success: false,
+
+        message:
+          'Property ID is required.'
+
+      });
+
+    }
+
+
+    const conditions = [
+
+      {
+        id:
+          requestedId
+      },
+
+      {
+        uniqueId:
+          requestedId
+      }
+
+    ];
+
+
+    if (
+      mongoose.Types.ObjectId.isValid(
+        requestedId
+      )
+    ) {
+
+      conditions.push({
+
+        _id:
+          requestedId
+
+      });
+
+    }
+
+
+    const property =
+      await Property.findOneAndUpdate(
+
+        {
+          $or:
+            conditions
+        },
+
+        {
+          $inc: {
+            viewCount: 1
+          }
+        },
+
+        {
+          new: true
+        }
+
+      );
+
+
+    if (!property) {
+
+      return res.status(404).json({
+
+        success: false,
+
+        message:
+          'Property not found.'
+
+      });
+
+    }
+
+
+    return res.status(200).json({
+
+      success: true,
+
+      viewCount:
+        property.viewCount
+
+    });
+
+  }
+
+  catch (error) {
+
+    console.error(
+      'PROPERTY VIEW COUNT ERROR:',
+      error
+    );
+
+
+    return res.status(500).json({
+
+      success: false,
+
+      message:
+        'Unable to update property views.'
+
+    });
+
+  }
+
+});
+
+
 // =====================================================
 // UPDATE OWN PROPERTY
 // PUT /api/properties/my-property/:id
@@ -848,5 +989,81 @@ router.delete('/:id', adminAuth, async (req, res) => {
 
 });
 
+
+// =====================================================
+// FAST HOME PROPERTIES
+// GET /api/properties/home
+// =====================================================
+
+router.get('/home', async (req, res) => {
+
+  console.log(
+    '🏠 FAST HOME PROPERTIES API HIT'
+  );
+
+  try {
+
+    const properties =
+      await Property.find({})
+        .sort({
+          createdAt: -1
+        })
+        .limit(12)
+        .select({
+          _id: 1,
+          id: 1,
+          uniqueId: 1,
+          name: 1,
+          permalink: 1,
+          type: 1,
+          status: 1,
+          is_featured: 1,
+          priority: 1,
+          price: 1,
+          area: 1,
+          bhk: 1,
+          bathrooms: 1,
+          furnishing: 1,
+          facing: 1,
+          location: 1,
+          address: 1,
+          city: 1,
+          locality: 1,
+          subLocality: 1,
+          gallery: 1,
+          createdAt: 1,
+          updatedAt: 1
+        })
+        .lean();
+
+    return res.status(200).json({
+
+      success: true,
+
+      properties
+
+    });
+
+  }
+
+  catch (error) {
+
+    console.error(
+      'FAST HOME PROPERTIES ERROR:',
+      error
+    );
+
+    return res.status(500).json({
+
+      success: false,
+
+      message:
+        'Failed to fetch home properties.'
+
+    });
+
+  }
+
+});
 
 module.exports = router;

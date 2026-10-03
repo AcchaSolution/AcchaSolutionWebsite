@@ -409,7 +409,7 @@ export class AddPropertyFormComponent
         uniqueId: [''],
 
         price: [
-          0,
+          null,
           [
             Validators.required,
             Validators.min(0)
@@ -775,7 +775,7 @@ const propertyId =
 
             price:
               property.price ??
-              0,
+              null,
 
             area:
               property.area ||
@@ -1636,6 +1636,11 @@ const propertyId =
 
     }
 
+    if (!form.type) {
+  alert('Please select Property Type: Rent or Sale.');
+  return;
+}
+
 
     this.isAiGenerating = true;
 
@@ -1721,28 +1726,28 @@ const propertyId =
 
             // Update Quill editor
 
-            if (this.quillInstance) {
+if (this.quillInstance) {
 
-              this.quillInstance.root.innerHTML =
-                aiText;
+  this.quillInstance.setText(aiText);
 
-            }
+}
+
 
             else {
 
-              const editor =
-                document.querySelector(
-                  '.ql-editor'
-                );
+  const editor =
+    document.querySelector(
+      '.ql-editor'
+    );
 
-              if (editor) {
+  if (editor) {
 
-                editor.innerHTML =
-                  aiText;
+    editor.textContent =
+      aiText;
 
-              }
+  }
 
-            }
+}
 
           }
 
@@ -2292,7 +2297,7 @@ const propertyId =
         '',
 
       price:
-        0,
+        null,
 
       area:
         '',

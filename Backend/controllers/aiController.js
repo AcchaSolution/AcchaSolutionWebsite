@@ -238,270 +238,361 @@ exports.generatePropertyDescription = async (req, res) => {
 
 
     // ==========================================================
-    // 🤖 GEMINI
-    // ONLY SHORT CONTENT
+    // 🤖 GEMINI MODEL
     // ==========================================================
 
-const model =
-  genAI.getGenerativeModel({
+    const model =
+      genAI.getGenerativeModel({
 
-    model: 'gemini-3.8-flash',
+        model: 'gemini-3.8-flash',
 
-    generationConfig: {
+        generationConfig: {
 
-      temperature: 0.2,
+          temperature: 0.2,
 
-      maxOutputTokens: 500,
+          maxOutputTokens: 300,
 
-      responseMimeType:
-        'application/json'
-    }
-  });
+          responseMimeType:
+            'application/json'
+        }
+      });
+
 
     // ==========================================================
-    // VERY SHORT PROMPT
+    // SHORT SAFE PROMPT
     // ==========================================================
 
     const prompt = `
-Generate ONLY JSON for a real-estate listing.
+Generate a real-estate listing overview.
 
-Use ONLY these facts.
+Use ONLY the supplied facts.
 Never invent facts.
 
-Property:
-${finalPropertyName}
+Property: ${finalPropertyName}
+Purpose: ${purpose}
+Type: ${finalPropertyType}
+BHK: ${clean(bhk)}
+Area: ${clean(area)}
+Bathrooms: ${clean(bathrooms)}
+Furnishing: ${clean(furnishing)}
+Facing: ${clean(facing)}
+Floor: ${clean(propertyFloor)}
+Total Floors: ${clean(totalFloors)}
+Price: ${finalPrice}
+Location: ${completeLocation}
+Amenities: ${finalAmenities.length ? finalAmenities.join(', ') : 'None'}
 
-Purpose:
-${purpose}
-
-Type:
-${finalPropertyType}
-
-BHK:
-${clean(bhk)}
-
-Area:
-${clean(area)}
-
-Bathrooms:
-${clean(bathrooms)}
-
-Furnishing:
-${clean(furnishing)}
-
-Facing:
-${clean(facing)}
-
-Floor:
-${clean(propertyFloor)}
-
-Total Floors:
-${clean(totalFloors)}
-
-Price:
-${finalPrice}
-
-Location:
-${completeLocation}
-
-Amenities:
-${finalAmenities.length ? finalAmenities.join(', ') : 'None'}
-
-Return ONLY this JSON:
+Return ONLY this JSON object:
 
 {
-"overview": "one short complete sentence",
-"highlights": ["short fact", "short fact", "short fact"]
+  "overview": "one short sentence",
+  "highlights": ["short fact", "short fact"]
 }
-
-Do not write anything before or after the JSON.
-Do not explain.
-Do not reason.
-Do not mention instructions.
-Do not mention rules.
-Do not say "Let's check".
-Do not say "double-check".
-Do not say "omit".
-Do not output markdown.
 
 Overview must be under 180 characters.
 
-Highlights must contain maximum 3 short items.
+Maximum 2 highlights.
 
-Do not repeat all property details in the overview.
-Do not include price, area, bathrooms, floor, furnishing, facing or amenities in the overview.
-Those details are already added by the backend.
+Do not include price, area, bathrooms, floor, furnishing, facing or amenities in overview.
 
-Return the smallest valid JSON possible.
-
+No markdown.
+No explanation.
+No reasoning.
+No extra text.
 `;
 
 
-// ==========================================================
-// GEMINI CALL WITH RETRY
-// ==========================================================
+    // ==========================================================
+    // 🤖 GEMINI GENERATION
+    // RETRY FOR:
+    // 503 / 429 / 500 / 502 / 504
+    // INVALID JSON
+    // ==========================================================
 
-let rawText = '';
+    let aiData = null;
+    let lastError = null;
 
-const sleep = (ms) =>
-  new Promise(resolve => setTimeout(resolve, ms));
+    const sleep = (ms) =>
+      new Promise(resolve => setTimeout(resolve, ms));
 
-const maxAttempts = 4;
 
-for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const maxAttempts = 5;
 
-  try {
 
-    console.log(
-      `🤖 AI PROPERTY DESCRIPTION ATTEMPT ${attempt}/${maxAttempts}`
-    );
-
-    const result =
-      await model.generateContent(
-        prompt
-      );
-
-    rawText =
-      String(
-        result.response.text() || ''
-      ).trim();
-
-    console.log(
-      '🤖 GEMINI RAW LENGTH:',
-      rawText.length
-    );
-
-    // Successful response
-    if (rawText) {
-      break;
-    }
-
-    throw new Error(
-      'Gemini returned an empty response.'
-    );
-
-  } catch (aiError) {
-
-    const status =
-      aiError?.status ||
-      aiError?.response?.status;
-
-    console.error(
-      `❌ GEMINI ATTEMPT ${attempt} FAILED:`,
-      status || aiError?.message || aiError
-    );
-
-    // Retry only temporary server/busy errors
-    const retryable =
-      status === 429 ||
-      status === 500 ||
-      status === 502 ||
-      status === 503 ||
-      status === 504;
-
-    if (
-      retryable &&
-      attempt < maxAttempts
+    for (
+      let attempt = 1;
+      attempt <= maxAttempts;
+      attempt++
     ) {
 
-      const delay =
-        attempt === 1
-          ? 2000
-          : attempt === 2
-            ? 5000
-            : 10000;
+      try {
 
-      console.log(
-        `⏳ GEMINI RETRYING IN ${delay / 1000}s...`
-      );
+        console.log(
+          `🤖 AI PROPERTY DESCRIPTION ATTEMPT ${attempt}/${maxAttempts}`
+        );
 
-      await sleep(delay);
 
-      continue;
+        const result =
+          await model.generateContent(
+            prompt
+          );
+
+
+        const rawText =
+          String(
+            result.response.text() || ''
+          ).trim();
+
+
+        console.log(
+          '🤖 GEMINI RAW LENGTH:',
+          rawText.length
+        );
+
+
+        // ======================================================
+        // CLEAN RESPONSE
+        // ======================================================
+
+        let cleanedJson =
+          rawText
+            .replace(
+              /^```json/i,
+              ''
+            )
+            .replace(
+              /^```/,
+              ''
+            )
+            .replace(
+              /```$/,
+              ''
+            )
+            .trim();
+
+
+        const firstBrace =
+          cleanedJson.indexOf('{');
+
+
+        const lastBrace =
+          cleanedJson.lastIndexOf('}');
+
+
+        if (
+          firstBrace !== -1 &&
+          lastBrace !== -1
+        ) {
+
+          cleanedJson =
+            cleanedJson.substring(
+              firstBrace,
+              lastBrace + 1
+            );
+        }
+
+
+        // ======================================================
+        // PARSE JSON
+        // ======================================================
+
+        try {
+
+          aiData =
+            JSON.parse(
+              cleanedJson
+            );
+
+
+        } catch (parseError) {
+
+          console.error(
+            `❌ INVALID GEMINI JSON ON ATTEMPT ${attempt}:`,
+            rawText
+          );
+
+
+          lastError =
+            new Error(
+              'Gemini returned invalid JSON.'
+            );
+
+
+          // Retry invalid/truncated response
+          if (
+            attempt < maxAttempts
+          ) {
+
+            const delay =
+              attempt === 1
+                ? 1000
+                : attempt === 2
+                  ? 2000
+                  : 4000;
+
+            console.log(
+              `⏳ INVALID JSON RETRYING IN ${delay / 1000}s...`
+            );
+
+            await sleep(delay);
+
+            continue;
+          }
+
+
+          break;
+        }
+
+
+        // ======================================================
+        // VALID JSON
+        // ======================================================
+
+        if (
+          aiData &&
+          typeof aiData === 'object' &&
+          !Array.isArray(aiData)
+        ) {
+
+          const testOverview =
+            clean(
+              aiData?.overview
+            );
+
+
+          const testHighlights =
+            arrayClean(
+              aiData?.highlights
+            ).slice(0, 2);
+
+
+          if (
+            testOverview
+          ) {
+
+            console.log(
+              '✅ VALID GEMINI JSON RECEIVED'
+            );
+
+            break;
+          }
+        }
+
+
+        // ======================================================
+        // EMPTY / INVALID STRUCTURE
+        // ======================================================
+
+        console.error(
+          `❌ INVALID GEMINI STRUCTURE ON ATTEMPT ${attempt}`
+        );
+
+
+        aiData = null;
+
+
+        lastError =
+          new Error(
+            'Gemini returned an invalid JSON structure.'
+          );
+
+
+        if (
+          attempt < maxAttempts
+        ) {
+
+          const delay =
+            attempt === 1
+              ? 1000
+              : attempt === 2
+                ? 2000
+                : 4000;
+
+          console.log(
+            `⏳ STRUCTURE RETRYING IN ${delay / 1000}s...`
+          );
+
+          await sleep(delay);
+
+          continue;
+        }
+
+
+        break;
+
+
+      } catch (aiError) {
+
+        lastError =
+          aiError;
+
+
+        const status =
+          aiError?.status ||
+          aiError?.response?.status;
+
+
+        console.error(
+          `❌ GEMINI ATTEMPT ${attempt} FAILED:`,
+          status || aiError?.message || aiError
+        );
+
+
+        // ======================================================
+        // RETRY TEMPORARY ERRORS
+        // ======================================================
+
+        const retryable =
+          status === 429 ||
+          status === 500 ||
+          status === 502 ||
+          status === 503 ||
+          status === 504;
+
+
+        if (
+          retryable &&
+          attempt < maxAttempts
+        ) {
+
+          const delay =
+            attempt === 1
+              ? 2000
+              : attempt === 2
+                ? 5000
+                : attempt === 3
+                  ? 10000
+                  : 15000;
+
+
+          console.log(
+            `⏳ GEMINI RETRYING IN ${delay / 1000}s...`
+          );
+
+
+          await sleep(delay);
+
+          continue;
+        }
+
+
+        break;
+      }
     }
 
-    console.error(
-      '❌ GEMINI FINAL ERROR:',
-      aiError
-    );
-
-    return res.status(500).json({
-
-      success: false,
-
-      code:
-        'AI_GENERATION_ERROR',
-
-      message:
-        retryable
-          ? 'AI service is temporarily busy. Please try again in a moment.'
-          : 'Unable to generate the AI property description. Please try again.'
-    });
-  }
-}
-
 
     // ==========================================================
-    // CLEAN JSON
+    // IF GEMINI NEVER RETURNED VALID DATA
     // ==========================================================
-
-    let cleanedJson =
-      rawText
-        .replace(
-          /^```json/i,
-          ''
-        )
-        .replace(
-          /^```/,
-          ''
-        )
-        .replace(
-          /```$/,
-          ''
-        )
-        .trim();
-
-
-    const firstBrace =
-      cleanedJson.indexOf('{');
-
-
-    const lastBrace =
-      cleanedJson.lastIndexOf('}');
-
 
     if (
-      firstBrace !== -1 &&
-      lastBrace !== -1
+      !aiData ||
+      typeof aiData !== 'object'
     ) {
-
-      cleanedJson =
-        cleanedJson.substring(
-          firstBrace,
-          lastBrace + 1
-        );
-    }
-
-
-    // ==========================================================
-    // PARSE
-    // ==========================================================
-
-    let aiData;
-
-
-    try {
-
-      aiData =
-        JSON.parse(
-          cleanedJson
-        );
-
-    } catch (parseError) {
 
       console.error(
-        '❌ INVALID GEMINI JSON:',
-        rawText
+        '❌ GEMINI FINAL FAILURE:',
+        lastError
       );
 
 
@@ -510,10 +601,10 @@ for (let attempt = 1; attempt <= maxAttempts; attempt++) {
         success: false,
 
         code:
-          'AI_INVALID_RESPONSE',
+          'AI_GENERATION_ERROR',
 
         message:
-          'AI returned an invalid response. Please try again.'
+          'AI service is temporarily busy. Please try again in a moment.'
       });
     }
 
@@ -531,7 +622,7 @@ for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     const highlights =
       arrayClean(
         aiData?.highlights
-      ).slice(0, 5);
+      ).slice(0, 2);
 
 
     // ==========================================================
@@ -796,8 +887,7 @@ for (let attempt = 1; attempt <= maxAttempts; attempt++) {
 
 
     // ==========================================================
-    // SEO GENERATED FROM FACTS
-    // NO GEMINI
+    // SEO
     // ==========================================================
 
     let seoTitle =
@@ -841,37 +931,50 @@ for (let attempt = 1; attempt <= maxAttempts; attempt++) {
 
 
     seoTitle =
-      seoTitle.substring(
-        0,
-        60
-      ).trim();
+      seoTitle
+        .substring(
+          0,
+          60
+        )
+        .trim();
 
 
     const metaParts = [];
 
 
     if (clean(bhk)) {
+
       metaParts.push(
         `${clean(bhk)} BHK`
       );
     }
 
 
-    if (finalPropertyType !== 'Not specified') {
+    if (
+      finalPropertyType !==
+      'Not specified'
+    ) {
+
       metaParts.push(
         finalPropertyType
       );
     }
 
 
-    if (purpose === 'RENT') {
+    if (
+      purpose === 'RENT'
+    ) {
+
       metaParts.push(
         'for rent'
       );
     }
 
 
-    if (purpose === 'SALE') {
+    if (
+      purpose === 'SALE'
+    ) {
+
       metaParts.push(
         'for sale'
       );
@@ -879,6 +982,7 @@ for (let attempt = 1; attempt <= maxAttempts; attempt++) {
 
 
     if (seoLocation) {
+
       metaParts.push(
         `in ${seoLocation}`
       );
@@ -905,27 +1009,38 @@ for (let attempt = 1; attempt <= maxAttempts; attempt++) {
 
 
     if (clean(bhk)) {
+
       keywords.push(
         `${clean(bhk)} BHK`
       );
     }
 
 
-    if (finalPropertyType !== 'Not specified') {
+    if (
+      finalPropertyType !==
+      'Not specified'
+    ) {
+
       keywords.push(
         finalPropertyType
       );
     }
 
 
-    if (purpose === 'RENT') {
+    if (
+      purpose === 'RENT'
+    ) {
+
       keywords.push(
         'property for rent'
       );
     }
 
 
-    if (purpose === 'SALE') {
+    if (
+      purpose === 'SALE'
+    ) {
+
       keywords.push(
         'property for sale'
       );
@@ -933,6 +1048,7 @@ for (let attempt = 1; attempt <= maxAttempts; attempt++) {
 
 
     if (seoLocation) {
+
       keywords.push(
         seoLocation
       );
@@ -940,6 +1056,7 @@ for (let attempt = 1; attempt <= maxAttempts; attempt++) {
 
 
     if (clean(furnishing)) {
+
       keywords.push(
         clean(furnishing)
       );
@@ -947,6 +1064,7 @@ for (let attempt = 1; attempt <= maxAttempts; attempt++) {
 
 
     if (clean(bathrooms)) {
+
       keywords.push(
         `${clean(bathrooms)} bathrooms`
       );
@@ -954,6 +1072,7 @@ for (let attempt = 1; attempt <= maxAttempts; attempt++) {
 
 
     if (clean(area)) {
+
       keywords.push(
         `${clean(area)} area`
       );

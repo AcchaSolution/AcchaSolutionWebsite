@@ -16,6 +16,11 @@ export class AuthService {
 
   private apiUrl =
 enviroment?.apiUrl || 'https://api.acchasolution.com/api/auth';
+
+private forgotPasswordApiUrl =
+  enviroment?.forgotPasswordApiUrl ||
+  'http://localhost:5000/api/auth';
+
   // =========================================================
   // LOGIN STATE
   // =========================================================
@@ -329,10 +334,8 @@ deleteAgent(agentId: string): Observable<any> {
   }
 
 
-  // =========================================================
-  // 4. OTP MANAGEMENT
-  // =========================================================
-  //
+  
+  
   // Existing files ke liye methods rakhe hain.
   // Inke backend routes hum baad me banayenge.
   //
@@ -404,6 +407,56 @@ deleteAgent(agentId: string): Observable<any> {
       );
 
   }
+
+
+  // =========================================================
+  //  Forgot  OTP 
+  // =========================================================
+  sendForgotPasswordOtp(
+  email: string
+): Observable<any> {
+
+  return this.http.post(
+    `${this.forgotPasswordApiUrl}/send-otp`,
+    { email }
+  );
+
+}
+
+// =========================================================
+  //  verify  OTP 
+  // =========================================================
+
+  verifyForgotPasswordOtp(
+  email: string,
+  otp: string
+): Observable<any> {
+
+  return this.http.post(
+    `${this.forgotPasswordApiUrl}/verify-forgot-password-otp`,
+    {
+      email,
+      otp
+    }
+  );
+
+}
+
+
+resetForgotPassword(
+  email: string,
+  newPassword: string
+): Observable<any> {
+
+  return this.http.post(
+    `${this.forgotPasswordApiUrl}/reset-password`,
+    {
+      email,
+      newPassword
+    }
+  );
+
+}
 
 
   // =========================================================

@@ -23,7 +23,6 @@ export class PropertyService {
   private readonly API_URL =
 'https://api.acchasolution.com/api/properties'
 
-// 'http://localhost:5000/api/ai/generate-description'
 
   // =========================================================
 // FAST PROPERTY CACHE
@@ -131,6 +130,46 @@ updateMyProperty(
 
   }
 
+
+  // =========================================================
+// FAST HOME PROPERTIES
+// =========================================================
+
+getHomeProperties(): Observable<any[]> {
+
+  return this.http
+    .get<any>(
+      `${this.API_URL}/home`
+    )
+    .pipe(
+
+      map(response => {
+
+        if (
+          Array.isArray(response)
+        ) {
+
+          return response;
+
+        }
+
+        if (
+          Array.isArray(
+            response?.properties
+          )
+        ) {
+
+          return response.properties;
+
+        }
+
+        return [];
+
+      })
+
+    );
+
+}
 
   // =========================================================
   // GET BY ID / UNIQUE ID / MONGODB ID
@@ -256,6 +295,14 @@ updateMyProperty(
   }
 
 
+  incrementPropertyView(id: string): Observable<any> {
+  return this.http.post(
+    `${this.API_URL}/${encodeURIComponent(id)}/view`,
+    {}
+  );
+}
+
+
   // =========================================================
   // DELETE
   // =========================================================
@@ -281,7 +328,9 @@ generateAIDescription(
 ): Observable<any> {
 
   return this.http.post(
-'https://api.acchasolution.com/api/ai/generate-description',
+// 'https://api.acchasolution.com/api/ai/generate-description',
+'http://localhost:5000/api/ai/generate-description',
+
     propertyData
   );
 

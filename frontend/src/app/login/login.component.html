@@ -127,16 +127,38 @@
               PASSWORD
             </label>
 
-            <input
-              type="password"
-              [(ngModel)]="loginData.password"
-              name="loginPass"
-              required
-              autocomplete="current-password"
-              placeholder="Enter your password"
-            >
+<div class="password-wrapper">
 
-          </div>
+  <input
+    [type]="showLoginPassword ? 'text' : 'password'"
+    [(ngModel)]="loginData.password"
+    name="loginPass"
+    required
+    autocomplete="current-password"
+    placeholder="Enter your password"
+  >
+
+  <span
+    class="password-eye"
+    (click)="showLoginPassword = !showLoginPassword"
+  >
+    {{ showLoginPassword ? '🙈' : '👁️' }}
+  </span>
+
+</div>
+
+<div class="forgot-password">
+  <button
+    type="button"
+    (click)="openForgotPassword()"
+  >
+    Forgot Password?
+  </button>
+</div>
+
+
+
+</div>
 
 
           <!-- LOGIN -->
@@ -578,13 +600,26 @@
                   PASSWORD
                 </label>
 
-                <input
-                  type="password"
-                  placeholder="Create password"
-                  [(ngModel)]="signUpData.password"
-                  name="password"
-                  required
-                >
+<div class="password-wrapper">
+
+  <input
+    [type]="showSignupPassword ? 'text' : 'password'"
+    placeholder="Create password"
+    [(ngModel)]="signUpData.password"
+    name="password"
+    required
+  >
+
+  <span
+    class="password-eye"
+    (click)="showSignupPassword = !showSignupPassword"
+  >
+    {{ showSignupPassword ? '🙈' : '👁️' }}
+  </span>
+
+</div>
+
+
 
               </div>
 
@@ -656,24 +691,304 @@
     </div>
 
 
-    <!-- REGISTRATION FOOTER -->
-
-    <!-- <footer class="register-footer">
-
-      <span>
-        ACCHASOLUTION
-      </span>
-
-      <span>
-        BUY • SELL • RENT • LEASE • INVEST • PROMOTE
-      </span>
-
-      <span>
-        BENGALURU
-      </span>
-
-    </footer> -->
-
   </section>
+
+
+
+    <!-- =====================================================
+       ACCHASOLUTION — FORGOT PASSWORD MODAL
+       STEP 1 — EMAIL
+  ====================================================== -->
+
+  <div
+    class="forgot-modal-overlay"
+*ngIf="forgotStep === 1 || forgotStep === 2 || forgotStep === 3"
+    (click)="closeForgotPassword()"
+  >
+
+    <div
+      class="forgot-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <!-- CLOSE -->
+      <button
+        type="button"
+        class="forgot-close"
+        (click)="closeForgotPassword()"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+
+      <!-- ICON -->
+      <div class="forgot-icon">
+        🔐
+      </div>
+
+
+      <!-- TITLE -->
+      <h2>
+        Forgot Password?
+      </h2>
+
+
+      <!-- DESCRIPTION -->
+      <p class="forgot-subtitle">
+        Enter your registered email address
+        to reset your password.
+      </p>
+
+
+      <!-- EMAIL -->
+      <div class="forgot-form">
+
+        <label>
+          REGISTERED EMAIL
+        </label>
+
+        <input
+          type="email"
+          [(ngModel)]="forgotEmail"
+          name="forgotEmail"
+          placeholder="Enter your email"
+          autocomplete="email"
+          (input)="forgotError = ''"
+        >
+
+
+        <!-- ERROR -->
+        <div
+          class="forgot-error"
+          *ngIf="forgotError"
+        >
+          {{ forgotError }}
+        </div>
+
+
+        <!-- SEND OTP -->
+        <button
+          type="button"
+          class="forgot-primary-btn"
+          (click)="sendForgotOtp()"
+        >
+          Send OTP
+        </button>
+
+      </div>
+
+      <!-- =====================================================
+     FORGOT PASSWORD — OTP SCREEN
+===================================================== -->
+
+<div
+  class="forgot-form"
+  *ngIf="forgotStep === 2"
+>
+
+  <label>
+    ENTER OTP
+  </label>
+
+  <p class="forgot-otp-info">
+    We sent a 6-digit OTP to
+    <strong>{{ forgotEmail }}</strong>
+  </p>
+
+  <input
+    type="text"
+    [(ngModel)]="forgotOtp"
+    name="forgotOtp"
+    placeholder="Enter 6-digit OTP"
+    maxlength="6"
+    inputmode="numeric"
+    autocomplete="one-time-code"
+    (input)="forgotError = ''"
+  >
+
+  <!-- TIMER -->
+
+  <div class="forgot-otp-timer">
+    OTP expires in:
+
+    <strong>
+      {{ (forgotOtpTimer / 60) | number:'2.0-0' }}:
+      {{ (forgotOtpTimer % 60) | number:'2.0-0' }}
+    </strong>
+  </div>
+
+  <!-- ERROR -->
+
+  <div
+    class="forgot-error"
+    *ngIf="forgotError"
+  >
+    {{ forgotError }}
+  </div>
+
+  <!-- SUCCESS / INFO -->
+
+  <div
+    class="forgot-message"
+    *ngIf="forgotMessage"
+  >
+    {{ forgotMessage }}
+  </div>
+
+  <!-- VERIFY OTP -->
+
+  <button
+    type="button"
+    class="forgot-primary-btn"
+    (click)="verifyForgotPasswordOtp()"
+    [disabled]="forgotLoading"
+  >
+
+    <span *ngIf="!forgotLoading">
+      Verify OTP
+    </span>
+
+    <span *ngIf="forgotLoading">
+      Verifying...
+    </span>
+
+  </button>
+
+  <!-- RESEND -->
+
+  <button
+    type="button"
+    class="forgot-resend-btn"
+    (click)="sendForgotOtp()"
+    [disabled]="forgotOtpTimer > 0 || forgotLoading"
+  >
+    Resend OTP
+  </button>
+
+</div>
+
+
+<!-- =====================================================
+     FORGOT PASSWORD — NEW PASSWORD SCREEN
+===================================================== -->
+
+<div
+  class="forgot-form"
+  *ngIf="forgotStep === 3"
+>
+
+  <p class="forgot-otp-info">
+    OTP verified successfully.
+    <br>
+    Please create your new password.
+  </p>
+
+  <!-- NEW PASSWORD -->
+
+  <label>
+    NEW PASSWORD
+  </label>
+
+  <div class="forgot-password-input">
+    <input
+      [type]="showForgotNewPassword ? 'text' : 'password'"
+      [(ngModel)]="forgotNewPassword"
+      name="forgotNewPassword"
+      placeholder="Enter new password"
+      autocomplete="new-password"
+      (input)="forgotError = ''"
+    >
+
+    <button
+      type="button"
+      class="forgot-password-toggle"
+      (click)="showForgotNewPassword = !showForgotNewPassword"
+      aria-label="Show or hide password"
+    >
+      {{ showForgotNewPassword ? 'Hide' : 'Show' }}
+    </button>
+  </div>
+
+  <!-- CONFIRM PASSWORD -->
+
+  <label>
+    CONFIRM PASSWORD
+  </label>
+
+  <div class="forgot-password-input">
+
+    <input
+      [type]="showForgotConfirmPassword ? 'text' : 'password'"
+      [(ngModel)]="forgotConfirmPassword"
+      name="forgotConfirmPassword"
+      placeholder="Confirm new password"
+      autocomplete="new-password"
+      (input)="forgotError = ''"
+    >
+
+    <button
+      type="button"
+      class="forgot-password-toggle"
+      (click)="showForgotConfirmPassword = !showForgotConfirmPassword"
+      aria-label="Show or hide password"
+    >
+      {{ showForgotConfirmPassword ? 'Hide' : 'Show' }}
+    </button>
+
+  </div>
+
+  <!-- ERROR -->
+
+  <div
+    class="forgot-error"
+    *ngIf="forgotError"
+  >
+    {{ forgotError }}
+  </div>
+
+  <!-- SUCCESS / INFO -->
+
+  <div
+    class="forgot-message"
+    *ngIf="forgotMessage"
+  >
+    {{ forgotMessage }}
+  </div>
+
+  <!-- RESET PASSWORD -->
+
+  <button
+    type="button"
+    class="forgot-primary-btn"
+    (click)="resetForgotPassword()"
+    [disabled]="forgotLoading"
+  >
+
+    <span *ngIf="!forgotLoading">
+      Update Password
+    </span>
+
+    <span *ngIf="forgotLoading">
+      Updating...
+    </span>
+
+  </button>
+
+</div>
+
+
+      <!-- BACK -->
+      <button
+        type="button"
+        class="back-login-btn"
+        (click)="closeForgotPassword()"
+      >
+        ← Back to Login
+      </button>
+
+    </div>
+
+  </div>
 
 </div>

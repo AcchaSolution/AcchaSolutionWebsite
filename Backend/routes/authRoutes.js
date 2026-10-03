@@ -5,8 +5,512 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { OAuth2Client } = require('google-auth-library');
 const adminAuth = require('../middleware/adminAuth');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
+
 const router = express.Router();
 console.log('AUTH ROUTES LOADED');
+
+// =====================================================
+// FORGOT PASSWORD — EMAIL TRANSPORTER
+// =====================================================
+
+const forgotPasswordTransporter =
+  nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.CONTACT_EMAIL_USER,
+      pass: process.env.CONTACT_EMAIL_APP_PASSWORD
+    }
+  });
+
+console.log('FORGOT PASSWORD MAILER READY');
+
+
+// =====================================================
+// FORGOT PASSWORD — TEMP OTP STORAGE
+// =====================================================
+
+const forgotPasswordOtps = new Map();
+
+
+// =====================================================
+// FORGOT PASSWORD — SEND OTP
+// =====================================================
+
+router.post('/send-otp', async (req, res) => {
+
+  console.log('FORGOT PASSWORD SEND OTP API HIT');
+
+  try {
+
+    const { email } = req.body;
+
+    // -------------------------------------------------
+    // VALIDATION
+    // -------------------------------------------------
+
+    if (!email || !email.trim()) {
+
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required.'
+      });
+
+    }
+
+    const lowerEmail =
+      email.trim().toLowerCase();
+
+    // -------------------------------------------------
+    // CHECK USER IN MONGODB
+    // -------------------------------------------------
+
+    const user =
+      await User.findOne({
+        email: lowerEmail
+      });
+
+    if (!user) {
+
+      return res.status(404).json({
+        success: false,
+        message:
+          'This email is not registered.'
+      });
+
+    }
+
+    // -------------------------------------------------
+    // GENERATE 6-DIGIT OTP
+    // -------------------------------------------------
+
+    const otp =
+      crypto.randomInt(
+        100000,
+        1000000
+      ).toString();
+
+    // -------------------------------------------------
+    // OTP EXPIRY — 10 MINUTES
+    // -------------------------------------------------
+
+    const expiresAt =
+      Date.now() +
+      10 * 60 * 1000;
+
+    // -------------------------------------------------
+    // SAVE OTP TEMPORARILY
+    // -------------------------------------------------
+
+    forgotPasswordOtps.set(
+      lowerEmail,
+      {
+        otp,
+        expiresAt,
+        attempts: 0,
+        verified: false
+      }
+    );
+
+    // -------------------------------------------------
+    // SEND OTP EMAIL
+    // -------------------------------------------------
+
+    await forgotPasswordTransporter.sendMail({
+
+      from:
+        process.env.CONTACT_EMAIL_USER,
+
+      to:
+        lowerEmail,
+
+      subject:
+        'AcchaSolution Password Reset OTP',
+
+      text:
+        `Your AcchaSolution password reset OTP is ${otp}. This OTP is valid for 10 minutes.`,
+
+      html: `
+        <div style="
+          font-family: Arial, sans-serif;
+          background: #f8f8f8;
+          padding: 30px;
+        ">
+
+          <div style="
+            max-width: 520px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid #eeeeee;
+          ">
+
+            <h2 style="
+              color: #b71c1c;
+              margin-bottom: 10px;
+            ">
+              AcchaSolution
+            </h2>
+
+            <p style="
+              color: #333333;
+              font-size: 16px;
+            ">
+              You requested to reset your password.
+            </p>
+
+            <p style="
+              color: #555555;
+            ">
+              Your One-Time Password (OTP) is:
+            </p>
+
+            <div style="
+              background: #fff1f1;
+              border: 1px solid #b71c1c;
+              border-radius: 10px;
+              padding: 18px;
+              text-align: center;
+              margin: 20px 0;
+            ">
+
+              <span style="
+                font-size: 32px;
+                font-weight: 700;
+                letter-spacing: 8px;
+                color: #b71c1c;
+              ">
+                ${otp}
+              </span>
+
+            </div>
+
+            <p style="
+              color: #666666;
+              font-size: 14px;
+            ">
+              This OTP is valid for <strong>10 minutes</strong>.
+            </p>
+
+            <p style="
+              color: #888888;
+              font-size: 13px;
+              margin-top: 25px;
+            ">
+              If you did not request a password reset,
+              please ignore this email.
+            </p>
+
+            <hr style="
+              border: none;
+              border-top: 1px solid #eeeeee;
+              margin: 25px 0;
+            ">
+
+            <p style="
+              color: #999999;
+              font-size: 12px;
+              text-align: center;
+            ">
+              © AcchaSolution
+            </p>
+
+          </div>
+
+        </div>
+      `
+
+    });
+
+    console.log(
+      'FORGOT PASSWORD OTP SENT TO:',
+      lowerEmail
+    );
+
+    // -------------------------------------------------
+    // SUCCESS
+    // -------------------------------------------------
+
+    return res.status(200).json({
+
+      success: true,
+
+      message:
+        'OTP has been sent to your registered email.'
+
+    });
+
+  } catch (error) {
+
+    console.error(
+      'Forgot Password Send OTP Error:',
+      error
+    );
+
+    return res.status(500).json({
+
+      success: false,
+
+      message:
+        'Unable to send OTP. Please try again later.'
+
+    });
+
+  }
+
+});
+
+
+
+// =====================================================
+// FORGOT PASSWORD — VERIFY OTP
+// =====================================================
+
+router.post('/verify-forgot-password-otp', async (req, res) => {
+
+  console.log('FORGOT PASSWORD VERIFY OTP API HIT');
+
+  try {
+
+    const { email, otp } = req.body;
+
+    if (!email || !email.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required.'
+      });
+    }
+
+    if (!otp || !otp.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: 'OTP is required.'
+      });
+    }
+
+    const lowerEmail =
+      email.trim().toLowerCase();
+
+    const storedData =
+      forgotPasswordOtps.get(lowerEmail);
+
+    if (!storedData) {
+      return res.status(400).json({
+        success: false,
+        message:
+          'OTP expired or not found. Please request a new OTP.'
+      });
+    }
+
+    // =================================================
+    // OTP EXPIRY CHECK
+    // =================================================
+
+    if (Date.now() > storedData.expiresAt) {
+
+      forgotPasswordOtps.delete(lowerEmail);
+
+      return res.status(400).json({
+        success: false,
+        message:
+          'OTP has expired. Please request a new OTP.'
+      });
+    }
+
+    // =================================================
+    // MAX ATTEMPTS
+    // =================================================
+
+    if (storedData.attempts >= 5) {
+
+      forgotPasswordOtps.delete(lowerEmail);
+
+      return res.status(429).json({
+        success: false,
+        message:
+          'Too many incorrect attempts. Please request a new OTP.'
+      });
+    }
+
+    // =================================================
+    // OTP CHECK
+    // =================================================
+
+    if (storedData.otp !== otp.trim()) {
+
+      storedData.attempts += 1;
+
+      return res.status(400).json({
+        success: false,
+        message:
+          'Incorrect OTP. Please check your email and try again.'
+      });
+    }
+
+    // =================================================
+    // OTP VERIFIED
+    // =================================================
+
+    storedData.verified = true;
+
+    forgotPasswordOtps.set(
+      lowerEmail,
+      storedData
+    );
+
+    console.log(
+      'FORGOT PASSWORD OTP VERIFIED:',
+      lowerEmail
+    );
+
+    return res.status(200).json({
+
+      success: true,
+
+      message:
+        'OTP verified successfully.'
+
+    });
+
+  } catch (error) {
+
+    console.error(
+      'Forgot Password Verify OTP Error:',
+      error
+    );
+
+    return res.status(500).json({
+
+      success: false,
+
+      message:
+        'Unable to verify OTP. Please try again later.'
+
+    });
+
+  }
+
+});
+
+
+router.post('/reset-password', async (req, res) => {
+
+  console.log('FORGOT PASSWORD RESET API HIT');
+
+  try {
+
+    const {
+      email,
+      newPassword
+    } = req.body;
+
+    // Email validation
+    if (!email || !email.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required.'
+      });
+    }
+
+    // Password validation
+    if (!newPassword || !newPassword.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: 'New password is required.'
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message:
+          'Password must be at least 6 characters.'
+      });
+    }
+
+    const lowerEmail =
+      email.trim().toLowerCase();
+
+    // Check OTP verification
+    const storedData =
+      forgotPasswordOtps.get(lowerEmail);
+
+    if (!storedData) {
+      return res.status(400).json({
+        success: false,
+        message:
+          'Password reset session expired. Please request a new OTP.'
+      });
+    }
+
+    if (!storedData.verified) {
+      return res.status(400).json({
+        success: false,
+        message:
+          'Please verify the OTP first.'
+      });
+    }
+
+    // Find user
+    const user =
+      await User.findOne({
+        email: lowerEmail
+      });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message:
+          'User account not found.'
+      });
+    }
+
+    // Hash new password
+    const hashedPassword =
+      await bcrypt.hash(
+        newPassword,
+        10
+      );
+
+    // Update password
+    user.password =
+      hashedPassword;
+
+    await user.save();
+
+    // Remove OTP after successful reset
+    forgotPasswordOtps.delete(
+      lowerEmail
+    );
+
+    console.log(
+      'FORGOT PASSWORD UPDATED:',
+      lowerEmail
+    );
+
+    return res.status(200).json({
+      success: true,
+      message:
+        'Password updated successfully.'
+    });
+
+  } catch (error) {
+
+    console.error(
+      'Forgot Password Reset Error:',
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      message:
+        'Unable to update password. Please try again later.'
+    });
+  }
+
+});
 
 // const GOOGLE_CLIENT_ID =
 //   process.env.GOOGLE_CLIENT_ID ||

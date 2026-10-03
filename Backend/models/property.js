@@ -53,6 +53,11 @@ const propertySchema = new mongoose.Schema(
       default: 10
     },
 
+viewCount: {
+  type: Number,
+  default: 0
+},
+
     price: {
       type: mongoose.Schema.Types.Mixed,
       default: 0

@@ -3,6 +3,9 @@ export const enviroment = {
   production: false,
 
 apiUrl: 'https://api.acchasolution.com/api/auth',
+forgotPasswordApiUrl: 'http://localhost:5000/api/auth',
+
+
 
   firebaseConfig: {
     apiKey: 'AIzaSyCl9EfcztIejhqA1eE6eJpZ8IFfhmi93zk',

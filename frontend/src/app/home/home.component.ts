@@ -1175,9 +1175,12 @@ searchProperties(): void {
 openProperty(property: any): void {
   this.viewDetails(property);
 }
-  // ============================================================
+  
+
+// ============================================================
 // PROPERTY DETAILS
 // ============================================================
+
 viewDetails(property: any): void {
 
   if (!property) {
@@ -1205,6 +1208,39 @@ viewDetails(property: any): void {
     console.warn('Unable to create property URL');
     return;
   }
+const propertyId =
+  property.uniqueId ||
+  property.id ||
+  property._id;
+
+if (propertyId) {
+  this.propService
+    .incrementPropertyView(String(propertyId))
+    .subscribe({
+      next: (response: any) => {
+        if (
+          response?.success &&
+          typeof response.viewCount === 'number'
+        ) {
+          property.viewCount =
+            response.viewCount;
+        }
+
+        console.log(
+          '👁️ View count updated:',
+          response?.viewCount
+        );
+      },
+
+      error: (error) => {
+        console.warn(
+          '⚠️ View count update failed:',
+          error
+        );
+      }
+    });
+}
+
 
   console.log(
     '➡️ Opening Property Details:',
@@ -1426,6 +1462,61 @@ isWishlisted(property: any): boolean {
 
   return saved.includes(propertyId);
 }
+
+
+getTimeAgo(dateValue: any): string {
+  if (!dateValue) {
+    return 'Recently';
+  }
+
+  const updatedDate = new Date(dateValue);
+
+  if (isNaN(updatedDate.getTime())) {
+    return 'Recently';
+  }
+
+  const now = new Date();
+  const diffMs = now.getTime() - updatedDate.getTime();
+
+  if (diffMs < 0) {
+    return 'Recently';
+  }
+
+  const diffSeconds = Math.floor(diffMs / 1000);
+  const diffMinutes = Math.floor(diffSeconds / 60);
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
+  const diffWeeks = Math.floor(diffDays / 7);
+  const diffMonths = Math.floor(diffDays / 30);
+  const diffYears = Math.floor(diffDays / 365);
+
+  if (diffSeconds < 60) {
+    return `${diffSeconds}s ago`;
+  }
+
+  if (diffMinutes < 60) {
+    return `${diffMinutes}m ago`;
+  }
+
+  if (diffHours < 24) {
+    return `${diffHours}h ago`;
+  }
+
+  if (diffDays < 7) {
+    return `${diffDays}d ago`;
+  }
+
+  if (diffWeeks < 5) {
+    return `${diffWeeks}w ago`;
+  }
+
+  if (diffMonths < 12) {
+    return `${diffMonths}mo ago`;
+  }
+
+  return `${diffYears}y ago`;
+}
+
 
 }
 

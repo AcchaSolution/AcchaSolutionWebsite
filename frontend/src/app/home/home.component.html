@@ -325,7 +325,6 @@
             loading="lazy"
           />
 
-
           <!-- FALLBACK -->
 
           <div
@@ -464,6 +463,12 @@
           loading="lazy"
         />
 
+    <!-- PROPERTY VIEWS -->
+    <div class="property-view-count">
+      <i class="bi bi-eye-fill"></i>
+      <span>{{ $any(property).viewCount || 0 }}</span>
+    </div>
+
 
         <!-- STATUS -->
 
@@ -488,10 +493,16 @@
 
         <!-- VERIFIED LABEL -->
 
-        <span class="property-verified-badge">
+        <!-- <span class="property-verified-badge">
           <i class="bi bi-patch-check-fill"></i>
           Verified
-        </span>
+        </span> -->
+
+
+<!-- <span class="property-verified-badge">
+  <i class="bi bi-clock-history"></i>
+Updated {{ getTimeAgo(property.updatedAt || property.createdAt) }}
+</span> -->
 
       </div>
 

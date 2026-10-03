@@ -3147,6 +3147,56 @@ html {
     uppercase;
 }
 
+
+.property-updated-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.94);
+  color: #263746;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  white-space: nowrap;
+}
+
+.property-updated-badge i {
+  font-size: 12px;
+  color: #b6784b;
+}
+
+.property-view-count {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 5;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  backdrop-filter: blur(6px);
+}
 .property-status-badge {
 
   left:
@@ -5625,4 +5675,40 @@ html {
     stroke-width:
       3 !important;
   }
+}
+
+.property-card-image-wrapper {
+  position: relative;
+}
+
+.property-view-count {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 5;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  pointer-events: none;
+}
+
+.property-view-count i {
+  font-size: 13px;
+  line-height: 1;
 }

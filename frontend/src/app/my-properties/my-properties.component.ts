@@ -22,56 +22,94 @@ export class MyPropertiesComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
 
-    const userEmail =
-      localStorage.getItem('userEmail');
+  
+ngOnInit(): void {
 
-    this.propertyService
-      .getProperties()
-      .subscribe({
+  const userEmail =
+    String(
+      localStorage.getItem('userEmail') || ''
+    )
+      .trim()
+      .toLowerCase();
 
-        next: (allProperties) => {
+  this.propertyService
+    .getProperties()
+    .subscribe({
 
-          this.properties =
-            allProperties.filter(
-              (property: any) =>
-                property.postedByEmail === userEmail
-            );
+      next: (allProperties) => {
 
-          this.loading = false;
-        },
+        const propertiesList =
+          Array.isArray(allProperties)
+            ? allProperties
+            : [];
 
-        error: (error) => {
+        this.properties =
+          propertiesList.filter(
+            (property: any) => {
 
-          console.error(
-            'MY PROPERTIES ERROR',
-            error
+              const postedByEmail =
+                String(
+                  property.postedByEmail || ''
+                )
+                  .trim()
+                  .toLowerCase();
+
+              return (
+                postedByEmail === userEmail
+              );
+
+            }
           );
 
-          this.loading = false;
-        }
+        console.log(
+          'Logged-in User Email:',
+          userEmail
+        );
 
-      });
+        console.log(
+          'My Properties:',
+          this.properties
+        );
 
-  }
+        this.loading = false;
+      },
 
-  editProperty(property: any): void {
+      error: (error) => {
 
-    const propertyId =
-      property.uniqueId ||
-      property.id ||
-      property._id;
+        console.error(
+          'MY PROPERTIES ERROR',
+          error
+        );
 
-    this.router.navigate(
-      ['/post-property'],
-      {
-        queryParams: {
-          edit: propertyId
-        }
+        this.properties = [];
+        this.loading = false;
       }
-    );
 
-  }
+    });
+
+}
+
+editProperty(property: any): void {
+
+  console.log('PROPERTY DATA:', property);
+
+  const propertyId =
+    property.uniqueId ||
+    property.id ||
+    property._id;
+
+  console.log('EDIT PROPERTY ID:', propertyId);
+
+  this.router.navigate(
+    ['/add-property-form'],
+    {
+      queryParams: {
+        edit: propertyId
+      }
+    }
+  );
+}
+
 
 }
