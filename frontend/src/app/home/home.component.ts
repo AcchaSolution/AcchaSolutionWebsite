@@ -204,11 +204,16 @@ featuredProperties: any[] = [];
 
         console.log('🏠 ALL PROPERTIES:', data);
 
-        this.allProperties =
-          Array.isArray(data)
-            ? data
-            : [];
+this.allProperties =
+  Array.isArray(data)
+    ? data.map((property: any) => ({
+        ...property,
+        isRentedOut:
+          property?.isRentedOut === true
+      }))
+    : [];
 
+    
         this.properties =
           [...this.allProperties];
 
