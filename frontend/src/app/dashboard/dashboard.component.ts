@@ -471,8 +471,11 @@ error: (error: any) => {
               // -----------------------------------------
 
               status:
-                normalizedStatus
+                normalizedStatus,
 
+
+                isRentedOut:
+                  property?.isRentedOut === true
             };
 
           }
@@ -1384,4 +1387,79 @@ toggleAdminMenu(): void {
 
 }
 
+
+async saveRentedOutProperties(): Promise<void> {
+
+  try {
+
+    const rentedProperties =
+      this.propertyList.filter(
+        (property: any) =>
+          property?.isRentedOut === true
+      );
+
+    console.log(
+      'RENTED OUT PROPERTIES:',
+      rentedProperties
+    );
+
+    if (rentedProperties.length === 0) {
+
+      alert(
+        'No property is marked as Rented Out.'
+      );
+
+      return;
+    }
+
+    const confirmed =
+      confirm(
+        `Mark ${rentedProperties.length} property/properties as Rented Out?`
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    for (const property of rentedProperties) {
+
+      const id =
+        property?.id ||
+        property?._id ||
+        property?.uniqueId ||
+        '';
+
+      if (!id) {
+        continue;
+      }
+
+      await firstValueFrom(
+        this.propertyService.updateRentedOutStatus(
+          String(id),
+          true
+        )
+      );
+
+    }
+
+    alert(
+      'Rented Out status saved successfully!'
+    );
+
+    await this.fetchProperties();
+
+  } catch (error) {
+
+    console.error(
+      'SAVE RENTED OUT ERROR:',
+      error
+    );
+
+    alert(
+  'Unable to save the Rented Out status.'
+    );
+
+  }
+
+}
 }

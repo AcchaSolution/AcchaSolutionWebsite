@@ -1183,6 +1183,18 @@ openProperty(property: any): void {
 
 viewDetails(property: any): void {
 
+  if (property?.isRentedOut === true) {
+  console.log(
+    '🚫 Rented Out property cannot be opened:',
+    property?.name ||
+    property?.title ||
+    property?.id ||
+    property?._id
+  );
+
+  return;
+}
+  
   if (!property) {
     console.warn('Property data not found');
     return;

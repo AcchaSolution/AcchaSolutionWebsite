@@ -5712,3 +5712,140 @@ html {
   font-size: 13px;
   line-height: 1;
 }
+
+/* =========================================================
+   RENTED OUT PROPERTY
+   Property stays visible but becomes inactive/faded
+   ========================================================= */
+
+.property-rented-out {
+  cursor: not-allowed;
+}
+
+/* -------------------------
+   CURATED PROPERTY IMAGE
+   ------------------------- */
+
+.property-card-image-wrapper.rented-out-blur
+  .property-card-image {
+  filter: blur(5px);
+  opacity: 0.45;
+  transform: scale(1.03);
+}
+
+/* Hide normal image labels while rented */
+.property-card-image-wrapper.rented-out-blur
+  .property-view-count,
+.property-card-image-wrapper.rented-out-blur
+  .property-status-badge {
+  opacity: 0.25;
+}
+
+/* -------------------------
+   CURATED PROPERTY CONTENT
+   ------------------------- */
+
+.property-card-content.rented-out-blur > * {
+  filter: blur(3px);
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+/* -------------------------
+   FEATURED PROPERTY IMAGE
+   ------------------------- */
+
+.home-featured-property-image.rented-out-blur
+  img {
+  filter: blur(5px);
+  opacity: 0.45;
+  transform: scale(1.03);
+}
+
+/* Featured badge becomes subdued */
+.home-featured-property-image.rented-out-blur
+  .home-featured-badge {
+  opacity: 0.25;
+}
+
+/* -------------------------
+   FEATURED PROPERTY CONTENT
+   ------------------------- */
+
+.home-featured-property-content.rented-out-blur > * {
+  filter: blur(3px);
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+/* -------------------------
+   RENTED OUT OVERLAY
+   ------------------------- */
+
+.rented-out-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  z-index: 20;
+
+  pointer-events: none;
+
+  text-align: center;
+}
+
+.rented-out-icon {
+  width: 54px;
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.rented-out-icon i {
+  font-size: 25px;
+}
+
+.rented-out-overlay strong {
+  display: inline-block;
+
+  padding: 8px 15px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+/* =========================================================
+   RENTED OUT — DISABLE CARD ACTIONS
+   ========================================================= */
+
+.property-rented-out .property-card-actions {
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.property-rented-out .property-action-btn {
+  cursor: not-allowed;
+}

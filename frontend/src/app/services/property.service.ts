@@ -87,6 +87,26 @@ updateMyProperty(
 
 }
 
+
+  // =========================================================
+  // UPDATE RENTED OUT STATUS
+  // =========================================================
+
+  updateRentedOutStatus(
+    id: string,
+    isRentedOut: boolean
+  ): Observable<any> {
+
+    return this.http.patch(
+      `${this.API_URL}/${encodeURIComponent(id)}/rented-out`,
+      {
+        isRentedOut
+      }
+    );
+
+  }
+
+
   // =========================================================
   // GET ALL
   // =========================================================

@@ -43,6 +43,16 @@ const propertySchema = new mongoose.Schema(
       default: 'Renting'
     },
 
+// =========================
+// RENTED OUT CONTROL
+// =========================
+
+isRentedOut: {
+  type: Boolean,
+  default: false
+},
+
+
     is_featured: {
       type: Boolean,
       default: false

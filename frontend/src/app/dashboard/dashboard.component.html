@@ -305,6 +305,16 @@
           Create Property
         </button>
 
+        <button
+    class="btn-save-rented"
+    type="button"
+    (click)="saveRentedOutProperties()"
+  >
+    <i class="fa fa-save"></i>
+    Save Changes
+  </button>
+
+
       </div>
 
 
@@ -347,6 +357,11 @@
               <th>
                 Status
               </th>
+              
+              <th>
+  Rented Out
+</th>
+
 
               <th>
                 Action
@@ -515,6 +530,30 @@
               </td>
 
 
+              <!-- =================================================
+     RENTED OUT CONTROL
+     ================================================= -->
+
+<td>
+
+  <label class="rented-toggle">
+
+    <input
+      type="checkbox"
+      [checked]="property?.isRentedOut === true"
+      (change)="
+        property.isRentedOut = $any($event.target).checked
+      "
+    />
+
+    <span class="rented-toggle-label">
+      Rented Out
+    </span>
+
+  </label>
+
+</td>
+
 
               <!-- =================================================
                    PROPERTY ACTIONS
@@ -659,6 +698,7 @@
           Create Property
 
         </button>
+
 
       </div>
 
@@ -940,7 +980,7 @@
             >
 
               <td
-                colspan="7"
+                colspan="8"
                 class="no-agent-data"
               >
                 No agents/users found.

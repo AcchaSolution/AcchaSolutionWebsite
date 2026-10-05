@@ -522,6 +522,188 @@ router.get(
 
 
 // =====================================================
+// UPDATE RENTED OUT STATUS
+// PATCH /api/properties/:id/rented-out
+// ADMIN ONLY
+// =====================================================
+
+router.patch(
+  '/:id/rented-out',
+  adminAuth,
+  async (req, res) => {
+
+    console.log(
+      '🏠 RENTED OUT STATUS API HIT:',
+      req.params.id,
+      req.body
+    );
+
+    try {
+
+      const requestedId =
+        String(
+          req.params.id || ''
+        ).trim();
+
+
+      if (!requestedId) {
+
+        return res.status(400).json({
+
+          success: false,
+
+          message:
+            'Property ID is required.'
+
+        });
+
+      }
+
+
+      // -------------------------------------------------
+      // VALIDATE BOOLEAN
+      // -------------------------------------------------
+
+      if (
+        typeof req.body?.isRentedOut !== 'boolean'
+      ) {
+
+        return res.status(400).json({
+
+          success: false,
+
+          message:
+            'isRentedOut must be true or false.'
+
+        });
+
+      }
+
+
+      const conditions = [
+
+        {
+          id:
+            requestedId
+        },
+
+        {
+          uniqueId:
+            requestedId
+        }
+
+      ];
+
+
+      // -------------------------------------------------
+      // MONGODB OBJECT ID
+      // -------------------------------------------------
+
+      if (
+        mongoose.Types.ObjectId.isValid(
+          requestedId
+        )
+      ) {
+
+        conditions.push({
+
+          _id:
+            requestedId
+
+        });
+
+      }
+
+
+      // -------------------------------------------------
+      // FIND PROPERTY
+      // -------------------------------------------------
+
+      const property =
+        await Property.findOne({
+          $or:
+            conditions
+        });
+
+
+      if (!property) {
+
+        return res.status(404).json({
+
+          success: false,
+
+          message:
+            'Property not found.'
+
+        });
+
+      }
+
+
+      // -------------------------------------------------
+      // UPDATE ONLY RENTED OUT FLAG
+      // -------------------------------------------------
+
+      property.isRentedOut =
+        req.body.isRentedOut;
+
+
+      await property.save();
+
+
+      console.log(
+        '✅ RENTED OUT STATUS UPDATED:',
+        {
+          id: property.id,
+          uniqueId: property.uniqueId,
+          isRentedOut:
+            property.isRentedOut
+        }
+      );
+
+
+      return res.status(200).json({
+
+        success: true,
+
+        message:
+          property.isRentedOut
+            ? 'Property marked as Rented Out.'
+            : 'Property restored to Available.',
+
+        property
+
+      });
+
+    }
+
+    catch (error) {
+
+      console.error(
+        '❌ RENTED OUT STATUS ERROR:',
+        error
+      );
+
+
+      return res.status(500).json({
+
+        success: false,
+
+        message:
+          'Failed to update Rented Out status.',
+
+        error:
+          error.message
+
+      });
+
+    }
+
+  }
+);
+
+
+// =====================================================
 // UPDATE PROPERTY
 // PUT /api/properties/:id
 // =====================================================
@@ -1032,7 +1214,9 @@ router.get('/home', async (req, res) => {
           subLocality: 1,
           gallery: 1,
           createdAt: 1,
-          updatedAt: 1
+          updatedAt: 1,
+           isRentedOut: 1
+
         })
         .lean();
 

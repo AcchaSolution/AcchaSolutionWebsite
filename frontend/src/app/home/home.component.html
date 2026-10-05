@@ -440,17 +440,34 @@
       (click)="viewDetails($any(property)._id || $any(property).id)"
     > -->
 
-    <article
+    <!-- <article
   class="property-card"
   *ngFor="let property of displayedProperties"
   (click)="viewDetails($any(property))"
+> -->
+
+
+<article
+  class="property-card"
+  *ngFor="let property of displayedProperties"
+  [class.property-rented-out]="$any(property).isRentedOut === true"
+  (click)="
+    $any(property).isRentedOut === true
+      ? $event.stopPropagation()
+      : viewDetails($any(property))
+  "
 >
 
       <!-- ======================================================
            PROPERTY IMAGE
            ====================================================== -->
 
-      <div class="property-card-image-wrapper">
+      <!-- <div class="property-card-image-wrapper"> -->
+
+        <div
+  class="property-card-image-wrapper"
+  [class.rented-out-blur]="$any(property).isRentedOut === true"
+>
 
         <img
           [src]="
@@ -490,19 +507,18 @@
           }}
         </span>
 
+<!-- RENTED OUT OVERLAY -->
+<div
+  class="rented-out-overlay"
+  *ngIf="$any(property).isRentedOut === true"
+>
+  <div class="rented-out-icon">
+    <i class="bi bi-house-fill"></i>
+  </div>
 
-        <!-- VERIFIED LABEL -->
+  <strong>RENTED OUT</strong>
+</div>
 
-        <!-- <span class="property-verified-badge">
-          <i class="bi bi-patch-check-fill"></i>
-          Verified
-        </span> -->
-
-
-<!-- <span class="property-verified-badge">
-  <i class="bi bi-clock-history"></i>
-Updated {{ getTimeAgo(property.updatedAt || property.createdAt) }}
-</span> -->
 
       </div>
 
@@ -511,8 +527,10 @@ Updated {{ getTimeAgo(property.updatedAt || property.createdAt) }}
            PROPERTY CONTENT
            ====================================================== -->
 
-      <div class="property-card-content">
-
+<div
+  class="property-card-content"
+  [class.rented-out-blur]="$any(property).isRentedOut === true"
+>
         <!-- PROPERTY NAME -->
 
         <h3 class="property-card-title">
@@ -579,7 +597,11 @@ Updated {{ getTimeAgo(property.updatedAt || property.createdAt) }}
     class="property-action-btn"
     title="View Property"
     aria-label="View Property"
-    (click)="viewDetails($any(property))"
+(click)="
+  $any(property).isRentedOut === true
+    ? $event.stopPropagation()
+    : viewDetails($any(property))
+"
   >
     <i class="bi bi-eye"></i>
   </button>
@@ -591,7 +613,11 @@ Updated {{ getTimeAgo(property.updatedAt || property.createdAt) }}
     class="property-action-btn whatsapp-action"
     title="WhatsApp"
     aria-label="WhatsApp"
-    (click)="openWhatsApp($any(property))"
+(click)="
+  $any(property).isRentedOut === true
+    ? $event.stopPropagation()
+    : openWhatsApp($any(property))
+"
   >
     <i class="bi bi-whatsapp"></i>
   </button>
@@ -603,7 +629,11 @@ Updated {{ getTimeAgo(property.updatedAt || property.createdAt) }}
     class="property-action-btn"
     title="Share Property"
     aria-label="Share Property"
-    (click)="shareProperty($any(property))"
+(click)="
+  $any(property).isRentedOut === true
+    ? $event.stopPropagation()
+    : shareProperty($any(property))
+"
   >
     <i class="bi bi-share"></i>
   </button>
@@ -615,7 +645,11 @@ Updated {{ getTimeAgo(property.updatedAt || property.createdAt) }}
     class="property-action-btn"
     title="Save Property"
     aria-label="Save Property"
-    (click)="toggleWishlist($any(property))"
+(click)="
+  $any(property).isRentedOut === true
+    ? $event.stopPropagation()
+    : toggleWishlist($any(property))
+"
   >
     <i
       class="bi"
@@ -680,14 +714,22 @@ Updated {{ getTimeAgo(property.updatedAt || property.createdAt) }}
 
   <div class="home-featured-properties-grid">
 
-    <article
-      class="home-featured-property-card"
-      *ngFor="let property of featuredProperties"
-      (click)="openProperty(property)"
-    >
+<article
+  class="home-featured-property-card"
+  *ngFor="let property of featuredProperties"
+  [class.property-rented-out]="property?.isRentedOut === true"
+  (click)="
+    property?.isRentedOut === true
+      ? $event.stopPropagation()
+      : openProperty(property)
+  "
+>
 
-      <div class="home-featured-property-image">
 
+<div
+  class="home-featured-property-image"
+  [class.rented-out-blur]="property?.isRentedOut === true"
+>
         <img
           [src]="property.images?.[0]"
           [alt]="property.name || 'Featured Property'"
@@ -698,10 +740,29 @@ Updated {{ getTimeAgo(property.updatedAt || property.createdAt) }}
           Featured
         </span>
 
+
+
+
+      <!-- RENTED OUT OVERLAY -->
+<div
+  class="rented-out-overlay"
+  *ngIf="property?.isRentedOut === true"
+>
+  <div class="rented-out-icon">
+    <i class="bi bi-house-fill"></i>
+  </div>
+
+  <strong>RENTED OUT</strong>
+</div>
+
+
       </div>
 
-      <div class="home-featured-property-content">
 
+<div
+  class="home-featured-property-content"
+  [class.rented-out-blur]="property?.isRentedOut === true"
+>
         <h3>
           {{ property.name }}
         </h3>
