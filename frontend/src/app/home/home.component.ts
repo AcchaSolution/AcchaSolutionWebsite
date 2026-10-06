@@ -218,21 +218,51 @@ console.log(
 );
 
 
-        this.allProperties =
+this.allProperties =
   Array.isArray(data)
-    ? data.map((property: any) => ({
-        ...property,
+    ? data.map((property: any) => {
 
-        // Support both boolean and string values
-        // coming from API/database.
-        isRentedOut:
-          property?.isRentedOut === true ||
-          String(property?.isRentedOut)
+        const rawStatus =
+          String(property?.status || '')
             .trim()
-            .toLowerCase() === 'true'
-      }))
+            .toUpperCase();
+
+        let normalizedStatus = 'AVAILABLE';
+
+        if (
+          rawStatus === 'RENTED_OUT' ||
+          rawStatus === 'RENTED OUT' ||
+          rawStatus === 'RENTED'
+        ) {
+          normalizedStatus = 'RENTED_OUT';
+
+        } else if (
+          rawStatus === 'SOLD_OUT' ||
+          rawStatus === 'SOLD OUT' ||
+          rawStatus === 'SOLD'
+        ) {
+          normalizedStatus = 'SOLD_OUT';
+
+        } else if (
+          rawStatus === 'AVAILABLE'
+        ) {
+          normalizedStatus = 'AVAILABLE';
+        }
+
+        return {
+          ...property,
+
+          status: normalizedStatus,
+
+          // Legacy compatibility
+          isRentedOut:
+            normalizedStatus === 'RENTED_OUT'
+        };
+
+      })
     : [];
 
+    
     
         this.properties =
           [...this.allProperties];
