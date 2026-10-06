@@ -198,8 +198,8 @@ featuredProperties: any[] = [];
 
       this.isLoadingProperties = true;
 
-    this.propService.getProperties().subscribe({
-
+    // this.propService.getProperties().subscribe({
+this.propService.getHomeProperties().subscribe({
       next: (data: any[]) => {
 
         console.log('🏠 ALL PROPERTIES:', data);
