@@ -520,7 +520,82 @@ router.get(
   }
 );
 
+// =====================================================
+// UPDATE PROPERTY STATUS
+// PATCH /api/properties/:id/status
+// ADMIN ONLY
+// =====================================================
 
+router.patch('/:id/status', adminAuth, async (req, res) => {
+
+  try {
+
+    const { status } = req.body;
+
+    const allowedStatuses = [
+      'AVAILABLE',
+      'RENTED_OUT',
+      'SOLD_OUT'
+    ];
+
+    if (!allowedStatuses.includes(status)) {
+
+      return res.status(400).json({
+        success: false,
+        message:
+          'Invalid property status. Allowed values: AVAILABLE, RENTED_OUT, SOLD_OUT.'
+      });
+
+    }
+
+    const property = await Property.findOne({
+      $or: [
+        { id: req.params.id },
+        { uniqueId: req.params.id },
+        ...(mongoose.Types.ObjectId.isValid(req.params.id)
+          ? [{ _id: req.params.id }]
+          : [])
+      ]
+    });
+
+    if (!property) {
+
+      return res.status(404).json({
+        success: false,
+        message: 'Property not found.'
+      });
+
+    }
+
+    property.status = status;
+
+    // Keep legacy field synchronized.
+    property.isRentedOut =
+      status === 'RENTED_OUT';
+
+    await property.save();
+
+    return res.status(200).json({
+      success: true,
+      message: `Property status updated to ${status}.`,
+      property
+    });
+
+  } catch (error) {
+
+    console.error(
+      'UPDATE PROPERTY STATUS ERROR:',
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to update property status.'
+    });
+
+  }
+
+});
 // =====================================================
 // UPDATE RENTED OUT STATUS
 // PATCH /api/properties/:id/rented-out
@@ -1228,7 +1303,7 @@ router.get('/home', async (req, res) => {
       property?.isRentedOut === true
   }));
 
-  
+
     return res.status(200).json({
 
       success: true,

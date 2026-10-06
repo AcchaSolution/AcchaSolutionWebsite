@@ -39,14 +39,14 @@ const propertySchema = new mongoose.Schema(
     },
 
     status: {
-      type: String,
-      default: 'Renting'
-    },
+  type: String,
+  enum: ['AVAILABLE', 'RENTED_OUT', 'SOLD_OUT'],
+  default: 'AVAILABLE',
+  index: true
+},
 
-// =========================
-// RENTED OUT CONTROL
-// =========================
-
+// Legacy compatibility field.
+// Do not remove yet because existing frontend code uses it.
 isRentedOut: {
   type: Boolean,
   default: false

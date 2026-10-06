@@ -357,9 +357,10 @@
               <th>
                 Status
               </th>
-              
+
+
               <th>
-  Rented Out
+  Status
 </th>
 
 
@@ -533,24 +534,33 @@
               <!-- =================================================
      RENTED OUT CONTROL
      ================================================= -->
-
 <td>
 
-  <label class="rented-toggle">
+  <select
+    class="property-status-select"
+    [value]="property?.status"
+    (change)="
+      changePropertyStatus(
+        property,
+        $any($event.target).value
+      );
+      $event.stopPropagation()
+    "
+  >
 
-    <input
-      type="checkbox"
-      [checked]="property?.isRentedOut === true"
-      (change)="
-        property.isRentedOut = $any($event.target).checked
-      "
-    />
+    <option value="AVAILABLE">
+      Available
+    </option>
 
-    <span class="rented-toggle-label">
+    <option value="RENTED_OUT">
       Rented Out
-    </span>
+    </option>
 
-  </label>
+    <option value="SOLD_OUT">
+      Sold Out
+    </option>
+
+  </select>
 
 </td>
 

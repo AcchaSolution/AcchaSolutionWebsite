@@ -438,4 +438,20 @@ generateAIDescription(
 
   }
 
+
+
+  updatePropertyStatus(
+  id: string,
+  status: 'AVAILABLE' | 'RENTED_OUT' | 'SOLD_OUT'
+) {
+
+  return this.http.patch(
+    `${this.API_URL}/${encodeURIComponent(id)}/status`,
+    {
+      status
+    }
+  );
+
+}
+
 }

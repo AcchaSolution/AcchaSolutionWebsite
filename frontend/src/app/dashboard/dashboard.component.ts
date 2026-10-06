@@ -344,11 +344,15 @@ error: (error: any) => {
         );
 
 
-      console.log(
-        'RAW PROPERTY RESPONSE:',
-        response
-      );
-
+console.log(
+  'RAW PROPERTY RESPONSE:',
+  response?.map((p: any) => ({
+    id: p?.id,
+    _id: p?._id,
+    name: p?.name,
+    isRentedOut: p?.isRentedOut
+  }))
+);
 
       // =================================================
       // NORMALIZE PROPERTY ARRAY
@@ -368,13 +372,42 @@ error: (error: any) => {
         properties.map(
           (property: any) => {
 
-            const normalizedStatus =
-              String(
-                property?.status ||
-                'pending'
-              )
-                .trim()
-                .toLowerCase();
+            const rawStatus =
+  String(
+    property?.status || ''
+  )
+    .trim()
+    .toUpperCase();
+
+let normalizedStatus =
+  'AVAILABLE';
+
+if (
+  rawStatus === 'RENTED_OUT' ||
+  rawStatus === 'RENTED OUT' ||
+  rawStatus === 'RENTED'
+) {
+
+  normalizedStatus =
+    'RENTED_OUT';
+
+} else if (
+  rawStatus === 'SOLD_OUT' ||
+  rawStatus === 'SOLD OUT' ||
+  rawStatus === 'SOLD'
+) {
+
+  normalizedStatus =
+    'SOLD_OUT';
+
+} else if (
+  rawStatus === 'AVAILABLE'
+) {
+
+  normalizedStatus =
+    'AVAILABLE';
+
+}
 
 
             return {
@@ -473,9 +506,10 @@ error: (error: any) => {
               status:
                 normalizedStatus,
 
-
-                isRentedOut:
-                  property?.isRentedOut === true
+isRentedOut:
+  normalizedStatus === 'RENTED_OUT'
+                // isRentedOut:
+                //   property?.isRentedOut === true
             };
 
           }
@@ -1440,13 +1474,18 @@ async saveRentedOutProperties(): Promise<void> {
         )
       );
 
+      console.log(
+  '✅ RENTED OUT SAVE RESPONSE:',
+  property
+);
+
     }
+    await this.fetchProperties();
 
     alert(
       'Rented Out status saved successfully!'
     );
 
-    await this.fetchProperties();
 
   } catch (error) {
 
@@ -1462,4 +1501,138 @@ async saveRentedOutProperties(): Promise<void> {
   }
 
 }
+
+
+// =====================================================
+// UPDATE PROPERTY STATUS
+// =====================================================
+
+async changePropertyStatus(
+  property: any,
+  newStatus:
+    | 'AVAILABLE'
+    | 'RENTED_OUT'
+    | 'SOLD_OUT'
+): Promise<void> {
+
+  if (!property) {
+    return;
+  }
+
+  const oldStatus =
+    property.status;
+
+  if (oldStatus === newStatus) {
+    return;
+  }
+
+  let message =
+    'Change property status?';
+
+  if (newStatus === 'RENTED_OUT') {
+
+    message =
+      'Mark this property as Rented Out?';
+
+  }
+
+  if (newStatus === 'SOLD_OUT') {
+
+    message =
+      'Mark this property as Sold Out?';
+
+  }
+
+  if (!confirm(message)) {
+
+    property.status =
+      oldStatus;
+
+    return;
+  }
+
+  const id =
+    property?.id ||
+    property?._id ||
+    property?.uniqueId ||
+    '';
+
+  if (!id) {
+
+    alert(
+      'Property ID not found.'
+    );
+
+    property.status =
+      oldStatus;
+
+    return;
+  }
+
+  try {
+
+    console.log(
+      'UPDATING PROPERTY STATUS:',
+      {
+        id,
+        oldStatus,
+        newStatus
+      }
+    );
+
+    const response =
+      await firstValueFrom(
+        this.propertyService.updatePropertyStatus(
+          String(id),
+          newStatus
+        )
+      );
+
+    console.log(
+      'PROPERTY STATUS API RESPONSE:',
+      response
+    );
+
+if (!response) {
+
+  throw new Error(
+    'Empty response received from status API.'
+  );
+
+}
+    // Update dashboard UI
+    property.status =
+      newStatus;
+
+    property.isRentedOut =
+      newStatus === 'RENTED_OUT';
+
+    console.log(
+      '✅ PROPERTY STATUS UPDATED:',
+      property
+    );
+
+  } catch (error) {
+
+    console.error(
+      '❌ PROPERTY STATUS UPDATE ERROR:',
+      error
+    );
+
+    // Restore old value
+    property.status =
+      oldStatus;
+
+    property.isRentedOut =
+      oldStatus === 'RENTED_OUT';
+
+    alert(
+      'Property status update failed.'
+    );
+
+  }
+
+}
+
+
 }

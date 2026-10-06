@@ -204,6 +204,19 @@ this.propService.getHomeProperties().subscribe({
 
         console.log('🏠 ALL PROPERTIES:', data);
 
+console.log(
+  '🏠 RENTED OUT FROM HOME API:',
+  JSON.stringify(
+    data?.map((p: any) => ({
+      id: p?.id,
+      name: p?.name,
+      isRentedOut: p?.isRentedOut
+    })),
+    null,
+    2
+  )
+);
+
 
         this.allProperties =
   Array.isArray(data)
