@@ -204,12 +204,19 @@ this.propService.getHomeProperties().subscribe({
 
         console.log('🏠 ALL PROPERTIES:', data);
 
-this.allProperties =
+
+        this.allProperties =
   Array.isArray(data)
     ? data.map((property: any) => ({
         ...property,
+
+        // Support both boolean and string values
+        // coming from API/database.
         isRentedOut:
-          property?.isRentedOut === true
+          property?.isRentedOut === true ||
+          String(property?.isRentedOut)
+            .trim()
+            .toLowerCase() === 'true'
       }))
     : [];
 

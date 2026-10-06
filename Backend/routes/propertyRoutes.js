@@ -1220,6 +1220,15 @@ router.get('/home', async (req, res) => {
         })
         .lean();
 
+
+        const normalizedProperties =
+  properties.map((property) => ({
+    ...property,
+    isRentedOut:
+      property?.isRentedOut === true
+  }));
+
+  
     return res.status(200).json({
 
       success: true,
