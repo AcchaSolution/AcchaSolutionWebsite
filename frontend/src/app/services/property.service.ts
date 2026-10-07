@@ -21,7 +21,9 @@ export class PropertyService {
 
 
   private readonly API_URL =
-'https://api.acchasolution.com/api/properties'
+// 'https://api.acchasolution.com/api/properties'
+
+'http://localhost:5000/api/properties';
 
 
   // =========================================================
@@ -108,54 +110,59 @@ updateMyProperty(
 
 
   // =========================================================
-  // GET ALL
-  // =========================================================
+// GET PROPERTIES — PAGINATED
+// =========================================================
 
-  getProperties(): Observable<any[]> {
+getProperties(
+  page: number = 1,
+  limit: number = 20
+): Observable<any> {
 
-    return this.http
-      .get<any>(
-        this.API_URL
-      )
+  return this.http
+    .get<any>(
+      `${this.API_URL}?page=${page}&limit=${limit}`
+    )
+    .pipe(
 
-      .pipe(
+      map(response => {
 
-        map(response => {
+        if (
+          response &&
+          Array.isArray(response.properties)
+        ) {
 
-          if (
-            Array.isArray(response)
-          ) {
+          return response;
 
-            return response;
+        }
 
-          }
+        if (
+          Array.isArray(response)
+        ) {
 
+          return {
+            properties: response,
+            pagination: null
+          };
 
-          if (
-            Array.isArray(
-              response?.properties
-            )
-          ) {
+        }
 
-            return response.properties;
+        return {
+          properties: [],
+          pagination: null
+        };
 
-          }
+      })
 
+    );
 
-          return [];
-
-        })
-
-      );
-
-  }
+}
 
 
   // =========================================================
 // FAST HOME PROPERTIES
 // =========================================================
 
-getHomeProperties(): Observable<any[]> {
+getHomeProperties(): Observable<any> {
 
   return this.http
     .get<any>(
@@ -166,7 +173,8 @@ getHomeProperties(): Observable<any[]> {
       map(response => {
 
         if (
-          Array.isArray(response)
+          response &&
+          !Array.isArray(response)
         ) {
 
           return response;
@@ -174,23 +182,30 @@ getHomeProperties(): Observable<any[]> {
         }
 
         if (
-          Array.isArray(
-            response?.properties
-          )
+          Array.isArray(response)
         ) {
 
-          return response.properties;
+          return {
+            success: true,
+            properties: response,
+            curated: response,
+            featured: []
+          };
 
         }
 
-        return [];
+        return {
+          success: false,
+          properties: [],
+          curated: [],
+          featured: []
+        };
 
       })
 
     );
 
 }
-
   // =========================================================
   // GET BY ID / UNIQUE ID / MONGODB ID
   // =========================================================

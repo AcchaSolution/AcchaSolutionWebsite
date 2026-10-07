@@ -64,6 +64,18 @@ export class PropertiesCatalogComponent
 
   filteredProperties: any[] = [];
 
+  // =========================================================
+// PAGINATION
+// =========================================================
+
+currentPage: number = 1;
+
+pageLimit: number = 20;
+
+hasNextPage: boolean = false;
+
+isLoadingMore: boolean = false;
+
 
   // =========================================================
   // PAGE / MODE
@@ -354,38 +366,52 @@ isLoading: boolean = true;
   }
 
 
-  // =========================================================
-  // FETCH PROPERTIES
-  // =========================================================
+// =========================================================
+// FETCH PROPERTIES
+// =========================================================
+
 fetchAndFilterData(): void {
 
-  // Loading immediately start
   this.isLoading = true;
 
+  this.currentPage = 1;
+
   this.propService
-    .getProperties()
+    .getProperties(
+      this.currentPage,
+      this.pageLimit
+    )
     .subscribe({
 
-      next: (list: any[]) => {
+      next: (response: any) => {
+
+        const properties =
+          Array.isArray(response?.properties)
+            ? response.properties
+            : [];
 
         this.allProperties =
-          Array.isArray(list)
-            ? list
-            : [];
+          properties;
+
+        this.hasNextPage =
+          response?.pagination?.hasNextPage === true;
 
         // AI result already available
         if (
           this.isAiResult &&
           this.filteredProperties.length > 0
         ) {
+
           this.isLoading = false;
+
           return;
+
         }
 
         this.applyAllFilters();
 
-        // Data/filtering complete
         this.isLoading = false;
+
       },
 
       error: (err: any) => {
@@ -396,14 +422,87 @@ fetchAndFilterData(): void {
         );
 
         this.allProperties = [];
+
         this.filteredProperties = [];
 
+        this.hasNextPage = false;
+
         this.isLoading = false;
+
       }
 
     });
 
 }
+
+// =========================================================
+// LOAD MORE PROPERTIES
+// =========================================================
+
+loadMoreProperties(): void {
+
+  if (
+    !this.hasNextPage ||
+    this.isLoadingMore
+  ) {
+
+    return;
+
+  }
+
+  this.isLoadingMore = true;
+
+  const nextPage =
+    this.currentPage + 1;
+
+  this.propService
+    .getProperties(
+      nextPage,
+      this.pageLimit
+    )
+    .subscribe({
+
+      next: (response: any) => {
+
+        const newProperties =
+          Array.isArray(
+            response?.properties
+          )
+            ? response.properties
+            : [];
+
+        this.allProperties = [
+          ...this.allProperties,
+          ...newProperties
+        ];
+
+        this.currentPage =
+          nextPage;
+
+        this.hasNextPage =
+          response?.pagination?.hasNextPage === true;
+
+        this.applyAllFilters();
+
+        this.isLoadingMore = false;
+
+      },
+
+      error: (err: any) => {
+
+        console.error(
+          '❌ Error loading more properties:',
+          err
+        );
+
+        this.isLoadingMore = false;
+
+      }
+
+    });
+
+}
+
 
   // =========================================================
   // APPLY ALL FILTERS

@@ -40,8 +40,32 @@
 
      
       <div class="card-image-left-frame">
-        <img [src]="item.gallery?.[0]?.url || 'assets/placeholder.jpg'" alt="AcchaSolution Premium Asset Preview">
-        <span class="luxury-badge-tag">✨ Verified On Site</span>
+<img
+  [src]="
+    (
+      item.gallery?.[0]?.url ||
+      'assets/placeholder.jpg'
+    ).includes('res.cloudinary.com')
+      ? (
+          item.gallery?.[0]?.url ||
+          'assets/placeholder.jpg'
+        ).replace(
+          '/upload/',
+          '/upload/f_webp,q_auto,w_600/'
+        )
+      : (
+          item.gallery?.[0]?.url ||
+          'assets/placeholder.jpg'
+        )
+  "
+  [alt]="item.name || 'AcchaSolution Property Image'"
+  width="600"
+  height="400"
+  loading="lazy"
+  decoding="async"
+>
+
+<span class="luxury-badge-tag">✨ Verified On Site</span>
       </div>
 
       <div class="card-content-middle-frame">
@@ -102,6 +126,36 @@ type="button"
 
     </div>
   </div>
+
+  <!-- ============================================================
+     LOAD MORE PROPERTIES
+     ============================================================ -->
+
+<div
+  class="catalog-load-more"
+  *ngIf="
+    !isLoading &&
+    hasNextPage &&
+    filteredProperties.length > 0
+  "
+>
+
+  <button
+    type="button"
+    class="btn-load-more-properties"
+    (click)="loadMoreProperties()"
+    [disabled]="isLoadingMore"
+  >
+
+    {{
+      isLoadingMore
+        ? 'Loading Properties...'
+        : 'Load More Properties'
+    }}
+
+  </button>
+
+</div>
 
 <div
   *ngIf="!isLoading && filteredProperties.length === 0"

@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 
 const propertySchema = new mongoose.Schema(
@@ -252,6 +253,8 @@ viewCount: {
     minimize: false
   }
 );
+
+propertySchema.index({ createdAt: -1 });
 
 module.exports =
   mongoose.models.Property ||

@@ -58,10 +58,14 @@ router.post(
 
       const uploadStream =
         cloudinary.uploader.upload_stream(
-          {
-            folder: 'acchasolution/properties',
-            resource_type: 'image'
-          },
+          
+{
+  folder: 'acchasolution/properties',
+  resource_type: 'image',
+  format: 'webp',
+  quality: 'auto'        
+
+},
 
           (error, result) => {
 

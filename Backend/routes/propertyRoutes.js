@@ -2,8 +2,12 @@ const express = require('express');
 
 const Property =
   require('../models/property');
-  const adminAuth = require('../middleware/adminAuth');
-const userAuth = require('../middleware/userAuth');
+
+const adminAuth =
+  require('../middleware/adminAuth');
+
+const userAuth =
+  require('../middleware/userAuth');
 
 const mongoose =
   require('mongoose');
@@ -67,10 +71,12 @@ router.post('/', async (req, res) => {
 
 
     const duplicateConditions = [
+
       {
         uniqueId:
           propertyData.uniqueId
       }
+
     ];
 
 
@@ -79,8 +85,10 @@ router.post('/', async (req, res) => {
     ) {
 
       duplicateConditions.push({
+
         id:
           propertyData.id
+
       });
 
     }
@@ -88,8 +96,10 @@ router.post('/', async (req, res) => {
 
     const existingProperty =
       await Property.findOne({
+
         $or:
           duplicateConditions
+
       });
 
 
@@ -152,30 +162,83 @@ router.post('/', async (req, res) => {
 
 
 // =====================================================
-// GET ALL PROPERTIES
-// GET /api/properties
+// GET PROPERTIES — PAGINATED
+// GET /api/properties?page=1&limit=20
 // =====================================================
 
 router.get('/', async (req, res) => {
 
   console.log(
-    'GET ALL PROPERTIES API HIT'
+    'GET PAGINATED PROPERTIES API HIT'
   );
 
   try {
 
-    const properties =
-      await Property.find({})
+    const page =
+      Math.max(
+        parseInt(req.query.page, 10) || 1,
+        1
+      );
+
+
+    const limit =
+      Math.min(
+        Math.max(
+          parseInt(req.query.limit, 10) || 20,
+          1
+        ),
+        50
+      );
+
+
+    const skip =
+      (page - 1) * limit;
+
+
+    const [
+      properties,
+      total
+    ] = await Promise.all([
+
+      Property.find({})
         .sort({
           createdAt: -1
-        });
+        })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+
+      Property.countDocuments({})
+
+    ]);
+
+
+    const totalPages =
+      Math.ceil(
+        total / limit
+      );
 
 
     return res.status(200).json({
 
       success: true,
 
-      properties
+      properties,
+
+      pagination: {
+
+        page,
+        limit,
+        total,
+        totalPages,
+
+        hasNextPage:
+          page < totalPages,
+
+        hasPreviousPage:
+          page > 1
+
+      }
 
     });
 
@@ -184,7 +247,7 @@ router.get('/', async (req, res) => {
   catch (error) {
 
     console.error(
-      'GET PROPERTIES ERROR:',
+      'GET PAGINATED PROPERTIES ERROR:',
       error
     );
 
@@ -232,8 +295,10 @@ router.get('/id/:id', async (req, res) => {
     // ---------------------------------------------------
 
     conditions.push({
+
       id:
         requestedId
+
     });
 
 
@@ -242,14 +307,15 @@ router.get('/id/:id', async (req, res) => {
     // ---------------------------------------------------
 
     conditions.push({
+
       uniqueId:
         requestedId
+
     });
 
 
     // ---------------------------------------------------
-    // MONGODB _id
-    // Only if valid ObjectId
+    // MONGODB OBJECT ID
     // ---------------------------------------------------
 
     if (
@@ -259,8 +325,10 @@ router.get('/id/:id', async (req, res) => {
     ) {
 
       conditions.push({
+
         _id:
           requestedId
+
       });
 
     }
@@ -268,8 +336,10 @@ router.get('/id/:id', async (req, res) => {
 
     const property =
       await Property.findOne({
+
         $or:
           conditions
+
       });
 
 
@@ -389,7 +459,6 @@ router.get(
                 ).trim();
 
 
-              // Full URL
               if (
                 raw.startsWith('http://') ||
                 raw.startsWith('https://')
@@ -424,26 +493,20 @@ router.get(
 
             savedSlug =
               savedSlug
-
                 .split('?')[0]
-
                 .split('#')[0]
-
                 .replace(
                   /^\/+/,
                   ''
                 )
-
                 .replace(
                   /^properties\//i,
                   ''
                 )
-
                 .replace(
                   /\/+$/,
                   ''
                 )
-
                 .trim()
                 .toLowerCase();
 
@@ -520,82 +583,159 @@ router.get(
   }
 );
 
+
 // =====================================================
 // UPDATE PROPERTY STATUS
 // PATCH /api/properties/:id/status
 // ADMIN ONLY
 // =====================================================
 
-router.patch('/:id/status', adminAuth, async (req, res) => {
+router.patch(
+  '/:id/status',
+  adminAuth,
+  async (req, res) => {
 
-  try {
+    try {
 
-    const { status } = req.body;
+      const { status } =
+        req.body;
 
-    const allowedStatuses = [
-      'AVAILABLE',
-      'RENTED_OUT',
-      'SOLD_OUT'
-    ];
 
-    if (!allowedStatuses.includes(status)) {
+      const allowedStatuses = [
 
-      return res.status(400).json({
-        success: false,
+        'AVAILABLE',
+        'RENTED_OUT',
+        'SOLD_OUT'
+
+      ];
+
+
+      if (
+        !allowedStatuses.includes(status)
+      ) {
+
+        return res.status(400).json({
+
+          success: false,
+
+          message:
+            'Invalid property status. Allowed values: AVAILABLE, RENTED_OUT, SOLD_OUT.'
+
+        });
+
+      }
+
+
+      const property =
+        await Property.findOne({
+
+          $or: [
+
+            {
+              id:
+                req.params.id
+            },
+
+            {
+              uniqueId:
+                req.params.id
+            },
+
+            ...(mongoose.Types.ObjectId.isValid(
+              req.params.id
+            )
+              ? [
+                  {
+                    _id:
+                      req.params.id
+                  }
+                ]
+              : [])
+
+          ]
+
+        });
+
+
+      if (!property) {
+
+        return res.status(404).json({
+
+          success: false,
+
+          message:
+            'Property not found.'
+
+        });
+
+      }
+
+
+      property.status =
+        status;
+
+
+      property.isRentedOut =
+        status === 'RENTED_OUT';
+
+
+      await property.save();
+
+
+      console.log(
+        '✅ STATUS SAVED IN DATABASE:',
+        {
+          id:
+            property._id,
+
+          name:
+            property.name,
+
+          status:
+            property.status,
+
+          isRentedOut:
+            property.isRentedOut
+        }
+      );
+
+
+      return res.status(200).json({
+
+        success: true,
+
         message:
-          'Invalid property status. Allowed values: AVAILABLE, RENTED_OUT, SOLD_OUT.'
+          `Property status updated to ${status}.`,
+
+        property
+
       });
 
     }
 
-    const property = await Property.findOne({
-      $or: [
-        { id: req.params.id },
-        { uniqueId: req.params.id },
-        ...(mongoose.Types.ObjectId.isValid(req.params.id)
-          ? [{ _id: req.params.id }]
-          : [])
-      ]
-    });
+    catch (error) {
 
-    if (!property) {
+      console.error(
+        'UPDATE PROPERTY STATUS ERROR:',
+        error
+      );
 
-      return res.status(404).json({
+
+      return res.status(500).json({
+
         success: false,
-        message: 'Property not found.'
+
+        message:
+          'Failed to update property status.'
+
       });
 
     }
-
-    property.status = status;
-
-    // Keep legacy field synchronized.
-    property.isRentedOut =
-      status === 'RENTED_OUT';
-
-    await property.save();
-
-    return res.status(200).json({
-      success: true,
-      message: `Property status updated to ${status}.`,
-      property
-    });
-
-  } catch (error) {
-
-    console.error(
-      'UPDATE PROPERTY STATUS ERROR:',
-      error
-    );
-
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to update property status.'
-    });
 
   }
+);
 
-});
+
 // =====================================================
 // UPDATE RENTED OUT STATUS
 // PATCH /api/properties/:id/rented-out
@@ -635,10 +775,6 @@ router.patch(
       }
 
 
-      // -------------------------------------------------
-      // VALIDATE BOOLEAN
-      // -------------------------------------------------
-
       if (
         typeof req.body?.isRentedOut !== 'boolean'
       ) {
@@ -670,10 +806,6 @@ router.patch(
       ];
 
 
-      // -------------------------------------------------
-      // MONGODB OBJECT ID
-      // -------------------------------------------------
-
       if (
         mongoose.Types.ObjectId.isValid(
           requestedId
@@ -690,14 +822,12 @@ router.patch(
       }
 
 
-      // -------------------------------------------------
-      // FIND PROPERTY
-      // -------------------------------------------------
-
       const property =
         await Property.findOne({
+
           $or:
             conditions
+
         });
 
 
@@ -715,10 +845,6 @@ router.patch(
       }
 
 
-      // -------------------------------------------------
-      // UPDATE ONLY RENTED OUT FLAG
-      // -------------------------------------------------
-
       property.isRentedOut =
         req.body.isRentedOut;
 
@@ -729,10 +855,15 @@ router.patch(
       console.log(
         '✅ RENTED OUT STATUS UPDATED:',
         {
-          id: property.id,
-          uniqueId: property.uniqueId,
+          id:
+            property.id,
+
+          uniqueId:
+            property.uniqueId,
+
           isRentedOut:
             property.isRentedOut
+
         }
       );
 
@@ -783,258 +914,276 @@ router.patch(
 // PUT /api/properties/:id
 // =====================================================
 
-router.put('/:id', adminAuth, async (req, res) => {
-  console.log(
-    'UPDATE PROPERTY API HIT:',
-    req.params.id
-  );
+router.put(
+  '/:id',
+  adminAuth,
+  async (req, res) => {
+
+    console.log(
+      'UPDATE PROPERTY API HIT:',
+      req.params.id
+    );
 
 
-  try {
+    try {
 
-    const conditions = [
+      const conditions = [
 
-      {
-        id:
+        {
+          id:
+            req.params.id
+        },
+
+        {
+          uniqueId:
+            req.params.id
+        }
+
+      ];
+
+
+      if (
+        mongoose.Types.ObjectId.isValid(
           req.params.id
-      },
+        )
+      ) {
 
-      {
-        uniqueId:
-          req.params.id
+        conditions.push({
+
+          _id:
+            req.params.id
+
+        });
+
       }
 
-    ];
+
+      const property =
+        await Property.findOne({
+
+          $or:
+            conditions
+
+        });
 
 
-    if (
-      mongoose.Types.ObjectId.isValid(
-        req.params.id
-      )
-    ) {
+      if (!property) {
 
-      conditions.push({
+        return res.status(404).json({
 
-        _id:
-          req.params.id
+          success: false,
+
+          message:
+            'Property not found.'
+
+        });
+
+      }
+
+
+      Object.assign(
+        property,
+        req.body
+      );
+
+
+      await property.save();
+
+
+      console.log(
+        'UPDATED PROPERTY TIMESTAMPS:',
+        {
+          createdAt:
+            property.createdAt,
+
+          updatedAt:
+            property.updatedAt
+        }
+      );
+
+
+      return res.status(200).json({
+
+        success: true,
+
+        message:
+          'Property updated successfully.',
+
+        property
 
       });
 
     }
 
+    catch (error) {
 
-    const property =
-      await Property.findOne({
-        $or:
-          conditions
-      });
+      console.error(
+        'UPDATE PROPERTY ERROR:',
+        error
+      );
 
 
-    if (!property) {
-
-      return res.status(404).json({
+      return res.status(500).json({
 
         success: false,
 
         message:
-          'Property not found.'
+          'Failed to update property.',
+
+        error:
+          error.message
 
       });
 
     }
 
-
-    Object.assign(
-      property,
-      req.body
-    );
-
-
-    await property.save();
-
-console.log('UPDATED PROPERTY TIMESTAMPS:', {
-  createdAt: property.createdAt,
-  updatedAt: property.updatedAt
-});
-
-
-    return res.status(200).json({
-
-      success: true,
-
-      message:
-        'Property updated successfully.',
-
-      property
-
-    });
-
   }
-
-  catch (error) {
-
-    console.error(
-      'UPDATE PROPERTY ERROR:',
-      error
-    );
-
-
-    return res.status(500).json({
-
-      success: false,
-
-      message:
-        'Failed to update property.',
-
-      error:
-        error.message
-
-    });
-
-  }
-
-});
+);
 
 
 // =====================================================
 // INCREMENT PROPERTY VIEW COUNT
 // POST /api/properties/:id/view
-// Public route — Login required nahi
+// Public route
 // =====================================================
 
-router.post('/:id/view', async (req, res) => {
+router.post(
+  '/:id/view',
+  async (req, res) => {
 
-  console.log(
-    '👁️ PROPERTY VIEW API HIT:',
-    req.params.id
-  );
-
-  try {
-
-    const requestedId =
-      String(
-        req.params.id || ''
-      ).trim();
-
-
-    if (!requestedId) {
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'Property ID is required.'
-
-      });
-
-    }
-
-
-    const conditions = [
-
-      {
-        id:
-          requestedId
-      },
-
-      {
-        uniqueId:
-          requestedId
-      }
-
-    ];
-
-
-    if (
-      mongoose.Types.ObjectId.isValid(
-        requestedId
-      )
-    ) {
-
-      conditions.push({
-
-        _id:
-          requestedId
-
-      });
-
-    }
-
-
-    const property =
-      await Property.findOneAndUpdate(
-
-        {
-          $or:
-            conditions
-        },
-
-        {
-          $inc: {
-            viewCount: 1
-          }
-        },
-
-        {
-          new: true
-        }
-
-      );
-
-
-    if (!property) {
-
-      return res.status(404).json({
-
-        success: false,
-
-        message:
-          'Property not found.'
-
-      });
-
-    }
-
-
-    return res.status(200).json({
-
-      success: true,
-
-      viewCount:
-        property.viewCount
-
-    });
-
-  }
-
-  catch (error) {
-
-    console.error(
-      'PROPERTY VIEW COUNT ERROR:',
-      error
+    console.log(
+      '👁️ PROPERTY VIEW API HIT:',
+      req.params.id
     );
 
 
-    return res.status(500).json({
+    try {
 
-      success: false,
+      const requestedId =
+        String(
+          req.params.id || ''
+        ).trim();
 
-      message:
-        'Unable to update property views.'
 
-    });
+      if (!requestedId) {
+
+        return res.status(400).json({
+
+          success: false,
+
+          message:
+            'Property ID is required.'
+
+        });
+
+      }
+
+
+      const conditions = [
+
+        {
+          id:
+            requestedId
+        },
+
+        {
+          uniqueId:
+            requestedId
+        }
+
+      ];
+
+
+      if (
+        mongoose.Types.ObjectId.isValid(
+          requestedId
+        )
+      ) {
+
+        conditions.push({
+
+          _id:
+            requestedId
+
+        });
+
+      }
+
+
+      const property =
+        await Property.findOneAndUpdate(
+
+          {
+            $or:
+              conditions
+          },
+
+          {
+            $inc: {
+              viewCount:
+                1
+            }
+          },
+
+          {
+            new: true
+          }
+
+        );
+
+
+      if (!property) {
+
+        return res.status(404).json({
+
+          success: false,
+
+          message:
+            'Property not found.'
+
+        });
+
+      }
+
+
+      return res.status(200).json({
+
+        success: true,
+
+        viewCount:
+          property.viewCount
+
+      });
+
+    }
+
+    catch (error) {
+
+      console.error(
+        'PROPERTY VIEW COUNT ERROR:',
+        error
+      );
+
+
+      return res.status(500).json({
+
+        success: false,
+
+        message:
+          'Unable to update property views.'
+
+      });
+
+    }
 
   }
-
-});
+);
 
 
 // =====================================================
 // UPDATE OWN PROPERTY
 // PUT /api/properties/my-property/:id
 // =====================================================
-
 
 router.put(
   '/my-property/:id',
@@ -1046,12 +1195,14 @@ router.put(
       req.params.id
     );
 
+
     try {
 
       const requestedId =
         String(
           req.params.id || ''
         ).trim();
+
 
       const userEmail =
         String(
@@ -1060,43 +1211,74 @@ router.put(
         .trim()
         .toLowerCase();
 
+
       if (!userEmail) {
+
         return res.status(401).json({
+
           success: false,
-          message: 'User email not found in token.'
+
+          message:
+            'User email not found in token.'
+
         });
+
       }
 
+
       const conditions = [
+
         {
-          id: requestedId
+          id:
+            requestedId
         },
+
         {
-          uniqueId: requestedId
+          uniqueId:
+            requestedId
         }
+
       ];
+
 
       if (
         mongoose.Types.ObjectId.isValid(
           requestedId
         )
       ) {
+
         conditions.push({
-          _id: requestedId
+
+          _id:
+            requestedId
+
         });
+
       }
+
 
       const property =
         await Property.findOne({
-          $or: conditions
+
+          $or:
+            conditions
+
         });
 
+
       if (!property) {
+
         return res.status(404).json({
+
           success: false,
-          message: 'Property not found.'
+
+          message:
+            'Property not found.'
+
         });
+
       }
+
 
       const postedByEmail =
         String(
@@ -1105,42 +1287,63 @@ router.put(
         .trim()
         .toLowerCase();
 
+
       if (
         postedByEmail !== userEmail
       ) {
+
         return res.status(403).json({
+
           success: false,
+
           message:
             'You can only edit your own property.'
+
         });
+
       }
+
 
       Object.assign(
         property,
         req.body
       );
 
+
       await property.save();
 
+
       return res.status(200).json({
+
         success: true,
+
         message:
           'Property updated successfully.',
+
         property
+
       });
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
       console.error(
         'USER PROPERTY UPDATE ERROR:',
         error
       );
 
+
       return res.status(500).json({
+
         success: false,
+
         message:
           'Failed to update property.',
-        error: error.message
+
+        error:
+          error.message
+
       });
 
     }
@@ -1148,190 +1351,337 @@ router.put(
   }
 );
 
+
 // =====================================================
 // DELETE PROPERTY
 // DELETE /api/properties/:id
 // =====================================================
 
-router.delete('/:id', adminAuth, async (req, res) => {
-  console.log(
-    'DELETE PROPERTY API HIT:',
-    req.params.id
-  );
+router.delete(
+  '/:id',
+  adminAuth,
+  async (req, res) => {
+
+    console.log(
+      'DELETE PROPERTY API HIT:',
+      req.params.id
+    );
 
 
-  try {
+    try {
 
-    const conditions = [
+      const conditions = [
 
-      {
-        id:
+        {
+          id:
+            req.params.id
+        },
+
+        {
+          uniqueId:
+            req.params.id
+        }
+
+      ];
+
+
+      if (
+        mongoose.Types.ObjectId.isValid(
           req.params.id
-      },
+        )
+      ) {
 
-      {
-        uniqueId:
-          req.params.id
+        conditions.push({
+
+          _id:
+            req.params.id
+
+        });
+
       }
 
-    ];
+
+      const deleted =
+        await Property.findOneAndDelete({
+
+          $or:
+            conditions
+
+        });
 
 
-    if (
-      mongoose.Types.ObjectId.isValid(
-        req.params.id
-      )
-    ) {
+      if (!deleted) {
 
-      conditions.push({
+        return res.status(404).json({
 
-        _id:
-          req.params.id
+          success: false,
+
+          message:
+            'Property not found.'
+
+        });
+
+      }
+
+
+      return res.status(200).json({
+
+        success: true,
+
+        message:
+          'Property deleted successfully.'
 
       });
 
     }
 
+    catch (error) {
 
-    const deleted =
-      await Property.findOneAndDelete({
-        $or:
-          conditions
-      });
+      console.error(
+        'DELETE PROPERTY ERROR:',
+        error
+      );
 
 
-    if (!deleted) {
-
-      return res.status(404).json({
+      return res.status(500).json({
 
         success: false,
 
         message:
-          'Property not found.'
+          'Failed to delete property.'
 
       });
 
     }
 
-
-    return res.status(200).json({
-
-      success: true,
-
-      message:
-        'Property deleted successfully.'
-
-    });
-
   }
-
-  catch (error) {
-
-    console.error(
-      'DELETE PROPERTY ERROR:',
-      error
-    );
+);
 
 
-    return res.status(500).json({
-
-      success: false,
-
-      message:
-        'Failed to delete property.'
-
-    });
-
-  }
-
-});
-
-
+// =====================================================
 // =====================================================
 // FAST HOME PROPERTIES
 // GET /api/properties/home
+//
+// NO 15-DAY CONDITION
+//
+// CURATED = latest 8 properties
+// FEATURED = next 8 properties
 // =====================================================
 
-router.get('/home', async (req, res) => {
+router.get(
+  '/home',
+  async (req, res) => {
 
-  console.log(
-    '🏠 FAST HOME PROPERTIES API HIT'
-  );
-
-  try {
-
-    const properties =
-      await Property.find({})
-        .sort({
-          createdAt: -1
-        })
-        .limit(12)
-        .select({
-          _id: 1,
-          id: 1,
-          uniqueId: 1,
-          name: 1,
-          permalink: 1,
-          type: 1,
-          status: 1,
-          is_featured: 1,
-          priority: 1,
-          price: 1,
-          area: 1,
-          bhk: 1,
-          bathrooms: 1,
-          furnishing: 1,
-          facing: 1,
-          location: 1,
-          address: 1,
-          city: 1,
-          locality: 1,
-          subLocality: 1,
-          gallery: 1,
-          createdAt: 1,
-          updatedAt: 1,
-           isRentedOut: 1
-
-        })
-        .lean();
-
-
-        const normalizedProperties =
-  properties.map((property) => ({
-    ...property,
-    isRentedOut:
-      property?.isRentedOut === true
-  }));
-
-
-    return res.status(200).json({
-
-      success: true,
-
-      properties
-
-    });
-
-  }
-
-  catch (error) {
-
-    console.error(
-      'FAST HOME PROPERTIES ERROR:',
-      error
+    console.log(
+      '🏠 FAST HOME PROPERTIES API HIT'
     );
 
-    return res.status(500).json({
+    try {
 
-      success: false,
+      // =================================================
+      // GET LATEST 16 PROPERTIES ONLY
+      // =================================================
 
-      message:
-        'Failed to fetch home properties.'
+const properties =
+  await Property.find({})
+    .select({
+      _id: 1,
+      id: 1,
+      uniqueId: 1,
+      name: 1,
+      permalink: 1,
+      type: 1,
+      status: 1,
+      isRentedOut: 1,
+      is_featured: 1,
+      priority: 1,
+      price: 1,
+      area: 1,
+      bhk: 1,
+      bathrooms: 1,
+      furnishing: 1,
+      facing: 1,
+      location: 1,
+      address: 1,
+      city: 1,
+      locality: 1,
+      subLocality: 1,
+      createdAt: 1,
+      updatedAt: 1,
 
-    });
+      // ONLY FIRST IMAGE FOR HOME CARD
+      gallery: {
+        $slice: 1
+      }
+    })
+    .sort({
+      createdAt: -1
+    })
+    .limit(16)
+    .lean();
+
+      // =================================================
+      // NORMALIZE IMAGE
+      // =================================================
+
+      const normalized =
+        properties.map(
+          (property) => {
+
+            let cardImage = '';
+
+
+            if (
+              Array.isArray(
+                property?.gallery
+              )
+            ) {
+
+              const mainImage =
+                property.gallery.find(
+                  (img) =>
+                    img?.main === true &&
+                    img?.url
+                );
+
+              cardImage =
+                mainImage?.url ||
+                property.gallery?.[0]?.url ||
+                '';
+
+            }
+
+
+            if (!cardImage) {
+
+              cardImage =
+                property?.image ||
+                '';
+
+            }
+
+
+            return {
+
+              ...property,
+
+              isRentedOut:
+
+                property?.isRentedOut === true ||
+
+                String(
+                  property?.status || ''
+                )
+                .trim()
+                .toUpperCase() ===
+                  'RENTED_OUT',
+
+              image:
+                cardImage || null,
+
+              gallery:
+
+                cardImage
+                  ? [
+                      {
+                        url:
+                          cardImage,
+                        main:
+                          true
+                      }
+                    ]
+                  : [],
+
+              images:
+
+                cardImage
+                  ? [
+                      cardImage
+                    ]
+                  : []
+
+            };
+
+          }
+        );
+
+
+      // =================================================
+      // CURATED
+      //
+      // Latest 8 properties
+      // =================================================
+
+      const curated =
+        normalized.slice(
+          0,
+          8
+        );
+
+
+      // =================================================
+      // FEATURED
+      //
+      // Next 8 properties
+      // =================================================
+
+      const featured =
+        normalized.slice(
+          8,
+          16
+        );
+
+
+      console.log(
+        '🏠 CURATED COUNT:',
+        curated.length
+      );
+
+      console.log(
+        '⭐ FEATURED COUNT:',
+        featured.length
+      );
+
+
+      // =================================================
+      // RESPONSE
+      // =================================================
+
+      return res.status(200).json({
+
+        success: true,
+
+        curated,
+
+        featured,
+
+        properties:
+          curated
+
+      });
+
+    }
+
+    catch (error) {
+
+      console.error(
+        '❌ FAST HOME PROPERTIES ERROR:',
+        error
+      );
+
+      return res.status(500).json({
+
+        success: false,
+
+        message:
+          'Failed to fetch home properties.'
+
+      });
+
+    }
 
   }
-
-});
+);
 
 module.exports = router;

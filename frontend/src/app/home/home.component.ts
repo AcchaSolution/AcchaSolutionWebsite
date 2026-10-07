@@ -194,121 +194,140 @@ featuredProperties: any[] = [];
   // INIT
   // ============================================================
 
-  ngOnInit(): void {
+ngOnInit(): void {
+  this.isLoadingProperties = true;
 
-      this.isLoadingProperties = true;
+  this.propService.getHomeProperties().subscribe({
+    next: (data: any) => {
 
-    // this.propService.getProperties().subscribe({
-this.propService.getHomeProperties().subscribe({
-      next: (data: any[]) => {
+      console.log(
+        '🏠 HOME API RESPONSE:',
+        data
+      );
 
-        console.log('🏠 ALL PROPERTIES:', data);
+      const curated =
+        Array.isArray(data?.curated)
+          ? data.curated
+          : [];
 
-console.log(
-  '🏠 RENTED OUT FROM HOME API:',
-  JSON.stringify(
-    data?.map((p: any) => ({
-      id: p?.id,
-      name: p?.name,
-      isRentedOut: p?.isRentedOut
-    })),
-    null,
-    2
-  )
-);
+      const featured =
+        Array.isArray(data?.featured)
+          ? data.featured
+          : [];
 
-
-this.allProperties =
-  Array.isArray(data)
-    ? data.map((property: any) => {
+      const normalizeProperty = (
+        property: any
+      ) => {
 
         const rawStatus =
-          String(property?.status || '')
+          String(
+            property?.status || ''
+          )
             .trim()
             .toUpperCase();
 
-        let normalizedStatus = 'AVAILABLE';
+        let normalizedStatus =
+          'AVAILABLE';
 
         if (
           rawStatus === 'RENTED_OUT' ||
           rawStatus === 'RENTED OUT' ||
           rawStatus === 'RENTED'
         ) {
-          normalizedStatus = 'RENTED_OUT';
+          normalizedStatus =
+            'RENTED_OUT';
 
         } else if (
           rawStatus === 'SOLD_OUT' ||
           rawStatus === 'SOLD OUT' ||
           rawStatus === 'SOLD'
         ) {
-          normalizedStatus = 'SOLD_OUT';
+          normalizedStatus =
+            'SOLD_OUT';
 
         } else if (
           rawStatus === 'AVAILABLE'
         ) {
-          normalizedStatus = 'AVAILABLE';
+          normalizedStatus =
+            'AVAILABLE';
         }
 
         return {
           ...property,
 
-          status: normalizedStatus,
+          status:
+            normalizedStatus,
 
-          // Legacy compatibility
           isRentedOut:
-            normalizedStatus === 'RENTED_OUT'
+            normalizedStatus ===
+            'RENTED_OUT'
         };
+      };
 
-      })
-    : [];
-
-    
-    
-        this.properties =
-          [...this.allProperties];
-
-        this.filteredProperties =
-          [...this.allProperties];
-
-
-  // ============================================
-  // CURATED / FEATURED PROPERTY ORGANIZATION
-  // ============================================
-
-  this.organizeHomeProperties();
-
-  this.isLoadingProperties = false;
-
-
-
-      },
-
-      error: (err) => {
-
-        console.error(
-          '❌ Data load nahi hua:',
-          err
+      this.curatedProperties =
+        curated.map(
+          normalizeProperty
         );
 
-        this.allProperties = [];
-        this.properties = [];
-        this.filteredProperties = [];
+      this.featuredProperties =
+        featured.map(
+          normalizeProperty
+        );
 
-          this.curatedProperties = [];
-  this.featuredProperties = [];
+      this.allProperties = [
+        ...this.curatedProperties,
+        ...this.featuredProperties
+      ];
 
+      /*
+       * Home ke main property section ke liye
+       * sirf curated properties use hongi.
+       */
+      this.properties = [
+        ...this.curatedProperties
+      ];
 
-  this.curatedProperties = [];
-  this.featuredProperties = [];
+      this.filteredProperties = [
+        ...this.allProperties
+      ];
 
-  this.isLoadingProperties = false;
+      this.isLoadingProperties = false;
 
-      }
+      console.log(
+        '🏠 CURATED:',
+        this.curatedProperties.length
+      );
 
-    });
+      console.log(
+        '⭐ FEATURED:',
+        this.featuredProperties.length
+      );
 
-  }
+      console.log(
+        '🏠 TOTAL HOME:',
+        this.allProperties.length
+      );
+    },
 
+    error: (err) => {
+
+      console.error(
+        '❌ Data load nahi hua:',
+        err
+      );
+
+      this.allProperties = [];
+      this.properties = [];
+      this.filteredProperties = [];
+      this.curatedProperties = [];
+      this.featuredProperties = [];
+
+      this.isLoadingProperties = false;
+    }
+  });
+}
+
+  
 private organizeHomeProperties(): void {
 
   const now = Date.now();

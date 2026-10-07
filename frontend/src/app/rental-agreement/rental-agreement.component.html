@@ -1,672 +1,1380 @@
-<div class="rental-agreement-page">
+<div class="rental-page">
 
-  <!-- ================= HERO ================= -->
-  <section class="ra-hero-new">
+  <!-- ============================= -->
+  <!-- PAGE HEADER -->
+  <!-- ============================= -->
+  <section class="rental-hero">
+    <div class="hero-content">
+      <span class="eyebrow">ACCHASOLUTION</span>
 
-    <div class="ra-hero-topline">
-      <span>ACCHASOLUTION DOCUMENTATION</span>
-      <span>RENTAL SERVICES</span>
-    </div>
-
-    <div class="ra-hero-main">
-
-      <div class="ra-hero-title">
-
-        <div class="ra-hero-number">
-          02
-        </div>
-
-        <div>
-          <span class="ra-kicker">RENTAL AGREEMENT</span>
-
-          <h1>
-            Easy.
-            <em>Clear.</em>
-            Documented.
-          </h1>
-        </div>
-
-      </div>
-
-
-      <div class="ra-hero-description">
-
-        <p>
-          Rental agreement preparation made simple with guided
-          documentation support for your property.
-        </p>
-
-        <a href="#ra-application" class="ra-start-btn">
-          Start Agreement
-          <span>↘</span>
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <div class="ra-hero-bottom">
-
-      <span>RESIDENTIAL</span>
-      <i></i>
-      <span>COMMERCIAL</span>
-      <i></i>
-      <span>RENEWAL</span>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= AGREEMENT TYPES ================= -->
-
-  <section class="ra-type-strip">
-
-    <div class="ra-type-intro">
-      <span>01</span>
-
-      <h2>
-        Select your
-        <strong>agreement type</strong>
-      </h2>
-    </div>
-
-
-    <div class="ra-type-options">
-
-      <button type="button" class="ra-type-option active">
-
-        <span class="ra-option-no">01</span>
-
-        <div>
-          <strong>Residential</strong>
-          <small>House / Flat / Apartment</small>
-        </div>
-
-        <b>→</b>
-
-      </button>
-
-
-      <button type="button" class="ra-type-option">
-
-        <span class="ra-option-no">02</span>
-
-        <div>
-          <strong>Commercial</strong>
-          <small>Shop / Office / Business</small>
-        </div>
-
-        <b>→</b>
-
-      </button>
-
-
-      <button type="button" class="ra-type-option">
-
-        <span class="ra-option-no">03</span>
-
-        <div>
-          <strong>Renewal</strong>
-          <small>Existing agreement</small>
-        </div>
-
-        <b>→</b>
-
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= APPLICATION ================= -->
-
-  <section class="ra-application" id="ra-application">
-
-    <div class="ra-application-heading">
-
-      <div class="ra-section-number">
-        02
-      </div>
-
-      <div>
-
-        <span>APPLICATION FORM</span>
-
-        <h2>
-          Rental Agreement
-          <strong>Request</strong>
-        </h2>
-
-      </div>
+      <h1>Rental Agreement</h1>
 
       <p>
-        Fill in the basic information below. We will review the
-        details and guide you through the next steps.
+        Create your rental agreement request with secure document
+        submission and professional assistance from AcchaSolution.
       </p>
 
+      <div class="hero-badges">
+        <span>✓ Secure Process</span>
+        <span>✓ Document Verification</span>
+        <span>✓ Professional Assistance</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================= -->
+  <!-- PROGRESS -->
+  <!-- ============================= -->
+  <section class="agreement-progress">
+
+    <div class="progress-step active">
+      <span class="step-number">01</span>
+      <div>
+        <strong>Agreement Details</strong>
+        <small>Basic information</small>
+      </div>
     </div>
 
-
-    <div class="ra-application-sheet">
-
-      <form>
-
-        <!-- LANDLORD -->
-
-        <div class="ra-sheet-section">
-
-          <div class="ra-sheet-label">
-            <span>01</span>
-            <strong>Landlord Details</strong>
-          </div>
-
-
-          <div class="ra-sheet-fields">
-
-            <div class="ra-input-group">
-
-              <label for="ra-landlord">
-                Full Name
-              </label>
-
-              <input
-                type="text"
-                id="ra-landlord"
-                name="landlordName"
-                placeholder="Landlord full name"
-                required
-              >
-
-            </div>
-
-
-            <div class="ra-input-group">
-
-              <label for="ra-landlord-phone">
-                Mobile Number
-              </label>
-
-              <input
-                type="tel"
-                id="ra-landlord-phone"
-                name="landlordMobile"
-                placeholder="Mobile number"
-                required
-              >
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- TENANT -->
-
-        <div class="ra-sheet-section">
-
-          <div class="ra-sheet-label">
-            <span>02</span>
-            <strong>Tenant Details</strong>
-          </div>
-
-
-          <div class="ra-sheet-fields">
-
-            <div class="ra-input-group">
-
-              <label for="ra-tenant">
-                Full Name
-              </label>
-
-              <input
-                type="text"
-                id="ra-tenant"
-                name="tenantName"
-                placeholder="Tenant full name"
-                required
-              >
-
-            </div>
-
-
-            <div class="ra-input-group">
-
-              <label for="ra-tenant-phone">
-                Mobile Number
-              </label>
-
-              <input
-                type="tel"
-                id="ra-tenant-phone"
-                name="tenantMobile"
-                placeholder="Mobile number"
-                required
-              >
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- PROPERTY -->
-
-        <div class="ra-sheet-section">
-
-          <div class="ra-sheet-label">
-            <span>03</span>
-            <strong>Property Details</strong>
-          </div>
-
-
-          <div class="ra-sheet-fields full">
-
-            <div class="ra-input-group">
-
-              <label for="ra-address">
-                Complete Property Address
-              </label>
-
-              <textarea
-                id="ra-address"
-                name="propertyAddress"
-                placeholder="Enter complete property address"
-                rows="3"
-                required
-              ></textarea>
-
-            </div>
-
-          </div>
-
-
-          <div class="ra-sheet-fields">
-
-            <div class="ra-input-group">
-
-              <label for="ra-property">
-                Property Type
-              </label>
-
-              <select
-                id="ra-property"
-                name="propertyType"
-                required
-              >
-
-                <option value="">
-                  Select property type
-                </option>
-
-                <option value="flat">
-                  Flat / Apartment
-                </option>
-
-                <option value="house">
-                  Independent House
-                </option>
-
-                <option value="shop">
-                  Shop
-                </option>
-
-                <option value="office">
-                  Office
-                </option>
-
-                <option value="other">
-                  Other
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="ra-input-group">
-
-              <label for="ra-purpose">
-                Request Type
-              </label>
-
-              <select
-                id="ra-purpose"
-                name="requestType"
-                required
-              >
-
-                <option value="">
-                  Select request
-                </option>
-
-                <option value="new">
-                  New Agreement
-                </option>
-
-                <option value="renewal">
-                  Renewal
-                </option>
-
-                <option value="extension">
-                  Extension
-                </option>
-
-              </select>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- FINANCIAL -->
-
-        <div class="ra-sheet-section">
-
-          <div class="ra-sheet-label">
-            <span>04</span>
-            <strong>Rent & Duration</strong>
-          </div>
-
-
-          <div class="ra-sheet-fields">
-
-            <div class="ra-input-group">
-
-              <label for="ra-rent">
-                Monthly Rent
-              </label>
-
-              <input
-                type="number"
-                id="ra-rent"
-                name="monthlyRent"
-                placeholder="₹ Enter amount"
-                required
-              >
-
-            </div>
-
-
-            <div class="ra-input-group">
-
-              <label for="ra-deposit">
-                Security Deposit
-              </label>
-
-              <input
-                type="number"
-                id="ra-deposit"
-                name="securityDeposit"
-                placeholder="₹ Enter amount"
-                required
-              >
-
-            </div>
-
-          </div>
-
-
-          <div class="ra-sheet-fields">
-
-            <div class="ra-input-group">
-
-              <label for="ra-duration">
-                Agreement Duration
-              </label>
-
-              <select
-                id="ra-duration"
-                name="duration"
-                required
-              >
-
-                <option value="">
-                  Select duration
-                </option>
-
-                <option value="6-months">
-                  6 Months
-                </option>
-
-                <option value="11-months">
-                  11 Months
-                </option>
-
-                <option value="1-year">
-                  1 Year
-                </option>
-
-                <option value="other">
-                  Other
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="ra-input-group">
-
-              <label for="ra-start">
-                Agreement Start Date
-              </label>
-
-              <input
-                type="date"
-                id="ra-start"
-                name="startDate"
-                required
-              >
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- ADDITIONAL -->
-
-        <div class="ra-sheet-section">
-
-          <div class="ra-sheet-label">
-            <span>05</span>
-            <strong>Additional Requirements</strong>
-          </div>
-
-
-          <div class="ra-sheet-fields full">
-
-            <div class="ra-input-group">
-
-              <label for="ra-notes">
-                Additional Notes
-              </label>
-
-              <textarea
-                id="ra-notes"
-                name="additionalNotes"
-                rows="4"
-                placeholder="Mention any additional terms or requirements..."
-              ></textarea>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- SUBMIT -->
-
-        <div class="ra-submit-area">
+    <div class="progress-line"></div>
+
+    <div class="progress-step">
+      <span class="step-number">02</span>
+      <div>
+        <strong>Parties & Property</strong>
+        <small>Owner and tenant</small>
+      </div>
+    </div>
+
+    <div class="progress-line"></div>
+
+    <div class="progress-step">
+      <span class="step-number">03</span>
+      <div>
+        <strong>Documents</strong>
+        <small>Upload documents</small>
+      </div>
+    </div>
+
+    <div class="progress-line"></div>
+
+    <div class="progress-step">
+      <span class="step-number">04</span>
+      <div>
+        <strong>Review</strong>
+        <small>Confirm details</small>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ============================= -->
+  <!-- MAIN FORM -->
+  <!-- ============================= -->
+  <main class="agreement-container">
+
+    <form
+      class="agreement-form"
+      [formGroup]="rentalForm"
+      (ngSubmit)="submitAgreement()"
+    >
+
+
+      <!-- ============================= -->
+      <!-- AGREEMENT DETAILS -->
+      <!-- ============================= -->
+      <section class="form-card">
+
+        <div class="section-heading">
+          <div class="section-icon">01</div>
 
           <div>
-            <span>READY TO CONTINUE?</span>
+            <h2>Agreement Details</h2>
+            <p>Tell us about the type and duration of your agreement.</p>
+          </div>
+        </div>
 
-            <p>
-              Submit your details and our team will contact you
-              regarding the next steps.
-            </p>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="agreementType">
+              Agreement Type <span>*</span>
+            </label>
+
+            <select
+              id="agreementType"
+              formControlName="agreementType"
+            >
+              <option value="">Select agreement type</option>
+              <option value="residential">Residential</option>
+              <option value="commercial">Commercial</option>
+            </select>
           </div>
 
 
-          <button type="submit" class="ra-submit">
+          <div class="form-group">
+            <label for="duration">
+              Agreement Duration
+            </label>
 
-            Submit Request
+            <select
+              id="duration"
+              formControlName="duration"
+            >
+              <option value="">Select duration</option>
+              <option value="11-months">11 Months</option>
+              <option value="12-months">12 Months</option>
+              <option value="24-months">24 Months</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
-            <span>→</span>
 
-          </button>
+          <div class="form-group">
+            <label for="startDate">
+              Start Date <span>*</span>
+            </label>
+
+            <input
+              id="startDate"
+              type="date"
+              formControlName="startDate"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="endDate">
+              End Date <span>*</span>
+            </label>
+
+            <input
+              id="endDate"
+              type="date"
+              formControlName="endDate"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="noticePeriod">
+              Notice Period
+            </label>
+
+            <select
+              id="noticePeriod"
+              formControlName="noticePeriod"
+            >
+              <option value="">Select notice period</option>
+              <option value="15-days">15 Days</option>
+              <option value="30-days">30 Days</option>
+              <option value="60-days">60 Days</option>
+              <option value="90-days">90 Days</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="lockInPeriod">
+              Lock-in Period
+            </label>
+
+            <select
+              id="lockInPeriod"
+              formControlName="lockInPeriod"
+            >
+              <option value="">Select lock-in period</option>
+              <option value="none">No Lock-in</option>
+              <option value="3-months">3 Months</option>
+              <option value="6-months">6 Months</option>
+              <option value="12-months">12 Months</option>
+            </select>
+          </div>
 
         </div>
 
-      </form>
-
-    </div>
-
-  </section>
+      </section>
 
 
-  <!-- ================= TIMELINE ================= -->
+      <!-- ============================= -->
+      <!-- PROPERTY DETAILS -->
+      <!-- ============================= -->
+      <section class="form-card">
 
-  <section class="ra-timeline-section">
+        <div class="section-heading">
+          <div class="section-icon">02</div>
 
-    <div class="ra-timeline-heading">
-
-      <span>03 / PROCESS</span>
-
-      <h2>
-        From details to
-        <strong>agreement.</strong>
-      </h2>
-
-    </div>
-
-
-    <div class="ra-timeline">
-
-      <div class="ra-timeline-step">
-
-        <span>01</span>
-
-        <div>
-          <strong>Details</strong>
-          <small>Share information</small>
+          <div>
+            <h2>Property Details</h2>
+            <p>Enter the complete property information.</p>
+          </div>
         </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="propertyType">
+              Property Type <span>*</span>
+            </label>
+
+            <select
+              id="propertyType"
+              formControlName="propertyType"
+            >
+              <option value="">Select property type</option>
+              <option value="flat">Flat / Apartment</option>
+              <option value="house">Independent House</option>
+              <option value="villa">Villa</option>
+              <option value="pg">PG</option>
+              <option value="shop">Shop</option>
+              <option value="office">Office</option>
+              <option value="commercial">Commercial Property</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="propertyName">
+              Property / Building Name
+            </label>
+
+            <input
+              id="propertyName"
+              type="text"
+              formControlName="propertyName"
+              placeholder="e.g. Prestige Lakeside Habitat"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="propertyNumber">
+              Flat / House / Unit Number
+            </label>
+
+            <input
+              id="propertyNumber"
+              type="text"
+              formControlName="propertyNumber"
+              placeholder="e.g. A-1204"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="floor">
+              Floor
+            </label>
+
+            <input
+              id="floor"
+              type="text"
+              formControlName="floor"
+              placeholder="e.g. 12th Floor"
+            />
+          </div>
+
+
+          <div class="form-group full-width">
+            <label for="propertyAddress">
+              Complete Property Address <span>*</span>
+            </label>
+
+            <textarea
+              id="propertyAddress"
+              formControlName="propertyAddress"
+              rows="3"
+              placeholder="Enter complete property address"
+            ></textarea>
+          </div>
+
+
+          <div class="form-group">
+            <label for="locality">
+              Locality <span>*</span>
+            </label>
+
+            <input
+              id="locality"
+              type="text"
+              formControlName="locality"
+              placeholder="e.g. Whitefield"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="city">
+              City <span>*</span>
+            </label>
+
+            <input
+              id="city"
+              type="text"
+              formControlName="city"
+              placeholder="e.g. Bengaluru"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="state">
+              State <span>*</span>
+            </label>
+
+            <input
+              id="state"
+              type="text"
+              formControlName="state"
+              placeholder="e.g. Karnataka"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="pincode">
+              Pincode <span>*</span>
+            </label>
+
+            <input
+              id="pincode"
+              type="text"
+              inputmode="numeric"
+              maxlength="6"
+              formControlName="pincode"
+              placeholder="e.g. 560066"
+            />
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ============================= -->
+      <!-- LANDLORD DETAILS -->
+      <!-- ============================= -->
+      <section class="form-card">
+
+        <div class="section-heading">
+          <div class="section-icon">03</div>
+
+          <div>
+            <h2>Landlord / Owner Details</h2>
+            <p>Details of the property owner.</p>
+          </div>
+        </div>
+
+
+        <div
+          class="form-grid"
+          formGroupName="owner"
+        >
+
+          <div class="form-group">
+            <label for="ownerName">
+              Full Name <span>*</span>
+            </label>
+
+            <input
+              id="ownerName"
+              type="text"
+              formControlName="name"
+              placeholder="Owner full name"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="ownerPhone">
+              Mobile Number <span>*</span>
+            </label>
+
+            <input
+              id="ownerPhone"
+              type="tel"
+              formControlName="phone"
+              placeholder="10-digit mobile number"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="ownerEmail">
+              Email Address
+            </label>
+
+            <input
+              id="ownerEmail"
+              type="email"
+              formControlName="email"
+              placeholder="owner@example.com"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="ownerPan">
+              PAN Number
+            </label>
+
+            <input
+              id="ownerPan"
+              type="text"
+              formControlName="pan"
+              maxlength="10"
+              placeholder="PAN number"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="ownerAadhaar">
+              Aadhaar Number
+            </label>
+
+            <input
+              id="ownerAadhaar"
+              type="text"
+              inputmode="numeric"
+              maxlength="12"
+              formControlName="aadhaar"
+              placeholder="12-digit Aadhaar number"
+            />
+          </div>
+
+
+          <div class="form-group full-width">
+            <label for="ownerAddress">
+              Permanent Address
+            </label>
+
+            <textarea
+              id="ownerAddress"
+              rows="3"
+              formControlName="address"
+              placeholder="Owner permanent address"
+            ></textarea>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ============================= -->
+      <!-- TENANT DETAILS -->
+      <!-- ============================= -->
+      <section class="form-card">
+
+        <div class="section-heading">
+          <div class="section-icon">04</div>
+
+          <div>
+            <h2>Tenant Details</h2>
+            <p>Details of the person renting the property.</p>
+          </div>
+        </div>
+
+
+        <div
+          class="form-grid"
+          formGroupName="tenant"
+        >
+
+          <div class="form-group">
+            <label for="tenantName">
+              Full Name <span>*</span>
+            </label>
+
+            <input
+              id="tenantName"
+              type="text"
+              formControlName="name"
+              placeholder="Tenant full name"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="tenantPhone">
+              Mobile Number <span>*</span>
+            </label>
+
+            <input
+              id="tenantPhone"
+              type="tel"
+              formControlName="phone"
+              placeholder="10-digit mobile number"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="tenantEmail">
+              Email Address <span>*</span>
+            </label>
+
+            <input
+              id="tenantEmail"
+              type="email"
+              formControlName="email"
+              placeholder="tenant@example.com"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="tenantPan">
+              PAN Number
+            </label>
+
+            <input
+              id="tenantPan"
+              type="text"
+              formControlName="pan"
+              maxlength="10"
+              placeholder="PAN number"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="tenantAadhaar">
+              Aadhaar Number
+            </label>
+
+            <input
+              id="tenantAadhaar"
+              type="text"
+              inputmode="numeric"
+              maxlength="12"
+              formControlName="aadhaar"
+              placeholder="12-digit Aadhaar number"
+            />
+          </div>
+
+
+          <div class="form-group full-width">
+            <label for="tenantAddress">
+              Permanent Address
+            </label>
+
+            <textarea
+              id="tenantAddress"
+              rows="3"
+              formControlName="address"
+              placeholder="Tenant permanent address"
+            ></textarea>
+          </div>
+
+        </div>
+
+
+        <!-- ADDITIONAL TENANTS -->
+
+        <div class="additional-party">
+
+          <div class="additional-party-header">
+            <div>
+              <h3>Additional Tenant</h3>
+              <p>Add another tenant if required.</p>
+            </div>
+
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="addTenant()"
+            >
+              + Add Tenant
+            </button>
+          </div>
+
+
+          <div
+            class="additional-tenant"
+            *ngFor="let tenant of additionalTenants; let i = index"
+          >
+
+            <div class="form-group">
+              <label>Tenant Name</label>
+              <input
+                type="text"
+                [value]="tenant.name"
+                (input)="tenant.name = $any($event.target).value"
+                placeholder="Full name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Mobile Number</label>
+              <input
+                type="tel"
+                [value]="tenant.phone"
+                (input)="tenant.phone = $any($event.target).value"
+                placeholder="Mobile number"
+              />
+            </div>
+
+            <button
+              type="button"
+              class="remove-button"
+              (click)="removeTenant(i)"
+              aria-label="Remove tenant"
+            >
+              Remove
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ============================= -->
+      <!-- RENT & FINANCIAL DETAILS -->
+      <!-- ============================= -->
+      <section class="form-card">
+
+        <div class="section-heading">
+          <div class="section-icon">05</div>
+
+          <div>
+            <h2>Rent & Financial Details</h2>
+            <p>Enter the financial terms of the rental agreement.</p>
+          </div>
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="monthlyRent">
+              Monthly Rent <span>*</span>
+            </label>
+
+            <div class="input-prefix">
+              <span>₹</span>
+              <input
+                id="monthlyRent"
+                type="number"
+                formControlName="monthlyRent"
+                placeholder="Monthly rent"
+              />
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="securityDeposit">
+              Security Deposit <span>*</span>
+            </label>
+
+            <div class="input-prefix">
+              <span>₹</span>
+              <input
+                id="securityDeposit"
+                type="number"
+                formControlName="securityDeposit"
+                placeholder="Security deposit"
+              />
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="maintenance">
+              Maintenance Charges
+            </label>
+
+            <div class="input-prefix">
+              <span>₹</span>
+              <input
+                id="maintenance"
+                type="number"
+                formControlName="maintenance"
+                placeholder="Monthly maintenance"
+              />
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="rentDueDate">
+              Rent Due Date
+            </label>
+
+            <select
+              id="rentDueDate"
+              formControlName="rentDueDate"
+            >
+              <option value="">Select date</option>
+              <option value="1">1st</option>
+              <option value="5">5th</option>
+              <option value="7">7th</option>
+              <option value="10">10th</option>
+              <option value="15">15th</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="paymentMode">
+              Rent Payment Mode
+            </label>
+
+            <select
+              id="paymentMode"
+              formControlName="paymentMode"
+            >
+              <option value="">Select payment mode</option>
+              <option value="bank-transfer">Bank Transfer</option>
+              <option value="upi">UPI</option>
+              <option value="cash">Cash</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="otherCharges">
+              Other Charges
+            </label>
+
+            <div class="input-prefix">
+              <span>₹</span>
+              <input
+                id="otherCharges"
+                type="number"
+                formControlName="otherCharges"
+                placeholder="Other monthly charges"
+              />
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ============================= -->
+      <!-- PROPERTY HANDOVER -->
+      <!-- ============================= -->
+      <section class="form-card">
+
+        <div class="section-heading">
+          <div class="section-icon">06</div>
+
+          <div>
+            <h2>Property Handover</h2>
+            <p>Additional information about possession and property condition.</p>
+          </div>
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="possessionDate">
+              Possession Date
+            </label>
+
+            <input
+              id="possessionDate"
+              type="date"
+              formControlName="possessionDate"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="furnishing">
+              Furnishing Status
+            </label>
+
+            <select
+              id="furnishing"
+              formControlName="furnishing"
+            >
+              <option value="">Select furnishing</option>
+              <option value="fully-furnished">Fully Furnished</option>
+              <option value="semi-furnished">Semi Furnished</option>
+              <option value="unfurnished">Unfurnished</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="parking">
+              Parking
+            </label>
+
+            <select
+              id="parking"
+              formControlName="parking"
+            >
+              <option value="">Select</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="parkingNumber">
+              Parking Number
+            </label>
+
+            <input
+              id="parkingNumber"
+              type="text"
+              formControlName="parkingNumber"
+              placeholder="e.g. P2-145"
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="keys">
+              Number of Keys
+            </label>
+
+            <input
+              id="keys"
+              type="number"
+              formControlName="keys"
+              placeholder="e.g. 3"
+            />
+          </div>
+
+
+          <div class="form-group full-width">
+            <label for="furniture">
+              Furniture / Appliances Included
+            </label>
+
+            <textarea
+              id="furniture"
+              rows="3"
+              formControlName="furniture"
+              placeholder="e.g. Bed, Sofa, Refrigerator, Washing Machine..."
+            ></textarea>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ============================= -->
+      <!-- DOCUMENT UPLOAD -->
+      <!-- ============================= -->
+      <section class="form-card">
+
+        <div class="section-heading">
+          <div class="section-icon">07</div>
+
+          <div>
+            <h2>Documents</h2>
+            <p>Upload the required owner and tenant documents.</p>
+          </div>
+        </div>
+
+
+        <!-- OWNER DOCUMENTS -->
+
+        <div class="document-group">
+
+          <div class="document-group-title">
+            <h3>Owner Documents</h3>
+            <span>Required / Optional as applicable</span>
+          </div>
+
+
+          <div class="upload-grid">
+
+            <label class="upload-box">
+
+              <input
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png"
+                (change)="onFileSelected($event, 'ownerAadhaar')"
+              />
+
+              <span class="upload-icon">↑</span>
+
+              <strong>Aadhaar Card</strong>
+
+              <small>
+                PDF, JPG, PNG
+              </small>
+
+            </label>
+
+
+            <label class="upload-box">
+
+              <input
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png"
+                (change)="onFileSelected($event, 'ownerPan')"
+              />
+
+              <span class="upload-icon">↑</span>
+
+              <strong>PAN Card</strong>
+
+              <small>
+                PDF, JPG, PNG
+              </small>
+
+            </label>
+
+
+            <label class="upload-box">
+
+              <input
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png"
+                (change)="onFileSelected($event, 'ownerAddressProof')"
+              />
+
+              <span class="upload-icon">↑</span>
+
+              <strong>Address Proof</strong>
+
+              <small>
+                PDF, JPG, PNG
+              </small>
+
+            </label>
+
+
+            <label class="upload-box">
+
+              <input
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png"
+                (change)="onFileSelected($event, 'propertyProof')"
+              />
+
+              <span class="upload-icon">↑</span>
+
+              <strong>Property Proof</strong>
+
+              <small>
+                PDF, JPG, PNG
+              </small>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- TENANT DOCUMENTS -->
+
+        <div class="document-group">
+
+          <div class="document-group-title">
+            <h3>Tenant Documents</h3>
+            <span>Required / Optional as applicable</span>
+          </div>
+
+
+          <div class="upload-grid">
+
+            <label class="upload-box">
+
+              <input
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png"
+                (change)="onFileSelected($event, 'tenantAadhaar')"
+              />
+
+              <span class="upload-icon">↑</span>
+
+              <strong>Aadhaar Card</strong>
+
+              <small>
+                PDF, JPG, PNG
+              </small>
+
+            </label>
+
+
+            <label class="upload-box">
+
+              <input
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png"
+                (change)="onFileSelected($event, 'tenantPan')"
+              />
+
+              <span class="upload-icon">↑</span>
+
+              <strong>PAN Card</strong>
+
+              <small>
+                PDF, JPG, PNG
+              </small>
+
+            </label>
+
+
+            <label class="upload-box">
+
+              <input
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png"
+                (change)="onFileSelected($event, 'tenantAddressProof')"
+              />
+
+              <span class="upload-icon">↑</span>
+
+              <strong>Address Proof</strong>
+
+              <small>
+                PDF, JPG, PNG
+              </small>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="document-note">
+
+          <span>🔒</span>
+
+          <p>
+            Your documents contain sensitive information. They should be
+            stored securely and accessed only by authorized AcchaSolution
+            personnel.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- ============================= -->
+      <!-- TERMS & CONDITIONS -->
+      <!-- ============================= -->
+      <section class="form-card">
+
+        <div class="section-heading">
+          <div class="section-icon">08</div>
+
+          <div>
+            <h2>Terms & Conditions</h2>
+            <p>Select the applicable agreement terms.</p>
+          </div>
+        </div>
+
+
+        <div class="terms-list">
+
+          <label class="term-item">
+            <input
+              type="checkbox"
+              formControlName="rentPaymentClause"
+            />
+
+            <span>
+              Rent shall be paid on or before the agreed due date.
+            </span>
+          </label>
+
+
+          <label class="term-item">
+            <input
+              type="checkbox"
+              formControlName="securityDepositClause"
+            />
+
+            <span>
+              Security deposit shall be handled according to the
+              agreed rental terms.
+            </span>
+          </label>
+
+
+          <label class="term-item">
+            <input
+              type="checkbox"
+              formControlName="maintenanceClause"
+            />
+
+            <span>
+              Maintenance and utility charges shall be paid as agreed
+              between the parties.
+            </span>
+          </label>
+
+
+          <label class="term-item">
+            <input
+              type="checkbox"
+              formControlName="propertyUsageClause"
+            />
+
+            <span>
+              The property shall be used only for the agreed purpose.
+            </span>
+          </label>
+
+
+          <label class="term-item">
+            <input
+              type="checkbox"
+              formControlName="sublettingClause"
+            />
+
+            <span>
+              The tenant shall not sublet the property without
+              written permission from the owner.
+            </span>
+          </label>
+
+
+          <label class="term-item">
+            <input
+              type="checkbox"
+              formControlName="terminationClause"
+            />
+
+            <span>
+              Termination shall follow the agreed notice and
+              lock-in conditions.
+            </span>
+          </label>
+
+        </div>
+
+
+        <!-- CUSTOM CLAUSE -->
+
+        <div class="custom-clause">
+
+          <div class="custom-clause-header">
+
+            <div>
+              <h3>Additional Clause</h3>
+              <p>Add any specific condition agreed by both parties.</p>
+            </div>
+
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="addClause()"
+            >
+              + Add Clause
+            </button>
+
+          </div>
+
+
+          <div
+            class="clause-row"
+            *ngFor="let clause of customClauses; let i = index"
+          >
+
+            <textarea
+              rows="2"
+              [value]="clause"
+              (input)="customClauses[i] = $any($event.target).value"
+              placeholder="Enter additional clause"
+            ></textarea>
+
+            <button
+              type="button"
+              class="remove-button"
+              (click)="removeClause(i)"
+            >
+              Remove
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ============================= -->
+      <!-- CONSENT -->
+      <!-- ============================= -->
+      <section class="form-card consent-card">
+
+        <label class="consent-item">
+
+          <input
+            type="checkbox"
+            formControlName="informationConsent"
+          />
+
+          <span>
+            I confirm that the information provided above is accurate
+            to the best of my knowledge and I authorize AcchaSolution
+            to process this rental agreement request.
+          </span>
+
+        </label>
+
+
+        <label class="consent-item">
+
+          <input
+            type="checkbox"
+            formControlName="documentConsent"
+          />
+
+          <span>
+            I understand that submitted documents may be reviewed
+            for verification and agreement preparation.
+          </span>
+
+        </label>
+
+      </section>
+
+
+      <!-- ============================= -->
+      <!-- FORM ACTIONS -->
+      <!-- ============================= -->
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="preview-button"
+          (click)="previewAgreement()"
+        >
+          Preview Agreement
+        </button>
+
+
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="rentalForm.invalid || isSubmitting"
+        >
+
+          <span *ngIf="!isSubmitting">
+            Submit Rental Agreement
+          </span>
+
+          <span *ngIf="isSubmitting">
+            Submitting...
+          </span>
+
+        </button>
 
       </div>
 
 
-      <div class="ra-timeline-line"></div>
+      <!-- ============================= -->
+      <!-- SECURITY FOOTNOTE -->
+      <!-- ============================= -->
+      <div class="form-footer-note">
+
+        <span>🔐</span>
+
+        <p>
+          Your information is submitted securely to AcchaSolution.
+          After submission, you will receive a confirmation on your
+          registered email. Agreement generation will take place
+          after verification of the submitted information.
+        </p>
+
+      </div>
+
+    </form>
 
 
-      <div class="ra-timeline-step">
+    <!-- ============================= -->
+    <!-- SIDE SUMMARY -->
+    <!-- ============================= -->
+    <aside class="agreement-sidebar">
 
-        <span>02</span>
+      <div class="summary-card">
 
-        <div>
-          <strong>Review</strong>
-          <small>Information check</small>
+        <span class="summary-label">
+          RENTAL AGREEMENT
+        </span>
+
+        <h3>Complete your agreement with confidence.</h3>
+
+        <p>
+          AcchaSolution helps you organize your rental agreement
+          details and documentation in one secure process.
+        </p>
+
+
+        <div class="summary-points">
+
+          <div class="summary-point">
+            <span>01</span>
+            <div>
+              <strong>Submit Details</strong>
+              <small>Provide owner, tenant and property information.</small>
+            </div>
+          </div>
+
+
+          <div class="summary-point">
+            <span>02</span>
+            <div>
+              <strong>Verification</strong>
+              <small>Our team reviews the submitted information.</small>
+            </div>
+          </div>
+
+
+          <div class="summary-point">
+            <span>03</span>
+            <div>
+              <strong>Agreement</strong>
+              <small>Your agreement can then be prepared.</small>
+            </div>
+          </div>
+
+
+          <div class="summary-point">
+            <span>04</span>
+            <div>
+              <strong>Confirmation</strong>
+              <small>Receive updates on your registered contact details.</small>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="summary-contact">
+
+          <small>Need assistance?</small>
+
+          <strong>AcchaSolution Support</strong>
+
+          <p>
+            Our team can help you with the rental agreement process.
+          </p>
+
         </div>
 
       </div>
 
+    </aside>
 
-      <div class="ra-timeline-line"></div>
-
-
-      <div class="ra-timeline-step">
-
-        <span>03</span>
-
-        <div>
-          <strong>Preparation</strong>
-          <small>Agreement drafting</small>
-        </div>
-
-      </div>
-
-
-      <div class="ra-timeline-line"></div>
-
-
-      <div class="ra-timeline-step">
-
-        <span>04</span>
-
-        <div>
-          <strong>Delivery</strong>
-          <small>Final document</small>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= INFORMATION ================= -->
-
-  <section class="ra-note">
-
-    <div class="ra-note-mark">
-      i
-    </div>
-
-    <div>
-
-      <span>IMPORTANT INFORMATION</span>
-
-      <p>
-        Agreement preparation is based on the information provided.
-        Applicable stamp duty, registration, notarization and other
-        requirements may vary depending on the location and agreement type.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= FINAL CTA ================= -->
-
-  <section class="ra-final">
-
-    <div class="ra-final-number">
-      02
-    </div>
-
-    <div class="ra-final-content">
-
-      <span>RENTAL DOCUMENTATION</span>
-
-      <h2>
-        Need help with
-        <strong>your agreement?</strong>
-      </h2>
-
-    </div>
-
-
-    <a
-      href="https://wa.me/919304751016?text=Hello%20AcchaSolution%2C%20I%20need%20help%20with%20a%20Rental%20Agreement."
-      target="_blank"
-      rel="noopener"
-      class="ra-final-btn"
-    >
-      Talk to Us
-      <span>↗</span>
-    </a>
-
-  </section>
+  </main>
 
 </div>

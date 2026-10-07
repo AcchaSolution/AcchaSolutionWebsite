@@ -449,7 +449,7 @@
 
 <article
   class="property-card"
-  *ngFor="let property of displayedProperties"
+*ngFor="let property of displayedProperties; let i = index"
   [class.property-rented-out]="$any(property).isRentedOut === true"
   (click)="
     $any(property).isRentedOut === true
@@ -469,16 +469,37 @@
   [class.rented-out-blur]="$any(property).isRentedOut === true"
 >
 
-        <img
-          [src]="
-            $any(property).gallery?.[0]?.url ||
-            $any(property).image ||
-            'assets/placeholder.jpg'
-          "
-          [alt]="$any(property).name || 'Property Image'"
-          class="property-card-image"
-          loading="lazy"
-        />
+<img
+  [src]="
+    (
+      $any(property).gallery?.[0]?.url ||
+      $any(property).image ||
+      'assets/placeholder.jpg'
+    ).includes('res.cloudinary.com')
+      ? (
+          $any(property).gallery?.[0]?.url ||
+          $any(property).image
+        ).replace(
+          '/upload/',
+          '/upload/f_webp,q_auto,w_600/'
+        )
+      : (
+          $any(property).gallery?.[0]?.url ||
+          $any(property).image ||
+          'assets/placeholder.jpg'
+        )
+  "
+  [alt]="$any(property).name || 'Property Image'"
+  class="property-card-image"
+  width="600"
+  height="400"
+[attr.loading]="i === 0 ? 'eager' : 'lazy'"
+[attr.fetchpriority]="i === 0 ? 'high' : 'auto'"
+decoding="async"
+
+/>
+
+
 
     <!-- PROPERTY VIEWS -->
     <div class="property-view-count">
@@ -730,11 +751,26 @@
   class="home-featured-property-image"
   [class.rented-out-blur]="property?.isRentedOut === true"
 >
-        <img
-          [src]="property.images?.[0]"
-          [alt]="property.name || 'Featured Property'"
-          loading="lazy"
-        >
+<img
+  [src]="
+    property.images?.[0]?.includes('res.cloudinary.com')
+      ? property.images[0].replace(
+          '/upload/',
+          '/upload/f_webp,q_auto,w_600/'
+        )
+      : (
+          property.images?.[0] ||
+          'assets/placeholder.jpg'
+        )
+  "
+  [alt]="property.name || 'Featured Property'"
+  class="home-featured-property-image"
+  width="600"
+  height="400"
+  loading="lazy"
+  decoding="async"
+>
+
 
         <span class="home-featured-badge">
           Featured
