@@ -264,20 +264,41 @@ ngOnInit(): void {
         };
       };
 
-      this.curatedProperties =
-        curated.map(
-          normalizeProperty
-        );
+this.curatedProperties =
+  curated
+    .map(normalizeProperty)
+    .sort((a: any, b: any) => {
+      const dateA = new Date(
+        a?.createdAt || a?.created_at || 0
+      ).getTime();
 
-      this.featuredProperties =
-        featured.map(
-          normalizeProperty
-        );
+      const dateB = new Date(
+        b?.createdAt || b?.created_at || 0
+      ).getTime();
 
-      this.allProperties = [
-        ...this.curatedProperties,
-        ...this.featuredProperties
-      ];
+      return dateB - dateA;
+    });
+
+this.featuredProperties =
+  featured
+    .map(normalizeProperty)
+    .sort((a: any, b: any) => {
+      const dateA = new Date(
+        a?.createdAt || a?.created_at || 0
+      ).getTime();
+
+      const dateB = new Date(
+        b?.createdAt || b?.created_at || 0
+      ).getTime();
+
+      return dateB - dateA;
+    });
+
+this.allProperties = [
+  ...this.curatedProperties,
+  ...this.featuredProperties
+];
+
 
       /*
        * Home ke main property section ke liye
@@ -1254,21 +1275,20 @@ openProperty(property: any): void {
 // ============================================================
 // PROPERTY DETAILS
 // ============================================================
-
 viewDetails(property: any): void {
 
   if (property?.isRentedOut === true) {
-  console.log(
-    '🚫 Rented Out property cannot be opened:',
-    property?.name ||
-    property?.title ||
-    property?.id ||
-    property?._id
-  );
+    console.log(
+      '🚫 Rented Out property cannot be opened:',
+      property?.name ||
+      property?.title ||
+      property?.id ||
+      property?._id
+    );
 
-  return;
-}
-  
+    return;
+  }
+
   if (!property) {
     console.warn('Property data not found');
     return;
@@ -1294,46 +1314,12 @@ viewDetails(property: any): void {
     console.warn('Unable to create property URL');
     return;
   }
-const propertyId =
-  property.uniqueId ||
-  property.id ||
-  property._id;
-
-if (propertyId) {
-  this.propService
-    .incrementPropertyView(String(propertyId))
-    .subscribe({
-      next: (response: any) => {
-        if (
-          response?.success &&
-          typeof response.viewCount === 'number'
-        ) {
-          property.viewCount =
-            response.viewCount;
-        }
-
-        console.log(
-          '👁️ View count updated:',
-          response?.viewCount
-        );
-      },
-
-      error: (error) => {
-        console.warn(
-          '⚠️ View count update failed:',
-          error
-        );
-      }
-    });
-}
-
 
   console.log(
     '➡️ Opening Property Details:',
     slug
   );
 
-  // 🚀 PROPERTY DATA DIRECTLY PASS
   this.router.navigate(
     ['/property-details', slug],
     {
@@ -1343,7 +1329,6 @@ if (propertyId) {
     }
   );
 }
-
 
 
   // ============================================================

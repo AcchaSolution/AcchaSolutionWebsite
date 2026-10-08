@@ -102,6 +102,7 @@ isLoadingMore: boolean = false;
 
   selectedNewProject: boolean = false;
 
+  selectedBudget: string = '';
 
   // =========================================================
   // AI SEARCH
@@ -301,6 +302,11 @@ isLoading: boolean = true;
           ).toLowerCase() === 'true';
 
 
+          this.selectedBudget =
+  String(
+    paramsRes['budget'] ||
+    ''
+  );
         // ===================================================
         // LOAD DATA
         // ===================================================
@@ -379,7 +385,14 @@ fetchAndFilterData(): void {
   this.propService
     .getProperties(
       this.currentPage,
-      this.pageLimit
+      this.pageLimit,
+      {
+  type: this.currentMode,
+  propertyType: this.selectedType,
+  budget: this.selectedBudget
+}
+
+
     )
     .subscribe({
 
@@ -458,8 +471,15 @@ loadMoreProperties(): void {
   this.propService
     .getProperties(
       nextPage,
-      this.pageLimit
+    this.pageLimit,
+    {
+  type: this.currentMode,
+  propertyType: this.selectedType,
+  budget: this.selectedBudget
+}
+
     )
+
     .subscribe({
 
       next: (response: any) => {

@@ -30,7 +30,7 @@ export class PropertyService {
 // FAST PROPERTY CACHE
 // =========================================================
 
-private propertiesCache: any[] | null = null;
+private propertiesCache: any | null = null;
 
 private propertiesRequest$:
   Observable<any[]> | null = null;
@@ -115,12 +115,33 @@ updateMyProperty(
 
 getProperties(
   page: number = 1,
-  limit: number = 20
+  limit: number = 20,
+  filters: any = {}
 ): Observable<any> {
+
+  let params =
+    `?page=${page}&limit=${limit}`;
+
+  Object.keys(filters || {}).forEach(key => {
+
+    const value = filters[key];
+
+    if (
+      value !== undefined &&
+      value !== null &&
+      value !== ''
+    ) {
+
+      params +=
+        `&${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+
+    }
+
+  });
 
   return this.http
     .get<any>(
-      `${this.API_URL}?page=${page}&limit=${limit}`
+      `${this.API_URL}${params}`
     )
     .pipe(
 
@@ -161,51 +182,52 @@ getProperties(
   // =========================================================
 // FAST HOME PROPERTIES
 // =========================================================
-
 getHomeProperties(): Observable<any> {
 
-  return this.http
-    .get<any>(
-      `${this.API_URL}/home`
-    )
-    .pipe(
+  if (this.propertiesCache) {
+    return of(this.propertiesCache);
+  }
 
+  if (this.propertiesRequest$) {
+    return this.propertiesRequest$;
+  }
+
+  this.propertiesRequest$ = this.http
+    .get<any>(`${this.API_URL}/home`)
+    .pipe(
       map(response => {
 
-        if (
-          response &&
-          !Array.isArray(response)
-        ) {
+        let result: any;
 
-          return response;
-
-        }
-
-        if (
-          Array.isArray(response)
-        ) {
-
-          return {
+        if (response && !Array.isArray(response)) {
+          result = response;
+        } else if (Array.isArray(response)) {
+          result = {
             success: true,
             properties: response,
             curated: response,
             featured: []
           };
-
+        } else {
+          result = {
+            success: false,
+            properties: [],
+            curated: [],
+            featured: []
+          };
         }
 
-        return {
-          success: false,
-          properties: [],
-          curated: [],
-          featured: []
-        };
+        this.propertiesCache = result;
 
-      })
-
+        return result;
+      }),
+      shareReplay(1)
     );
 
+  return this.propertiesRequest$;
 }
+
+
   // =========================================================
   // GET BY ID / UNIQUE ID / MONGODB ID
   // =========================================================

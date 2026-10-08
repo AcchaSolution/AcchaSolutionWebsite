@@ -117,11 +117,19 @@ router.post('/', async (req, res) => {
     }
 
 
-    const property =
-      await Property.create(
-        propertyData
-      );
+const propertyDataToSave = {
+  ...propertyData
+};
 
+// New submission ko hamesha current server time mile
+delete propertyDataToSave.createdAt;
+delete propertyDataToSave.updatedAt;
+
+const property =
+  await Property.create(
+    propertyDataToSave
+  );
+  
 
     return res.status(201).json({
 
@@ -161,8 +169,10 @@ router.post('/', async (req, res) => {
 });
 
 
+
+// 
 // =====================================================
-// GET PROPERTIES — PAGINATED
+// GET PROPERTIES — PAGINATED + FILTERED
 // GET /api/properties?page=1&limit=20
 // =====================================================
 
@@ -180,7 +190,6 @@ router.get('/', async (req, res) => {
         1
       );
 
-
     const limit =
       Math.min(
         Math.max(
@@ -190,17 +199,422 @@ router.get('/', async (req, res) => {
         50
       );
 
-
     const skip =
       (page - 1) * limit;
 
+
+    // =================================================
+    // BUILD FILTERS WITHOUT $OR OVERWRITE
+    // =================================================
+
+    const filters = [];
+
+
+    // =================================================
+    // SALE / RENT / COMMERCIAL
+    // =================================================
+
+    const requestedType =
+      String(req.query.type || '')
+        .trim()
+        .toLowerCase();
+
+    if (requestedType) {
+
+      if (requestedType === 'rent') {
+
+        filters.push({
+          type: {
+            $regex: /^rent$|^rental$/i
+          }
+        });
+
+      }
+
+      else if (requestedType === 'sale') {
+
+        filters.push({
+          type: {
+            $regex: /^sale$|^sell$|^buy$/i
+          }
+        });
+
+      }
+
+      else if (requestedType === 'commercial') {
+
+        filters.push({
+          $or: [
+            {
+              type: {
+                $regex: /commercial/i
+              }
+            },
+            {
+              category: {
+                $regex: /commercial/i
+              }
+            },
+            {
+              propertyType: {
+                $regex: /commercial/i
+              }
+            },
+            {
+              selectedCategories: {
+                $regex: /commercial/i
+              }
+            }
+          ]
+        });
+
+      }
+
+      else {
+
+        filters.push({
+          type: {
+            $regex:
+              `^${requestedType}$`,
+            $options: 'i'
+          }
+        });
+
+      }
+
+    }
+
+
+    // =================================================
+    // STATUS / READY TO MOVE
+    // =================================================
+
+    const requestedStatus =
+      String(req.query.status || '')
+        .trim()
+        .toLowerCase();
+
+    if (requestedStatus) {
+
+      if (
+        requestedStatus === 'ready' ||
+        requestedStatus === 'ready to move'
+      ) {
+
+        filters.push({
+          $or: [
+            {
+              possession: {
+                $regex: /ready\s*to\s*move|^ready$/i
+              }
+            },
+            {
+              status: {
+                $regex: /ready\s*to\s*move|^ready$/i
+              }
+            },
+            {
+              propertyStatus: {
+                $regex: /ready\s*to\s*move|^ready$/i
+              }
+            }
+          ]
+        });
+
+      }
+
+      else {
+
+        filters.push({
+          $or: [
+            {
+              status: {
+                $regex: requestedStatus,
+                $options: 'i'
+              }
+            },
+            {
+              propertyStatus: {
+                $regex: requestedStatus,
+                $options: 'i'
+              }
+            },
+            {
+              possession: {
+                $regex: requestedStatus,
+                $options: 'i'
+              }
+            }
+          ]
+        });
+
+      }
+
+    }
+
+
+    // =================================================
+    // NEW PROJECT
+    // =================================================
+
+    const newProject =
+      String(req.query.newProject || '')
+        .trim()
+        .toLowerCase();
+
+    if (newProject === 'true') {
+
+      filters.push({
+        $or: [
+          {
+            isBuilderProject: true
+          },
+          {
+            newBuilderProject: true
+          },
+          {
+            isNewProject: true
+          },
+          {
+            builderProject: true
+          },
+          {
+            builderName: {
+              $exists: true,
+              $nin: ['', null]
+            }
+          },
+          {
+            builder: {
+              $exists: true,
+              $nin: ['', null]
+            }
+          }
+        ]
+      });
+
+    }
+
+
+    // =================================================
+    // LOCATION / CITY
+    // =================================================
+
+    const location =
+      String(
+        req.query.location ||
+        req.query.city ||
+        ''
+      )
+        .trim();
+
+    if (location) {
+
+      filters.push({
+        $or: [
+          {
+            location: {
+              $regex: location,
+              $options: 'i'
+            }
+          },
+          {
+            city: {
+              $regex: location,
+              $options: 'i'
+            }
+          },
+          {
+            locality: {
+              $regex: location,
+              $options: 'i'
+            }
+          },
+          {
+            address: {
+              $regex: location,
+              $options: 'i'
+            }
+          }
+        ]
+      });
+
+    }
+
+
+    // =================================================
+    // BHK
+    // =================================================
+
+    const requestedBhk =
+      String(req.query.bhk || '')
+        .trim();
+
+    if (requestedBhk) {
+
+      const bhkNumber =
+        requestedBhk.match(/(\d+)/);
+
+      if (bhkNumber) {
+
+        if (
+          requestedBhk
+            .toLowerCase()
+            .includes('4+')
+        ) {
+
+          filters.push({
+            bhk: {
+              $regex: /^[4-9]\s*BHK$/i
+            }
+          });
+
+        }
+
+        else {
+
+          filters.push({
+            bhk: {
+              $regex:
+                `^${bhkNumber[1]}\\s*BHK$`,
+              $options: 'i'
+            }
+          });
+
+        }
+
+      }
+
+    }
+
+// =================================================
+// PROPERTY CATEGORY / TYPE
+// Flat / Villa / House / Plot
+// =================================================
+
+const requestedPropertyType =
+  String(req.query.propertyType || '')
+    .trim()
+    .toLowerCase();
+
+if (requestedPropertyType) {
+
+  const propertyTypeMap = {
+
+    flat: [
+      'apartment',
+      'flat'
+    ],
+
+    villa: [
+      'villa'
+    ],
+
+    house: [
+      'house',
+      'villa'
+    ],
+
+    plot: [
+      'plot'
+    ]
+
+  };
+
+  const categoryValues =
+    propertyTypeMap[requestedPropertyType] ||
+    [requestedPropertyType];
+
+  filters.push({
+
+    $or: categoryValues.map(
+      (category) => ({
+
+        selectedCategories: {
+          $regex: category,
+          $options: 'i'
+        }
+
+      })
+    )
+
+  });
+
+}
+
+
+
+    // =================================================
+    // RENTAL BUDGET
+    // =================================================
+
+    const budget =
+      String(req.query.budget || '')
+        .trim()
+        .toLowerCase();
+
+    if (budget) {
+
+      if (budget === 'under-20000') {
+
+        filters.push({
+          price: {
+            $lt: 20000
+          }
+        });
+
+      }
+
+      else if (budget === '20000-50000') {
+
+        filters.push({
+          price: {
+            $gte: 20000,
+            $lte: 50000
+          }
+        });
+
+      }
+
+      else if (budget === 'above-50000') {
+
+        filters.push({
+          price: {
+            $gt: 50000
+          }
+        });
+
+      }
+
+    }
+
+
+    // =================================================
+    // FINAL QUERY
+    // =================================================
+
+    const query =
+      filters.length > 0
+        ? { $and: filters }
+        : {};
+
+
+    console.log(
+      '🔎 PROPERTY FILTER QUERY:',
+      JSON.stringify(query)
+    );
+
+
+    // =================================================
+    // FETCH
+    // =================================================
 
     const [
       properties,
       total
     ] = await Promise.all([
 
-      Property.find({})
+      Property.find(query)
         .sort({
           createdAt: -1
         })
@@ -208,15 +622,13 @@ router.get('/', async (req, res) => {
         .limit(limit)
         .lean(),
 
-      Property.countDocuments({})
+      Property.countDocuments(query)
 
     ]);
 
 
     const totalPages =
-      Math.ceil(
-        total / limit
-      );
+      Math.ceil(total / limit);
 
 
     return res.status(200).json({
@@ -250,7 +662,6 @@ router.get('/', async (req, res) => {
       'GET PAGINATED PROPERTIES ERROR:',
       error
     );
-
 
     return res.status(500).json({
 
@@ -1479,6 +1890,7 @@ router.get(
 
     try {
 
+      const homeStartTime = Date.now();
       // =================================================
       // GET LATEST 16 PROPERTIES ONLY
       // =================================================
@@ -1509,6 +1921,7 @@ const properties =
       subLocality: 1,
       createdAt: 1,
       updatedAt: 1,
+viewCount: 1,
 
       // ONLY FIRST IMAGE FOR HOME CARD
       gallery: {
@@ -1521,6 +1934,7 @@ const properties =
     .limit(16)
     .lean();
 
+    
       // =================================================
       // NORMALIZE IMAGE
       // =================================================

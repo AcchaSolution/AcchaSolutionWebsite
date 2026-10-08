@@ -288,41 +288,49 @@ export const appConfig: ApplicationConfig = {
         // PERMALINK DETAILS
         // ===================================================
 
-        {
-          path: 'properties/:permalink',
-          component: PropertyDetailsComponent
-        },
+        
 
 
-        // ===================================================
-        // PROPERTY CATALOG
-        // ===================================================
+      
 
-        {
-          path: 'properties/sale',
-          component: PropertiesCatalogComponent,
-          data: {
-            mode: 'Sale'
-          }
-        },
+// ===================================================
+// PROPERTY CATALOG
+// ===================================================
+
+{
+  path: 'properties/sale',
+  component: PropertiesCatalogComponent,
+  data: {
+    mode: 'Sale'
+  }
+},
+
+{
+  path: 'properties/rent',
+  component: PropertiesCatalogComponent,
+  data: {
+    mode: 'Rent'
+  }
+},
+
+{
+  path: 'properties/commercial',
+  component: PropertiesCatalogComponent,
+  data: {
+    mode: 'Commercial'
+  }
+},
 
 
-        {
-          path: 'properties/rent',
-          component: PropertiesCatalogComponent,
-          data: {
-            mode: 'Rent'
-          }
-        },
+// ===================================================
+// PERMALINK DETAILS
+// ===================================================
 
+{
+  path: 'properties/:permalink',
+  component: PropertyDetailsComponent
+},
 
-        {
-          path: 'properties/commercial',
-          component: PropertiesCatalogComponent,
-          data: {
-            mode: 'Commercial'
-          }
-        },
 
 
         // ===================================================

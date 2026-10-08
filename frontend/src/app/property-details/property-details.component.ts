@@ -87,12 +87,11 @@ export class PropertyDetailsComponent
     this.route.paramMap.subscribe(
       params => {
 
-const value =
-  params.get('permalink') ||
-  params.get('id');
+        const value =
+          params.get('permalink') ||
+          params.get('id');
 
 
-  
         console.log(
           '🔎 PROPERTY DETAILS ROUTE VALUE:',
           value
@@ -237,6 +236,60 @@ const value =
             this.propertyData
           );
 
+
+          // -------------------------------------------------
+          // VIEW COUNTER
+          // -------------------------------------------------
+          // API fail hone par bhi property page open rahega.
+
+          const propertyId =
+            this.propertyData?.uniqueId ||
+            this.propertyData?.id ||
+            this.propertyData?._id;
+
+
+          if (propertyId) {
+
+            this.propService
+              .incrementPropertyView(
+                String(propertyId)
+              )
+              .subscribe({
+
+                next: (response: any) => {
+
+                  if (
+                    response?.success &&
+                    typeof response.viewCount === 'number'
+                  ) {
+
+                    this.propertyData.viewCount =
+                      response.viewCount;
+
+                  }
+
+
+                  console.log(
+                    '👁️ Property view count:',
+                    response?.viewCount
+                  );
+
+                },
+
+
+                error: (error) => {
+
+                  console.warn(
+                    '⚠️ View count update failed:',
+                    error
+                  );
+
+                }
+
+              });
+
+          }
+
         },
 
 
@@ -312,7 +365,6 @@ const value =
           );
 
 
-          
           if (!property) {
 
             this.propertyData = null;
@@ -334,6 +386,54 @@ const value =
 
           this.isLoading = false;
 
+
+          // VIEW COUNTER
+// API fail hone par bhi property page open rahega.
+
+const propertyId =
+  this.propertyData?.uniqueId ||
+  this.propertyData?.id ||
+  this.propertyData?._id;
+
+if (propertyId) {
+
+  this.propService
+    .incrementPropertyView(
+      String(propertyId)
+    )
+    .subscribe({
+
+      next: (response: any) => {
+
+        if (
+          response?.success &&
+          typeof response.viewCount === 'number'
+        ) {
+
+          this.propertyData.viewCount =
+            response.viewCount;
+
+        }
+
+        console.log(
+          '👁️ Property view count:',
+          response?.viewCount
+        );
+
+      },
+
+      error: (error) => {
+
+        console.warn(
+          '⚠️ View count update failed:',
+          error
+        );
+
+      }
+
+    });
+
+}
         },
 
 
@@ -372,212 +472,216 @@ const value =
       });
 
   }
-// =========================================================
-// NORMALIZE PROPERTY
-// =========================================================
-
-private normalizeProperty(
-  property: any
-): any {
-
-  if (!property) {
-
-    return null;
-
-  }
 
 
-  const normalized = {
-    ...property
-  };
+  // =========================================================
+  // NORMALIZE PROPERTY
+  // =========================================================
+
+  private normalizeProperty(
+    property: any
+  ): any {
+
+    if (!property) {
+
+      return null;
+
+    }
 
 
-  // -------------------------------------------------------
-  // MONGODB ID SUPPORT
-  // -------------------------------------------------------
-
-  if (
-    !normalized.id &&
-    normalized._id
-  ) {
-
-    normalized.id =
-      String(normalized._id);
-
-  }
+    const normalized = {
+      ...property
+    };
 
 
-  // -------------------------------------------------------
-  // UNIQUE ID SUPPORT
-  // -------------------------------------------------------
-
-  if (
-    !normalized.uniqueId &&
-    normalized.id
-  ) {
-
-    normalized.uniqueId =
-      normalized.id;
-
-  }
-
-
-  // -------------------------------------------------------
-  // GALLERY SAFETY
-  // -------------------------------------------------------
-
-  if (
-    !Array.isArray(
-      normalized.gallery
-    )
-  ) {
-
-    normalized.gallery = [];
-
-  }
-
-
-  // -------------------------------------------------------
-  // AMENITIES SAFETY
-  // -------------------------------------------------------
-
-  if (
-    !Array.isArray(
-      normalized.selectedAmenities
-    )
-  ) {
-
-    normalized.selectedAmenities = [];
-
-  }
-
-
-  // -------------------------------------------------------
-  // IMAGE URL FALLBACK
-  // -------------------------------------------------------
-
-  if (
-    normalized.gallery.length === 0
-  ) {
+    // -------------------------------------------------------
+    // MONGODB ID SUPPORT
+    // -------------------------------------------------------
 
     if (
-      normalized.image
+      !normalized.id &&
+      normalized._id
     ) {
 
-      normalized.gallery = [
-        {
-          url: normalized.image
-        }
-      ];
+      normalized.id =
+        String(normalized._id);
 
     }
 
-    else if (
-      normalized.imageUrl
+
+    // -------------------------------------------------------
+    // UNIQUE ID SUPPORT
+    // -------------------------------------------------------
+
+    if (
+      !normalized.uniqueId &&
+      normalized.id
     ) {
 
-      normalized.gallery = [
-        {
-          url: normalized.imageUrl
-        }
-      ];
+      normalized.uniqueId =
+        normalized.id;
 
     }
+
+
+    // -------------------------------------------------------
+    // GALLERY SAFETY
+    // -------------------------------------------------------
+
+    if (
+      !Array.isArray(
+        normalized.gallery
+      )
+    ) {
+
+      normalized.gallery = [];
+
+    }
+
+
+    // -------------------------------------------------------
+    // AMENITIES SAFETY
+    // -------------------------------------------------------
+
+    if (
+      !Array.isArray(
+        normalized.selectedAmenities
+      )
+    ) {
+
+      normalized.selectedAmenities = [];
+
+    }
+
+
+    // -------------------------------------------------------
+    // IMAGE URL FALLBACK
+    // -------------------------------------------------------
+
+    if (
+      normalized.gallery.length === 0
+    ) {
+
+      if (
+        normalized.image
+      ) {
+
+        normalized.gallery = [
+          {
+            url: normalized.image
+          }
+        ];
+
+      }
+
+      else if (
+        normalized.imageUrl
+      ) {
+
+        normalized.gallery = [
+          {
+            url: normalized.imageUrl
+          }
+        ];
+
+      }
+
+    }
+
+
+    // =======================================================
+    // AGENT / OWNER DETAILS NORMALIZATION
+    // =======================================================
+
+    const agent =
+      normalized.agent ||
+      normalized.agentDetails ||
+      normalized.postedBy ||
+      normalized.owner ||
+      {};
+
+
+    // -------------------------------------------------------
+    // NAME
+    // -------------------------------------------------------
+
+    normalized.postedByName =
+      normalized.postedByName ||
+      normalized.agentName ||
+      normalized.ownerName ||
+      agent?.name ||
+      agent?.fullName ||
+      agent?.displayName ||
+      '';
+
+
+    // -------------------------------------------------------
+    // EMAIL
+    // -------------------------------------------------------
+
+    normalized.postedByEmail =
+      normalized.postedByEmail ||
+      normalized.agentEmail ||
+      normalized.ownerEmail ||
+      agent?.email ||
+      '';
+
+
+    // -------------------------------------------------------
+    // PHONE
+    // -------------------------------------------------------
+
+    normalized.postedByPhone =
+      normalized.postedByPhone ||
+      normalized.agentPhone ||
+      normalized.ownerPhone ||
+      agent?.phone ||
+      agent?.mobile ||
+      agent?.phoneNumber ||
+      '';
+
+
+    // -------------------------------------------------------
+    // KEEP AGENT OBJECT ALSO
+    // -------------------------------------------------------
+
+    if (
+      !normalized.agent &&
+      Object.keys(agent).length > 0
+    ) {
+
+      normalized.agent = agent;
+
+    }
+
+
+    // -------------------------------------------------------
+    // DEBUG
+    // -------------------------------------------------------
+
+    console.log(
+      '👤 NORMALIZED AGENT DATA:',
+      {
+        name:
+          normalized.postedByName,
+
+        email:
+          normalized.postedByEmail,
+
+        phone:
+          normalized.postedByPhone,
+
+        agent:
+          normalized.agent
+      }
+    );
+
+
+    return normalized;
 
   }
 
 
-  // =======================================================
-  // AGENT / OWNER DETAILS NORMALIZATION
-  // =======================================================
-
-  const agent =
-    normalized.agent ||
-    normalized.agentDetails ||
-    normalized.postedBy ||
-    normalized.owner ||
-    {};
-
-
-  // -------------------------------------------------------
-  // NAME
-  // -------------------------------------------------------
-
-  normalized.postedByName =
-    normalized.postedByName ||
-    normalized.agentName ||
-    normalized.ownerName ||
-    agent?.name ||
-    agent?.fullName ||
-    agent?.displayName ||
-    '';
-
-
-  // -------------------------------------------------------
-  // EMAIL
-  // -------------------------------------------------------
-
-  normalized.postedByEmail =
-    normalized.postedByEmail ||
-    normalized.agentEmail ||
-    normalized.ownerEmail ||
-    agent?.email ||
-    '';
-
-
-  // -------------------------------------------------------
-  // PHONE
-  // -------------------------------------------------------
-
-  normalized.postedByPhone =
-    normalized.postedByPhone ||
-    normalized.agentPhone ||
-    normalized.ownerPhone ||
-    agent?.phone ||
-    agent?.mobile ||
-    agent?.phoneNumber ||
-    '';
-
-
-  // -------------------------------------------------------
-  // KEEP AGENT OBJECT ALSO
-  // -------------------------------------------------------
-
-  if (
-    !normalized.agent &&
-    Object.keys(agent).length > 0
-  ) {
-
-    normalized.agent = agent;
-
-  }
-
-
-  // -------------------------------------------------------
-  // DEBUG
-  // -------------------------------------------------------
-
-  console.log(
-    '👤 NORMALIZED AGENT DATA:',
-    {
-      name:
-        normalized.postedByName,
-
-      email:
-        normalized.postedByEmail,
-
-      phone:
-        normalized.postedByPhone,
-
-      agent:
-        normalized.agent
-    }
-  );
-
-
-  return normalized;
-
-}
   // =========================================================
   // PRICE FORMAT
   // =========================================================
@@ -903,7 +1007,6 @@ private normalizeProperty(
         .replace(/<div[^>]*>/gi, '')
 
         .replace(/<[^>]*>/g, '');
-
 
 
     // -------------------------------------------------------
