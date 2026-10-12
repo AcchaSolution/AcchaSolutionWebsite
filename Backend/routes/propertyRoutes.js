@@ -833,166 +833,100 @@ router.get(
       .trim()
       .toLowerCase();
 
-
     console.log(
       '🔗 GET PROPERTY BY PERMALINK:',
       requestedSlug
     );
 
-
     try {
 
-      const properties =
-        await Property.find({});
+      // Normalize the stored permalink for comparison
+      const properties = await Property.find({})
+        .select({
+          _id: 1,
+          id: 1,
+          uniqueId: 1,
+          name: 1,
+          permalink: 1,
+          type: 1
+        })
+        .lean();
 
+      const property = properties.find((item) => {
 
-      const property =
-        properties.find(
-          item => {
+        if (!item.permalink) {
+          return false;
+        }
 
-            if (
-              !item.permalink
-            ) {
+        let savedSlug = '';
 
-              return false;
+        try {
+          const raw = String(item.permalink).trim();
 
-            }
-
-
-            let savedSlug = '';
-
-
-            try {
-
-              const raw =
-                String(
-                  item.permalink
-                ).trim();
-
-
-              if (
-                raw.startsWith('http://') ||
-                raw.startsWith('https://')
-              ) {
-
-                const url =
-                  new URL(raw);
-
-                savedSlug =
-                  url.pathname;
-
-              }
-
-              else {
-
-                savedSlug =
-                  raw;
-
-              }
-
-            }
-
-            catch {
-
-              savedSlug =
-                String(
-                  item.permalink
-                );
-
-            }
-
-
-            savedSlug =
-              savedSlug
-                .split('?')[0]
-                .split('#')[0]
-                .replace(
-                  /^\/+/,
-                  ''
-                )
-                .replace(
-                  /^properties\//i,
-                  ''
-                )
-                .replace(
-                  /\/+$/,
-                  ''
-                )
-                .trim()
-                .toLowerCase();
-
-
-            return (
-              savedSlug ===
-              requestedSlug
-            );
-
+          if (
+            raw.startsWith('http://') ||
+            raw.startsWith('https://')
+          ) {
+            savedSlug = new URL(raw).pathname;
+          } else {
+            savedSlug = raw;
           }
-        );
+        } catch {
+          savedSlug = String(item.permalink);
+        }
 
+        savedSlug = savedSlug
+          .split('?')[0]
+          .split('#')[0]
+          .replace(/^\/+/, '')
+          .replace(/^properties\//i, '')
+          .replace(/\/+$/, '')
+          .trim()
+          .toLowerCase();
+
+        return savedSlug === requestedSlug;
+      });
 
       if (!property) {
-
         console.log(
           '❌ PERMALINK NOT FOUND:',
           requestedSlug
         );
 
-
         return res.status(404).json({
-
           success: false,
-
-          message:
-            'Property not found.',
-
+          message: 'Property not found.',
           requestedSlug
-
         });
-
       }
-
 
       console.log(
         '✅ PERMALINK PROPERTY FOUND:',
         property._id
       );
 
-
       return res.status(200).json({
-
         success: true,
-
         property
-
       });
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
       console.error(
         '❌ GET PROPERTY BY PERMALINK ERROR:',
         error
       );
 
-
       return res.status(500).json({
-
         success: false,
-
-        message:
-          'Failed to find property.',
-
-        error:
-          error.message
-
+        message: 'Failed to find property.',
+        error: error.message
       });
 
     }
-
   }
 );
+
 
 
 // =====================================================

@@ -44,34 +44,43 @@ constructor(
   // CREATE
   // =========================================================
 
-  addProperty(
-    propertyData: any
-  ): Observable<any> {
+addProperty
+(
+  propertyData: any
+): 
+Observable<any> 
+{
 
-    return this.http.post(
-      this.API_URL,
-      propertyData
-    );
-
-  }
+  return this.http.post(
+    this.API_URL,
+    propertyData
+  ).pipe(
+    tap(() => {
+      this.invalidateHomePropertiesCache();
+    })
+  );
+}
 
 
   // =========================================================
   // UPDATE
   // =========================================================
 
-  updateProperty(
-    id: string,
-    propertyData: any
-  ): Observable<any> {
-
-    return this.http.put(
+updateProperty(
+  id: string,
+  propertyData: any
+): Observable<any> {
+  return this.http
+    .put(
       `${this.API_URL}/${encodeURIComponent(id)}`,
       propertyData
+    )
+    .pipe(
+      tap(() => {
+        this.invalidateHomePropertiesCache();
+      })
     );
-
-  }
-
+}
 
   // =========================================================
 // UPDATE OWN PROPERTY
@@ -81,12 +90,16 @@ updateMyProperty(
   id: string,
   propertyData: any
 ): Observable<any> {
-
-  return this.http.put(
-    `${this.API_URL}/my-property/${encodeURIComponent(id)}`,
-    propertyData
-  );
-
+  return this.http
+    .put(
+      `${this.API_URL}/my-property/${encodeURIComponent(id)}`,
+      propertyData
+    )
+    .pipe(
+      tap(() => {
+        this.invalidateHomePropertiesCache();
+      })
+    );
 }
 
 
@@ -94,20 +107,21 @@ updateMyProperty(
   // UPDATE RENTED OUT STATUS
   // =========================================================
 
-  updateRentedOutStatus(
-    id: string,
-    isRentedOut: boolean
-  ): Observable<any> {
-
-    return this.http.patch(
+updateRentedOutStatus(
+  id: string,
+  isRentedOut: boolean
+): Observable<any> {
+  return this.http
+    .patch(
       `${this.API_URL}/${encodeURIComponent(id)}/rented-out`,
-      {
-        isRentedOut
-      }
+      { isRentedOut }
+    )
+    .pipe(
+      tap(() => {
+        this.invalidateHomePropertiesCache();
+      })
     );
-
-  }
-
+}
 
   // =========================================================
 // GET PROPERTIES — PAGINATED
@@ -184,13 +198,28 @@ getProperties(
 // =========================================================
 getHomeProperties(): Observable<any> {
 
-  if (this.propertiesCache) {
+if (this.propertiesCache) {
+  return of(this.propertiesCache);
+}
+
+if (this.propertiesRequest$) {
+  return this.propertiesRequest$;
+}
+
+try {
+  const savedCache = sessionStorage.getItem(
+    'accha_home_properties_cache'
+  );
+
+  if (savedCache) {
+    this.propertiesCache = JSON.parse(savedCache);
     return of(this.propertiesCache);
   }
+} catch (error) {
+  console.warn('Home property cache unavailable:', error);
+}
 
-  if (this.propertiesRequest$) {
-    return this.propertiesRequest$;
-  }
+
 
   this.propertiesRequest$ = this.http
     .get<any>(`${this.API_URL}/home`)
@@ -219,13 +248,41 @@ getHomeProperties(): Observable<any> {
 
         this.propertiesCache = result;
 
+        try {
+  sessionStorage.setItem(
+    'accha_home_properties_cache',
+    JSON.stringify(result)
+  );
+} catch (error) {
+  console.warn('Unable to save home property cache:', error);
+}
+
         return result;
       }),
-      shareReplay(1)
+shareReplay({
+  bufferSize: 1,
+  refCount: true
+})
     );
 
   return this.propertiesRequest$;
 }
+
+
+invalidateHomePropertiesCache(): void {
+  this.propertiesCache = null;
+  this.propertiesRequest$ = null;
+
+  try {
+    sessionStorage.removeItem(
+      'accha_home_properties_cache'
+    );
+  } catch (error)
+   {
+    console.warn('Unable to clear home property cache:', error);
+  }
+}
+
 
 
   // =========================================================
@@ -477,18 +534,22 @@ generateAIDescription(
 
 
 
-  updatePropertyStatus(
+updatePropertyStatus(
   id: string,
   status: 'AVAILABLE' | 'RENTED_OUT' | 'SOLD_OUT'
-) {
-
-  return this.http.patch(
-    `${this.API_URL}/${encodeURIComponent(id)}/status`,
-    {
-      status
-    }
-  );
-
+): Observable<any> {
+  return this.http
+    .patch(
+      `${this.API_URL}/${encodeURIComponent(id)}/status`,
+      { status }
+    )
+    .pipe(
+      tap(() => {
+        this.invalidateHomePropertiesCache();
+      })
+    );
 }
+
+
 
 }

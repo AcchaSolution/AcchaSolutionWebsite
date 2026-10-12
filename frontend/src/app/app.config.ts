@@ -56,9 +56,6 @@ import {
   HomeComponent
 } from './home/home.component';
 
-import {
-  PropertyComponent
-} from './property/property.component';
 
 import {
   LoginComponent
@@ -181,6 +178,7 @@ import {
 import {
   enviroment
 } from '../enviroments/enviroment';
+import { PropertyComponent } from './property/property.component';
 
 
 export const appConfig: ApplicationConfig = {
@@ -262,17 +260,19 @@ export const appConfig: ApplicationConfig = {
         // PROPERTY
         // ===================================================
 
-        {
-          path: 'property',
-          component: PropertyComponent
-        },
+{
+  path: 'property',
+  loadComponent: () =>
+    import('./property/property.component')
+      .then(m => m.PropertyComponent)
+},
 
-
-        {
-          path: 'property/edit/:id',
-          component: PropertyComponent
-        },
-
+{
+  path: 'property/edit/:id',
+  loadComponent: () =>
+    import('./property/property.component')
+      .then(m => m.PropertyComponent)
+},
 
         // ===================================================
         // PROPERTY DETAILS

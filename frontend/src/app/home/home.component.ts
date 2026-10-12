@@ -308,6 +308,26 @@ this.allProperties = [
         ...this.curatedProperties
       ];
 
+// // TEMPORARY TEST — sirf Console mein data check karega
+// console.table(
+//   this.properties
+//     .filter((p: any) =>
+//       (p.name || p.title || '')
+//         .toLowerCase()
+//         .includes('habitat eden heights')
+//     )
+//     .map((p: any) => ({
+//       name: p.name,
+//       location: p.location || p.locality,
+//       type: p.type || p.transactionType,
+//       id: p._id || p.id,
+//       uniqueId: p.uniqueId,
+//       permalink: p.permalink
+//     }))
+// );
+
+
+
       this.filteredProperties = [
         ...this.allProperties
       ];

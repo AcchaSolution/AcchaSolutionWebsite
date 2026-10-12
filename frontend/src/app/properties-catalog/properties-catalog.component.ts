@@ -387,7 +387,9 @@ fetchAndFilterData(): void {
       this.currentPage,
       this.pageLimit,
       {
-  type: this.currentMode,
+  type: this.currentMode.trim().toLowerCase() === 'all'
+    ? ''
+    : this.currentMode,
   propertyType: this.selectedType,
   budget: this.selectedBudget
 }
@@ -473,7 +475,11 @@ loadMoreProperties(): void {
       nextPage,
     this.pageLimit,
     {
-  type: this.currentMode,
+type: this.currentMode.trim().toLowerCase() === 'all'
+  ? ''
+  : this.currentMode,
+
+
   propertyType: this.selectedType,
   budget: this.selectedBudget
 }
