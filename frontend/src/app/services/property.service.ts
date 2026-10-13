@@ -21,9 +21,9 @@ export class PropertyService {
 
 
   private readonly API_URL =
-// 'https://api.acchasolution.com/api/properties'
+'https://api.acchasolution.com/api/properties'
 
-'http://localhost:5000/api/properties';
+// 'http://localhost:5000/api/properties';
 
 
   // =========================================================
