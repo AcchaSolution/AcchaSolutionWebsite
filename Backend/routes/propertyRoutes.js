@@ -684,76 +684,51 @@ if (requestedPropertyType) {
 
 router.get('/id/:id', async (req, res) => {
 
-  const requestedId =
-    String(
-      req.params.id || ''
-    ).trim();
-
+  const requestedId = String(
+    req.params.id || ''
+  ).trim();
 
   console.log(
     '🔎 GET PROPERTY BY ID:',
     requestedId
   );
 
-
   try {
+
+    if (!requestedId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Property ID is required.'
+      });
+    }
 
     const conditions = [];
 
-
-    // ---------------------------------------------------
     // CUSTOM ID
-    // ---------------------------------------------------
-
     conditions.push({
-
-      id:
-        requestedId
-
+      id: requestedId
     });
 
-
-    // ---------------------------------------------------
     // UNIQUE ID
-    // ---------------------------------------------------
-
     conditions.push({
-
-      uniqueId:
-        requestedId
-
+      uniqueId: requestedId
     });
 
-
-    // ---------------------------------------------------
     // MONGODB OBJECT ID
-    // ---------------------------------------------------
-
     if (
-      mongoose.Types.ObjectId.isValid(
-        requestedId
-      )
+      mongoose.Types.ObjectId.isValid(requestedId)
     ) {
-
       conditions.push({
-
-        _id:
-          requestedId
-
+        _id: requestedId
       });
-
     }
 
+    // Find the property first.
+    const property = await Property.findOne({
+      $or: conditions
+    });
 
-    const property =
-      await Property.findOne({
-
-        $or:
-          conditions
-
-      });
-
-
+    // IMPORTANT: Check before using property._id.
     if (!property) {
 
       console.log(
@@ -761,55 +736,48 @@ router.get('/id/:id', async (req, res) => {
         requestedId
       );
 
-
       return res.status(404).json({
-
         success: false,
-
-        message:
-          'Property not found.',
-
+        message: 'Property not found.',
         requestedId
-
       });
 
     }
-
 
     console.log(
       '✅ PROPERTY FOUND:',
       property._id
     );
 
+    // Fetch the complete property document.
+    const fullProperty = await Property.findById(
+      property._id
+    ).lean();
+
+    if (!fullProperty) {
+      return res.status(404).json({
+        success: false,
+        message: 'Property not found.',
+        requestedId
+      });
+    }
 
     return res.status(200).json({
-
       success: true,
-
-      property
-
+      property: fullProperty
     });
 
-  }
-
-  catch (error) {
+  } catch (error) {
 
     console.error(
       '❌ GET PROPERTY BY ID ERROR:',
       error
     );
 
-
     return res.status(500).json({
-
       success: false,
-
-      message:
-        'Failed to fetch property.',
-
-      error:
-        error.message
-
+      message: 'Failed to fetch property.',
+      error: error.message
     });
 
   }
@@ -820,16 +788,16 @@ router.get('/id/:id', async (req, res) => {
 // =====================================================
 // GET PROPERTY BY PERMALINK
 // GET /api/properties/permalink/:slug
+// Returns COMPLETE property details
 // =====================================================
 
 router.get(
   '/permalink/:slug',
   async (req, res) => {
 
-    const requestedSlug =
-      decodeURIComponent(
-        req.params.slug || ''
-      )
+    const requestedSlug = decodeURIComponent(
+      req.params.slug || ''
+    )
       .trim()
       .toLowerCase();
 
@@ -840,19 +808,16 @@ router.get(
 
     try {
 
-      // Normalize the stored permalink for comparison
+      // Step 1: Find matching permalink.
+      // Keep existing URL/slug normalization logic.
       const properties = await Property.find({})
         .select({
           _id: 1,
-          id: 1,
-          uniqueId: 1,
-          name: 1,
-          permalink: 1,
-          type: 1
+          permalink: 1
         })
         .lean();
 
-      const property = properties.find((item) => {
+      const matchedProperty = properties.find((item) => {
 
         if (!item.permalink) {
           return false;
@@ -871,6 +836,7 @@ router.get(
           } else {
             savedSlug = raw;
           }
+
         } catch {
           savedSlug = String(item.permalink);
         }
@@ -887,7 +853,9 @@ router.get(
         return savedSlug === requestedSlug;
       });
 
-      if (!property) {
+      // Step 2: Handle missing permalink.
+      if (!matchedProperty) {
+
         console.log(
           '❌ PERMALINK NOT FOUND:',
           requestedSlug
@@ -900,14 +868,42 @@ router.get(
         });
       }
 
+      // Step 3: Fetch the COMPLETE property document.
+      const fullProperty = await Property.findById(
+        matchedProperty._id
+      ).lean();
+
+      if (!fullProperty) {
+
+        console.log(
+          '❌ FULL PROPERTY DOCUMENT NOT FOUND:',
+          matchedProperty._id
+        );
+
+        return res.status(404).json({
+          success: false,
+          message: 'Property not found.',
+          requestedSlug
+        });
+      }
+
       console.log(
-        '✅ PERMALINK PROPERTY FOUND:',
-        property._id
+        '✅ FULL PERMALINK PROPERTY FOUND:',
+        {
+          id: fullProperty._id,
+          name: fullProperty.name,
+          hasGallery: Array.isArray(fullProperty.gallery),
+          galleryCount: fullProperty.gallery?.length || 0,
+          hasDescription: Boolean(fullProperty.description),
+          postedByName: fullProperty.postedByName || '',
+          postedByEmail: fullProperty.postedByEmail || ''
+        }
       );
 
+      // Step 4: Return the complete property.
       return res.status(200).json({
         success: true,
-        property
+        property: fullProperty
       });
 
     } catch (error) {
@@ -926,7 +922,6 @@ router.get(
     }
   }
 );
-
 
 
 // =====================================================

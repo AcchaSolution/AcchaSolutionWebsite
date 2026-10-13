@@ -381,3 +381,55 @@
   }
 
 }
+
+
+/* Market Price Analysis — colourful underline */
+h2:has(+ p) {
+  text-decoration-color: transparent;
+}
+
+.market-price-analysis,
+.market-price-analysis * {
+  box-sizing: border-box;
+}
+
+.market-price-analysis::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+  margin-top: 12px;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    #22a447 0%,
+    #2878e7 35%,
+    #f0ad2e 68%,
+    #d94646 100%
+  );
+
+  
+/* Market Price Analysis — colourful underline */
+.project-details-page h2,
+.project-details-page h2 + p {
+  position: relative;
+}
+
+.project-details-page h2:has(+ p)::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+  margin-top: 12px;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    #22a447,
+    #2878e7,
+    #f0ad2e,
+    #d94646
+  );
+}
+
+}
+
